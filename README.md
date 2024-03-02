@@ -1,4 +1,4 @@
-# laigeoffer-拿个offer系列之ProjectAIHub
+# laigeoffer-来个offer系列之ProjectAIHub
 ![](https://canghe666.oss-cn-chengdu.aliyuncs.com/canghe/1941709273629_.pic.jpg)
 ## 平台简介
 
