@@ -1,0 +1,2 @@
+/projectaihub-admin/src/main/resources/application.yml merge=ours
+/projectaihub-admin/src/main/resources/application.yml -diff

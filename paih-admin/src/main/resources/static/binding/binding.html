@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择绑定方式</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<style>
+*{
+    background-color: #3E4453;
+    color: #f6f5f7;
+}
+
+h1,h2{
+    color: #f6f5f7;
+    font-size: 2.5em;
+}
+
+.pad{
+    border-radius: 15px;
+    background: #3E4453;
+    box-shadow:  34px 34px 41px #383d4b,
+                -34px -34px 41px #444b5b;
+    }
+
+.choosePad{
+    width: 50em;
+    height: 34.5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+}
+
+input{
+    width: 50em;
+    height: 5em;
+    border: 0;
+    border-radius: 15px;
+    background: #3E4453;
+    box-shadow:  34px 34px 41px #383d4b,
+                -34px -34px 41px #444b5b;
+    transition:width 0.2s;
+	-webkit-transition:width 0.2s; /* Safari */
+}
+
+input:hover{
+    width: 52em;
+    border-radius: 18px;
+background: #3E4453;
+box-shadow: inset 20px 20px 51px #2e323d,
+            inset -20px -20px 51px #4e5669;
+}
+
+button{
+    cursor: pointer;
+    width: 30em;
+    border-radius: 15px;
+    font-size: 1em;
+}
+
+hr{
+    border-color: rgb(190, 190, 190);
+}
+
+</style>
+<script>
+    function create(){
+        var post_data={"username":$("#userName").val(),"password":$("#passWord").val()};  
+            $.ajax({  
+                url: "../sso/wx/binding",  
+                type: 'post',  
+                contentType: "application/json; charset=utf-8",  
+                data:JSON.stringify(post_data),  
+                
+                success:function (data) {  
+                    //调用成功  
+                    window.location.href='/';
+                },  
+                error: function(data, textStatus, errorThrown){  
+                    //调用失败  
+                }  
+            });  
+    }
+</script>
+<body>
+    
+    <div class="choosePad pad">
+        <h2>绑定已有账户</h2>
+        <hr>
+        <br>
+        <br>
+        <span style="float: left;margin-left: 1em; font-size: 1.5em;">请输入平台账号:</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <input id="userName" placeholder="&nbsp&nbsp&nbsp&nbsp账号" >
+        <br>
+        <br>
+        <input id="passWord" placeholder="&nbsp&nbsp&nbsp&nbsp密码" >
+        <br>
+        <br>
+        <br>
+        <button onclick="create()"><span style="font-size: 2em;">绑定账户</span></button>
+        <br>
+        <br>
+        <hr>
+        <span style="float: right;margin-right: 1em; font-size: 1em;">如有疑问请联系管理员</span>
+    </div>
+</body>
+</html>

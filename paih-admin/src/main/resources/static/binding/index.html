@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择绑定方式</title>
+</head>
+<style>
+*{
+    background-color: #3E4453;
+    color: #f6f5f7;
+}
+
+h1,h2{
+    color: #f6f5f7;
+    font-size: 2.5em;
+}
+
+.pad{
+    border-radius: 15px;
+    background: #3E4453;
+    box-shadow:  34px 34px 41px #383d4b,
+                -34px -34px 41px #444b5b;
+    }
+
+.choosePad{
+    width: 50em;
+    height: 33.5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+}
+
+button{
+    width: 50em;
+    height: 5em;
+    cursor: pointer;
+    border: 0;
+    border-radius: 15px;
+    background: #3E4453;
+    box-shadow:  34px 34px 41px #383d4b,
+                -34px -34px 41px #444b5b;
+    transition:width 0.2s;
+	-webkit-transition:width 0.2s; /* Safari */
+}
+
+button:hover{
+    width: 52em;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #383d4b, #424959);
+    box-shadow:  34px 34px 41px #383d4b,
+                -34px -34px 41px #444b5b;
+}
+
+hr{
+    border-color: rgb(190, 190, 190);
+}
+
+</style>
+<script>
+    function create(){
+        if(confirm('你确定要创建一个新账户吗？'))
+        {
+            alert('正在创建账号，完成后会自动跳转，请联系管理员调整权限和密码！');
+            window.location.href='../sso/wx/create';
+        }else{
+        };
+    }
+</script>
+<body>
+    
+    <div class="choosePad pad">
+        <h2>您的企业微信账号未绑定用户</h2>
+        <hr>
+        <span style="float: left;margin-left: 1em; font-size: 1.5em;">请选择以下方式自助绑定:</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!--<button onclick="window.location.href='./binding.html'"><span style="font-size: 2em;">绑定已有账户</span></button>-->
+        <button onclick="create()"><span style="font-size: 2em;">新建账户</span></button>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <span style="float: right;margin-right: 1em; font-size: 1em;">如有疑问请联系管理员</span>
+    </div>
+</body>
+</html>

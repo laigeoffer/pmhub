@@ -1,0 +1,28 @@
+package ${cfg.voPackage};
+
+
+#if(${entityLombokModel})
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+#end
+import ${package.Entity}.${entity};
+
+/**
+ * $!{table.comment}VO
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${entityLombokModel})
+@Data
+#if(${superEntityClass})
+@EqualsAndHashCode(callSuper = true)
+#else
+@EqualsAndHashCode(callSuper = false)
+#end
+@Accessors(chain = true)
+#end
+public class ${entity}VO extends ${entity} {
+
+}
