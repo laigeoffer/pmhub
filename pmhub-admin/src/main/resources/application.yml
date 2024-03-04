@@ -1,11 +1,11 @@
 # 项目相关配置
-projectaihub:
+pmhub:
   # 名称
-  name: laigeoffer-projectaihub
+  name: laigeoffer-pmhub
   # 版本
   version: 1.0.0
   # 版权年份
-  copyrightYear: 2022
+  copyrightYear: 2024
   # 实例演示开关
   demoEnabled: true
   # 获取ip地址开关
@@ -13,8 +13,8 @@ projectaihub:
   # 验证码类型 math 数组计算 char 字符验证
   captchaType: math
   # 本地开发请修改 profile 为对应系统的路径 切记不能提交 保证 profile: /data/uploadPath 始终是这个 因为容器部署挂载的这个路径
-  # Mac /usr/local/projectaihube/uploadPath
-  # Win D:/projectaihub/uploadPath
+  # Mac /usr/local/pmhub/uploadPath
+  # Win D:/pmhub/uploadPath
   profile: /data/uploadPath
 
 # 开发环境配置
@@ -38,7 +38,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.laigeoffer.projectaihub: info
+    com.laigeoffer.pmhub: info
     org.springframework: warn
   # 日志路径配置：测试及线上环境请勿修改保证 path: /data/logs 始终是这个 因为容器部署挂载的这个路径，本地环境可修改自己的存储路径
   file:
@@ -85,7 +85,7 @@ token:
 # MyBatis-plus 配置
 mybatis-plus:
   # 搜索指定包别名
-  typeAliasesPackage: com.laigeoffer.projectaihub.**.domain
+  typeAliasesPackage: com.laigeoffer.pmhub.**.domain
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件

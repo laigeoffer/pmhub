@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.laigeoffer.projectaihub.workflow.mapper.WfDeployFormMapper">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.WfDeployFormMapper">
 
-    <resultMap type="com.laigeoffer.projectaihub.workflow.domain.WfDeployForm" id="WfDeployFormResult">
+    <resultMap type="com.laigeoffer.pmhub.workflow.domain.WfDeployForm" id="WfDeployFormResult">
         <result property="deployId" column="deploy_id"/>
         <result property="formKey" column="form_key"/>
         <result property="nodeKey" column="node_key"/>

@@ -3,7 +3,7 @@ package ${packageName}.domain;
 #foreach ($import in $importList)
 import ${import};
 #end
-import com.laigeoffer.projectaihub.common.annotation.Excel;
+import com.laigeoffer.pmhub.common.annotation.Excel;
 #if($table.crud || $table.sub)
 #elseif($table.tree)
 #end

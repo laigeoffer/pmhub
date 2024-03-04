@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.laigeoffer.projectaihub.system.mapper.SysDictDataMapper">
+<mapper namespace="com.laigeoffer.pmhub.system.mapper.SysDictDataMapper">
 
     <resultMap type="SysDictData" id="SysDictDataResult">
         <id property="dictCode" column="dict_code"/>
@@ -112,7 +112,7 @@
         where dict_type = #{oldDictType}
     </update>
 
-    <select id="selectVarList" resultType="com.laigeoffer.projectaihub.common.core.domain.dto.SysDictDataDTO">
+    <select id="selectVarList" resultType="com.laigeoffer.pmhub.common.core.domain.dto.SysDictDataDTO">
         select dict_label as varKey, dict_value as varValue from sys_dict_data where dict_type = 'var'
     </select>
 

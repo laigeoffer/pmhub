@@ -6,7 +6,7 @@ spring:
     druid:
       # 主库数据源
       master:
-        url: jdbc:mysql://127.0.0.1:3306/laigeoffer-projectaihub?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        url: jdbc:mysql://127.0.0.1:3306/laigeoffer-pmhub?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: 123456
       # 从库数据源
@@ -77,7 +77,7 @@ spring:
         max-wait: -1ms
 
 # 自定义参数
-projectaihub:
+pmhub:
   # 企微相关
   workWx:
     host: https://laigeoffer.cn
@@ -100,8 +100,8 @@ projectaihub:
 #  rocketMQ:
 #    addr: 127.0.0.1:8081
 #    topic:
-#      wxMessage: laigeoffer_projectaihub_local
-#      uselessTask: laigeoffer_projectaihub_local_useless
+#      wxMessage: laigeoffer_pmhub_local
+#      uselessTask: laigeoffer_pmhub_local_useless
 #      consumerGroup: laigeoffer_MANAGER_GROUP
 #    group:
 #      uselessTask: laigeoffer_MANAGER_GROUP_USELESS
@@ -114,10 +114,10 @@ projectaihub:
 # 日志配置
 logging:
   level:
-    com.laigeoffer.projectaihub: info
+    com.laigeoffer.pmhub: info
     org.springframework: warn
   # 日志路径配置：测试及线上环境请勿修改保证 path: /data/logs 始终是这个 因为容器部署挂载的这个路径，本地环境可修改自己的存储路径
   file:
-    path: /Users/canghe/logs/laigeoffer/projectaihub/
+    path: /Users/canghe/logs/laigeoffer/pmhub/
 
 

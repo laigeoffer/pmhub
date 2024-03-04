@@ -14,25 +14,25 @@
 * 提供了技术栈（[Vue3](https://v3.cn.vuejs.org) [Element Plus](https://element-plus.org/zh-CN) [Vite](https://cn.vitejs.dev)）
 
 ## 模块简介
-### 1、projectaihub-admin
+### 1、pmhub-admin
 * web 层controller
 * 核心配置，如：国际化、mybatis、日志、swagger及配置文件
 * 项目启动类
 
-### 2、projectaihub-common
+### 2、pmhub-common
 * 各模块公共方法、注解、配置、常量、模型转换、异常、过滤器
 * 全局预防 xss 脚本攻击
 * 公共枚举
 * 公共分类（物料分类、供应商分类、零部件分类）
 
-### 3、projectaihub-workflow
+### 3、pmhub-workflow
 * 流程管理-流程分类
 * 流程管理-表单设计
 * 流程管理-流程设计
 * 流程管理-部署管理
 
 
-### 4、projectaihub-framework
+### 4、pmhub-framework
 * 数据过滤处理、多数据源处理
 * 操作日志记录
 * 限流处理
@@ -44,14 +44,14 @@
 * 全局异常处理器
 * 自定义权限、登录检验、websocket相关控制
 
-### 5、projectaihub-generator
+### 5、pmhub-generator
 * 代码生成相关控制器及配置
 
 
-### 6、projectaihub-oa
+### 6、pmhub-oa
 * 绑定企微通知、企微用户关联绑定
 
-### 7、projectaihub-project
+### 7、pmhub-project
 
 * 项目管理-我的项目
 * 项目管理-我的任务
@@ -60,11 +60,11 @@
 
 
 
-### 8、projectaihub-quartz
+### 8、pmhub-quartz
 * 定时任务调度
 
 
-### 9、projectaihub-system
+### 9、pmhub-system
 * 系统管理-用户管理
 * 系统管理-角色管理
 * 系统管理-菜单管理

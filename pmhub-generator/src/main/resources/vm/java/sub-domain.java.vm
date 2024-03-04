@@ -3,7 +3,7 @@ package ${packageName}.domain;
     #foreach ($import in $subImportList)
     import ${import};
     #end
-import com.laigeoffer.projectaihub.common.annotation.Excel;
+import com.laigeoffer.pmhub.common.annotation.Excel;
 
 /**
  * ${subTable.functionName}对象 ${subTableName}

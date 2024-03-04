@@ -3,7 +3,7 @@ package ${packageName}.service.impl;
 import java.util.List;
     #foreach ($column in $columns)
         #if($column.javaField == 'createTime' || $column.javaField == 'updateTime')
-        import com.laigeoffer.projectaihub.common.utils.DateUtils;
+        import com.laigeoffer.pmhub.common.utils.DateUtils;
             #break
         #end
     #end
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
     #if($table.sub)
     import java.util.ArrayList;
 
-    import com.laigeoffer.projectaihub.common.utils.StringUtils;
+    import com.laigeoffer.pmhub.common.utils.StringUtils;
     import org.springframework.transaction.annotation.Transactional;
     import ${packageName}.domain.${subClassName};
     #end

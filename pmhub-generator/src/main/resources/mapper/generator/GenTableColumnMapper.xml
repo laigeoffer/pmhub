@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.laigeoffer.projectaihub.generator.mapper.GenTableColumnMapper">
+<mapper namespace="com.laigeoffer.pmhub.generator.mapper.GenTableColumnMapper">
 
     <resultMap type="GenTableColumn" id="GenTableColumnResult">
         <id property="columnId" column="column_id"/>

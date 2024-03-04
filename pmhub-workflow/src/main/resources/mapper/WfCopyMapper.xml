@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.laigeoffer.projectaihub.workflow.mapper.WfCopyMapper">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.WfCopyMapper">
 
-    <resultMap type="com.laigeoffer.projectaihub.workflow.domain.WfCopy" id="WfCopyResult">
+    <resultMap type="com.laigeoffer.pmhub.workflow.domain.WfCopy" id="WfCopyResult">
         <result property="copyId" column="copy_id"/>
         <result property="title" column="title"/>
         <result property="processId" column="process_id"/>
@@ -18,13 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime" column="update_time"/>
         <result property="delFlag" column="del_flag"/>
     </resultMap>
-    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.laigeoffer.projectaihub.common.core.domain.entity.SysUser">
+    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysUser">
         select * from sys_user where user_id = #{userId} and del_flag = 0
     </select>
-    <select id="selectRoleById" parameterType="java.lang.Long" resultType="com.laigeoffer.projectaihub.common.core.domain.entity.SysRole">
+    <select id="selectRoleById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysRole">
         select * from sys_role where role_id = #{roleId}
     </select>
-    <select id="selectDeptById" parameterType="java.lang.Long" resultType="com.laigeoffer.projectaihub.common.core.domain.entity.SysDept">
+    <select id="selectDeptById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysDept">
         select * from sys_dept where dept_id = #{deptId}
     </select>
     <select id="selectUserIdsByRoleId" resultType="Long">

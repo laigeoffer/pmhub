@@ -25,25 +25,25 @@ create table sys_dept
 -- 初始化-部门表数据
 -- ----------------------------
 insert into sys_dept
-values (100, 0, '0', '若依科技', 0, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (100, 0, '0', '苍何科技', 0, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (101, 100, '0,100', '深圳总公司', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (101, 100, '0,100', '深圳总公司', 1, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (102, 100, '0,100', '长沙分公司', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (102, 100, '0,100', '长沙分公司', 2, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (103, 101, '0,100,101', '研发部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (103, 101, '0,100,101', '研发部门', 1, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (104, 101, '0,100,101', '市场部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (104, 101, '0,100,101', '市场部门', 2, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (105, 101, '0,100,101', '测试部门', 3, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (105, 101, '0,100,101', '测试部门', 3, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (106, 101, '0,100,101', '财务部门', 4, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (106, 101, '0,100,101', '财务部门', 4, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (107, 101, '0,100,101', '运维部门', 5, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (107, 101, '0,100,101', '运维部门', 5, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (108, 102, '0,100,102', '市场部门', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (108, 102, '0,100,102', '市场部门', 1, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 insert into sys_dept
-values (109, 102, '0,100,102', '财务部门', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+values (109, 102, '0,100,102', '财务部门', 2, '苍何', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
 
 
 -- ----------------------------
@@ -78,11 +78,11 @@ create table sys_user
 -- 初始化-用户信息表数据
 -- ----------------------------
 insert into sys_user
-values (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '',
+values (1, 103, 'admin', '苍何', '00', 'ry@163.com', '15888888888', '1', '',
         '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin',
         sysdate(), '', null, '管理员');
 insert into sys_user
-values (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '',
+values (2, 105, 'ry', '苍何', '00', 'ry@qq.com', '15666666666', '1', '',
         '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin',
         sysdate(), '', null, '测试员');
 
@@ -193,8 +193,8 @@ insert into sys_menu
 values ('3', '系统工具', '0', '3', 'tool', null, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', sysdate(), '', null,
         '系统工具目录');
 insert into sys_menu
-values ('4', '若依官网', '0', '4', 'http://ruoyi.vip', null, '', 0, 0, 'M', '0', '0', '', 'guide', 'admin', sysdate(), '',
-        null, '若依官网地址');
+values ('4', '苍何官网', '0', '4', 'http://ruoyi.vip', null, '', 0, 0, 'M', '0', '0', '', 'guide', 'admin', sysdate(), '',
+        null, '苍何官网地址');
 -- 二级菜单
 insert into sys_menu
 values ('100', '用户管理', '1', '1', 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user',
@@ -979,9 +979,9 @@ create table sys_notice
 -- 初始化-公告信息表数据
 -- ----------------------------
 insert into sys_notice
-values ('1', '温馨提醒：2018-07-01 若依新版本发布啦', '2', '新版本内容', '0', 'admin', sysdate(), '', null, '管理员');
+values ('1', '温馨提醒：2018-07-01 苍何新版本发布啦', '2', '新版本内容', '0', 'admin', sysdate(), '', null, '管理员');
 insert into sys_notice
-values ('2', '维护通知：2018-07-01 若依系统凌晨维护', '1', '维护内容', '0', 'admin', sysdate(), '', null, '管理员');
+values ('2', '维护通知：2018-07-01 苍何系统凌晨维护', '1', '维护内容', '0', 'admin', sysdate(), '', null, '管理员');
 
 
 -- ----------------------------
