@@ -1,8 +1,8 @@
-# laigeoffer-来个offer系列之ProjectAIHub
+# laigeoffer-来个offer系列之 PmHub
 ![](https://canghe666.oss-cn-chengdu.aliyuncs.com/canghe/1941709273629_.pic.jpg)
 ## 平台简介
 
-* 🔥热门推荐🔥大学春招、秋招、应届项目，ProjectAIHub 是一套智能项目管理系统，SpringBoot+mybatis-plus+RocketMQ等技术架构，完成项目管理+BPM流程管理+AI智能项目，帮助学生主打就业的项目。
+* 🔥热门推荐🔥大学春招、秋招、应届项目，PmHub 是一套智能项目管理系统，SpringBoot+mybatis-plus+RocketMQ等技术架构，完成项目管理+BPM流程管理+AI智能项目，帮助学生主打就业的项目。
 * 前端采用Vue、Element UI。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt。
 * 权限认证使用Jwt，支持多终端认证系统。

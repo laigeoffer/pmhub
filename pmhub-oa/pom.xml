@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.laigeoffer.projectaihub</groupId>
-        <artifactId>projectaihub</artifactId>
+        <groupId>com.laigeoffer.pmhub</groupId>
+        <artifactId>pmhub</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>paih-oa</artifactId>
+    <artifactId>pmhub-oa</artifactId>
 
     <dependencies>
 
@@ -67,8 +67,8 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.laigeoffer.projectaihub</groupId>
-            <artifactId>paih-common</artifactId>
+            <groupId>com.laigeoffer.pmhub</groupId>
+            <artifactId>pmhub-common</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>mybatis-spring</artifactId>

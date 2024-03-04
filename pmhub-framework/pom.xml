@@ -3,13 +3,13 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>com.laigeoffer.projectaihub</groupId>
-        <artifactId>projectaihub</artifactId>
+        <groupId>com.laigeoffer.pmhub</groupId>
+        <artifactId>pmhub</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>paih-framework</artifactId>
+    <artifactId>pmhub-framework</artifactId>
 
     <description>
         framework框架核心
@@ -55,8 +55,8 @@
 
         <!-- 系统模块-->
         <dependency>
-            <groupId>com.laigeoffer.projectaihub</groupId>
-            <artifactId>paih-system</artifactId>
+            <groupId>com.laigeoffer.pmhub</groupId>
+            <artifactId>pmhub-system</artifactId>
         </dependency>
 
         <!--hutool工具包-->
