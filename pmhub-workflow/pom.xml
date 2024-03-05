@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.laigeoffer.pmhub</groupId>
+        <artifactId>pmhub</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>pmhub-workflow</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter-process</artifactId>
+            <version>6.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.laigeoffer.pmhub</groupId>
+            <artifactId>pmhub-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.laigeoffer.pmhub</groupId>
+            <artifactId>pmhub-oa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.aviator</groupId>
+            <artifactId>aviator</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

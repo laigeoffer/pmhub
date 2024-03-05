@@ -4,23 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.laigeoffer.projectaihub</groupId>
-    <artifactId>projectaihub</artifactId>
+    <groupId>com.laigeoffer.pmhub</groupId>
+    <artifactId>pmhub</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>projectaihub</name>
+    <name>pmhub</name>
     <description>🔥热门推荐🔥大学春招、秋招、应届项目，SpringBoot+JDK8+RocketMQ等技术架构，完成项目管理+BPM流程管理+AI智能项目，帮助学生主打就业的项目。</description>
 
     <modules>
-        <module>paih-admin</module>
-        <module>paih-framework</module>
-        <module>paih-system</module>
-        <module>paih-quartz</module>
-        <module>paih-generator</module>
-        <module>paih-common</module>
-        <module>paih-project</module>
-        <module>paih-workflow</module>
-        <module>paih-oa</module>
+        <module>pmhub-admin</module>
+        <module>pmhub-framework</module>
+        <module>pmhub-system</module>
+        <module>pmhub-quartz</module>
+        <module>pmhub-generator</module>
+        <module>pmhub-common</module>
+        <module>pmhub-project</module>
+        <module>pmhub-workflow</module>
+        <module>pmhub-oa</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -180,58 +180,58 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-quartz</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-quartz</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-generator</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-generator</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-framework</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-framework</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-system</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-system</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-common</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-common</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- 项目管理模块-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-project</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-project</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
 
             <!-- OA对接模块-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-oa</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-oa</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 
             <!-- workflow模块-->
             <dependency>
-                <groupId>com.laigeoffer.projectaihub</groupId>
-                <artifactId>paih-workflow</artifactId>
+                <groupId>com.laigeoffer.pmhub</groupId>
+                <artifactId>pmhub-workflow</artifactId>
                 <version>${laigeoffer.version}</version>
             </dependency>
 

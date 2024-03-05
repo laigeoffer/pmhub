@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.project.mapper.ProjectFileMapper">
+    <select id="queryFileList" parameterType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO" resultType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileResVO">
+      select pf.file_url, pf.id as projectFileId, pf.file_name, p.project_name,pf.user_id, pf.file_size, pf.created_time,pf.type,pf.pt_id from pmhub_project_file pf
+      left join pmhub_project p on pf.project_id = p.id
+      where pf.project_id = #{data.id} and pf.type in ('project', 'task')
+      <if test="data.fileName != null and data.fileName != ''">
+        and pf.file_name like CONCAT("%", #{data.fileName},"%")
+      </if>
+        order by pf.created_time desc
+    </select>
+    <select id="queryProjectFileList" parameterType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO" resultType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileResVO">
+        select pf.file_url, pf.id as projectFileId, pf.file_name, p.project_name,pf.user_id, pf.file_size, pf.created_time,pf.type,pf.pt_id from pmhub_project_file pf
+        left join pmhub_project p on pf.project_id = p.id
+        where pf.pt_id = #{data.id} and pf.type = 'project'
+        order by pf.created_time desc
+    </select>
+    <select id="queryTaskFileList" parameterType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO" resultType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileResVO">
+        select pf.file_url, pf.id as projectFileId, pf.file_name, p.project_name,pf.user_id, pf.file_size, pf.created_time,pf.type,pf.pt_id from pmhub_project_file pf
+        left join pmhub_project p on pf.project_id = p.id
+        where pf.pt_id = #{data.id} and pf.type = 'task'
+        order by pf.created_time desc
+    </select>
+    <select id="queryTemplateFileList" parameterType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO" resultType="com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileResVO">
+        select pf.file_url, pf.id as projectFileId, pf.file_name, p.project_name,pf.user_id, pf.file_size, pf.created_time,pf.type,pf.pt_id from pmhub_project_file pf
+        left join pmhub_project p on pf.project_id = p.id
+        where pf.pt_id = #{data.id} and pf.type = 'template'
+    </select>
+
+</mapper>

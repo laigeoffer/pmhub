@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.WfCopyMapper">
+
+    <resultMap type="com.laigeoffer.pmhub.workflow.domain.WfCopy" id="WfCopyResult">
+        <result property="copyId" column="copy_id"/>
+        <result property="title" column="title"/>
+        <result property="processId" column="process_id"/>
+        <result property="processName" column="process_name"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="taskId" column="taskId"/>
+        <result property="userId" column="user_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysUser">
+        select * from sys_user where user_id = #{userId} and del_flag = 0
+    </select>
+    <select id="selectRoleById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysRole">
+        select * from sys_role where role_id = #{roleId}
+    </select>
+    <select id="selectDeptById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysDept">
+        select * from sys_dept where dept_id = #{deptId}
+    </select>
+    <select id="selectUserIdsByRoleId" resultType="Long">
+        select u.user_id from sys_user u
+        inner join sys_user_role sur
+        on u.user_id = sur.user_id and sur.role_id = #{roleId}
+        where u.del_flag = 0
+    </select>
+    <select id="selectUserIds" resultType="java.lang.Long">
+        select user_id from sys_user su where su.del_flag = 0
+        <if test="deptIds != null and deptIds.size() > 0">
+            and su.dept_id in
+            <foreach item="deptId" index="index" collection="deptIds" open="(" separator="," close=")">
+                #{deptId}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

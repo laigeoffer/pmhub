@@ -1,0 +1,123 @@
+# 项目相关配置
+pmhub:
+  # 名称
+  name: laigeoffer-pmhub
+  # 版本
+  version: 1.0.0
+  # 版权年份
+  copyrightYear: 2024
+  # 实例演示开关
+  demoEnabled: true
+  # 获取ip地址开关
+  addressEnabled: false
+  # 验证码类型 math 数组计算 char 字符验证
+  captchaType: math
+  # 本地开发请修改 profile 为对应系统的路径 切记不能提交 保证 profile: /data/uploadPath 始终是这个 因为容器部署挂载的这个路径
+  # Mac /usr/local/pmhub/uploadPath
+  # Win D:/pmhub/uploadPath
+  profile: /data/uploadPath
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 5010
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 连接数满后的排队数，默认为100
+    accept-count: 1000
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 100
+
+# 日志配置
+logging:
+  level:
+    com.laigeoffer.pmhub: info
+    org.springframework: warn
+  # 日志路径配置：测试及线上环境请勿修改保证 path: /data/logs 始终是这个 因为容器部署挂载的这个路径，本地环境可修改自己的存储路径
+  file:
+    path: /data/logs
+
+# 用户配置
+user:
+  password:
+    # 密码最大错误次数
+    maxRetryCount: 5
+    # 密码锁定时间（默认10分钟）
+    lockTime: 10
+
+# Spring配置
+spring:
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  profiles:
+    active: local
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 100MB
+      # 设置总上传的文件大小
+      max-request-size: 200MB
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+
+# token配置
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌密钥
+  secret: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+  # 令牌有效期（默认30分钟）
+  expireTime: 120
+
+# MyBatis-plus 配置
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.laigeoffer.pmhub.**.domain
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
+
+# Swagger配置
+swagger:
+  # 是否开启swagger
+  enabled: true
+  # 请求前缀
+  pathMapping: /dev-api
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
+
+--- # workflow 配置
+workflow:
+  # 关闭定时任务 job
+  async-executor-activate: false
+  # 库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。
+  database-schema-update: true
+  idm:
+    enabled: false

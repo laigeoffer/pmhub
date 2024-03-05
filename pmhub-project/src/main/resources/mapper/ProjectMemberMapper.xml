@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.project.mapper.ProjectMemberMapper">
+    <select id="searchMember" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
+        select pm.user_id, su.nick_name, pm.joined_time, sd.dept_name, sr.role_name from pmhub_project_member pm
+            inner join sys_user su on pm.user_id = su.user_id
+            left join sys_dept sd on su.dept_id = sd.dept_id
+            left join sys_user_role sur on sur.user_id = su.user_id
+            left join sys_role sr on sr.role_id = sur.role_id where pm.pt_id = #{data.projectId}
+        <if test="data.keyword != null and data.keyword != ''">
+            and su.nick_name like CONCAT("%", #{data.keyword},"%") or su.email like CONCAT("%", #{data.keyword},"%")
+        </if>
+    </select>
+    <select id="queryUserList" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
+        select user_id, user_name, nick_name, email from sys_user where del_flag = 0
+        <if test="keyword != null and keyword != ''">
+            and nick_name like CONCAT("%", #{keyword},"%") or email like CONCAT("%", #{keyword},"%")
+        </if>
+    </select>
+    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysUser">
+        select * from sys_user su where
+        <if test="userIdList != null and userIdList.size() > 0">
+            su.user_id in
+            <foreach item="userId" index="index" collection="userIdList" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectUserByUsername" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.common.core.domain.entity.SysUser">
+        select * from sys_user su where
+        <if test="usernameList != null and usernameList.size() > 0">
+            su.user_name in
+            <foreach item="username" index="index" collection="usernameList" open="(" separator="," close=")">
+                #{username}
+            </foreach>
+        </if>
+    </select>
+    <select id="queryExecutorList" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
+        select su.user_id, su.user_name, su.nick_name, su.email, su.avatar from pmhub_project_member pm left join sys_user su on pm.user_id = su.user_id
+        where pm.pt_id = #{projectId}
+    </select>
+    <select id="queryTaskUserList" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
+        select su.user_id, su.user_name, su.nick_name from pmhub_project_member pm left join sys_user su on pm.user_id = su.user_id
+        where pm.pt_id = #{taskId}
+    </select>
+</mapper>
