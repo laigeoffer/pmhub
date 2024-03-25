@@ -1,24 +1,56 @@
-## 开发
+## pmhub-ui 介绍
+
+## pmhub-ui 启动说明
+
+第一步，推荐使用 VSCode 打开 pmhub-ui 项目。
+
+> 项目依赖 Nodejs 环境，需要提前安装。
+
+第二步，打开终端，执行 `npm install` 安装依赖：
+
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324122950.png)
+
+不建议直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题。
 
 ```bash
-# 安装依赖
-npm install
-
-# 建议不要直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
 npm install --registry=https://registry.npmmirror.com
-
-# 如果nodejs版本过新(Error: error:0308010C:digital envelope routines::unsupported)，
-# win 用户输入命令：
-$env:NODE_OPTIONS="--openssl-legacy-provider"
-# mac 用户输入命令：
-export NODE_OPTIONS=--openssl-legacy-provider
-
-# 启动服务
-
-npm run dev
 ```
 
-浏览器访问 http://localhost:80
+第三步，安装完依赖后，执行 `npm run dev` 启动项目：
+
+如果 Nodejs 版本过新，可能会出现`Error: error:0308010C:digital envelope routines::unsupported`这个问题。
+
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324123352.png)
+
+①、如果你是 Windows 用户，可以在 cmd 命令行中输入以下命令：
+
+```bash
+set NODE_OPTIONS=--openssl-legacy-provider
+```
+
+也可以在 PowerShell 中输入以下命令：
+
+```bash
+$env:NODE_OPTIONS="--openssl-legacy-provider"
+```
+
+②、如果你是 macOS 用户，可以在终端中输入以下命令：
+
+```bash
+export NODE_OPTIONS=--openssl-legacy-provider
+```
+
+之后再次执行 `npm run dev` 即可正常启动项目。
+
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324123905.png)
+
+浏览器会自动打开 `http://localhost:1024`，即可看到 pmhub-ui 项目登录页面。
+
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324124027.png)
+
+第四步，微信搜索「苍何」，关注我们的公众号，回复 `pmhub` 获取账号和密码，帮我们增加一个粉丝，哈哈哈，开源不易，请满足一下我的虚荣心（😁）。
+
+第五步，输入账号密码登录，即可看到 pmhub-ui 项目主页。
 
 ## 发布
 
@@ -28,7 +60,7 @@ npm run build:stage
 
 # 构建生产环境
 npm run build:prod
-```
+````
 
 ## 模块划分
 

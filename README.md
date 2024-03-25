@@ -83,7 +83,7 @@
 * Nacos 2.0
 * Elasticsearch 7.10
 
-### 2、项目启动
+### 2、后端项目启动
 
 #### 第一步，下载项目源码
 
@@ -161,7 +161,16 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ![主类就在 admin 中](https://cdn.tobebetterjavaer.com/images/20240324/7a2259e197014c33be4355025f87266a.png)
 
-* 5、访问项目
+如果出现以下的日志，表明项目已经启动成功了。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/42274fdded6d44cbb942ca951f36bf68.png)
+
+### 3，前端项目启动
+
+第一步，使用 VS Code 打开前端项目，也就是 pmhub/pmhub-ui。
+
+> PmHub 是前后端分离项目，前端项目是基于 Vue + Element UI 开发的。启动说明我们直接写在了 ui 中的 readme。
+
 * 6、登录账号：admin 密码：123456
 * 7、访问地址：http://localhost:1024
 * 8、swagger地址：http://localhost:1024/swagger-ui/index.html
