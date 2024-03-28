@@ -8,7 +8,7 @@ spring:
       master:
         url: jdbc:mysql://127.0.0.1:3306/laigeoffer-pmhub?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
-        password: 123456
+        password: Codingmore123
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -118,6 +118,6 @@ logging:
     org.springframework: warn
   # 日志路径配置：测试及线上环境请勿修改保证 path: /data/logs 始终是这个 因为容器部署挂载的这个路径，本地环境可修改自己的存储路径
   file:
-    path: /Users/canghe/logs/laigeoffer/pmhub/
+    path: ./logs/laigeoffer/pmhub/
 
 

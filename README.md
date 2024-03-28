@@ -1,6 +1,4 @@
-# laigeoffer-来个offer系列之 PmHub
-![](https://canghe666.oss-cn-chengdu.aliyuncs.com/canghe/1941709273629_.pic.jpg)
-## 平台简介
+# 项目简介
 
 * 🔥热门推荐🔥大学春招、秋招、应届项目，PmHub 是一套智能项目管理系统，SpringBoot+mybatis-plus+RocketMQ等技术架构，完成项目管理+BPM流程管理+AI智能项目，帮助学生主打就业的项目。
 * 前端采用Vue、Element UI。
@@ -75,8 +73,8 @@
 * 系统管理-通知公告
 * 系统管理-日志管理
 
-# 项目启动
-## 1、环境准备
+## 项目部署
+### 1、环境准备
 * JDK 1.8
 * Maven 3.6
 * MySQL 5.7
@@ -85,24 +83,106 @@
 * Nacos 2.0
 * Elasticsearch 7.10
 
-## 2、项目启动
-* 1、下载项目
-* 2、导入数据库
-* 3、修改配置文件
-* 4、启动项目
-* 5、访问项目
+### 2、后端项目启动
+
+#### 第一步，下载项目源码
+
+①、使用 Git 命令
+
+网络比较通畅的小伙伴可以直接从 GitHub 上拉取，命令如下：
+
+```
+git clone git@github.com:laigeoffer/pmhub.git
+```
+
+国内的小伙伴也可以直接使用码云 Gitee 上的镜像仓库地址拉取：
+
+```
+git clone https://gitee.com/laigeoffer/pmhub.git
+```
+
+②、直接下载压缩包
+
+也可以直接下载 GitHub 上的压缩包，然后解压到本地。
+
+- GitHub 地址：[https://github.com/laigeoffer/pmhub](https://github.com/laigeoffer/pmhub)
+- 码云地址：[https://gitee.com/laigeoffer/pmhub](https://gitee.com/laigeoffer/pmhub)
+
+![下载项目源码压缩包](https://cdn.tobebetterjavaer.com/images/20240324/76023993f091417a800ec7da19989e88.png)
+
+③、直接通过 GitHub 桌面版
+
+我个人一直比较喜欢实用 GitHub 桌面版来管理仓库，图形化界面操作起来也比较舒服。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/27136b6558d84edb861461ca5452021d.png)
+
+#### 第二步，使用 Intellij IDEA 导入项目
+
+这一步应该就不需要我多讲了，相信大家都能搞定。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/62ee1affa2fd46ed89eaaa2d6931198b.png)
+
+#### 第三步，导入数据库
+
+推荐大家使用 [Navicat](https://javabetter.cn/nice-article/itmind/navicatmacyjpx.html) 这款图形化数据库管理工具。
+
+①、创建数据库 laigeoffer-pmhub
+
+>也可以是其他名字，只要在配置文件里修改对应的数据库名即可。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/83b5e36a95e04e3d951641215ff16dcf.png)
+
+
+②、导入数据库文件，路径在 pmhub/sql/pmhub_20240305.sql
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/327783d299814ff8837ab5c3c64b3ff5.png)
+
+可以直接右键在 terminal 终端中打开，然后通过 pwd 和 ls 命令查看文件的绝对路径。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/24f0cbafe1fb4995827015c294196eb2.png)
+
+拿到绝对路径后，就可以在 Navicat 中导入数据库文件了。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/aa4cb8f705aa4f46a7d4835c9d26a596.png)
+
+#### 第四步，修改配置文件
+
+在 pmhub/pmhub-admin/src/main/resources/application-local.yml 中修改数据库连接信息。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/6a39a64bee524e5daf4edb388eebf14f.png)
+
+1. 如果数据库名也是 laigeoffer-pmhub，那么只需要修改用户名和密码即可。
+2. 如果用户名也是 root，那么只需要修改密码即可。
+3. 如果密码也一样，那么就不需要修改了（不可能，绝对不可能这么巧😂）。
+
+#### 第五步，启动项目
+
+找到 PmhubApplication 类，右键 Run PmhubApplication.main()。
+
+![主类就在 admin 中](https://cdn.tobebetterjavaer.com/images/20240324/7a2259e197014c33be4355025f87266a.png)
+
+如果出现以下的日志，表明项目已经启动成功了。
+
+![](https://cdn.tobebetterjavaer.com/images/20240324/42274fdded6d44cbb942ca951f36bf68.png)
+
+### 3，前端项目启动
+
+第一步，使用 VS Code 打开前端项目，也就是 pmhub/pmhub-ui。
+
+> PmHub 是前后端分离项目，前端项目是基于 Vue + Element UI 开发的。启动说明我们直接写在了 ui 中的 readme。
+
 * 6、登录账号：admin 密码：123456
 * 7、访问地址：http://localhost:1024
 * 8、swagger地址：http://localhost:1024/swagger-ui/index.html
 
-## 3、项目部署
+### 3、项目部署
 * 1、打包项目
 * 2、上传服务器
 * 3、启动项目
 * 4、访问项目
 * 5、登录账号：admin 密码：123456
 
-## 4、项目配置
+### 4、项目配置
 * 1、数据库配置
 * 2、redis配置
 * 3、rocketmq配置

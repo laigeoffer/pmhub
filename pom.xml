@@ -249,6 +249,12 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client-java</artifactId>
                 <version>${rocketmq.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>annotations-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- aspectjrt -->
