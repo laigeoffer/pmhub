@@ -50,6 +50,8 @@ export NODE_OPTIONS=--openssl-legacy-provider
 
 第四步，微信搜索「苍何」，关注我们的公众号，回复 `pmhub` 获取账号和密码，帮我们增加一个粉丝，哈哈哈，开源不易，请满足一下我的虚荣心（😁）。
 
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240328095419.png)
+
 第五步，输入账号密码登录，即可看到 pmhub-ui 项目主页。
 
 ## 发布
