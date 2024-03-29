@@ -1,15 +1,43 @@
 # 项目简介
 
-* 🔥热门推荐🔥大学春招、秋招、应届项目，PmHub 是一套智能项目管理系统，SpringBoot+mybatis-plus+RocketMQ等技术架构，完成项目管理+BPM流程管理+AI智能项目，帮助学生主打就业的项目。
-* 前端采用Vue、Element UI。
-* 后端采用Spring Boot、Spring Security、Redis & Jwt。
-* 权限认证使用Jwt，支持多终端认证系统。
-* 支持加载动态权限菜单，多方式轻松权限控制。
-* 高效率开发，使用代码生成器可以一键生成前后端代码。
-* 支持联动企业微信进行消息推送
-* 支持敏感数据动态加解密
-* 支持 OAuth2 统一认证登录
-* 提供了技术栈（[Vue3](https://v3.cn.vuejs.org) [Element Plus](https://element-plus.org/zh-CN) [Vite](https://cn.vitejs.dev)）
+PmHub 是一套智能项目管理系统，包括用户、流程、项目管理、认证等服务。
+
+这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
+
+>如果对开源项目感兴趣，可以关注二哥的另外一个实战项目：技术派，一个前后端分离的社区项目。[GitHub](https://github.com/itwanger/paicoding) 上已经星标 1.5k+，不少同学就是靠这个项目在往年的校招中拿到了不错的 offer。
+
+PmHub 包含了 Redis 缓存、RocketMQ 消息队列、Docker 容器化、Jenkins 自动化部署、Spring Security 安全框架、Nacos 服务注册和发现、Elasticsearch 搜索引擎、Kibana 可视化工具、Zipkin 链路追踪、OAuth2 统一认证、Vue3 前端框架等互联网开发中需要用到的主流技术栈，可以帮助同学们快速掌握微服务/分布式项目的核心知识点。
+
+为了方便大家循序渐进式的学习，我们将会推出两个版本：
+
+- 单体架构版本：适合初学者，直接运行 pmhub-admin 中的 PmhubApplication 类即可。
+- 微服务架构版本：适合有一定基础，想进阶学习微服务/分布式的同学，可以分别启动用户、流程、项目管理、认证等多个服务。
+
+可以根据自己的实际情况选择合适的版本进行学习，我们将会倾其所有，在第一时间帮助大家解决所有学习过程遇到的问题，让你的学习曲线变得非常丝滑😁。
+
+![pmhub 业务架构图](https://cdn.tobebetterjavaer.com/images/README/1711707917318.png)
+
+# 关于来个 offer 组织
+
+来个 offer 组织由二哥发起，苍何主理，旨在帮助同学们在校招、社招中拿到满意的 offer。
+
+- 二哥，原创公众号“沉默王二”累计 18 万+ 读者，GitHub 星标 11000+ 开源知识库《二哥的 Java 进阶之路》作者，帮助很多很多同学成功拿到满意的 offer。
+- 苍何，原创公众号“苍何”作者，前阿里 P7，曾就职于蚂蚁金服，现国企技术总监，技术、管理、面试经验丰富。
+
+加入[二哥的编程星球](https://javabetter.cn/zhishixingqiu/)后，即可解锁来个 offer 组织下的所有项目的付费文档，以及 1 对 1 的技术面试辅导服务。
+
+项目|码云|GitHub|简介
+---|---|---|---
+PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com/laigeoffer/pmhub) | 一套智能项目管理系统，即将帮助不少同学在接下来的校招/社招中斩获满意 offer。
+技术派| [Gitee](https://gitee.com/itwanger/paicoding) | [GitHub](https://github.com/itwanger/paicoding) | 一个前后端分离的社区项目，帮助过不少同学在秋招中斩获满意 offer。
+
+# 技术架构
+
+下面这张系统架构图可以帮助大家快速了解 PmHub 项目的组织架构，从前端到网关、从服务应用到基础服务、从存储技术到运维部署，可以说是一目了然。
+
+![pmhub-系统架构图](https://cdn.tobebetterjavaer.com/images/README/1711709454988.png)
+
+优质的项目，离不开一张清晰的鸟瞰图（😄）。
 
 ## 模块简介
 ### 1、pmhub-admin
