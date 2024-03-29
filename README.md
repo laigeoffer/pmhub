@@ -175,24 +175,22 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ![](https://cdn.tobebetterjavaer.com/images/20240324/42274fdded6d44cbb942ca951f36bf68.png)
 
-### 3，前端项目启动
+### 3、前端项目启动
 
-第一步，使用 VS Code 打开前端项目，也就是 pmhub/pmhub-ui。
+请参考 pmhub-ui 项目的 README.md 文档。
 
-> PmHub 是前后端分离项目，前端项目是基于 Vue + Element UI 开发的。启动说明我们直接写在了 ui 中的 readme。
+### 4、Swagger 地址
 
-* 6、登录账号：admin 密码：123456
-* 7、访问地址：http://localhost:1024
-* 8、swagger地址：http://localhost:1024/swagger-ui/index.html
+http://localhost:1024/dev-api/swagger-ui/index.html
 
-### 3、项目部署
+### 5、项目部署
 * 1、打包项目
 * 2、上传服务器
 * 3、启动项目
 * 4、访问项目
 * 5、登录账号：admin 密码：123456
 
-### 4、项目配置
+### 6、项目配置
 * 1、数据库配置
 * 2、redis配置
 * 3、rocketmq配置
