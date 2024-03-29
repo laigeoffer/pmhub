@@ -48,4 +48,4 @@ nbdist/
 
 .DS_store
 */.DS_store
-application-*.yml
+application-prod.yml
