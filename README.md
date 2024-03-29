@@ -145,6 +145,8 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ![](https://cdn.tobebetterjavaer.com/images/20240324/aa4cb8f705aa4f46a7d4835c9d26a596.png)
 
+导入完成后，刷新一下就可以看到最新的数据库表了。
+
 #### 第四步，修改配置文件
 
 在 pmhub/pmhub-admin/src/main/resources/application-local.yml 中修改数据库连接信息。
