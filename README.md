@@ -145,6 +145,8 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ![](https://cdn.tobebetterjavaer.com/images/20240324/aa4cb8f705aa4f46a7d4835c9d26a596.png)
 
+导入完成后，刷新一下就可以看到最新的数据库表了。
+
 #### 第四步，修改配置文件
 
 在 pmhub/pmhub-admin/src/main/resources/application-local.yml 中修改数据库连接信息。
@@ -155,7 +157,15 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 2. 如果用户名也是 root，那么只需要修改密码即可。
 3. 如果密码也一样，那么就不需要修改了（不可能，绝对不可能这么巧😂）。
 
-#### 第五步，启动项目
+#### 第五步，启动 Redis
+
+①、如果你是 macOS 用户，可以直接在终端输入`redis-server`启动 Redis。
+
+![](https://cdn.tobebetterjavaer.com/images/README/1711692102829.png)
+
+②、如果你是 Windows 用户，可以直接双击 redis-server.exe 启动 Redis。
+
+#### 第六步，启动项目
 
 找到 PmhubApplication 类，右键 Run PmhubApplication.main()。
 
