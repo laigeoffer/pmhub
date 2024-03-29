@@ -181,7 +181,7 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ### 4、Swagger 地址
 
-http://localhost:1024/swagger-ui/index.html
+http://localhost:1024/dev-api/swagger-ui/index.html
 
 ### 5、项目部署
 * 1、打包项目
