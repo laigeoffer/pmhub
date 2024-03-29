@@ -75,26 +75,26 @@ spring:
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
 
-# 自定义参数
+# 自定义参数（需要替换为你自己的企业微信信息）
 pmhub:
   # 企微相关
   workWx:
-    host: 填写URL
-    corpid: 填写企业微信企业id
-    corpsecret: 企业微信企业秘钥
-    addressSecret: 应用秘钥
-    agentid: 企微应用id
-    aeskey: 应用key
+    host: https://laigeoffer.cn
+    corpid: wx123a99212131
+    corpsecret: 231asdad
+    addressSecret: 2131234
+    agentid: 12
+    aeskey: sda12
     path:
   # 企微相关
   oa:
-    host: 填写URL
+    host: https://laigeoffer.cn
     path2: /stage-api
-    clientId: 客户端id
-    clientSecret: 客户端秘钥
-    path: 应用URL
-    appId: 小程序id
-    code: 小程序code
+    clientId: 12
+    clientSecret: asd12
+    path: https://laigeoffer.cn
+    appId: wx12
+    code: 2
   #  请确保开启企业微信消息联动后再开启MQ，并开启 RocketMqUtils 和 OAMessageConsumer
   #  rocketMQ:
   #    addr: 127.0.0.1:8081
