@@ -4,9 +4,11 @@
 
 第一步，推荐使用 VSCode 打开 pmhub-ui 项目。
 
-> 项目依赖 Nodejs 环境，需要提前安装。
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240329133716.png)
 
 第二步，打开终端，执行 `npm install` 安装依赖：
+
+项目依赖 Nodejs 环境，需要提前安装。此处略过。
 
 ![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324122950.png)
 
@@ -15,6 +17,8 @@
 ```bash
 npm install --registry=https://registry.npmmirror.com
 ```
+
+如果出现 `npm ERR! code EIDLETIMEOUT` 错误，一般是因为网络问题导致的，可以重新再执行一次 `npm install`。
 
 第三步，安装完依赖后，执行 `npm run dev` 启动项目：
 
@@ -50,11 +54,11 @@ export NODE_OPTIONS=--openssl-legacy-provider
 
 第四步，微信搜索「苍何」，关注我们的公众号，回复 `pmhub` 获取账号和密码，帮我们增加一个粉丝，哈哈哈，开源不易，请满足一下我的虚荣心（😁）。
 
-![](https://cdn.tobebetterjavaer.com/stutymore/README-20240328095419.png)
+![](https://cdn.tobebetterjavaer.com/stutymore/README-20240329142637.png)
 
 第五步，输入账号密码登录，即可看到 pmhub-ui 项目主页。
 
-## 发布
+## pmhub-ui 发布说明
 
 ```bash
 # 构建测试环境
