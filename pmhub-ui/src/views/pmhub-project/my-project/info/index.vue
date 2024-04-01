@@ -12,9 +12,6 @@
     <el-tab-pane label="成员" name="成员">
       <Member :projectData="projectData" />
     </el-tab-pane>
-    <el-tab-pane label="物料" name="物料">
-      <Material :projectData="projectData" />
-    </el-tab-pane>
     <el-tab-pane label="甘特图" name="甘特图">敬请期待</el-tab-pane>
   </el-tabs>
 </template>
@@ -24,12 +21,11 @@ import Overview from "./components/Overview.vue"
 import Task from "./components/Task.vue"
 import File from "./components/File.vue"
 import Member from "./components/Member.vue"
-import Material from "./components/Material.vue"
 import { getProjectDetailApi } from "@/api/pmhub-project/my-project.js"
 
 export default {
   name: "MyProjectInfo",
-  components: { Overview, Task, File, Member, Material },
+  components: { Overview, Task, File, Member},
   props: {},
   data() {
     return {
@@ -42,10 +38,7 @@ export default {
       if (name === "任务") {
         // this.$router.push({ path: "/pmhub-project/my-task", query: { test: "test" } })
       } else if (name === "物料") {
-        // this.$router.push({
-        //   path: "/pmhub-materials/materials-details",
-        //   query: { projectId: this.projectData.projectId },
-        // })
+       
       }
     },
   },

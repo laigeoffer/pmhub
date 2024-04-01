@@ -71,9 +71,7 @@ npm run build:prod
 ## 模块划分
 
 - 项目管理：pmhub-project
-- 采购管理：pmhub-purchase
-- 物料管理：pmhub-materials
-- 库存管理：pmhub-storehouse
+
 - 审批管理：pmhub-approval
 
 ## Git 提交规范参考
