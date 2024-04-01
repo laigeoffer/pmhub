@@ -2,7 +2,7 @@
   <div class="login">
     <div class="layer" />
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">laigeoffer-pmhub</h3>
+      <h3 class="title">PmHub</h3>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
@@ -52,7 +52,9 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2022-至今 来个offer科技有限公司</span>
+      <span>Copyright © 2022-至今 </span>
+      <a href="https://github.com/laigeoffer" target="_blank">来个offer官方，</a>
+      <a href="https://github.com/laigeoffer/pmhub" target="_blank">项目源码</a>
     </div>
   </div>
 </template>

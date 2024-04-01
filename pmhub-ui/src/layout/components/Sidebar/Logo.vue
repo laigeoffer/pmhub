@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: 'laigeoffer-pmhub',
+      title: 'PmHub',
       logo: logoImg
     }
   }

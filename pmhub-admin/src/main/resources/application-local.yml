@@ -78,6 +78,8 @@ spring:
 
 # 自定义参数
 pmhub:
+  # 本地上传路径，这里使用的是相对路径，请修改为你自己需要设置的上传路径
+  profile: ./upload
   # 企微相关
   workWx:
     host: https://laigeoffer.cn
