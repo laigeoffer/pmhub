@@ -18,13 +18,16 @@ public class StarterRunner implements CommandLineRunner {
     @Value("${spring.profiles.active}")
     String activeStr;
 
+    @Value("${pmhub.workWx.robert-url}")
+    String robert_url;
+
     @Override
     public void run(String... args) throws Exception {
         LogFactory.get().info("启动完成，发送企微机器人通知");
-        String message = String.format("项目管理系统【%s】分支服务已于： %s 启动完成！",activeStr, DateUtil.now());
+        String message = String.format("PmHub系统【%s】分支服务已于： %s 启动完成！",activeStr, DateUtil.now());
         // 屏蔽local
         if (!"local".equals(activeStr)){
-            WxBotUtils.sendMessage(message);
+            WxBotUtils.sendMessage(message,robert_url);
         }
         LogFactory.get().info(message);
     }

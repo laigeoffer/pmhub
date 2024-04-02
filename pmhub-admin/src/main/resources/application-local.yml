@@ -82,6 +82,8 @@ pmhub:
   profile: ./upload
   # 企微相关
   workWx:
+    # 项目启动成功机器人通知(默认本地关闭线上部署开启，开启可修改ExitRunner逻辑即可)
+    robert-url: 替换成自己的企微机器人webhook地址
     host: https://laigeoffer.cn
     corpid: wx123a99282131
     corpsecret: 231asdad
