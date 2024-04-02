@@ -9,19 +9,17 @@ import cn.hutool.json.JSONObject;
  */
 public class WxBotUtils {
 
-    private static final String URL = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=dbfaae98-6faf-4f52-98d1-ae166a2e1fda";
-
 
     /**
      * 发送企微机器人消息
      * */
-    public static String sendMessage(String msg){
+    public static String sendMessage(String msg, String url){
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonMsg = new JSONObject();
         jsonObject.set("msgtype","text");
         jsonMsg.set("content",msg);
         jsonObject.set("text",jsonMsg);
-        String result2 = HttpRequest.post(URL)
+        String result2 = HttpRequest.post(url)
                 .body(jsonObject.toString())
                 .execute().body();
         return result2;
