@@ -74,22 +74,20 @@ npm run build:prod
 
 - 审批管理：pmhub-approval
 
-## Git 提交规范参考
+## git commit规范
 
-- `feat` 增加新的业务功能
-- `fix` 修复业务问题/BUG
-- `perf` 优化性能
-- `style` 更改代码风格, 不影响运行结果
-- `refactor` 重构代码
-- `revert` 撤销更改
-- `test` 测试相关, 不涉及业务代码的更改
-- `docs` 文档和注释相关
-- `chore` 更新依赖/修改脚手架配置等琐事
-- `workflow` 工作流改进
-- `ci` 持续集成相关
-- `types` 类型定义文件更改
-- `wip` 开发中
-- `api` 接口联调
+| 功能    | commit规范         | 示例                  | 描述                          |
+|-------|------------------|---------------------|-----------------------------|
+| 新功能   | feat/module_name | feat/multi_merchant | 开发一个新功能                     |
+| bug修复 | bugfix/fix_name  | bugfix/user         | 修复某个功能模块的bug                |
+| 紧急修复  | hotfix/fix_name  | hotfix/create_order | 紧急修复某个严重bug                 |
+| 性能优化  | perf/name        | pref/user_login     | 优化某个功能的性能                   |
+| 格式调整  | style/name       | style/log_print     | 做一下不影响任何业务的优化，比如删掉不使用了的注释之类 |
+| 重构    | refactor/name    | refactor/user       | 重构某个功能模块                    |   
+| 测试    | test/name        | test/user           | 测试相关, 不涉及业务代码的更改            |   
+| 文档和注释 | docs/name        | docs/user           | 文档和注释相关                     |   
+| 更新依赖等 | chore/name       | chore/user          | 更新依赖/修改脚手架配置等琐事             |   
+
 
 ## 教程
 
