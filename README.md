@@ -1,12 +1,29 @@
+<p align="center"><img src= "https://cdn.tobebetterjavaer.com/stutymore/pmhub_%E7%AE%80%E4%BB%8B%E7%89%88.png" alt="MaxKB" width="300" /></p>
+<h3 align="center">基于 SpringCloud Alibaba & LLM 的智能项目管理系统</h3>
+<p align="center">
+  <a href="https://opensource.org/license/MIT"><img src="https://img.shields.io/github/license/laigeoffer/pmhub?color=rgb(25%2C%20121%2C%20255)
+" alt="The MIT License"></a>
+  <a href=""><img src="https://img.shields.io/github/forks/laigeoffer/pmhub?color=green
+" alt="Forks"></a>
+  <a href="https://laigeoffer.cn/"><img src="https://img.shields.io/badge/PmHub-%E5%AE%98%E7%BD%91-green
+" alt="Official"></a>
+  <a href="https://github.com/laigeoffer/pmhub"><img src="https://img.shields.io/github/stars/laigeoffer/pmhub?style=flat-square&color=rgb(25%2C%20121%2C%20255)
+" alt="Stars"></a>    
+  <a href="https://pmhub.laigeoffer.cn/"><img src="https://img.shields.io/badge/PmHub-%E4%BD%93%E9%AA%8C%E5%9C%B0%E5%9D%80-blue
+" alt="Experience"></a>  
+</p>
+
+<hr/>
+PmHub 是一套基于 SpringCloud Alibaba 分布式微服务 & LLM 的智能项目管理系统，这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
+
 ## 一、项目简介
 
-PmHub 是一套智能项目管理系统，包括用户、流程、项目管理、认证等服务。
+PmHub 包括用户、流程、项目管理、认证等服务。包含了 Redis 缓存、RocketMQ 消息队列、Docker 容器化、Jenkins 自动化部署、Spring Security 安全框架、Nacos 服务注册和发现、Elasticsearch 搜索引擎、Kibana 可视化工具、Zipkin 链路追踪、OAuth2 统一认证、Vue3 前端框架等互联网开发中需要用到的主流技术栈，可以帮助同学们快速掌握微服务/分布式项目的核心知识点。
 
-这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
+
 
 >如果对开源项目感兴趣，可以关注二哥的另外一个实战项目：技术派，一个前后端分离的社区项目。[GitHub](https://github.com/itwanger/paicoding) 上已经星标 1.5k+，不少同学就是靠这个项目在往年的校招中拿到了不错的 offer。
 
-PmHub 包含了 Redis 缓存、RocketMQ 消息队列、Docker 容器化、Jenkins 自动化部署、Spring Security 安全框架、Nacos 服务注册和发现、Elasticsearch 搜索引擎、Kibana 可视化工具、Zipkin 链路追踪、OAuth2 统一认证、Vue3 前端框架等互联网开发中需要用到的主流技术栈，可以帮助同学们快速掌握微服务/分布式项目的核心知识点。
 
 为了方便大家循序渐进式的学习，我们将会推出两个版本：
 
@@ -443,7 +460,9 @@ PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
 
 ## 十三、许可证
 
-[Apache License 2.0](https://github.com/laigeoffer/pmhub/edit/master/README.md)
+[MIT License (MIT)](https://opensource.org/licenses/MIT)<hr/>
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 Copyright (c) 2023-2024 PmHub（苍何、沉默王二）
 
