@@ -1,0 +1,14 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.laigeoffer.pmhub.base.framework.aspectj.DataSourceAspect,\
+com.laigeoffer.pmhub.base.framework.aspectj.RateLimiterAspect,\
+com.laigeoffer.pmhub.base.framework.config.properties.DruidProperties,\
+com.laigeoffer.pmhub.base.framework.config.CaptchaConfig,\
+com.laigeoffer.pmhub.base.framework.config.DruidConfig,\
+com.laigeoffer.pmhub.base.framework.config.FilterConfig,\
+com.laigeoffer.pmhub.base.framework.config.JacksonConfig,\
+com.laigeoffer.pmhub.base.framework.config.MybatisPlusConfig,\
+com.laigeoffer.pmhub.base.framework.config.ServerConfig,\
+com.laigeoffer.pmhub.base.framework.config.ThreadPoolConfig,\
+com.laigeoffer.pmhub.base.framework.interceptor.impl.SameUrlDataInterceptor,\
+com.laigeoffer.pmhub.base.framework.interceptor.RepeatSubmitInterceptor,\
+com.laigeoffer.pmhub.base.framework.manager.ShutdownManager

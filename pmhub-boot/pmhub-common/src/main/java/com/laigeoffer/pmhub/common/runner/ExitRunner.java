@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ExitRunner implements DisposableBean {
 
-    @Value("${spring.profiles.active}")
+    @Value("${META-INF.spring.profiles.active}")
     String activeStr;
     @Value("${pmhub.workWx.robert-url}")
     String robert_url;

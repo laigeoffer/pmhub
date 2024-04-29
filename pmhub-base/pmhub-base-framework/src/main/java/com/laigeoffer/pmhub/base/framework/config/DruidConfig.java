@@ -6,6 +6,7 @@ import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatPropertie
 import com.alibaba.druid.util.Utils;
 import com.laigeoffer.pmhub.base.core.enums.DataSourceType;
 import com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils;
+import com.laigeoffer.pmhub.base.framework.config.properties.DruidProperties;
 import com.laigeoffer.pmhub.base.framework.datasource.DynamicDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

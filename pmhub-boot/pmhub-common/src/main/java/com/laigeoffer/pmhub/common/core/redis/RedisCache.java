@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * spring redis 工具类
+ * META-INF.spring redis 工具类
  *
  * @author canghe
  **/

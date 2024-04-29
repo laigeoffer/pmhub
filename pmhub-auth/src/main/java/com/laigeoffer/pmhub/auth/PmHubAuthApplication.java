@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @description 认证授权中心
  * @create 2024-04-23-15:00
  */
-//@EnableRyFeignClients todo
+//@EnablePmFeignClients todo
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class PmHubAuthApplication {
     public static void main(String[] args) {

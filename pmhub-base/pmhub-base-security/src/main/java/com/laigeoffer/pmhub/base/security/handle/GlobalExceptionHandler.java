@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.framework.web.exception;
+package com.laigeoffer.pmhub.base.security.handle;
 
 import com.laigeoffer.pmhub.base.core.constant.HttpStatus;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;

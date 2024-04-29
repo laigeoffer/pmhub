@@ -3,6 +3,7 @@ package com.laigeoffer.pmhub.base.security.service;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
+import com.laigeoffer.pmhub.base.core.utils.JwtUtils;
 import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.ip.AddressUtils;
@@ -14,6 +15,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -34,6 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class TokenService {
+    private static final Logger log = LoggerFactory.getLogger(TokenService.class);
     protected static final long MILLIS_SECOND = 1000;
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
@@ -81,6 +85,32 @@ public class TokenService {
         }
         return null;
     }
+
+
+    /**
+     * 获取用户身份信息
+     *
+     * @return 用户信息
+     */
+    public LoginUser getLoginUser(String token)
+    {
+        LoginUser user = null;
+        try
+        {
+            if (StringUtils.isNotEmpty(token))
+            {
+                String userkey = JwtUtils.getUserKey(token);
+                user = redisService.getCacheObject(getTokenKey(userkey));
+                return user;
+            }
+        }
+        catch (Exception e)
+        {
+            log.error("获取用户信息异常'{}'", e.getMessage());
+        }
+        return user;
+    }
+
 
     /**
      * 设置用户身份信息

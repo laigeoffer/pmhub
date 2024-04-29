@@ -6,14 +6,13 @@ import org.apache.catalina.session.ManagerBase;
 import org.apache.commons.logging.Log;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 /**
  * 由于启用了JWT，自定义TomcatServletWebServerFactory以禁用session，获取session时将返回null，避免开发时误用，同时略微提升性能
  */
-@Component
+//@Component
 public class TomcatServletWebServerFactorySelf extends TomcatServletWebServerFactory {
 
     @Override

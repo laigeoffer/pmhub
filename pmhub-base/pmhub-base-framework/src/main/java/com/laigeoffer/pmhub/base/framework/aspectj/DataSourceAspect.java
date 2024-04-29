@@ -27,8 +27,8 @@ import java.util.Objects;
 public class DataSourceAspect {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.laigeoffer.pmhub.common.annotation.DataSource)"
-            + "|| @within(com.laigeoffer.pmhub.common.annotation.DataSource)")
+    @Pointcut("@annotation(com.laigeoffer.pmhub.base.core.annotation.DataSource)"
+            + "|| @within(com.laigeoffer.pmhub.base.core.annotation.DataSource)")
     public void dsPointCut() {
 
     }

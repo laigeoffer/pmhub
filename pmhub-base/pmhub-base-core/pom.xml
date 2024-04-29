@@ -160,6 +160,13 @@
             <artifactId>jaxb-api</artifactId>
         </dependency>
 
+        <!-- Transmittable ThreadLocal -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+        </dependency>
+
+
         <!-- redis 缓存操作 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

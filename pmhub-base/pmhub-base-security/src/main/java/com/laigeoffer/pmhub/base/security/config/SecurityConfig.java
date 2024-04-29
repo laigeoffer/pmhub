@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.system.config;
+package com.laigeoffer.pmhub.base.security.config;
 
 import com.laigeoffer.pmhub.base.security.filter.JwtAuthenticationTokenFilter;
 import com.laigeoffer.pmhub.base.security.handle.AuthenticationEntryPointImpl;

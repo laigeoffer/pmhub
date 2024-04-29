@@ -54,6 +54,7 @@
         <spring-boot-admin.version>2.7.15</spring-boot-admin.version>
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <swagger.core.version>1.6.2</swagger.core.version>
+        <transmittable-thread-local.version>2.14.4</transmittable-thread-local.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -173,6 +174,13 @@
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
+            </dependency>
+
+            <!-- 线程传递值 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
             </dependency>
 
             <!-- velocity代码生成使用模板 -->

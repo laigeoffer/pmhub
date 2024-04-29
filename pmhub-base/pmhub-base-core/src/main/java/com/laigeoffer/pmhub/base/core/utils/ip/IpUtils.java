@@ -1,6 +1,7 @@
 package com.laigeoffer.pmhub.base.core.utils.ip;
 
 
+import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,6 +92,16 @@ public class IpUtils {
             default:
                 return false;
         }
+    }
+
+    /**
+     * 获取客户端IP
+     *
+     * @return IP地址
+     */
+    public static String getIpAddr()
+    {
+        return getIpAddr(ServletUtils.getRequest());
     }
 
     /**

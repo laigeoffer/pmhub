@@ -11,37 +11,37 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DruidProperties {
-    @Value("${spring.datasource.druid.initialSize}")
+    @Value("${META-INF.spring.datasource.druid.initialSize}")
     private int initialSize;
 
-    @Value("${spring.datasource.druid.minIdle}")
+    @Value("${META-INF.spring.datasource.druid.minIdle}")
     private int minIdle;
 
-    @Value("${spring.datasource.druid.maxActive}")
+    @Value("${META-INF.spring.datasource.druid.maxActive}")
     private int maxActive;
 
-    @Value("${spring.datasource.druid.maxWait}")
+    @Value("${META-INF.spring.datasource.druid.maxWait}")
     private int maxWait;
 
-    @Value("${spring.datasource.druid.timeBetweenEvictionRunsMillis}")
+    @Value("${META-INF.spring.datasource.druid.timeBetweenEvictionRunsMillis}")
     private int timeBetweenEvictionRunsMillis;
 
-    @Value("${spring.datasource.druid.minEvictableIdleTimeMillis}")
+    @Value("${META-INF.spring.datasource.druid.minEvictableIdleTimeMillis}")
     private int minEvictableIdleTimeMillis;
 
-    @Value("${spring.datasource.druid.maxEvictableIdleTimeMillis}")
+    @Value("${META-INF.spring.datasource.druid.maxEvictableIdleTimeMillis}")
     private int maxEvictableIdleTimeMillis;
 
-    @Value("${spring.datasource.druid.validationQuery}")
+    @Value("${META-INF.spring.datasource.druid.validationQuery}")
     private String validationQuery;
 
-    @Value("${spring.datasource.druid.testWhileIdle}")
+    @Value("${META-INF.spring.datasource.druid.testWhileIdle}")
     private boolean testWhileIdle;
 
-    @Value("${spring.datasource.druid.testOnBorrow}")
+    @Value("${META-INF.spring.datasource.druid.testOnBorrow}")
     private boolean testOnBorrow;
 
-    @Value("${spring.datasource.druid.testOnReturn}")
+    @Value("${META-INF.spring.datasource.druid.testOnReturn}")
     private boolean testOnReturn;
 
     public DruidDataSource dataSource(DruidDataSource datasource) {

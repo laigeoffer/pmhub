@@ -2,6 +2,7 @@ package com.laigeoffer.pmhub.base.core.utils;
 
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.text.Convert;
+import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +53,8 @@ public class ServletUtils {
     public static Integer getParameterToInt(String name, Integer defaultValue) {
         return Convert.toInt(getRequest().getParameter(name), defaultValue);
     }
+
+
 
     /**
      * 获取Boolean参数
@@ -185,5 +189,26 @@ public class ServletUtils {
         } catch (UnsupportedEncodingException e) {
             return StringUtils.EMPTY;
         }
+    }
+
+    /**
+     * feign调用传递用户请求头
+     * @param request
+     * @return
+     */
+    public static Map<String, String> getHeaders(HttpServletRequest request)
+    {
+        Map<String, String> map = new LinkedCaseInsensitiveMap<>();
+        Enumeration<String> enumeration = request.getHeaderNames();
+        if (enumeration != null)
+        {
+            while (enumeration.hasMoreElements())
+            {
+                String key = enumeration.nextElement();
+                String value = request.getHeader(key);
+                map.put(key, value);
+            }
+        }
+        return map;
     }
 }

@@ -139,4 +139,10 @@ public class Constants
      */
     public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
             "org.springframework", "org.apache", "com.laigeoffer.pmhub.common.utils.file", "com.laigeoffer.pmhub.common.config" };
+
+    /**
+     * 自动识别json对象白名单配置（仅允许解析的包名，范围越小越安全）
+     */
+    public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.ruoyi" };
+
 }

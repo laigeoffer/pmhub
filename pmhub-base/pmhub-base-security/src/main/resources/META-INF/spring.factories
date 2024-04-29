@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.laigeoffer.pmhub.base.security.aspect.InnerAuthAspect,\
+com.laigeoffer.pmhub.base.security.aspect.PreAuthorizeAspect,\
+com.laigeoffer.pmhub.base.security.config.WebMvcConfig,\
+com.laigeoffer.pmhub.base.security.service.TokenService,\
+com.laigeoffer.pmhub.base.security.handle.GlobalExceptionHandler,\
+com.laigeoffer.pmhub.base.security.config.SecurityConfig

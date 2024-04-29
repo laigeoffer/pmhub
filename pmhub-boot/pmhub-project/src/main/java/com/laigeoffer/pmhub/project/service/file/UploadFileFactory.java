@@ -25,7 +25,7 @@ public class UploadFileFactory {
         }
     }
 
-    // 通过 Map 注入，通过 spring bean 的名称作为 key 动态获取对应实例
+    // 通过 Map 注入，通过 META-INF.spring bean 的名称作为 key 动态获取对应实例
     @Autowired
     private Map<String, UploadAbstractExecutor> executorMap;
     // 工厂层执行器

@@ -71,6 +71,13 @@ public class LoginUser implements UserDetails {
      */
     private SysUser user;
 
+    /**
+     * 角色列表
+     */
+    private Set<String> roles;
+
+
+
     public LoginUser() {
     }
 
@@ -225,6 +232,14 @@ public class LoginUser implements UserDetails {
 
     public void setUser(SysUser user) {
         this.user = user;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     @Override
