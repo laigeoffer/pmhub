@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.WfFormMapper">
+
+    <resultMap type="com.laigeoffer.pmhub.workflow.domain.WfForm" id="WfFormResult">
+        <result property="formId" column="form_id"/>
+        <result property="formName" column="form_name"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <select id="selectFormVoList" resultType="com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo">
+        SELECT
+            t1.form_id AS formId,
+            t1.form_name AS formName,
+            t1.content AS content
+        FROM wf_form t1
+        LEFT JOIN wf_deploy_form t2 ON t1.form_id = t2.form_id
+        ${ew.getCustomSqlSegment}
+    </select>
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.ListenerMapper">
+
+
+    <select id="getTaskCompletedState" parameterType="String" resultType="com.laigeoffer.pmhub.workflow.domain.vo.TaskCompletedStateVO">
+        select c.TYPE_ as taskType ,c.MESSAGE_ as taskMessage,c.TIME_ from
+            (select inst.TASK_ID_,inst.PROC_INST_ID_
+                from ACT_HI_ACTINST inst
+                where inst.TASK_ID_ = #{id}) taskid
+            left join
+                ACT_HI_COMMENT c
+            on c.TASK_ID_ = taskid.TASK_ID_ and c.PROC_INST_ID_ = taskid.PROC_INST_ID_ and c.TYPE_ &lt;&gt; 'event'
+            order by c.TIME_ desc
+            limit 1
+    </select>
+
+
+    <select id="getLastTaskCompletedState" parameterType="String" resultType="com.laigeoffer.pmhub.workflow.domain.vo.TaskCompletedStateVO">
+        select
+            t.TYPE_ as taskType
+             ,t.MESSAGE_ as taskMessage
+        from ACT_HI_COMMENT t where t.PROC_INST_ID_ = #{instId}
+        order by t.TIME_ desc
+            limit 1
+    </select>
+
+    <select id="getProcessName" parameterType="String" resultType="String">
+        select t.NAME_ from ACT_RE_PROCDEF t where t.ID_ = #{processDefinitionId}
+    </select>
+
+    <select id="getDeployId" parameterType="String" resultType="String">
+        select distinct pro.DEPLOYMENT_ID_  from
+            (select inst.PROC_DEF_ID_
+             from ACT_HI_ACTINST inst
+             where inst.TASK_ID_ =#{id}) inst
+                left join ACT_RE_PROCDEF pro
+                          on pro.ID_ = inst.PROC_DEF_ID_
+    </select>
+
+    <select id="getDeployByDefinitionId" parameterType="String" resultType="String">
+        select t.DEPLOYMENT_ID_ from ACT_RE_PROCDEF t where t.ID_ = #{definitionId}
+    </select>
+
+    <select id="getTaskId" parameterType="String" resultType="String">
+        select inst.TASK_ID_
+        from ACT_HI_ACTINST inst
+        where inst.PROC_INST_ID_ =#{instId} and TASK_ID_ is not null
+        order by END_TIME_ desc limit 1
+    </select>
+
+    <select id="getProcessTypeName" parameterType="String" resultType="String">
+        select cate.category_name from
+            (select t.CATEGORY_ from  ACT_RE_DEPLOYMENT t where t.ID_ = #{deployId}) deployId
+                left join pmhub_wf_category cate
+                          on cate.code = deployId.CATEGORY_
+    </select>
+
+    <select id="getAllTaskId" resultType="String">
+        select t.TASK_ID_ from ACT_HI_ACTINST t where t.PROC_INST_ID_ = #{instId} and t.ACT_TYPE_ = 'userTask'
+    </select>
+
+
+    <select id="getDetailUrlByInstId" resultType="String">
+        select t.url
+        from pmhub_project_task_process t
+        where t.instance_id = #{instId}
+    </select>
+
+    <select id="getTodoNumList" resultType="com.laigeoffer.pmhub.workflow.domain.vo.TodoNumVO">
+        select *
+        from (select u.user_wx_name as userWxName, task.num,u.user_name
+              from (select t.ASSIGNEE_, count(t.ID_) as num from ACT_RU_TASK t group by t.ASSIGNEE_) task
+                       left join sys_user u on u.user_id = task.ASSIGNEE_) t
+        where t.userWxName is not null
+    </select>
+
+</mapper>

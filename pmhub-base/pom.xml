@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.laigeoffer.pmhub-cloud</groupId>
+        <artifactId>pmhub</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>pmhub-base</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        pmhub-base通用模块
+    </description>
+
+
+    <modules>
+        <module>pmhub-base-core</module>
+        <module>pmhub-base-datascope</module>
+        <module>pmhub-base-datasource</module>
+        <module>pmhub-base-log</module>
+        <module>pmhub-base-redis</module>
+        <module>pmhub-base-seata</module>
+        <module>pmhub-base-security</module>
+        <module>pmhub-base-sensitive</module>
+        <module>pmhub-base-swagger</module>
+        <module>pmhub-base-framework</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+
+</project>

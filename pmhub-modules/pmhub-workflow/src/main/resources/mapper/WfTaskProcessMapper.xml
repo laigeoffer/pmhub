@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.workflow.mapper.WfTaskProcessMapper">
+
+    <select id="selectStatusByTaskId" resultType="java.lang.Integer">
+        select execute_status from pmhub_project_task where id = #{taskId}
+    </select>
+    <select id="selectStatusByTaskId2" resultType="java.lang.Integer">
+        select status from pmhub_project_task where id = #{taskId}
+    </select>
+    <update id="updateTaskStatus" parameterType="java.lang.String">
+        update pmhub_project_task
+        <set>
+            status = 2,task_process = 100.00
+        </set>
+        where id = #{taskId}
+    </update>
+    <update id="updateTaskStatus2" parameterType="java.lang.String">
+        update pmhub_project_task
+        <set>
+            status = 0,task_process = 0.00
+        </set>
+        where id = #{taskId}
+    </update>
+    <update id="updateTaskStatus3" parameterType="java.lang.String">
+        update pmhub_project_task
+        <set>
+            status = 1
+        </set>
+        where id = #{taskId}
+    </update>
+    <update id="updateProcessState" parameterType="java.lang.String">
+        update pmhub_materials_change_records
+        <set>
+            process_state = 2
+        </set>
+        where id = #{dataId}
+    </update>
+    <update id="updateProcessState2" parameterType="java.lang.String">
+        update pmhub_materials_change_records
+        <set>
+            process_state = 0
+        </set>
+        where id = #{dataId}
+    </update>
+    <update id="updateProviderStatus" parameterType="java.lang.String">
+        update pmhub_purchase_provider
+        <set>
+            provider_status = 1
+        </set>
+        where id = #{providerId}
+    </update>
+    <select id="selectLinkRecordsId" resultType="java.lang.String">
+        select link_records_id from pmhub_materials_change_records where id = #{materialId}
+    </select>
+</mapper>

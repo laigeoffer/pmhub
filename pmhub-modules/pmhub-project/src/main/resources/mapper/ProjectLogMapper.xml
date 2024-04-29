@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.project.mapper.ProjectLogMapper">
+    <select id="queryLogList" resultType="com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO">
+        select pl.type, pl.id as projectLogId, pl.operate_type,pl.remark,p.id as project_id,pt.id as taskId,p.project_name,pt.task_name,pl.created_time
+             ,su.user_id,su.user_name,su.nick_name,su.avatar
+        from pmhub_project_log pl
+                 left join pmhub_project p on p.id = pl.project_id
+                 left join pmhub_project_task pt on pt.id = pl.pt_id
+                 left join sys_user su on pl.user_id = su.user_id
+        where p.id = #{projectId} order by pl.created_time desc
+    </select>
+    <select id="queryAllLog" resultType="com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO">
+        select pl.pt_id,pl.type, pl.id as projectLogId, pl.operate_type,pl.remark,pl.content,p.id as project_id,pt.id as taskId,p.project_name,pt.task_name,pl.created_time
+             ,su.user_id,su.user_name,su.nick_name,su.avatar,p.id as projectId, p.project_name,pl.log_type
+        from pmhub_project_log pl
+                 left join pmhub_project p on p.id = pl.project_id
+                 left join pmhub_project_task pt on pt.id = pl.pt_id
+                 left join sys_user su on pl.user_id = su.user_id
+        where pl.pt_id = #{taskId} and pl.type = 'task' and (pl.log_type = 1 and pl.operate_type = 'editTask' or pl.log_type = 2 or pl.log_type = 3) order by pl.created_time desc
+    </select>
+    <select id="queryCommentLog" resultType="com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO">
+        select pl.pt_id,pl.type, pl.id as projectLogId, pl.operate_type,pl.remark,pl.content,p.id as project_id,pt.id as taskId,p.project_name,pt.task_name,pl.created_time
+             ,su.user_id,su.user_name,su.nick_name,su.avatar,p.id as projectId, p.project_name,pl.log_type
+        from pmhub_project_log pl
+                 left join pmhub_project p on p.id = pl.project_id
+                 left join pmhub_project_task pt on pt.id = pl.pt_id
+                 left join sys_user su on pl.user_id = su.user_id
+        where pl.pt_id = #{taskId} and pl.type = 'task' and pl.log_type = 3 order by pl.created_time desc
+    </select>
+    <select id="queryDeliverableLog" resultType="com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO">
+        select pl.pt_id,pl.type, pl.id as projectLogId, pl.operate_type,pl.remark,pl.content,p.id as project_id,pt.id as taskId,p.project_name,pt.task_name,pl.created_time
+             ,su.user_id,su.user_name,su.nick_name,su.avatar,p.id as projectId, p.project_name,pl.log_type
+        from pmhub_project_log pl
+                 left join pmhub_project p on p.id = pl.project_id
+                 left join pmhub_project_task pt on pt.id = pl.pt_id
+                 left join sys_user su on pl.user_id = su.user_id
+        where pl.pt_id = #{taskId} and pl.type = 'task' and pl.log_type = 2 order by pl.created_time desc
+    </select>
+    <select id="queryTrendsLog" resultType="com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO">
+        select pl.pt_id,pl.type, pl.id as projectLogId, pl.operate_type,pl.remark,pl.content,p.id as project_id,pt.id as taskId,p.project_name,pt.task_name,pl.created_time
+             ,su.user_id,su.user_name,su.nick_name,su.avatar,p.id as projectId, p.project_name,pl.log_type
+        from pmhub_project_log pl
+                 left join pmhub_project p on p.id = pl.project_id
+                 left join pmhub_project_task pt on pt.id = pl.pt_id
+                 left join sys_user su on pl.user_id = su.user_id
+        where pl.pt_id = #{taskId} and pl.type = 'task' and pl.log_type = 1 and pl.operate_type = 'editTask' order by pl.created_time desc
+    </select>
+</mapper>

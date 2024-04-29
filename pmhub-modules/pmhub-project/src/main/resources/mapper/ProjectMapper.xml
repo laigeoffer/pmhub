@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laigeoffer.pmhub.project.mapper.ProjectMapper">
+    <select id="queryMyProjectList" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO">
+        select p.id as projectId, p.project_name, p.cover, p.status from pmhub_project p inner join pmhub_project_member pm on p.id = pm.pt_id
+        where p.deleted = 0 and pm.type = 'project' and pm.user_id = #{userId} order by p.project_process desc
+    </select>
+    <select id="recycleProjectList" resultType="com.laigeoffer.pmhub.project.domain.vo.project.ProjectResVO">
+        select p.close_begin_time,p.close_end_time,p.id as projectId, p.project_code, p.project_name, p.user_id, ps.stage_code,ps.stage_name, p.type as projectType, p.status, p.published, p.project_process, p.created_time, p.updated_time,p.description,p.cover,p.auto_update_process,p.open_prefix,p.prefix,p.open_task_private,p.msg_notify,p.notify_day
+        from pmhub_project p left join pmhub_project_stage ps on p.project_stage_id = ps.id
+        where p.deleted = 1 order by p.created_time desc
+    </select>
+    <select id="detail" resultType="com.laigeoffer.pmhub.project.domain.vo.project.ProjectResVO">
+        select p.close_begin_time,p.close_end_time,p.id as projectId, p.project_code, p.project_name, p.user_id, su.nick_name, ps.stage_code,ps.stage_name, p.type as projectType, p.status, p.published, p.project_process, p.created_time, p.updated_time,p.description,p.cover,p.auto_update_process,p.open_prefix,p.prefix,p.open_task_private,p.msg_notify,p.notify_day
+        from pmhub_project p left join pmhub_project_stage ps on p.project_stage_id = ps.id
+        left join sys_user su on su.user_id = p.user_id
+        where p.id = #{projectId}
+    </select>
+    <select id="selectMyProjectList" resultType="com.laigeoffer.pmhub.project.domain.vo.project.ProjectResVO">
+        select p.close_begin_time,p.close_end_time,p.id as projectId, p.project_code, p.project_name, p.user_id, ps.stage_code,ps.stage_name, p.type as projectType, p.status, p.published, p.project_process, p.created_time, p.updated_time,p.description,p.cover,p.auto_update_process,p.open_prefix,p.prefix,p.open_task_private,p.msg_notify,p.notify_day
+        from pmhub_project p
+        left join pmhub_project_stage ps on p.project_stage_id = ps.id
+        left join pmhub_project_member pm on p.id = pm.pt_id
+        where pm.user_id = #{userId} and p.deleted = 0
+        <if test="data.keyword != null and data.keyword != ''">
+            and (p.project_code like CONCAT("%", #{data.keyword},"%") or p.project_name like CONCAT("%", #{data.keyword},"%"))
+        </if>
+        <if test="data.stageCode != null ">
+            and ps.stage_code = #{data.stageCode}
+        </if>
+        <if test="data.status != null ">
+            and p.status = #{data.status}
+        </if>
+        <if test="data.published != null ">
+            and p.published = #{data.published}
+        </if>
+        <if test="data.projectType != null ">
+            and p.type = #{data.projectType}
+        </if>
+        <if test="data.closeBeginTime != null and data.closeBeginTime != ''">
+            and p.close_end_time between #{data.closeBeginTime} and #{data.closeEndTime}
+        </if>
+        order by p.created_time desc
+    </select>
+
+    <select id="selectMyCollectProjectList" resultType="com.laigeoffer.pmhub.project.domain.vo.project.ProjectResVO">
+        select p.close_begin_time,p.close_end_time,p.id as projectId, p.project_code, p.project_name, p.user_id, ps.stage_name, p.type as projectType, p.status, p.published, p.project_process,p.created_time, p.updated_time,p.description,p.cover,p.auto_update_process,p.open_prefix,p.prefix,p.open_task_private,p.msg_notify,p.notify_day
+        from pmhub_project p
+        left join pmhub_project_stage ps on p.project_stage_id = ps.id
+        left join pmhub_project_collection pc on p.id = pc.project_id
+        where pc.user_id = #{userId} and p.deleted = 0
+        <if test="data.keyword != null and data.keyword != ''">
+            and (p.project_code like CONCAT("%", #{data.keyword},"%") or p.project_name like CONCAT("%", #{data.keyword},"%"))
+        </if>
+        <if test="data.stageCode != null ">
+            and ps.stage_code = #{data.stageCode}
+        </if>
+        <if test="data.status != null ">
+            and p.status = #{data.status}
+        </if>
+        <if test="data.published != null ">
+            and p.published = #{data.published}
+        </if>
+        <if test="data.projectType != null ">
+            and p.type = #{data.projectType}
+        </if>
+        <if test="data.closeBeginTime != null and data.closeBeginTime != ''">
+            and p.close_end_time between #{data.closeBeginTime} and #{data.closeEndTime}
+        </if>
+        order by p.created_time desc
+    </select>
+</mapper>
