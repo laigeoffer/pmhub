@@ -2,8 +2,6 @@ package com.laigeoffer.pmhub.workflow.listener;
 
 import cn.hutool.log.LogFactory;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.laigeoffer.pmhub.base.core.enums.OAMessageStatusEnum;
-import com.laigeoffer.pmhub.base.core.utils.OAUtils;
 import com.laigeoffer.pmhub.workflow.domain.WfTaskMessageDeal;
 import com.laigeoffer.pmhub.workflow.mapper.ListenerMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfCopyMapper;
@@ -46,7 +44,7 @@ public class GlobalProcesstCancelListener extends AbstractFlowableEngineEventLis
         wfTaskMessageDeals.forEach(a -> {
             // TODO: 2024.04.25 关闭企微
 //            RocketMqUtils.cleanMessage(a.getTaskId() + "_" + a.getAssignee());
-            OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(a.getTaskId() + "_" + a.getAssignee(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(Long.valueOf(a.getAssignee())).getUserName())), OAUtils.ALTER_MESSAGE_API);
+//            OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(a.getTaskId() + "_" + a.getAssignee(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(Long.valueOf(a.getAssignee())).getUserName())), OAUtils.ALTER_MESSAGE_API);
         });
         wfTaskMessageDealMapper.delete(lqw);
 

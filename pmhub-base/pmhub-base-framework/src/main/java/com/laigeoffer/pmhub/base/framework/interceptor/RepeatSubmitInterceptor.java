@@ -4,7 +4,6 @@ import com.alibaba.fastjson2.JSON;
 import com.laigeoffer.pmhub.base.core.annotation.RepeatSubmit;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,8 +16,9 @@ import java.lang.reflect.Method;
  *
  * @author canghe
  */
-@Component
+//@Component
 public abstract class RepeatSubmitInterceptor implements HandlerInterceptor {
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {

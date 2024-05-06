@@ -6,9 +6,7 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
-import com.laigeoffer.pmhub.base.core.enums.OAMessageStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import com.laigeoffer.pmhub.base.core.utils.OAUtils;
 import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.common.constant.ProcessConstants;
@@ -347,7 +345,7 @@ public class WfTaskServiceImpl extends FlowServiceFactory implements IWfTaskServ
 
         // TODO: 2024.04.25 删除oa模块暂时
 //        RocketMqUtils.cleanMessage(bo.getTaskId() + "_" + SecurityUtils.getUserId());
-        OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(bo.getTaskId() + "_" + bo.getAssignee(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(SecurityUtils.getUserId()).getUserName())), "OAUtils.ALTER_MESSAGE_API");
+//        OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(bo.getTaskId() + "_" + bo.getAssignee(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(SecurityUtils.getUserId()).getUserName())), "OAUtils.ALTER_MESSAGE_API");
         LambdaQueryWrapper<WfTaskMessageDeal> qw = new LambdaQueryWrapper<>();
         qw.eq(WfTaskMessageDeal::getTaskId, bo.getTaskId()).eq(WfTaskMessageDeal::getAssignee, SecurityUtils.getUserId());
         wfTaskMessageDealMapper.delete(qw);
@@ -422,7 +420,7 @@ public class WfTaskServiceImpl extends FlowServiceFactory implements IWfTaskServ
     private void extracted(String taskId) {
         // TODO: 2024.04.25 删除oa模块暂时
 //        RocketMqUtils.cleanMessage(taskId + "_" + SecurityUtils.getUserId());
-        OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(taskId + "_" + SecurityUtils.getUserId(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(SecurityUtils.getUserId()).getUserName())), OAUtils.ALTER_MESSAGE_API);
+//        OAUtils.restfulCall2(OAUtils.ALTER_MESSAGE_API, OAUtils.mapToStr(OAUtils.alterCustomMessageSingle(taskId + "_" + SecurityUtils.getUserId(), OAMessageStatusEnum.DEAL.getStatus(), wfCopyMapper.selectUserById(SecurityUtils.getUserId()).getUserName())), OAUtils.ALTER_MESSAGE_API);
         LambdaQueryWrapper<WfTaskMessageDeal> qw = new LambdaQueryWrapper<>();
         qw.eq(WfTaskMessageDeal::getTaskId, taskId).eq(WfTaskMessageDeal::getAssignee, SecurityUtils.getUserId());
         wfTaskMessageDealMapper.delete(qw);

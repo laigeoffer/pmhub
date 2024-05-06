@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.framework.interceptor.impl;
+package com.laigeoffer.pmhub.base.framework.interceptor;
 
 import com.alibaba.fastjson2.JSON;
 import com.laigeoffer.pmhub.base.core.annotation.RepeatSubmit;
@@ -6,11 +6,9 @@ import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.filter.RepeatedlyRequestWrapper;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.http.HttpHelper;
-import com.laigeoffer.pmhub.base.framework.interceptor.RepeatSubmitInterceptor;
 import com.laigeoffer.pmhub.base.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -23,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author canghe
  */
-@Component
+//@Component
 public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
     public final String REPEAT_PARAMS = "repeatParams";
 
