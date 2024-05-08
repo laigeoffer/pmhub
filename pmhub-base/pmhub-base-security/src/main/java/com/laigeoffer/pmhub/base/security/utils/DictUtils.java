@@ -1,9 +1,9 @@
 package com.laigeoffer.pmhub.base.security.utils;
 
 import com.alibaba.fastjson2.JSONArray;
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysDictData;
-import com.laigeoffer.pmhub.base.redis.service.RedisService;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils;
 

@@ -17,7 +17,7 @@
 
     <dependencies>
 
-        <!-- META-INF.spring-boot-devtools -->
+        <!--spring-boot-devtools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

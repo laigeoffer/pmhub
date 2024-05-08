@@ -1,8 +1,11 @@
-package com.laigeoffer.pmhub.common.core.redis;
+package com.laigeoffer.pmhub.base.core.config.redis;
 
 import cn.hutool.core.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.BoundSetOperations;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -15,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  **/
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 @Component
-public class RedisCache {
+public class RedisService {
     @Autowired
     public RedisTemplate redisTemplate;
 

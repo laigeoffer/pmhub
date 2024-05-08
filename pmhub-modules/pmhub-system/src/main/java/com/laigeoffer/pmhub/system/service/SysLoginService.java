@@ -1,19 +1,19 @@
 package com.laigeoffer.pmhub.system.service;
 
 
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.exception.user.CaptchaException;
 import com.laigeoffer.pmhub.base.core.exception.user.CaptchaExpireException;
+import com.laigeoffer.pmhub.base.core.manage.AsyncManager;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.MessageUtils;
 import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.ip.IpUtils;
-import com.laigeoffer.pmhub.base.framework.manager.AsyncManager;
-import com.laigeoffer.pmhub.base.redis.service.RedisService;
 import com.laigeoffer.pmhub.base.security.service.TokenService;
 import com.laigeoffer.pmhub.system.manager.AsyncFactory;
 import org.springframework.beans.factory.annotation.Autowired;

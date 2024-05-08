@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * META-INF.spring security配置
+ * spring security配置
  *
  * @author canghe
  */

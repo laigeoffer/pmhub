@@ -29,17 +29,7 @@
             <artifactId>pmhub-base-core</artifactId>
         </dependency>
 
-        <!-- SpringBoot Web容器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
-        <!-- PmHub Base Redis-->
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-base-redis</artifactId>
-        </dependency>
 
 
     </dependencies>

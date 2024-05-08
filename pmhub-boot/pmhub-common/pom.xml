@@ -29,7 +29,7 @@
             <artifactId>spring-web</artifactId>
         </dependency>
 
-        <!-- META-INF.spring security 安全认证 -->
+        <!-- spring security 安全认证 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>

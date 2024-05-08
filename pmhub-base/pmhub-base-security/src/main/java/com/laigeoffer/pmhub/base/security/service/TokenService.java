@@ -1,5 +1,6 @@
 package com.laigeoffer.pmhub.base.security.service;
 
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
@@ -9,7 +10,6 @@ import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.ip.AddressUtils;
 import com.laigeoffer.pmhub.base.core.utils.ip.IpUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.IdUtils;
-import com.laigeoffer.pmhub.base.redis.service.RedisService;
 import eu.bitwalker.useragentutils.UserAgent;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

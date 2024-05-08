@@ -1,13 +1,13 @@
-package com.laigeoffer.pmhub.framework.config;
+package com.laigeoffer.pmhub.base.core.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
-import com.laigeoffer.pmhub.common.enums.DataSourceType;
-import com.laigeoffer.pmhub.common.utils.spring.SpringUtils;
-import com.laigeoffer.pmhub.framework.config.properties.DruidProperties;
-import com.laigeoffer.pmhub.framework.datasource.DynamicDataSource;
+import com.laigeoffer.pmhub.base.core.datasource.DynamicDataSource;
+import com.laigeoffer.pmhub.base.core.enums.DataSourceType;
+import com.laigeoffer.pmhub.base.core.properties.DruidProperties;
+import com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.laigeoffer.pmhub.base.redis.config.RedisConfig,\
-com.laigeoffer.pmhub.base.redis.service.RedisService

@@ -19,15 +19,11 @@
 
     <modules>
         <module>pmhub-base-core</module>
-        <module>pmhub-base-datascope</module>
-        <module>pmhub-base-datasource</module>
         <module>pmhub-base-log</module>
-        <module>pmhub-base-redis</module>
         <module>pmhub-base-seata</module>
         <module>pmhub-base-security</module>
         <module>pmhub-base-sensitive</module>
         <module>pmhub-base-swagger</module>
-        <module>pmhub-base-framework</module>
     </modules>
 
     <properties>

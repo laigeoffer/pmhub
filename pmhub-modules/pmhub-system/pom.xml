@@ -59,20 +59,12 @@
             <artifactId>pmhub-base-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-base-redis</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.laigeoffer.pmhub-cloud</groupId>
             <artifactId>pmhub-base-security</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-base-framework</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

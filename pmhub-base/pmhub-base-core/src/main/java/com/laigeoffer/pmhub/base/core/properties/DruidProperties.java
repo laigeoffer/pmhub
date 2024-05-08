@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.framework.config.properties;
+package com.laigeoffer.pmhub.base.core.properties;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class DruidProperties {
     @Value("${spring.datasource.druid.minEvictableIdleTimeMillis}")
     private int minEvictableIdleTimeMillis;
 
-    @Value("${pring.datasource.druid.maxEvictableIdleTimeMillis}")
+    @Value("${spring.datasource.druid.maxEvictableIdleTimeMillis}")
     private int maxEvictableIdleTimeMillis;
 
     @Value("${spring.datasource.druid.validationQuery}")
@@ -41,7 +41,7 @@ public class DruidProperties {
     @Value("${spring.datasource.druid.testOnBorrow}")
     private boolean testOnBorrow;
 
-    @Value("${pring.datasource.druid.testOnReturn}")
+    @Value("${spring.datasource.druid.testOnReturn}")
     private boolean testOnReturn;
 
     public DruidDataSource dataSource(DruidDataSource datasource) {

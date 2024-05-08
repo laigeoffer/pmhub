@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StarterRunner implements CommandLineRunner {
 
-    @Value("${META-INF.spring.profiles.active}")
+    @Value("${spring.profiles.active}")
     String activeStr;
 
     @Value("${pmhub.workWx.robert-url}")
