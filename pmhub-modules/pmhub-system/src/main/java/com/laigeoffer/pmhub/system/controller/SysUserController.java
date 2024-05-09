@@ -7,11 +7,13 @@ import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysDept;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.core.page.TableDataInfo;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.InnerAuth;
 import com.laigeoffer.pmhub.base.security.service.TokenService;
 import com.laigeoffer.pmhub.system.service.ISysDeptService;
 import com.laigeoffer.pmhub.system.service.ISysPostService;
@@ -31,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -56,7 +59,6 @@ public class SysUserController extends BaseController {
     @Resource
     private TokenService tokenService;
 
-    // TODO: 2024.04.24  
     @Autowired
     private SysPermissionService permissionService;
 
@@ -100,6 +102,7 @@ public class SysUserController extends BaseController {
     /**
      * 根据用户编号获取详细信息
      */
+    @InnerAuth
     @PreAuthorize("@ss.hasPermi('system:user:query')")
     @GetMapping(value = {"/", "/{userId}"})
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId) {
@@ -126,6 +129,7 @@ public class SysUserController extends BaseController {
         }
         return ajax;
     }
+
 
     /**
      * 新增用户
@@ -179,11 +183,10 @@ public class SysUserController extends BaseController {
         // 如果完成用户信息修改，就刷新用户缓存
         if (count>0){
             SysUser newUser = userService.selectUserById(user.getUserId());
-            // TODO: 2024.04.24
-//            tokenService.updateToken(new LoginUser(newUser.getUserId()
-//                    , newUser.getDeptId()
-//                    , newUser
-//                    , permissionService.getMenuPermission(newUser)));
+            tokenService.updateToken(new LoginUser(newUser.getUserId()
+                    , newUser.getDeptId()
+                    , newUser
+                    , permissionService.getMenuPermission(newUser)));
         }
         return toAjax(count);
     }
@@ -261,6 +264,31 @@ public class SysUserController extends BaseController {
     @GetMapping("/deptTree")
     public AjaxResult deptTree(SysDept dept) {
         return success(deptService.selectDeptTreeList(dept));
+    }
+
+    /**
+     * 根据用户名获取当前用户信息
+     */
+    @InnerAuth
+    @GetMapping("/info/{username}")
+    public AjaxResult getInfoByUsername(@PathVariable("username") String username) {
+        AjaxResult ajax = AjaxResult.success();
+        SysUser sysUser = userService.selectUserByUserName(username);
+        if (StringUtils.isNull(sysUser)) {
+            return AjaxResult.error("用户名或密码错误");
+        }
+        // 角色集合
+        Set<String> roles = permissionService.getRolePermission(sysUser);
+        // 权限集合
+        Set<String> permissions = permissionService.getMenuPermission(sysUser);
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUser(sysUser);
+        loginUser.setRoles(roles);
+        loginUser.setPermissions(permissions);
+
+        ajax.put(AjaxResult.DATA_TAG, loginUser);
+
+        return ajax;
     }
 
 }

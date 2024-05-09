@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.system.manager;
+package com.laigeoffer.pmhub.base.security.aspect;
 
 
 import com.laigeoffer.pmhub.base.core.annotation.DataScope;

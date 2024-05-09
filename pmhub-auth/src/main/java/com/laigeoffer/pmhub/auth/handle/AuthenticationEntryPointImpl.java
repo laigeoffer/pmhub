@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.security.handle;
+package com.laigeoffer.pmhub.auth.handle;
 
 import com.alibaba.fastjson2.JSON;
 import com.laigeoffer.pmhub.base.core.constant.HttpStatus;

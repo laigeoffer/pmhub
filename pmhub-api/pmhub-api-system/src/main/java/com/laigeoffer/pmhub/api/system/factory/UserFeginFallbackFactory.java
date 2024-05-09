@@ -24,8 +24,12 @@ public class UserFeginFallbackFactory implements FallbackFactory<UserFeignServic
         return new UserFeignService()
         {
             @Override
-            public AjaxResult getInfo(Long userId)
-            {
+            public AjaxResult getInfo(Long userId, String source) {
+                return AjaxResult.error("获取用户失败:" + throwable.getMessage());
+            }
+
+            @Override
+            public AjaxResult getInfoByUsername(String username) {
                 return AjaxResult.error("获取用户失败:" + throwable.getMessage());
             }
 
