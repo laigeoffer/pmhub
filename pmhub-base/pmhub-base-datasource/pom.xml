@@ -5,27 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.laigeoffer.pmhub-cloud</groupId>
-        <artifactId>pmhub</artifactId>
+        <artifactId>pmhub-base</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>pmhub-base</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>pmhub-base-datasource</artifactId>
 
     <description>
-        pmhub-base通用模块
+        pmhub-base-datasource 数据源服务
     </description>
-
-
-    <modules>
-        <module>pmhub-base-core</module>
-        <module>pmhub-base-log</module>
-        <module>pmhub-base-seata</module>
-        <module>pmhub-base-security</module>
-        <module>pmhub-base-sensitive</module>
-        <module>pmhub-base-swagger</module>
-        <module>pmhub-base-datasource</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -33,6 +21,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-base-core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

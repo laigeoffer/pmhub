@@ -78,6 +78,11 @@
             <artifactId>pmhub-base-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-base-datasource</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

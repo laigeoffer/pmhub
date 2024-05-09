@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.core.datasource;
+package com.laigeoffer.pmhub.base.datasource.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.core.datasource;
+package com.laigeoffer.pmhub.base.datasource.service;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

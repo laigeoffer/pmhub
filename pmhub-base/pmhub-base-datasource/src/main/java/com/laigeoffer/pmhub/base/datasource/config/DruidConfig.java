@@ -1,13 +1,13 @@
-package com.laigeoffer.pmhub.base.core.config;
+package com.laigeoffer.pmhub.base.datasource.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
-import com.laigeoffer.pmhub.base.core.datasource.DynamicDataSource;
 import com.laigeoffer.pmhub.base.core.enums.DataSourceType;
-import com.laigeoffer.pmhub.base.core.properties.DruidProperties;
 import com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils;
+import com.laigeoffer.pmhub.base.datasource.properties.DruidProperties;
+import com.laigeoffer.pmhub.base.datasource.service.DynamicDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -28,6 +28,11 @@ import java.util.Map;
  */
 @Configuration
 public class DruidConfig {
+    @Bean
+    public DruidStatProperties druidStatProperties() {
+        return new DruidStatProperties();
+    }
+
     @Bean
     @ConfigurationProperties("spring.datasource.druid.master")
     public DataSource masterDataSource(DruidProperties druidProperties) {

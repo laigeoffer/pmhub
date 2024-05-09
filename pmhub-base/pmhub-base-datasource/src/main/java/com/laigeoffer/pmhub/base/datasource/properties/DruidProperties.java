@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.core.properties;
+package com.laigeoffer.pmhub.base.datasource.properties;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Value;

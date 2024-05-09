@@ -282,11 +282,6 @@
                 <version>${laigeoffer.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.laigeoffer.pmhub-cloud</groupId>
-                <artifactId>pmhub-base-datascope</artifactId>
-                <version>${laigeoffer.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.laigeoffer.pmhub-cloud</groupId>
@@ -300,11 +295,6 @@
                 <version>${laigeoffer.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.laigeoffer.pmhub-cloud</groupId>
-                <artifactId>pmhub-base-redis</artifactId>
-                <version>${laigeoffer.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.laigeoffer.pmhub-cloud</groupId>
