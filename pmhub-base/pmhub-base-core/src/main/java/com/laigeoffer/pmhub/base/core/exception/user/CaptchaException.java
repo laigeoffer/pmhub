@@ -5,10 +5,11 @@ package com.laigeoffer.pmhub.base.core.exception.user;
  *
  * @author ruoyi
  */
-public class CaptchaException extends UserException {
+public class CaptchaException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public CaptchaException() {
-        super("user.jcaptcha.error", null);
+    public CaptchaException(String msg)
+    {
+        super(msg);
     }
 }
