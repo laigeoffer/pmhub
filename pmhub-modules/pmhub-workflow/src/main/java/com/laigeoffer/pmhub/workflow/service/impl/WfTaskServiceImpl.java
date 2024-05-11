@@ -7,7 +7,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.common.constant.ProcessConstants;
 import com.laigeoffer.pmhub.workflow.common.constant.TaskConstants;

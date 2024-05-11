@@ -12,7 +12,7 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectStageEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
 import com.laigeoffer.pmhub.project.domain.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.*;

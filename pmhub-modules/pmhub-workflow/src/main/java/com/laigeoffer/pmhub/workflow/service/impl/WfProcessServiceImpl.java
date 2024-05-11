@@ -20,7 +20,7 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectTaskStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.common.constant.ProcessConstants;
 import com.laigeoffer.pmhub.workflow.common.constant.TaskConstants;

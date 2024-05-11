@@ -5,17 +5,15 @@ import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.ProjectTask;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.task.*;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
-//import com.laigeoffer.pmhub.workflow.domain.dto.ApprovalSetDTO;
-//import com.laigeoffer.pmhub.workflow.service.IWfProcessService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,7 +46,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/queryMyTaskList")
-    @PreAuthorize("@ss.hasPermi('project:task:queryMyTaskList')")
+    @RequiresPermissions("project:task:queryMyTaskList")
     public AjaxResult queryMyTaskList(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.queryMyTaskList(taskReqVO));
     }
@@ -59,7 +57,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/task/situation")
-    @PreAuthorize("@ss.hasPermi('project:task:situation')")
+    @RequiresPermissions("project:task:situation")
     public AjaxResult queryTaskStatusStats(@RequestBody ProjectVO projectVO) {
         return AjaxResult.success(projectTaskService.queryTaskStatusStats(projectVO));
     }
@@ -69,7 +67,7 @@ public class ProjectTaskController {
      * @return
      */
     @DeleteMapping("/task/delete")
-    @PreAuthorize("@ss.hasPermi('project:task:delete')")
+    @RequiresPermissions("project:task:delete")
     public AjaxResult deleteTask(@RequestBody TaskIdsVO taskIdsVO) {
         List<ProjectTask> projectTasks = projectTaskService.listByIds(taskIdsVO.getTaskIdList());
         List<String> projectIds = projectTasks.stream().map(ProjectTask::getProjectId).distinct().collect(Collectors.toList());
@@ -109,7 +107,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/task/detail")
-    @PreAuthorize("@ss.hasPermi('project:task:detail')")
+    @RequiresPermissions("project:task:detail")
     public AjaxResult detail(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.detail(taskReqVO));
     }
@@ -120,7 +118,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/task/queryExecutorList")
-    @PreAuthorize("@ss.hasPermi('project:task:queryExecutorList')")
+    @RequiresPermissions("project:task:queryExecutorList")
     public AjaxResult queryExecutorList(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.queryExecutorList(taskReqVO));
     }
@@ -130,7 +128,7 @@ public class ProjectTaskController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:add')")
+    @RequiresPermissions("project:task:add")
     @PostMapping("/task/add")
     public AjaxResult add(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
@@ -144,7 +142,7 @@ public class ProjectTaskController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:addChildTask')")
+    @RequiresPermissions("project:task:addChildTask")
     @PostMapping("/task/addChildTask")
     public AjaxResult addChildTask(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
@@ -159,7 +157,7 @@ public class ProjectTaskController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:edit')")
+    @RequiresPermissions("project:task:edit")
     @PostMapping("/task/edit")
     public AjaxResult edit(@RequestBody TaskReqVO taskReqVO) {
         projectTaskService.edit(taskReqVO);
@@ -171,7 +169,7 @@ public class ProjectTaskController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:list')")
+    @RequiresPermissions("project:task:list")
     @PostMapping("/task/list")
     public AjaxResult list(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.list(taskReqVO));
@@ -181,7 +179,7 @@ public class ProjectTaskController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:queryChildTask')")
+    @RequiresPermissions("project:task:queryChildTask")
     @PostMapping("/task/queryChildTask")
     public AjaxResult queryChildTask(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.queryChildTask(taskReqVO));
@@ -218,7 +216,7 @@ public class ProjectTaskController {
      * @param taskCommentVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:task:addComment')")
+    @RequiresPermissions("project:task:addComment")
     @PostMapping("/task/addComment")
     public AjaxResult addComment(@RequestBody TaskCommentVO taskCommentVO) {
         projectTaskService.addComment(taskCommentVO);
@@ -240,7 +238,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/task/log/list")
-    @PreAuthorize("@ss.hasPermi('project:task:logList')")
+    @RequiresPermissions("project:task:logList")
     public AjaxResult queryTaskLogList(@RequestBody LogReqVO logReqVO) {
         return AjaxResult.success(projectTaskService.queryTaskLogList(logReqVO));
     }
@@ -274,7 +272,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/task/import")
-    @PreAuthorize("@ss.hasPermi('project:task:import')")
+    @RequiresPermissions("project:task:import")
     public AjaxResult importData(@RequestParam("file") MultipartFile file) throws Exception {
         ExcelUtil<TaskExcelVO> util = new ExcelUtil<>(TaskExcelVO.class);
         List<TaskExcelVO> list = util.importExcel(file.getInputStream());
@@ -302,7 +300,7 @@ public class ProjectTaskController {
      * @param processDefId 流程定义id
      * @param variables 变量集合,json对象
      */
-    @PreAuthorize("@ss.hasPermi('project:task:approve')")
+    @RequiresPermissions("project:task:approve")
     @PostMapping("/startTaskApprove/{taskId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
         // TODO: 2024.04.28 暂时注释掉流程相关

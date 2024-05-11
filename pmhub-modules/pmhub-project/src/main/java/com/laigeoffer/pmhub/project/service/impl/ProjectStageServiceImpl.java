@@ -3,7 +3,7 @@ package com.laigeoffer.pmhub.project.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectStage;
 import com.laigeoffer.pmhub.project.domain.ProjectTask;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;

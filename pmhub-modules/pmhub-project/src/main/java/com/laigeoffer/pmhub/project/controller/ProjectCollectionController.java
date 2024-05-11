@@ -1,10 +1,10 @@
 package com.laigeoffer.pmhub.project.controller;
 
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.service.ProjectCollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ public class ProjectCollectionController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:collect')")
+    @RequiresPermissions("project:manage:collect")
     @PostMapping("/collect")
     public AjaxResult collectProject(@RequestBody ProjectVO projectVO) {
 
@@ -39,7 +39,7 @@ public class ProjectCollectionController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:cancelCollect')")
+    @RequiresPermissions("project:manage:cancelCollect")
     @PostMapping("/cancelCollect")
     public AjaxResult cancelCollectProject(@RequestBody ProjectVO projectVO) {
 

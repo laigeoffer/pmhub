@@ -6,7 +6,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
-import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
+import com.laigeoffer.pmhub.file.utils.FileUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.FileVO;

@@ -5,5 +5,4 @@ com.laigeoffer.pmhub.base.security.service.TokenService,\
 com.laigeoffer.pmhub.base.security.handle.GlobalExceptionHandler,\
 com.laigeoffer.pmhub.base.security.config.WebMvcConfig,\
 com.laigeoffer.pmhub.base.security.handle.LogoutSuccessHandlerImpl,\
-com.laigeoffer.pmhub.base.security.filter.JwtAuthenticationTokenFilter,\
 com.laigeoffer.pmhub.base.security.properties.PermitAllUrlProperties

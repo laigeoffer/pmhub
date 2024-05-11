@@ -1,11 +1,11 @@
 package com.laigeoffer.pmhub.project.controller;
 
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.stage.ProjectStageVO;
 import com.laigeoffer.pmhub.project.service.ProjectStageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,7 +24,7 @@ public class ProjectStageController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:stage:list')")
+    @RequiresPermissions("project:stage:list")
     @PostMapping("/list")
     public AjaxResult list(@RequestBody ProjectVO projectVO) {
 
@@ -36,7 +36,7 @@ public class ProjectStageController {
      * @param projectStageVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:stage:add')")
+    @RequiresPermissions("project:stage:add")
     @PostMapping("/add")
     public AjaxResult add(@RequestBody ProjectStageVO projectStageVO) {
         projectStageService.add(projectStageVO);
@@ -47,7 +47,7 @@ public class ProjectStageController {
      * @param projectStageVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:stage:edit')")
+    @RequiresPermissions("project:stage:edit")
     @PostMapping("/edit")
     public AjaxResult edit(@RequestBody ProjectStageVO projectStageVO) {
         projectStageService.edit(projectStageVO);
@@ -59,7 +59,7 @@ public class ProjectStageController {
      * @param projectStageVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:stage:delete')")
+    @RequiresPermissions("project:stage:delete")
     @DeleteMapping("/delete")
     public AjaxResult delete(@RequestBody ProjectStageVO projectStageVO) {
         if (projectStageService.selectTaskByStageId(projectStageVO.getStageId())) {

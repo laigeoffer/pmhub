@@ -6,7 +6,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.TreeSelect;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysMenu;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.system.domain.vo.MetaVo;
 import com.laigeoffer.pmhub.system.domain.vo.RouterVo;

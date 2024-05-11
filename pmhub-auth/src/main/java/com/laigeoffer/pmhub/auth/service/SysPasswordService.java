@@ -5,7 +5,7 @@ import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.exception.user.UserPasswordNotMatchException;
 import com.laigeoffer.pmhub.base.core.exception.user.UserPasswordRetryLimitExceedException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.security.context.AuthenticationContextHolder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

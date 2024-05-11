@@ -1,7 +1,7 @@
 package com.laigeoffer.pmhub.project.service.project;
 
 import com.alibaba.fastjson2.JSON;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectResVO;
 import com.laigeoffer.pmhub.project.mapper.ProjectMapper;

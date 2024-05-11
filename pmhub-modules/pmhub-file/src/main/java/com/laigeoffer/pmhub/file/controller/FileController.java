@@ -4,8 +4,8 @@
 //import com.laigeoffer.pmhub.base.core.constant.Constants;
 //import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 //import com.laigeoffer.pmhub.base.core.utils.StringUtils;
-//import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
-//import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
+//import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
+//import com.laigeoffer.pmhub.file.utils.FileUtils;
 //import com.laigeoffer.pmhub.base.framework.config.ServerConfig;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;

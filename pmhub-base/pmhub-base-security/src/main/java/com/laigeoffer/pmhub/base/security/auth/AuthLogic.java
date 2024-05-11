@@ -5,7 +5,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.exception.auth.NotLoginException;
 import com.laigeoffer.pmhub.base.core.exception.auth.NotPermissionException;
 import com.laigeoffer.pmhub.base.core.exception.auth.NotRoleException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils;
 import com.laigeoffer.pmhub.base.security.annotation.Logical;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresLogin;

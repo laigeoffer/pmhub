@@ -8,13 +8,13 @@ import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.core.validate.QueryGroup;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.domain.WfDeployForm;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfFormBo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;
 import com.laigeoffer.pmhub.workflow.service.IWfDeployFormService;
 import com.laigeoffer.pmhub.workflow.service.IWfFormService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +42,7 @@ public class WfFormController extends BaseController {
     /**
      * 查询流程表单列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:list')")
+    @RequiresPermissions("workflow:form:list")
     @GetMapping("/list")
     public Table2DataInfo<WfFormVo> list(@Validated(QueryGroup.class) WfFormBo bo, PageQuery pageQuery) {
         return formService.queryPageList(bo, pageQuery);
@@ -51,7 +51,7 @@ public class WfFormController extends BaseController {
     /**
      * 导出流程表单列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:export')")
+    @RequiresPermissions("workflow:form:export")
     @Log(title = "流程表单", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(@Validated WfFormBo bo, HttpServletResponse response) {
@@ -63,7 +63,7 @@ public class WfFormController extends BaseController {
      * 获取流程表单详细信息
      * @param formId 主键
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:query')")
+    @RequiresPermissions("workflow:form:query")
     @GetMapping(value = "/{formId}")
     public R<WfFormVo> getInfo(@NotNull(message = "主键不能为空") @PathVariable("formId") Long formId) {
         return R.ok(formService.queryById(formId));
@@ -72,7 +72,7 @@ public class WfFormController extends BaseController {
     /**
      * 新增流程表单
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:add')")
+    @RequiresPermissions("workflow:form:add")
     @Log(title = "流程表单", businessType = BusinessType.INSERT)
     @PostMapping
     public R<Void> add(@RequestBody WfFormBo bo) {
@@ -82,7 +82,7 @@ public class WfFormController extends BaseController {
     /**
      * 修改流程表单
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:edit')")
+    @RequiresPermissions("workflow:form:edit")
     @Log(title = "流程表单", businessType = BusinessType.UPDATE)
     @PutMapping
     public R<Void> edit(@RequestBody WfFormBo bo) {
@@ -93,7 +93,7 @@ public class WfFormController extends BaseController {
      * 删除流程表单
      * @param formIds 主键串
      */
-    @PreAuthorize("@ss.hasPermi('workflow:form:remove')")
+    @RequiresPermissions("workflow:form:remove")
     @Log(title = "流程表单", businessType = BusinessType.DELETE)
     @DeleteMapping("/{formIds}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空") @PathVariable Long[] formIds) {

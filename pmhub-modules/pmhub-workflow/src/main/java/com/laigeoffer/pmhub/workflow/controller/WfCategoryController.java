@@ -12,11 +12,11 @@ import com.laigeoffer.pmhub.base.core.core.validate.EditGroup;
 import com.laigeoffer.pmhub.base.core.core.validate.QueryGroup;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfCategoryBo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfCategoryVo;
 import com.laigeoffer.pmhub.workflow.service.IWfCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +43,7 @@ public class WfCategoryController extends BaseController {
     /**
      * 查询流程分类列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:list')")
+    @RequiresPermissions("workflow:category:list")
     @GetMapping("/list")
     public Table2DataInfo<WfCategoryVo> list(@Validated(QueryGroup.class) WfCategoryBo bo, PageQuery pageQuery) {
         return categoryService.queryPageList(bo, pageQuery);
@@ -52,7 +52,7 @@ public class WfCategoryController extends BaseController {
     /**
      * 查询全部的流程分类列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:listAll')")
+    @RequiresPermissions("workflow:category:listAll")
     @GetMapping("/listAll")
     public R<List<WfCategoryVo>> listAll(@Validated(QueryGroup.class) WfCategoryBo bo) {
         return R.ok(categoryService.queryList(bo));
@@ -61,7 +61,7 @@ public class WfCategoryController extends BaseController {
     /**
      * 导出流程分类列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:export')")
+    @RequiresPermissions("workflow:category:export")
     @Log(title = "流程分类", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(@Validated WfCategoryBo bo, HttpServletResponse response) {
@@ -73,7 +73,7 @@ public class WfCategoryController extends BaseController {
      * 获取流程分类详细信息
      * @param categoryId 分类主键
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:query')")
+    @RequiresPermissions("workflow:category:query")
     @GetMapping("/{categoryId}")
     public R<WfCategoryVo> getInfo(@NotNull(message = "主键不能为空") @PathVariable("categoryId") Long categoryId) {
         return R.ok(categoryService.queryById(categoryId));
@@ -82,7 +82,7 @@ public class WfCategoryController extends BaseController {
     /**
      * 新增流程分类
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:add')")
+    @RequiresPermissions("workflow:category:add")
     @Log(title = "流程分类", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping()
@@ -96,7 +96,7 @@ public class WfCategoryController extends BaseController {
     /**
      * 修改流程分类
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:edit')")
+    @RequiresPermissions("workflow:category:edit")
     @Log(title = "流程分类", businessType = BusinessType.UPDATE)
     @RepeatSubmit()
     @PutMapping()
@@ -111,7 +111,7 @@ public class WfCategoryController extends BaseController {
      * 删除流程分类
      * @param categoryIds 分类主键串
      */
-    @PreAuthorize("@ss.hasPermi('workflow:category:remove')")
+    @RequiresPermissions("orkflow:category:remove")
     @Log(title = "流程分类" , businessType = BusinessType.DELETE)
     @DeleteMapping("/{categoryIds}")
     public R<Void> remove(@NotEmpty(message = "主键不能为空") @PathVariable Long[] categoryIds) {

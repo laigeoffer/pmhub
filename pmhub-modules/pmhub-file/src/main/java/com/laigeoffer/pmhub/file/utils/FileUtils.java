@@ -1,9 +1,11 @@
-package com.laigeoffer.pmhub.base.core.utils.file;
+package com.laigeoffer.pmhub.file.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileTypeUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.IdUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;

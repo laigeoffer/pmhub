@@ -1,6 +1,7 @@
 package com.laigeoffer.pmhub.project.controller;
 
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectStatisticsResVO;
@@ -8,9 +9,7 @@ import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.task.TaskReqVO;
 import com.laigeoffer.pmhub.project.service.ProjectService;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
-//import com.laigeoffer.pmhub.workflow.domain.dto.ApprovalSetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -38,7 +37,7 @@ public class ProjectController {
      * @param project
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:add')")
+    @RequiresPermissions("project:manage:add")
     @PostMapping("/add")
     public AjaxResult add(@RequestBody Project project) {
         projectService.saveProject(project);
@@ -50,7 +49,7 @@ public class ProjectController {
      * @param project
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:edit')")
+    @RequiresPermissions("project:manage:edit")
     @PostMapping("/edit")
     public AjaxResult edit(@RequestBody Project project) {
         projectService.editProject(project);
@@ -62,7 +61,7 @@ public class ProjectController {
      * @param projectReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:list')")
+    @RequiresPermissions("project:manage:list")
     @PostMapping("/list")
     public AjaxResult list(@RequestBody ProjectReqVO projectReqVO) {
         return AjaxResult.success(projectService.list(projectReqVO));
@@ -72,7 +71,7 @@ public class ProjectController {
      * 首页统计
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:statistics')")
+    @RequiresPermissions("project:manage:statistics")
     @GetMapping("/statistics")
     public AjaxResult statistics() {
         ProjectStatisticsResVO projectStatisticsResVO = new ProjectStatisticsResVO();
@@ -95,7 +94,7 @@ public class ProjectController {
      * 查询与我有关的项目
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:select')")
+    @RequiresPermissions("project:manage:select")
     @GetMapping("/select")
     public AjaxResult queryMyProject() {
         return AjaxResult.success(projectService.queryMyProjectList());
@@ -105,7 +104,7 @@ public class ProjectController {
      * 查询所有项目
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:queryAllProject')")
+    @RequiresPermissions("project:manage:queryAllProject")
     @GetMapping("/queryAllProject")
     public AjaxResult queryAllProject() {
         return AjaxResult.success(projectService.queryAllProject());
@@ -115,7 +114,7 @@ public class ProjectController {
      * 进行中的项目
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:doing')")
+    @RequiresPermissions("project:manage:doing")
     @GetMapping("/doing")
     public AjaxResult queryDoingProject() {
         return AjaxResult.success(projectService.queryDoingProject());
@@ -126,7 +125,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:delete')")
+    @RequiresPermissions("project:manage:delete")
     @DeleteMapping("/delete")
     public AjaxResult deleteProject(@RequestBody ProjectVO projectVO) {
         return AjaxResult.success(projectService.deleteProject(projectVO));
@@ -137,7 +136,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:detail')")
+    @RequiresPermissions("project:manage:detail")
     @PostMapping("/detail")
     public AjaxResult detail(@RequestBody ProjectVO projectVO) {
 
@@ -149,7 +148,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:archive')")
+    @RequiresPermissions("project:manage:archive")
     @PostMapping("/archive")
     public AjaxResult archived(@RequestBody ProjectVO projectVO) {
         projectService.archived(projectVO.getProjectId());
@@ -161,7 +160,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:cancelArchive')")
+    @RequiresPermissions("project:manage:cancelArchive")
     @PostMapping("/cancelArchive")
     public AjaxResult cancelArchived(@RequestBody ProjectVO projectVO) {
         projectService.cancelArchived(projectVO.getProjectId());
@@ -173,7 +172,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:quit')")
+    @RequiresPermissions("project:manage:quit")
     @PostMapping("/quit")
     public AjaxResult quit(@RequestBody ProjectVO projectVO) {
         projectService.quit(projectVO.getProjectId());
@@ -185,7 +184,7 @@ public class ProjectController {
      * @param projectVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:taskStatisticsByDate')")
+    @RequiresPermissions("project:manage:taskStatisticsByDate")
     @PostMapping("/taskStatisticsByDate")
     public AjaxResult taskStatisticsByDate(@RequestBody ProjectVO projectVO) {
 
@@ -196,7 +195,7 @@ public class ProjectController {
      * @param taskReqVO
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('project:detail:taskList')")
+    @RequiresPermissions("project:detail:taskList")
     @PostMapping("/detail/taskList")
     public AjaxResult taskList(@RequestBody TaskReqVO taskReqVO) {
 
@@ -221,7 +220,7 @@ public class ProjectController {
      * @param processDefId 流程定义id
      * @param variables 变量集合,json对象
      */
-    @PreAuthorize("@ss.hasPermi('project:manage:approve')")
+    @RequiresPermissions("project:manage:approve")
     @PostMapping("/startProjectApprove/{projectId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "projectId") String projectId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
         // TODO: 2024.04.28 接口修改为远程调用

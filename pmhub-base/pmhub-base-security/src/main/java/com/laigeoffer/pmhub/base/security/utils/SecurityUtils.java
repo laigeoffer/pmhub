@@ -1,11 +1,13 @@
-package com.laigeoffer.pmhub.base.core.utils;
+package com.laigeoffer.pmhub.base.security.utils;
 
 import com.laigeoffer.pmhub.base.core.constant.HttpStatus;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.constant.TokenConstants;
+import com.laigeoffer.pmhub.base.core.context.SecurityContextHolder;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
+import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +56,7 @@ public class SecurityUtils {
      **/
     public static LoginUser getLoginUser() {
         try {
-            return (LoginUser) getAuthentication().getPrincipal();
+            return SecurityContextHolder.get(SecurityConstants.LOGIN_USER, LoginUser.class);
         } catch (Exception e) {
             throw new ServiceException("获取用户信息异常", HttpStatus.UNAUTHORIZED);
         }
@@ -63,9 +65,9 @@ public class SecurityUtils {
     /**
      * 获取Authentication
      */
-    public static Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
+//    public static Authentication getAuthentication() {
+//        return SecurityContextHolder.getContext().getAuthentication();
+//    }
 
     /**
      * 生成BCryptPasswordEncoder密码

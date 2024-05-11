@@ -1,15 +1,12 @@
 package com.laigeoffer.pmhub.base.core.utils;
 
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.log.LogFactory;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
-import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import org.apache.poi.ss.usermodel.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -34,15 +31,15 @@ public class ExcelUtils {
         }
 
         // 文件输出
-        try {
-            FileUtils.setAttachmentResponseHeader(response, fileName);
-            FileUtils.writeBytes(tmpExcelPath, response);
-        }catch (IOException ex){
-            LogFactory.get().error(ex);
-            throw new RuntimeException("文件导出失败！");
-        }
-
-        FileUtils.deleteFile(tmpExcelPath);
+//        try {
+//            FileUtils.setAttachmentResponseHeader(response, fileName);
+//            FileUtils.writeBytes(tmpExcelPath, response);
+//        }catch (IOException ex){
+//            LogFactory.get().error(ex);
+//            throw new RuntimeException("文件导出失败！");
+//        }
+//
+//        FileUtils.deleteFile(tmpExcelPath);
     }
 
     public static String createExcel(List<Map<String, Object>> rows,String path,String fileName){
@@ -121,13 +118,13 @@ public class ExcelUtils {
         // 关闭writer，释放内存
         writer.close();
         // 文件输出
-        try {
-            FileUtils.setAttachmentResponseHeader(response, fileName);
-            FileUtils.writeBytes(tmpExcelPath, response);
-        }catch (IOException ex){
-            LogFactory.get().error(ex);
-            throw new RuntimeException("文件导出失败！");
-        }
-        FileUtils.deleteFile(tmpExcelPath);
+//        try {
+//            FileUtils.setAttachmentResponseHeader(response, fileName);
+//            FileUtils.writeBytes(tmpExcelPath, response);
+//        }catch (IOException ex){
+//            LogFactory.get().error(ex);
+//            throw new RuntimeException("文件导出失败！");
+//        }
+//        FileUtils.deleteFile(tmpExcelPath);
     }
 }

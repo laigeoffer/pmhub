@@ -11,6 +11,7 @@ import com.laigeoffer.pmhub.base.core.core.validate.AddGroup;
 import com.laigeoffer.pmhub.base.core.core.validate.EditGroup;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfCategoryBo;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfModelBo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfCategoryVo;
@@ -21,7 +22,6 @@ import com.laigeoffer.pmhub.workflow.service.IWfCategoryService;
 import com.laigeoffer.pmhub.workflow.service.IWfModelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,7 +54,7 @@ public class WfModelController extends BaseController {
      * @param modelBo 流程模型对象
      * @param pageQuery 分页参数
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:list')")
+    @RequiresPermissions("workflow:model:list")
     @GetMapping("/list")
     public Table2DataInfo<WfModelVo> list(WfModelBo modelBo, PageQuery pageQuery) {
         return modelService.list(modelBo, pageQuery);
@@ -66,7 +66,7 @@ public class WfModelController extends BaseController {
      * @param modelBo 流程模型对象
      * @param pageQuery 分页参数
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:list')")
+    @RequiresPermissions("workflow:model:list")
     @GetMapping("/historyList")
     public Table2DataInfo<WfModelVo> historyList(WfModelBo modelBo, PageQuery pageQuery) {
         return modelService.historyList(modelBo, pageQuery);
@@ -77,7 +77,7 @@ public class WfModelController extends BaseController {
      *
      * @param modelId 模型主键
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:query')")
+    @RequiresPermissions("workflow:model:query")
     @GetMapping(value = "/{modelId}")
     public R<WfModelVo> getInfo(@NotNull(message = "主键不能为空") @PathVariable("modelId") String modelId) {
         return R.ok(modelService.getModel(modelId));
@@ -88,7 +88,7 @@ public class WfModelController extends BaseController {
      *
      * @param modelId 模型主键
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:query')")
+    @RequiresPermissions("workflow:model:query")
     @GetMapping(value = "/bpmnXml/{modelId}")
     public R<String> getBpmnXml(@NotNull(message = "主键不能为空") @PathVariable("modelId") String modelId) {
         return R.ok("操作成功", modelService.queryBpmnXmlById(modelId));
@@ -97,7 +97,7 @@ public class WfModelController extends BaseController {
     /**
      * 新增流程模型
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:add')")
+    @RequiresPermissions("workflow:model:add")
     @Log(title = "流程模型", businessType = BusinessType.INSERT)
     @PostMapping
     public R<WfModelResVO> add(@Validated(AddGroup.class) @RequestBody WfModelBo modelBo) {
@@ -107,7 +107,7 @@ public class WfModelController extends BaseController {
     /**
      * 修改流程模型
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:edit')")
+    @RequiresPermissions("workflow:model:edit")
     @Log(title = "流程模型", businessType = BusinessType.UPDATE)
     @PutMapping
     public R<Void> edit(@Validated(EditGroup.class) @RequestBody WfModelBo modelBo) {
@@ -118,7 +118,7 @@ public class WfModelController extends BaseController {
     /**
      * 保存流程模型
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:save')")
+    @RequiresPermissions("workflow:model:save")
     @Log(title = "保存流程模型", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping("/save")
@@ -132,7 +132,7 @@ public class WfModelController extends BaseController {
      * @param modelId
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:save')")
+    @RequiresPermissions("workflow:model:save")
     @Log(title = "设为最新流程模型", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping("/latest")
@@ -146,7 +146,7 @@ public class WfModelController extends BaseController {
      *
      * @param modelIds 流程模型主键串
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:remove')")
+    @RequiresPermissions("workflow:model:remove")
     @Log(title = "删除流程模型", businessType = BusinessType.DELETE)
     @DeleteMapping("/{modelIds}")
     public R<String> remove(@NotEmpty(message = "主键不能为空") @PathVariable String[] modelIds) {
@@ -159,7 +159,7 @@ public class WfModelController extends BaseController {
      *
      * @param modelId 流程模型主键
      */
-    @PreAuthorize("@ss.hasPermi('workflow:model:deploy')")
+    @RequiresPermissions("workflow:model:deploy")
     @Log(title = "部署流程模型", businessType = BusinessType.INSERT)
     @RepeatSubmit()
     @PostMapping("/deploy")
@@ -171,7 +171,7 @@ public class WfModelController extends BaseController {
      * 导出流程模型数据
      */
     @Log(title = "导出流程模型数据", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('workflow:model:export')")
+    @RequiresPermissions("workflow:model:export")
     @PostMapping("/export")
     public void export(WfModelBo modelBo, HttpServletResponse response) {
         List<WfModelVo> list =  modelService.list(modelBo);

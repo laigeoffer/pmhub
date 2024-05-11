@@ -4,20 +4,19 @@ import com.laigeoffer.pmhub.base.core.annotation.Anonymous;
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
-import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
+import com.laigeoffer.pmhub.file.utils.FileUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileIdsVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO;
 import com.laigeoffer.pmhub.project.service.ProjectFileService;
 import com.laigeoffer.pmhub.project.service.file.UploadFileFactory;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.laigeoffer.pmhub.base.core.core.domain.AjaxResult.error;
-import static com.laigeoffer.pmhub.base.core.utils.SecurityUtils.getLoginUser;
+import static com.laigeoffer.pmhub.base.security.utils.SecurityUtils.getLoginUser;
 
 
 /**
@@ -55,7 +54,7 @@ public class ProjectFileController {
      * @return
      */
     @PostMapping("/list")
-    @PreAuthorize("@ss.hasPermi('project:file:queryFileList')")
+    @RequiresPermissions("project:file:queryFileList')")
     public AjaxResult queryFileList(@RequestBody ProjectFileReqVO projectReqVO) {
         return AjaxResult.success(projectFileService.queryFileList(projectReqVO));
     }
@@ -78,7 +77,7 @@ public class ProjectFileController {
     }
 
     @PostMapping("/rename")
-    @PreAuthorize("@ss.hasPermi('project:file:rename')")
+    @RequiresPermissions("project:file:rename")
     public AjaxResult rename(@RequestBody ProjectFileReqVO projectFileReqVO) {
         projectFileService.rename(projectFileReqVO);
         return AjaxResult.success();
@@ -91,7 +90,7 @@ public class ProjectFileController {
      * @return
      */
     @PostMapping("/delete")
-    @PreAuthorize("@ss.hasPermi('project:file:delete')")
+    @RequiresPermissions("project:file:delete")
     public AjaxResult deleteFileList(@RequestBody ProjectFileIdsVO projectFileIdsVO) {
         projectFileService.deleteFileList(projectFileIdsVO);
         return AjaxResult.success();

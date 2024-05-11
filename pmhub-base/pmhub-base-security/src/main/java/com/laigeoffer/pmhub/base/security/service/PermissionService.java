@@ -2,7 +2,7 @@ package com.laigeoffer.pmhub.base.security.service;
 
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.security.context.PermissionContextHolder;
 import org.springframework.stereotype.Service;

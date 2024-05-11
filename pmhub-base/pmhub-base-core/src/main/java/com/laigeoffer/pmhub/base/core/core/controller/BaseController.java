@@ -5,14 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.laigeoffer.pmhub.base.core.constant.HttpStatus;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
-import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.core.page.PageDomain;
 import com.laigeoffer.pmhub.base.core.core.page.TableDataInfo;
 import com.laigeoffer.pmhub.base.core.core.page.TableDataInfoForUs;
 import com.laigeoffer.pmhub.base.core.core.page.TableSupport;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.PageUtils;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.sql.SqlUtil;
 import org.slf4j.Logger;
@@ -186,31 +184,4 @@ public class BaseController {
         return StringUtils.format("redirect:{}", url);
     }
 
-    /**
-     * 获取用户缓存信息
-     */
-    public LoginUser getLoginUser() {
-        return SecurityUtils.getLoginUser();
-    }
-
-    /**
-     * 获取登录用户id
-     */
-    public Long getUserId() {
-        return getLoginUser().getUserId();
-    }
-
-    /**
-     * 获取登录部门id
-     */
-    public Long getDeptId() {
-        return getLoginUser().getDeptId();
-    }
-
-    /**
-     * 获取登录用户名
-     */
-    public String getUsername() {
-        return getLoginUser().getUsername();
-    }
 }

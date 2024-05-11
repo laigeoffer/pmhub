@@ -5,6 +5,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.PageQuery;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfDeployVo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;
@@ -12,7 +13,6 @@ import com.laigeoffer.pmhub.workflow.service.IWfDeployFormService;
 import com.laigeoffer.pmhub.workflow.service.IWfDeployService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -36,7 +36,7 @@ public class WfDeployController extends BaseController {
     /**
      * 查询流程部署列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:deploy:list')")
+    @RequiresPermissions("'workflow:deploy:list")
     @GetMapping("/list")
     public Table2DataInfo<WfDeployVo> list(ProcessQuery processQuery, PageQuery pageQuery) {
         return deployService.queryPageList(processQuery, pageQuery);
@@ -45,7 +45,7 @@ public class WfDeployController extends BaseController {
     /**
      * 查询流程部署版本列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:deploy:list')")
+    @RequiresPermissions("workflow:deploy:list")
     @GetMapping("/publishList")
     public Table2DataInfo<WfDeployVo> publishList(@RequestParam String processKey, PageQuery pageQuery) {
         return deployService.queryPublishList(processKey, pageQuery);
@@ -57,7 +57,7 @@ public class WfDeployController extends BaseController {
      * @param state 状态（active:激活 suspended:挂起）
      * @param definitionId 流程定义ID
      */
-    @PreAuthorize("@ss.hasPermi('workflow:deploy:state')")
+    @RequiresPermissions("workflow:deploy:state")
     @PutMapping(value = "/changeState")
     public R<Void> changeState(@RequestParam String state, @RequestParam String definitionId) {
         deployService.updateState(definitionId, state);
@@ -69,7 +69,7 @@ public class WfDeployController extends BaseController {
      * @param definitionId 流程定义ID
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('workflow:deploy:query')")
+    @RequiresPermissions("workflow:deploy:query")
     @GetMapping("/bpmnXml/{definitionId}")
     public R<String> getBpmnXml(@PathVariable(value = "definitionId") String definitionId) {
         return R.ok(null, deployService.queryBpmnXmlById(definitionId));

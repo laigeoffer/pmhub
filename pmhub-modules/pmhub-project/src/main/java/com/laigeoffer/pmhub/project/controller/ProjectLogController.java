@@ -1,10 +1,10 @@
 package com.laigeoffer.pmhub.project.controller;
 
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.service.ProjectLogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ public class ProjectLogController {
      * @return
      */
     @PostMapping("/list")
-    @PreAuthorize("@ss.hasPermi('project:log:list')")
+    @RequiresPermissions("project:log:list")
     public AjaxResult list(@RequestBody ProjectVO projectVO) {
         return AjaxResult.success(projectLogService.list(projectVO));
     }

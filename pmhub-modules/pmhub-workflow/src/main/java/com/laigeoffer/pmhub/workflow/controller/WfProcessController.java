@@ -10,6 +10,8 @@ import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfCopyBo;
 import com.laigeoffer.pmhub.workflow.domain.vo.*;
@@ -17,7 +19,6 @@ import com.laigeoffer.pmhub.workflow.service.IWfCopyService;
 import com.laigeoffer.pmhub.workflow.service.IWfProcessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,7 @@ public class WfProcessController extends BaseController {
      * @param pageQuery 分页参数
      */
     @GetMapping(value = "/list")
-    @PreAuthorize("@ss.hasPermi('workflow:process:startList')")
+    @RequiresPermissions("workflow:process:startList")
     public Table2DataInfo<WfDefinitionVo> startProcessList(ProcessQuery processQuery, PageQuery pageQuery) {
         return processService.selectPageStartProcessList(processQuery, pageQuery);
     }
@@ -54,7 +55,7 @@ public class WfProcessController extends BaseController {
     /**
      * 我拥有的流程
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:ownList')")
+    @RequiresPermissions("workflow:process:ownList")
     @GetMapping(value = "/ownList")
     public Table2DataInfo<WfTaskVo> ownProcessList(ProcessQuery processQuery, PageQuery pageQuery) {
         return processService.selectPageOwnProcessList(processQuery, pageQuery);
@@ -63,7 +64,7 @@ public class WfProcessController extends BaseController {
     /**
      * 获取待办列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:todoList')")
+    @RequiresPermissions("workflow:process:todoList")
     @GetMapping(value = "/todoList")
     public Table2DataInfo<WfTaskVo> todoProcessList(ProcessQuery processQuery, PageQuery pageQuery) {
         return processService.selectPageTodoProcessList(processQuery, pageQuery);
@@ -75,7 +76,7 @@ public class WfProcessController extends BaseController {
      * @param processQuery 流程业务对象
      * @param pageQuery 分页参数
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:claimList')")
+    @RequiresPermissions("workflow:process:claimList")
     @GetMapping(value = "/claimList")
     public Table2DataInfo<WfTaskVo> claimProcessList(ProcessQuery processQuery, PageQuery pageQuery) {
         return processService.selectPageClaimProcessList(processQuery, pageQuery);
@@ -86,7 +87,7 @@ public class WfProcessController extends BaseController {
      *
      * @param pageQuery 分页参数
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:finishedList')")
+    @RequiresPermissions("workflow:process:finishedList")
     @GetMapping(value = "/finishedList")
     public Table2DataInfo<WfTaskVo> finishedProcessList(ProcessQuery processQuery, PageQuery pageQuery) {
         return processService.selectPageFinishedProcessList(processQuery, pageQuery);
@@ -98,17 +99,17 @@ public class WfProcessController extends BaseController {
      * @param copyBo 流程抄送对象
      * @param pageQuery 分页参数
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:copyList')")
+    @RequiresPermissions("workflow:process:copyList")
     @GetMapping(value = "/copyList")
     public Table2DataInfo<WfCopyVo> copyProcessList(WfCopyBo copyBo, PageQuery pageQuery) {
-        copyBo.setUserId(getUserId());
+        copyBo.setUserId(SecurityUtils.getUserId());
         return copyService.selectPageList(copyBo, pageQuery);
     }
 
     /**
      * 导出可发起流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:startExport')")
+    @RequiresPermissions("workflow:process:startExport")
     @Log(title = "可发起流程", businessType = BusinessType.EXPORT)
     @PostMapping("/startExport")
     public void startExport(@Validated ProcessQuery processQuery, HttpServletResponse response) {
@@ -119,7 +120,7 @@ public class WfProcessController extends BaseController {
     /**
      * 导出我拥有流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:ownExport')")
+    @RequiresPermissions("workflow:process:ownExport")
     @Log(title = "我拥有流程", businessType = BusinessType.EXPORT)
     @PostMapping("/ownExport")
     public void ownExport(@Validated ProcessQuery processQuery, HttpServletResponse response) {
@@ -134,7 +135,7 @@ public class WfProcessController extends BaseController {
     /**
      * 导出待办流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:todoExport')")
+    @RequiresPermissions("workflow:process:todoExport")
     @Log(title = "待办流程", businessType = BusinessType.EXPORT)
     @PostMapping("/todoExport")
     public void todoExport(@Validated ProcessQuery processQuery, HttpServletResponse response) {
@@ -146,7 +147,7 @@ public class WfProcessController extends BaseController {
     /**
      * 导出待签流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:claimExport')")
+    @RequiresPermissions("workflow:process:claimExport")
     @Log(title = "待签流程", businessType = BusinessType.EXPORT)
     @PostMapping("/claimExport")
     public void claimExport(@Validated ProcessQuery processQuery, HttpServletResponse response) {
@@ -158,7 +159,7 @@ public class WfProcessController extends BaseController {
     /**
      * 导出已办流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:finishedExport')")
+    @RequiresPermissions("workflow:process:finishedExport")
     @Log(title = "已办流程", businessType = BusinessType.EXPORT)
     @PostMapping("/finishedExport")
     public void finishedExport(@Validated ProcessQuery processQuery, HttpServletResponse response) {
@@ -170,11 +171,11 @@ public class WfProcessController extends BaseController {
     /**
      * 导出抄送流程列表
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:copyExport')")
+    @RequiresPermissions("workflow:process:copyExport")
     @Log(title = "抄送流程", businessType = BusinessType.EXPORT)
     @PostMapping("/copyExport")
     public void copyExport(WfCopyBo copyBo, HttpServletResponse response) {
-        copyBo.setUserId(getUserId());
+        copyBo.setUserId(SecurityUtils.getUserId());
         List<WfCopyVo> list = copyService.selectList(copyBo);
         ExcelUtil.exportExcel2(list, "抄送流程", WfCopyVo.class, response);
     }
@@ -186,7 +187,7 @@ public class WfProcessController extends BaseController {
      * @param deployId 流程部署id
      */
     @GetMapping("/getProcessForm")
-    @PreAuthorize("@ss.hasPermi('workflow:process:start')")
+    @RequiresPermissions("workflow:process:start")
     public R<?> getForm(@RequestParam(value = "definitionId") String definitionId,
                         @RequestParam(value = "deployId") String deployId) {
         String formContent = processService.selectFormContent(definitionId, deployId);
@@ -199,7 +200,7 @@ public class WfProcessController extends BaseController {
      * @param processDefId 流程定义id
      * @param variables 变量集合,json对象
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:start')")
+    @RequiresPermissions("workflow:process:start")
     @PostMapping("/start/{processDefId}")
     public R<Void> start(@PathVariable(value = "processDefId") String processDefId, @RequestBody Map<String, Object> variables) {
         processService.startProcessByDefId(processDefId, variables);
@@ -213,7 +214,7 @@ public class WfProcessController extends BaseController {
      * @param processDefId 流程定义id
      * @param variables 变量集合,json对象
      */
-    @PreAuthorize("@ss.hasPermi('workflow:process:start')")
+    @RequiresPermissions("workflow:process:start")
     @PostMapping("/startTaskApprove/{taskId}/{processDefId}")
     public R<Void> startTaskProcessDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
         processService.startTaskProcessByDefId(taskId, processDefId, url, variables);

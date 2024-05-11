@@ -13,7 +13,6 @@ import com.laigeoffer.pmhub.base.core.exception.UtilException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.FileTypeUtils;
-import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.ImageUtils;
 import com.laigeoffer.pmhub.base.core.utils.reflect.ReflectUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -466,7 +465,7 @@ public class ExcelUtil<T> {
                                 val = "";
                             } else {
                                 byte[] data = image.getData();
-                                val = FileUtils.writeImportBytes(data);
+//                                val = FileUtils.writeImportBytes(data);
                             }
                         }
                         ReflectUtils.invokeSetter(entity, propertyName, val);
@@ -1412,7 +1411,7 @@ public class ExcelUtil<T> {
      */
     private static void resetResponse(String sheetName, HttpServletResponse response) throws UnsupportedEncodingException {
         String filename = encodingFilename(sheetName);
-        FileUtils.setAttachmentResponseHeader(response, filename);
+//        FileUtils.setAttachmentResponseHeader(response, filename);
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8");
     }
 }

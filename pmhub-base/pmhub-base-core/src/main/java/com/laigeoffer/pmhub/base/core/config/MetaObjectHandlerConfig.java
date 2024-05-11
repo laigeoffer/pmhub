@@ -1,7 +1,6 @@
 package com.laigeoffer.pmhub.base.core.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
@@ -35,10 +34,12 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
             this.strictInsertFill(metaObject, "deleted", Integer.class, 0);
         }
         if (createdBy == null) {
-            this.strictInsertFill(metaObject, "createBy", String.class, SecurityUtils.getUsername());
+            // TODO: 2024.05.11 拿到用户信息
+            this.strictInsertFill(metaObject, "createBy", String.class, null);
         }
         if (updatedBy == null) {
-            this.strictInsertFill(metaObject, "updateBy", String.class, SecurityUtils.getUsername());
+            // TODO: 2024.05.11 拿到用户信息
+            this.strictInsertFill(metaObject, "updateBy", String.class,null);
         }
 
 
@@ -53,7 +54,8 @@ public class MetaObjectHandlerConfig implements MetaObjectHandler {
             this.strictInsertFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
         }
         if (updatedBy == null) {
-            this.strictInsertFill(metaObject, "updateBy", String.class, SecurityUtils.getUsername());
+            // TODO: 2024.05.11 拿到用户信息
+            this.strictInsertFill(metaObject, "updateBy", String.class, null);
         }
     }
 }

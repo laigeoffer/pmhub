@@ -8,7 +8,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.PageQuery;
 import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
 import com.laigeoffer.pmhub.workflow.domain.MaterialsApprovalSet;

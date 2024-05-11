@@ -2,11 +2,13 @@ package com.laigeoffer.pmhub.base.security.config;
 
 //import com.laigeoffer.pmhub.base.framework.interceptor.RepeatSubmitInterceptor;
 
+import com.laigeoffer.pmhub.base.security.interceptor.HeaderInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -27,6 +29,27 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(repeatSubmitInterceptor).addPathPatterns("/**");
 //    }
+
+
+    /** 不需要拦截地址 */
+    public static final String[] excludeUrls = { "/login", "/logout", "/refresh" };
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry)
+    {
+        registry.addInterceptor(getHeaderInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(excludeUrls)
+                .order(-10);
+    }
+
+    /**
+     * 自定义请求头拦截器
+     */
+    public HeaderInterceptor getHeaderInterceptor()
+    {
+        return new HeaderInterceptor();
+    }
 
     /**
      * 跨域配置

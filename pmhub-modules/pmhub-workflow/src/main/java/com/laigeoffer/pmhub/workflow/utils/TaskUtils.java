@@ -2,7 +2,7 @@ package com.laigeoffer.pmhub.workflow.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.workflow.common.constant.TaskConstants;
 
 import java.util.ArrayList;

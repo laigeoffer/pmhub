@@ -8,7 +8,7 @@
 //import com.laigeoffer.pmhub.base.core.exception.user.CaptchaException;
 //import com.laigeoffer.pmhub.base.core.exception.user.CaptchaExpireException;
 //import com.laigeoffer.pmhub.base.core.utils.MessageUtils;
-//import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+//import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 //import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 //import com.laigeoffer.pmhub.base.framework.manager.AsyncManager;
 //import com.laigeoffer.pmhub.base.framework.manager.factory.AsyncFactory;

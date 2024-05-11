@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.core.utils.file;
+package com.laigeoffer.pmhub.file.utils;
 
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
@@ -6,9 +6,10 @@ import com.laigeoffer.pmhub.base.core.exception.file.FileNameLengthLimitExceeded
 import com.laigeoffer.pmhub.base.core.exception.file.FileSizeLimitExceededException;
 import com.laigeoffer.pmhub.base.core.exception.file.InvalidExtensionException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.FilenameUtils;

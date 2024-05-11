@@ -6,7 +6,7 @@ import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.constant.GenConstants;
 import com.laigeoffer.pmhub.base.core.core.text.CharsetKit;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-import com.laigeoffer.pmhub.base.core.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.gen.domain.GenTable;
 import com.laigeoffer.pmhub.gen.domain.GenTableColumn;
