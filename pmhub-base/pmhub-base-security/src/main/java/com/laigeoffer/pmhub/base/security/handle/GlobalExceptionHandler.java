@@ -4,10 +4,10 @@ import com.laigeoffer.pmhub.base.core.constant.HttpStatus;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.exception.DemoModeException;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
+import com.laigeoffer.pmhub.base.core.exception.auth.NotPermissionException;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,8 +28,8 @@ public class GlobalExceptionHandler {
     /**
      * 权限校验异常
      */
-    @ExceptionHandler(AccessDeniedException.class)
-    public AjaxResult handleAccessDeniedException(AccessDeniedException e, HttpServletRequest request) {
+    @ExceptionHandler(NotPermissionException.class)
+    public AjaxResult handleAccessDeniedException(NotPermissionException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',权限校验失败'{}'", requestURI, e.getMessage());
         return AjaxResult.error(HttpStatus.FORBIDDEN, "没有权限，请联系管理员授权");
