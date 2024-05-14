@@ -1,7 +1,6 @@
 package com.laigeoffer.pmhub.auth.controller;
 
 import com.laigeoffer.pmhub.auth.service.SysLoginService;
-import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginBody;
@@ -38,14 +37,12 @@ public class LoginController {
     private SysLoginService sysLoginService;
 
     @PostMapping("login")
-    public AjaxResult login(@RequestBody LoginBody form) {
+    public R<?> login(@RequestBody LoginBody form) {
         AjaxResult ajax = success();
         // 用户登录
         LoginUser userInfo = sysLoginService.login(form.getUsername(), form.getPassword());
-        String token =  tokenService.createToken(userInfo);
-        ajax.put(Constants.TOKEN, token);
         // 获取登录token
-        return ajax;
+        return R.ok(tokenService.createToken(userInfo));
     }
 
     @DeleteMapping("logout")

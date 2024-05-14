@@ -220,6 +220,16 @@ public class ServletUtils {
         return map;
     }
 
+    public static String getHeader(HttpServletRequest request, String name)
+    {
+        String value = request.getHeader(name);
+        if (StringUtils.isEmpty(value))
+        {
+            return StringUtils.EMPTY;
+        }
+        return urlDecode(value);
+    }
+
     /**
      * 设置webflux模型响应
      *

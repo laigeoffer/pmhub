@@ -9,7 +9,7 @@ public class CacheConstants {
     /**
      * 登录用户 redis key
      */
-    public static final String LOGIN_TOKEN_KEY = "login_tokens:";
+    public static final String LOGIN_TOKEN_KEY = "user_key:";
 
     /**
      * 验证码 redis key

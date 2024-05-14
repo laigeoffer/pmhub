@@ -20,6 +20,11 @@ public class LoginUser implements Serializable {
     private Long userId;
 
     /**
+     * 用户名
+     */
+    private String username;
+
+    /**
      * 部门ID
      */
     private Long deptId;
@@ -93,6 +98,10 @@ public class LoginUser implements Serializable {
 
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setUserId(Long userId) {

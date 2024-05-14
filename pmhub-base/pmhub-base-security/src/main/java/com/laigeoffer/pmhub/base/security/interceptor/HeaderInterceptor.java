@@ -3,9 +3,10 @@ package com.laigeoffer.pmhub.base.security.interceptor;
 import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.context.SecurityContextHolder;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
-import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
+import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.security.auth.AuthUtil;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
@@ -28,9 +29,9 @@ public class HeaderInterceptor implements AsyncHandlerInterceptor
             return true;
         }
 
-//        SecurityContextHolder.setUserId(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USER_ID));
-//        SecurityContextHolder.setUserName(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USERNAME));
-//        SecurityContextHolder.setUserKey(ServletUtils.getHeader(request, SecurityConstants.USER_KEY));
+        SecurityContextHolder.setUserId(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USER_ID));
+        SecurityContextHolder.setUserName(ServletUtils.getHeader(request, SecurityConstants.DETAILS_USERNAME));
+        SecurityContextHolder.setUserKey(ServletUtils.getHeader(request, SecurityConstants.USER_KEY));
 
         String token = SecurityUtils.getToken();
         if (StringUtils.isNotEmpty(token))

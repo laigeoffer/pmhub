@@ -3,6 +3,7 @@ package com.laigeoffer.pmhub.base.security.service;
 import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.utils.JwtUtils;
 import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
@@ -41,6 +42,9 @@ public class TokenService {
     protected static final long MILLIS_SECOND = 1000;
     protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
     private static final Long MILLIS_MINUTE_TEN = 20 * 60 * 1000L;
+
+    private final static String ACCESS_TOKEN = CacheConstants.LOGIN_TOKEN_KEY;
+
     // 令牌自定义标识
     @Value("${token.header}")
     private String header;
@@ -133,19 +137,29 @@ public class TokenService {
 
     /**
      * 创建令牌
-     *
-     * @param loginUser 用户信息
-     * @return 令牌
      */
-    public String createToken(LoginUser loginUser) {
+    public Map<String, Object> createToken(LoginUser loginUser)
+    {
         String token = IdUtils.fastUUID();
+        Long userId = loginUser.getUser().getUserId();
+        String userName = loginUser.getUser().getUserName();
         loginUser.setToken(token);
-        setUserAgent(loginUser);
+        loginUser.setUserId(userId);
+        loginUser.setUsername(userName);
+        loginUser.setIpaddr(IpUtils.getIpAddr());
         refreshToken(loginUser);
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(Constants.LOGIN_USER_KEY, token);
-        return createToken(claims);
+        // Jwt存储信息
+        Map<String, Object> claimsMap = new HashMap<String, Object>();
+        claimsMap.put(SecurityConstants.USER_KEY, token);
+        claimsMap.put(SecurityConstants.DETAILS_USER_ID, userId);
+        claimsMap.put(SecurityConstants.DETAILS_USERNAME, userName);
+
+        // 接口返回信息
+        Map<String, Object> rspMap = new HashMap<String, Object>();
+        rspMap.put("access_token", JwtUtils.createToken(claimsMap));
+        rspMap.put("expires_in", expireTime);
+        return rspMap;
     }
 
 
@@ -308,7 +322,7 @@ public class TokenService {
         return token;
     }
 
-    private String getTokenKey(String uuid) {
-        return CacheConstants.LOGIN_TOKEN_KEY + uuid;
+    private String getTokenKey(String token) {
+        return ACCESS_TOKEN + token;
     }
 }
