@@ -40,4 +40,19 @@ public class CacheConstants {
      * 登录账户密码错误次数 redis key
      */
     public static final String PWD_ERR_CNT_KEY = "pwd_err_cnt:";
+
+    /**
+     * 密码最大错误次数
+     */
+    public final static int PASSWORD_MAX_RETRY_COUNT = 5;
+
+    /**
+     * 密码锁定时间，默认10（分钟）
+     */
+    public final static int PASSWORD_LOCK_TIME = 10;
+
+    /**
+     * 登录IP黑名单 cache key
+     */
+    public static final String SYS_LOGIN_BLACKIPLIST = SYS_CONFIG_KEY + "sys.login.blackIPList";
 }

@@ -3,11 +3,11 @@ package com.laigeoffer.pmhub.api.system;
 import com.laigeoffer.pmhub.api.system.factory.UserFeginFallbackFactory;
 import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.constant.ServiceNameConstants;
-import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author canghe
@@ -17,15 +17,20 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(contextId = "userFeignService", value = ServiceNameConstants.SYSTEM_SERVICE, fallbackFactory = UserFeginFallbackFactory.class)
 public interface UserFeignService {
 
-    /**
-     * 根据用户编号获取详细信息
-     */
-    @GetMapping(value = { "/user/{userId}"})
-    AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 根据用户名获取当前用户信息
      */
     @GetMapping("/user/info/{username}")
-    AjaxResult getInfoByUsername(@PathVariable("username") String username);
+    R<LoginUser> info(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+
+    /**
+     * 注册用户信息
+     *
+     * @param sysUser 用户信息
+     * @param source 请求来源
+     * @return 结果
+     */
+    @PostMapping("/user/register")
+    R<Boolean> registerUserInfo(@RequestBody SysUser sysUser, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 }

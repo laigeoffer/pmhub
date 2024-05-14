@@ -1,149 +1,132 @@
-//package com.laigeoffer.pmhub.auth.service;
-//
-//
-//import com.laigeoffer.pmhub.api.system.UserFeignService;
-//import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
-//import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
-//import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
-//import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
-//import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
-//import com.laigeoffer.pmhub.base.core.exception.ServiceException;
-//import com.laigeoffer.pmhub.base.core.exception.user.UserPasswordNotMatchException;
-//import com.laigeoffer.pmhub.base.core.utils.DateUtils;
-//import com.laigeoffer.pmhub.base.core.utils.ServletUtils;
-//import com.laigeoffer.pmhub.base.core.utils.StringUtils;
-//import com.laigeoffer.pmhub.base.core.utils.ip.IpUtils;
-//import com.laigeoffer.pmhub.base.security.service.TokenService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.authentication.AuthenticationManager;
-//import org.springframework.security.authentication.BadCredentialsException;
-//import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.stereotype.Component;
-//
-//import javax.annotation.Resource;
-//
-///**
-// * 登录校验方法
-// *
-// * @author canghe
-// */
-//@Component
-//public class SysLoginService {
-//    @Autowired
-//    private TokenService tokenService;
-//
-//
-//    @Autowired
-//    private RedisService redisService;
-//
-//    @Resource
-//    private UserFeignService userService;
-//
-////    @Autowired
-////    private ISysUserService userService;
-////
-////    @Autowired
-////    private ISysConfigService configService;
-//
-//    /**
-//     * 登录验证
-//     *
-//     * @param username 用户名
-//     * @param password 密码
-//     * @param code     验证码
-//     * @param uuid     唯一标识
-//     * @return 结果
-//     */
-//    public String login(String username, String password, String code, String uuid) {
-////        boolean captchaEnabled = configService.selectCaptchaEnabled();
-////        // 验证码开关
-////        if (captchaEnabled) {
-////            validateCaptcha(username, code, uuid);
-////        }
-//        // 用户验证
-//        Authentication authentication = null;
-//        try {
-//            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-//            AuthenticationContextHolder.setContext(authenticationToken);
-//            // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
-//            authentication = authenticationManager.authenticate(authenticationToken);
-//        } catch (Exception e) {
-//            if (e instanceof BadCredentialsException) {
-//                // TODO: 2024.05.09 记录登录信息
-////                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
-//                throw new UserPasswordNotMatchException();
-//            } else {
-//                // TODO: 2024.05.09 记录登录信息
-////                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
-//                throw new ServiceException(e.getMessage());
-//            }
-//        } finally {
-//            AuthenticationContextHolder.clearContext();
-//        }
-//        // TODO: 2024.05.09 记录登录信息
-////        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
-//        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-//        recordLoginInfo(loginUser.getUserId());
-//        // 生成token
-//        return tokenService.createToken(loginUser);
-//    }
-//
-//
-//    /**
-//     * 单点登录
-//     *
-//     * @param loginUser 单点登录用户
-//     * @return token
-//     */
-////    public String loginSso(LoginUser loginUser) {
-////        // 用户验证
-////        AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginUser.getUsername(), Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
-////        // 生成token
-////        return tokenService.createLongTimeToken(loginUser);
-////    }
-//
-//    /**
-//     * 校验验证码
-//     *
-//     * @param username 用户名
-//     * @param code     验证码
-//     * @param uuid     唯一标识
-//     * @return 结果
-//     */
-////    public void validateCaptcha(String username, String code, String uuid) {
-////        String verifyKey = CacheConstants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
-////        String captcha = redisService.getCacheObject(verifyKey);
-////        redisService.deleteObject(verifyKey);
-////        if (captcha == null) {
-////            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
-////            throw new CaptchaExpireException();
-////        }
-////        if (!code.equalsIgnoreCase(captcha)) {
-////            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
-////            throw new CaptchaException();
-////        }
-////    }
-//
-//    /**
-//     * 记录登录信息
-//     *
-//     * @param userId 用户ID
-//     */
-//    public void recordLoginInfo(Long userId) {
-//        SysUser sysUser = new SysUser();
-//        AjaxResult userResult = userService.getInfo(userId, SecurityConstants.INNER);
-//        if (StringUtils.isNull(userResult) || userResult.get(AjaxResult.DATA_TAG) == null)
-//        {
-//            throw new ServiceException("登录用户：" + userId + " 不存在");
-//        }
-//
-//        SysUser user = (SysUser) userResult.get(AjaxResult.DATA_TAG);
-//
-//        sysUser.setLeaderId(user.getLeaderId());
-//        sysUser.setUserId(userId);
-//        sysUser.setLoginIp(IpUtils.getIpAddr(ServletUtils.getRequest()));
-//        sysUser.setLoginDate(DateUtils.getNowDate());
-////        userService.updateUserProfile(sysUser);
-//    }
-//}
+package com.laigeoffer.pmhub.auth.service;
+
+
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
+import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
+import com.laigeoffer.pmhub.base.core.constant.Constants;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.constant.UserConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
+import com.laigeoffer.pmhub.base.core.core.text.Convert;
+import com.laigeoffer.pmhub.base.core.enums.UserStatus;
+import com.laigeoffer.pmhub.base.core.exception.ServiceException;
+import com.laigeoffer.pmhub.base.core.utils.StringUtils;
+import com.laigeoffer.pmhub.base.core.utils.ip.IpUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * 登录校验方法
+ *
+ * @author canghe
+ */
+@Component
+public class SysLoginService {
+    @Autowired
+    private UserFeignService userFeignService;
+
+    @Autowired
+    private SysPasswordService passwordService;
+
+    @Autowired
+    private SysRecordLogService recordLogService;
+
+    @Autowired
+    private RedisService redisService;
+
+    /**
+     * 登录
+     */
+    public LoginUser login(String username, String password) {
+        // 用户名或密码为空 错误
+        if (StringUtils.isAnyBlank(username, password)) {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户/密码必须填写");
+            throw new ServiceException("用户/密码必须填写");
+        }
+        // 密码如果不在指定范围内 错误
+        if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户密码不在指定范围");
+            throw new ServiceException("用户密码不在指定范围");
+        }
+        // 用户名不在指定范围内 错误
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户名不在指定范围");
+            throw new ServiceException("用户名不在指定范围");
+        }
+        // IP黑名单校验
+        String blackStr = Convert.toStr(redisService.getCacheObject(CacheConstants.SYS_LOGIN_BLACKIPLIST));
+        if (IpUtils.isMatchedIp(blackStr, IpUtils.getIpAddr())) {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "很遗憾，访问IP已被列入系统黑名单");
+            throw new ServiceException("很遗憾，访问IP已被列入系统黑名单");
+        }
+        // 查询用户信息
+        R<LoginUser> userResult = userFeignService.info(username, SecurityConstants.INNER);
+
+        if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData()))
+        {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
+            throw new ServiceException("登录用户：" + username + " 不存在");
+        }
+
+        if (R.FAIL == userResult.getCode())
+        {
+            throw new ServiceException(userResult.getMsg());
+        }
+
+        LoginUser userInfo = userResult.getData();
+        SysUser user = userResult.getData().getUser();
+        if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
+        {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
+            throw new ServiceException("对不起，您的账号：" + username + " 已被删除");
+        }
+        if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
+        {
+            recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
+            throw new ServiceException("对不起，您的账号：" + username + " 已停用");
+        }
+        passwordService.validate(user, password);
+        recordLogService.recordLogininfor(username, Constants.LOGIN_SUCCESS, "登录成功");
+        return userInfo;
+    }
+
+    public void logout(String loginName) {
+        recordLogService.recordLogininfor(loginName, Constants.LOGOUT, "退出成功");
+    }
+
+    /**
+     * 注册
+     */
+    public void register(String username, String password) {
+        // 用户名或密码为空 错误
+        if (StringUtils.isAnyBlank(username, password)) {
+            throw new ServiceException("用户/密码必须填写");
+        }
+        if (username.length() < UserConstants.USERNAME_MIN_LENGTH
+                || username.length() > UserConstants.USERNAME_MAX_LENGTH) {
+            throw new ServiceException("账户长度必须在2到20个字符之间");
+        }
+        if (password.length() < UserConstants.PASSWORD_MIN_LENGTH
+                || password.length() > UserConstants.PASSWORD_MAX_LENGTH) {
+            throw new ServiceException("密码长度必须在5到20个字符之间");
+        }
+
+        // 注册用户信息
+        SysUser sysUser = new SysUser();
+        sysUser.setUserName(username);
+        sysUser.setNickName(username);
+        sysUser.setPassword(SecurityUtils.encryptPassword(password));
+        R<?> registerResult = userFeignService.registerUserInfo(sysUser, SecurityConstants.INNER);
+
+        if (R.FAIL == registerResult.getCode()) {
+            throw new ServiceException(registerResult.getMsg());
+        }
+        recordLogService.recordLogininfor(username, Constants.REGISTER, "注册成功");
+    }
+}

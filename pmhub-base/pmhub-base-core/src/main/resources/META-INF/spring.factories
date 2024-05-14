@@ -3,7 +3,6 @@ com.laigeoffer.pmhub.base.core.utils.spring.SpringUtils,\
 com.laigeoffer.pmhub.base.core.config.PmhubConfig,\
 com.laigeoffer.pmhub.base.core.config.MetaObjectHandlerConfig,\
 com.laigeoffer.pmhub.base.core.aspectj.RateLimiterAspect,\
-com.laigeoffer.pmhub.base.core.config.FilterConfig,\
 com.laigeoffer.pmhub.base.core.config.JacksonConfig,\
 com.laigeoffer.pmhub.base.core.config.MybatisPlusConfig,\
 com.laigeoffer.pmhub.base.core.config.ServerConfig,\

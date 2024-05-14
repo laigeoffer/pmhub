@@ -1,7 +1,9 @@
 package com.laigeoffer.pmhub.api.system.factory;
 
 import com.laigeoffer.pmhub.api.system.UserFeignService;
-import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -23,14 +25,15 @@ public class UserFeginFallbackFactory implements FallbackFactory<UserFeignServic
         log.error("用户服务调用失败:{}", throwable.getMessage());
         return new UserFeignService()
         {
+
             @Override
-            public AjaxResult getInfo(Long userId, String source) {
-                return AjaxResult.error("获取用户失败:" + throwable.getMessage());
+            public R<LoginUser> info(String username, String source) {
+                return R.fail("获取用户失败:" + throwable.getMessage());
             }
 
             @Override
-            public AjaxResult getInfoByUsername(String username) {
-                return AjaxResult.error("获取用户失败:" + throwable.getMessage());
+            public R<Boolean> registerUserInfo(SysUser sysUser, String source) {
+                return R.fail("注册用户失败:" + throwable.getMessage());
             }
 
         };

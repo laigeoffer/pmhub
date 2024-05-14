@@ -4,6 +4,7 @@ import com.laigeoffer.pmhub.base.core.annotation.Log;
 import com.laigeoffer.pmhub.base.core.constant.UserConstants;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysDept;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
@@ -16,10 +17,7 @@ import com.laigeoffer.pmhub.base.security.annotation.InnerAuth;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.base.security.service.TokenService;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
-import com.laigeoffer.pmhub.system.service.ISysDeptService;
-import com.laigeoffer.pmhub.system.service.ISysPostService;
-import com.laigeoffer.pmhub.system.service.ISysRoleService;
-import com.laigeoffer.pmhub.system.service.ISysUserService;
+import com.laigeoffer.pmhub.system.service.*;
 import com.laigeoffer.pmhub.system.service.impl.SysPermissionService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -42,7 +40,7 @@ import java.util.stream.Collectors;
  * @author canghe
  */
 @RestController
-@RequestMapping("/system/user")
+@RequestMapping("/user")
 public class SysUserController extends BaseController {
     @Autowired
     private ISysUserService userService;
@@ -61,6 +59,9 @@ public class SysUserController extends BaseController {
 
     @Autowired
     private SysPermissionService permissionService;
+
+    @Autowired
+    private ISysConfigService configService;
 
     /**
      * 获取用户列表
@@ -271,11 +272,10 @@ public class SysUserController extends BaseController {
      */
     @InnerAuth
     @GetMapping("/info/{username}")
-    public AjaxResult getInfoByUsername(@PathVariable("username") String username) {
-        AjaxResult ajax = AjaxResult.success();
+    public R<LoginUser> info(@PathVariable("username") String username) {
         SysUser sysUser = userService.selectUserByUserName(username);
         if (StringUtils.isNull(sysUser)) {
-            return AjaxResult.error("用户名或密码错误");
+            return R.fail("用户名或密码错误");
         }
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(sysUser);
@@ -286,9 +286,24 @@ public class SysUserController extends BaseController {
         loginUser.setRoles(roles);
         loginUser.setPermissions(permissions);
 
-        ajax.put(AjaxResult.DATA_TAG, loginUser);
 
-        return ajax;
+        return R.ok(loginUser);
+    }
+
+    /**
+     * 注册用户信息
+     */
+    @InnerAuth
+    @PostMapping("/register")
+    public R<Boolean> register(@RequestBody SysUser sysUser) {
+        String username = sysUser.getUserName();
+        if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser")))) {
+            return R.fail("当前系统没有开启注册功能！");
+        }
+        if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(sysUser))) {
+            return R.fail("保存用户'" + username + "'失败，注册账号已存在");
+        }
+        return R.ok(userService.registerUser(sysUser));
     }
 
 }
