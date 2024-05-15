@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface LogFeignService
 {
     /**
-     * 保存系统日志
+     * 保存系统日志 todo 待优化后使用
      *
      * @param sysOperLog 日志实体
      * @param source 请求来源

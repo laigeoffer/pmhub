@@ -289,11 +289,6 @@
                 <version>${laigeoffer.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.laigeoffer.pmhub-cloud</groupId>
-                <artifactId>pmhub-base-log</artifactId>
-                <version>${laigeoffer.version}</version>
-            </dependency>
 
 
             <dependency>

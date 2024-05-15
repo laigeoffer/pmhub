@@ -19,7 +19,6 @@
 
     <modules>
         <module>pmhub-base-core</module>
-        <module>pmhub-base-log</module>
         <module>pmhub-base-seata</module>
         <module>pmhub-base-security</module>
         <module>pmhub-base-sensitive</module>
