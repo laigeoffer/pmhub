@@ -1,6 +1,6 @@
 package com.laigeoffer.pmhub.system.service;
 
-import com.laigeoffer.pmhub.system.domain.SysOperLog;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysOperLog;
 
 import java.util.List;
 

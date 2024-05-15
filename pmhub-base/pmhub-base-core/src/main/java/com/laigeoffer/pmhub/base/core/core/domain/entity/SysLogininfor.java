@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.system.domain;
+package com.laigeoffer.pmhub.base.core.core.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.laigeoffer.pmhub.base.core.annotation.Excel;

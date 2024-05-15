@@ -145,4 +145,16 @@ public class Constants
      */
     public static final String[] JSON_WHITELIST_STR = { "org.springframework", "com.ruoyi" };
 
+    /**
+     * 登录成功状态
+     */
+    public static final String LOGIN_SUCCESS_STATUS = "0";
+
+    /**
+     * 登录失败状态
+     */
+    public static final String LOGIN_FAIL_STATUS = "1";
+
+
+
 }

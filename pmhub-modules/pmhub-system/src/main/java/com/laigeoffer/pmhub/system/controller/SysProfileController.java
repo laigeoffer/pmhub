@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author canghe
  */
 @RestController
-@RequestMapping("/system/user/profile")
+@RequestMapping("/user/profile")
 public class SysProfileController extends BaseController {
     @Autowired
     private ISysUserService userService;

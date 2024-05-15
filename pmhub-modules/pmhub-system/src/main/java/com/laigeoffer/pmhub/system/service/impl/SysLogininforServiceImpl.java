@@ -1,6 +1,6 @@
 package com.laigeoffer.pmhub.system.service.impl;
 
-import com.laigeoffer.pmhub.system.domain.SysLogininfor;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysLogininfor;
 import com.laigeoffer.pmhub.system.mapper.SysLogininforMapper;
 import com.laigeoffer.pmhub.system.service.ISysLogininforService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class SysLogininforServiceImpl implements ISysLogininforService {
      * @param logininfor 访问日志对象
      */
     @Override
-    public void insertLogininfor(SysLogininfor logininfor) {
-        logininforMapper.insertLogininfor(logininfor);
+    public int insertLogininfor(SysLogininfor logininfor) {
+        return logininforMapper.insertLogininfor(logininfor);
     }
 
     /**

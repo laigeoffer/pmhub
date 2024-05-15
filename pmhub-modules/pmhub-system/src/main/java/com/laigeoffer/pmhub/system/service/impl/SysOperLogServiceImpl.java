@@ -1,6 +1,6 @@
 package com.laigeoffer.pmhub.system.service.impl;
 
-import com.laigeoffer.pmhub.system.domain.SysOperLog;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysOperLog;
 import com.laigeoffer.pmhub.system.mapper.SysOperLogMapper;
 import com.laigeoffer.pmhub.system.service.ISysOperLogService;
 import org.springframework.beans.factory.annotation.Autowired;
