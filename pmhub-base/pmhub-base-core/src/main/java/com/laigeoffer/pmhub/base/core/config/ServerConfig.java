@@ -28,4 +28,5 @@ public class ServerConfig {
         HttpServletRequest request = ServletUtils.getRequest();
         return getDomain(request);
     }
+
 }

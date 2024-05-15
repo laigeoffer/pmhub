@@ -4,7 +4,7 @@ package com.laigeoffer.pmhub.system.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.log.LogFactory;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.laigeoffer.pmhub.file.utils.FileUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.system.domain.PmhubAsync;
 import com.laigeoffer.pmhub.system.mapper.PmhubAsyncMapper;
 import com.laigeoffer.pmhub.system.service.IPmhubAsyncService;

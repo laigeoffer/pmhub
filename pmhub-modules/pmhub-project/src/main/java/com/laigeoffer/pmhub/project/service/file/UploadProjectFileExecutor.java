@@ -6,12 +6,13 @@ import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
-import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.FileVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogVO;
 import com.laigeoffer.pmhub.project.mapper.ProjectFileMapper;
 import com.laigeoffer.pmhub.project.service.ProjectLogService;
+import com.laigeoffer.pmhub.project.utils.ProjectFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,8 @@ public class UploadProjectFileExecutor extends UploadAbstractExecutor {
     @Transactional(rollbackFor = Exception.class)
     public FileVO upload(LoginUser user, MultipartFile file, String id) throws Exception {
         log.info("项目文件上传的项目id:{}", id);
-        String filePath = FileUploadUtils.uploadProjectFile(PmhubConfig.getProjectPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
-        String pathName = FileUploadUtils.getPathName(PmhubConfig.getProjectPath(), file);
+        String filePath = ProjectFileUtil.uploadProjectFile(PmhubConfig.getProjectPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        String pathName = ProjectFileUtil.getPathName(PmhubConfig.getProjectPath(), file);
         ProjectFile projectFile = new ProjectFile();
         projectFile.setProjectId(id);
         projectFile.setFileSize(new BigDecimal(String.valueOf(file.getSize())).divide(new BigDecimal("1024"), 2, RoundingMode.HALF_UP));

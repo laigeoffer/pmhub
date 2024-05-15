@@ -13,7 +13,6 @@
         <module>pmhub-system</module>
         <module>pmhub-gen</module>
         <module>pmhub-job</module>
-        <module>pmhub-file</module>
         <module>pmhub-project</module>
         <module>pmhub-workflow</module>
     </modules>

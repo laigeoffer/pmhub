@@ -5,13 +5,14 @@ import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
-import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
-import com.laigeoffer.pmhub.file.utils.FileUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.FileVO;
 import com.laigeoffer.pmhub.project.mapper.ProjectFileMapper;
 import com.laigeoffer.pmhub.project.mapper.ProjectTaskMapper;
+import com.laigeoffer.pmhub.project.utils.ProjectFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +43,7 @@ public class UploadTemplateFileExecutor extends UploadAbstractExecutor {
     @Transactional(rollbackFor = Exception.class)
     public FileVO upload(LoginUser user, MultipartFile file, String id) throws Exception {
         log.info("模板上传的的任务id:{}", id);
-        String templatePath = FileUploadUtils.uploadTaskFile(PmhubConfig.getTemplatePath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        String templatePath = ProjectFileUtil.uploadTaskFile(PmhubConfig.getTemplatePath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         if (StringUtils.isBlank(templatePath)) {
             throw new ServiceException("上传文件异常，请联系管理员");
         }
@@ -57,7 +58,7 @@ public class UploadTemplateFileExecutor extends UploadAbstractExecutor {
         }
         fileUrls.forEach(FileUtils::deleteFile);
 
-        String pn = FileUploadUtils.getPathName(PmhubConfig.getTemplatePath(), file);
+        String pn = ProjectFileUtil.getPathName(PmhubConfig.getTemplatePath(), file);
         ProjectFile projectFile = new ProjectFile();
         projectFile.setFileSize(new BigDecimal(String.valueOf(file.getSize())).divide(new BigDecimal("1024"), 2, RoundingMode.HALF_UP));
         projectFile.setFileName(file.getOriginalFilename());

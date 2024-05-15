@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.file.utils;
+package com.laigeoffer.pmhub.base.core.utils.file;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;

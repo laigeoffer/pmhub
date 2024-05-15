@@ -6,7 +6,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
-import com.laigeoffer.pmhub.file.utils.FileUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileIdsVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.ProjectFileReqVO;

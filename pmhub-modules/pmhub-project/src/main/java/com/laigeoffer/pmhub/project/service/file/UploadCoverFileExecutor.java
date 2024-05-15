@@ -4,10 +4,10 @@ import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
-import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.FileVO;
 import com.laigeoffer.pmhub.project.mapper.ProjectMapper;
+import com.laigeoffer.pmhub.project.utils.ProjectFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class UploadCoverFileExecutor extends UploadAbstractExecutor {
     @Transactional(rollbackFor = Exception.class)
     public FileVO upload(LoginUser user, MultipartFile file, String id) throws Exception {
         log.info("封面上传的项目id:{}", id);
-        String coverPath = FileUploadUtils.uploadProjectFile(PmhubConfig.getProjectCoverPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        String coverPath = ProjectFileUtil.uploadProjectFile(PmhubConfig.getProjectCoverPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         if (StringUtils.isBlank(coverPath)) {
             throw new ServiceException("上传文件异常，请联系管理员");
         }

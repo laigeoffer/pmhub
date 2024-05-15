@@ -16,8 +16,4 @@ public class ServiceNameConstants {
      */
     public static final String SYSTEM_SERVICE = "pmhub-system";
 
-    /**
-     * 文件服务的serviceid
-     */
-    public static final String FILE_SERVICE = "pmhub-file";
 }

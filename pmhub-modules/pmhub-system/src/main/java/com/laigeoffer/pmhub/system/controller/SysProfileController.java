@@ -12,7 +12,7 @@ import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.security.service.TokenService;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
-import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
 import com.laigeoffer.pmhub.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

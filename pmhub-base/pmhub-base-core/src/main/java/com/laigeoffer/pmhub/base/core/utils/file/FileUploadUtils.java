@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.file.utils;
+package com.laigeoffer.pmhub.base.core.utils.file;
 
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
@@ -7,9 +7,7 @@ import com.laigeoffer.pmhub.base.core.exception.file.FileSizeLimitExceededExcept
 import com.laigeoffer.pmhub.base.core.exception.file.InvalidExtensionException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
-import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
-import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.io.FilenameUtils;
@@ -136,39 +134,6 @@ public class FileUploadUtils {
     }
 
 
-    public static String uploadProjectFile(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
-            InvalidExtensionException {
-
-        if (Objects.requireNonNull(file.getOriginalFilename()).length() > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
-            throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
-        }
-
-        assertAllowed(file, allowedExtension);
-
-        String fileName = extractFileName(SecurityUtils.getUsername(), file);
-
-        String absPath = getAbsoluteFile(baseDir, fileName).getAbsolutePath();
-        file.transferTo(Paths.get(absPath));
-        return getPathFileName(baseDir, fileName);
-    }
-    public static String uploadTaskFile(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
-            InvalidExtensionException {
-
-        int fileNameLength = Objects.requireNonNull(file.getOriginalFilename()).length();
-        if (fileNameLength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
-            throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
-        }
-
-        assertAllowed(file, allowedExtension);
-
-        String fileName = extractFileName(SecurityUtils.getUsername(), file);
-
-        String absPath = getAbsoluteFile(baseDir, fileName).getAbsolutePath();
-        file.transferTo(Paths.get(absPath));
-        return getPathFileName(baseDir, fileName);
-    }
 
     /**
      * 编码文件名
@@ -203,10 +168,6 @@ public class FileUploadUtils {
         return Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
     }
 
-    public static String getPathName(String uploadDir, MultipartFile file) throws IOException {
-        String fileName = extractFileName(SecurityUtils.getUsername(), file);
-        return uploadDir + "/" + fileName;
-    }
 
     /**
      * 文件大小校验

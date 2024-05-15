@@ -4,15 +4,16 @@ import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUploadUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.MimeTypeUtils;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
-import com.laigeoffer.pmhub.file.utils.FileUploadUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectFile;
 import com.laigeoffer.pmhub.project.domain.vo.project.file.FileVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogVO;
 import com.laigeoffer.pmhub.project.mapper.ProjectFileMapper;
 import com.laigeoffer.pmhub.project.mapper.ProjectTaskMapper;
 import com.laigeoffer.pmhub.project.service.ProjectLogService;
+import com.laigeoffer.pmhub.project.utils.ProjectFileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,8 @@ public class UploadTaskFileExecutor extends UploadAbstractExecutor {
     @Transactional(rollbackFor = Exception.class)
     public FileVO upload(LoginUser user, MultipartFile file, String id) throws Exception {
         log.info("任务文件上传的任务id:{}", id);
-        String taskPath = FileUploadUtils.uploadTaskFile(PmhubConfig.getTaskPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
-        String pn = FileUploadUtils.getPathName(PmhubConfig.getTaskPath(), file);
+        String taskPath = ProjectFileUtil.uploadTaskFile(PmhubConfig.getTaskPath(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
+        String pn = ProjectFileUtil.getPathName(PmhubConfig.getTaskPath(), file);
         String projectId = projectTaskMapper.selectById(id).getProjectId();
         ProjectFile projectFile = new ProjectFile();
         projectFile.setFileSize(new BigDecimal(String.valueOf(file.getSize())).divide(new BigDecimal("1024"), 2, RoundingMode.HALF_UP));

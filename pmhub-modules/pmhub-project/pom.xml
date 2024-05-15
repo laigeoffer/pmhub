@@ -65,11 +65,6 @@
             <artifactId>pmhub-base-datasource</artifactId>
         </dependency>
 
-        <!-- pmhub-file 文件存储服务 todo 后期改成文件服务 -->
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-file</artifactId>
-        </dependency>
 
 
     </dependencies>

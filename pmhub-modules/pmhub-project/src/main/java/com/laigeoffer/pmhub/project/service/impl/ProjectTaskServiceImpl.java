@@ -15,7 +15,7 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectTaskStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
-import com.laigeoffer.pmhub.file.utils.FileUtils;
+import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
 import com.laigeoffer.pmhub.project.domain.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.*;
