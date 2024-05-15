@@ -28,7 +28,7 @@ import com.laigeoffer.pmhub.workflow.core.FormConf;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
 import com.laigeoffer.pmhub.workflow.domain.WfDeployForm;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
-import com.laigeoffer.pmhub.workflow.domain.WfTaskProcess;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.workflow.domain.vo.*;
 import com.laigeoffer.pmhub.workflow.factory.FlowServiceFactory;
 import com.laigeoffer.pmhub.workflow.flow.FlowableUtils;
@@ -653,9 +653,10 @@ public class WfProcessServiceImpl extends FlowServiceFactory implements IWfProce
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void startProjectProcessByDefId(String projectId, String procDefId, String url, Map<String, Object> variables) {
+    public int startProjectProcessByDefId(String projectId, String procDefId, String url, Map<String, Object> variables) {
         ProcessDefinition processDefinition = getProcessDefinition(procDefId);
         startProjectProcess(projectId, processDefinition, url, variables);
+        return 1;
     }
 
     /**

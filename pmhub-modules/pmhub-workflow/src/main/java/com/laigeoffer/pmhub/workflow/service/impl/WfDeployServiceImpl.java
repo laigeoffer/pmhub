@@ -14,8 +14,8 @@ import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
 import com.laigeoffer.pmhub.workflow.domain.MaterialsApprovalSet;
 import com.laigeoffer.pmhub.workflow.domain.WfDeployForm;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
-import com.laigeoffer.pmhub.workflow.domain.WfTaskProcess;
-import com.laigeoffer.pmhub.workflow.domain.dto.ApprovalSetDTO;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.workflow.domain.dto.MaterialsApprovalSetDTO;
 import com.laigeoffer.pmhub.workflow.domain.vo.MaterialsApprovalSetVO;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfDeployVo;
@@ -232,7 +232,7 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     }
 
     @Override
-    public void updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type) {
+    public boolean updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type) {
         LambdaQueryWrapper<WfTaskProcess> queryWrapper = new LambdaQueryWrapper<>();
         if (ProjectStatusEnum.TASK.getStatusName().equals(type)) {
             queryWrapper.eq(WfTaskProcess::getExtraId, approvalSetDTO.getTaskId()).eq(WfTaskProcess::getType, ProjectStatusEnum.TASK.getStatusName());
@@ -267,11 +267,13 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
             extracted(approvalSetDTO.getDefinitionId(), approvalSetDTO.getDeploymentId(), wfTaskProcess);
             wfTaskProcessMapper.insert(wfTaskProcess);
         }
+
+        return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
+    public boolean updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
         LambdaQueryWrapper<MaterialsApprovalSet> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MaterialsApprovalSet::getExtraId, approvalSetDTO.getTaskId()).eq(MaterialsApprovalSet::getType, ProjectStatusEnum.TASK.getStatusName());
         MaterialsApprovalSet materialsApprovalSet = materialsApprovalSetMapper.selectOne(queryWrapper);
@@ -309,11 +311,12 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
         materialsApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
         materialsApprovalSet.setUpdatedTime(new Date());
         materialsApprovalSetMapper.updateById(materialsApprovalSet);
+        return true;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insertApprovalSet() {
+    public boolean insertApprovalSet() {
         LambdaQueryWrapper<WfTaskProcess> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(WfTaskProcess::getType, ProjectStatusEnum.TASK.getStatusName());
         List<WfTaskProcess> list = wfTaskProcessMapper.selectList(queryWrapper);
@@ -338,6 +341,7 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
             });
             log.info("结束优化的任务审批设置");
         }
+        return true;
 
     }
 
@@ -366,7 +370,7 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     }
 
     @Override
-    public void insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
+    public boolean insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
         LambdaQueryWrapper<MaterialsApprovalSet> qw = new LambdaQueryWrapper<>();
         qw.eq(MaterialsApprovalSet::getExtraId, extraId).eq(MaterialsApprovalSet::getType, type);
         MaterialsApprovalSet mas = materialsApprovalSetMapper.selectOne(qw);
@@ -390,6 +394,8 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
             materialsApprovalSet.setUpdatedTime(new Date());
             materialsApprovalSetMapper.insert(materialsApprovalSet);
         }
+
+        return true;
     }
 
     @Override

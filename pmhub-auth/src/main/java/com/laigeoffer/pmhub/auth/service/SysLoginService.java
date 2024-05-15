@@ -68,26 +68,22 @@ public class SysLoginService {
         // 查询用户信息
         R<LoginUser> userResult = userFeignService.info(username, SecurityConstants.INNER);
 
-        if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData()))
-        {
+        if (StringUtils.isNull(userResult) || StringUtils.isNull(userResult.getData())) {
             recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "登录用户不存在");
             throw new ServiceException("登录用户：" + username + " 不存在");
         }
 
-        if (R.FAIL == userResult.getCode())
-        {
+        if (R.FAIL == userResult.getCode()) {
             throw new ServiceException(userResult.getMsg());
         }
 
         LoginUser userInfo = userResult.getData();
         SysUser user = userResult.getData().getUser();
-        if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
-        {
+        if (UserStatus.DELETED.getCode().equals(user.getDelFlag())) {
             recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "对不起，您的账号已被删除");
             throw new ServiceException("对不起，您的账号：" + username + " 已被删除");
         }
-        if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
-        {
+        if (UserStatus.DISABLE.getCode().equals(user.getStatus())) {
             recordLogService.recordLogininfor(username, Constants.LOGIN_FAIL, "用户已停用，请联系管理员");
             throw new ServiceException("对不起，您的账号：" + username + " 已停用");
         }

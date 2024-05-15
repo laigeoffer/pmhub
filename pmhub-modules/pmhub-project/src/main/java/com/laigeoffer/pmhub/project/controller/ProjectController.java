@@ -1,6 +1,10 @@
 package com.laigeoffer.pmhub.project.controller;
 
+import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
+import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
+import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectReqVO;
@@ -27,10 +31,10 @@ public class ProjectController {
     @Autowired
     private ProjectTaskService projectTaskService;
     // TODO: 2024.04.28 接口修改为远程调用
-//    @Autowired
-//    private IWfProcessService processService;
-//    @Autowired
-//    private IWfDeployService wfDeployService;
+    @Autowired
+    private ProcessFeignService processService;
+    @Autowired
+    private DeployFeignService wfDeployService;
 
     /**
      * 增加项目
@@ -206,13 +210,12 @@ public class ProjectController {
      * @param approvalSetDTO
      * @return
      */
-//    @PostMapping("/updateApprovalSet")
-//    @PreAuthorize("@ss.hasPermi('project:manage:updateApprovalSet')")
-//    public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
-//        // TODO: 2024.04.28 接口修改为远程调用
-////        wfDeployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName());
-//        return AjaxResult.success();
-//    }
+    @PostMapping("/updateApprovalSet")
+    @RequiresPermissions("project:manage:updateApprovalSet")
+    public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
+        wfDeployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName());
+        return AjaxResult.success();
+    }
 
     /**
      * 项目发布根据流程定义id启动流程实例
@@ -223,8 +226,8 @@ public class ProjectController {
     @RequiresPermissions("project:manage:approve")
     @PostMapping("/startProjectApprove/{projectId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "projectId") String projectId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
-        // TODO: 2024.04.28 接口修改为远程调用
-//        processService.startProjectProcessByDefId(projectId, processDefId, url, variables);
+        // 远程调用流程服务
+        processService.startProjectProcess(projectId, processDefId, url, variables);
         return AjaxResult.success("流程启动成功");
 
     }

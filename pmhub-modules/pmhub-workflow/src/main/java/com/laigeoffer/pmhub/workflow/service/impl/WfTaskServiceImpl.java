@@ -13,7 +13,7 @@ import com.laigeoffer.pmhub.workflow.common.constant.ProcessConstants;
 import com.laigeoffer.pmhub.workflow.common.constant.TaskConstants;
 import com.laigeoffer.pmhub.workflow.common.enums.FlowComment;
 import com.laigeoffer.pmhub.workflow.domain.WfTaskMessageDeal;
-import com.laigeoffer.pmhub.workflow.domain.WfTaskProcess;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfTaskBo;
 import com.laigeoffer.pmhub.workflow.factory.FlowServiceFactory;
 import com.laigeoffer.pmhub.workflow.flow.CustomProcessDiagramGenerator;

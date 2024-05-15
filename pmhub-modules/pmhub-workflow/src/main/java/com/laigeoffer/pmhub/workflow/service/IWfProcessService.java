@@ -99,7 +99,7 @@ public interface IWfProcessService {
      * @param url
      * @param variables
      */
-    void startProjectProcessByDefId(String projectId, String procDefId, String url, Map<String, Object> variables);
+    int startProjectProcessByDefId(String projectId, String procDefId, String url, Map<String, Object> variables);
 
     /**
      * 启动采购入库流程实例

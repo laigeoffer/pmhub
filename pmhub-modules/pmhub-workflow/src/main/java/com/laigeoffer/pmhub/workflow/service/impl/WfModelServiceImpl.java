@@ -16,7 +16,7 @@ import com.laigeoffer.pmhub.workflow.common.enums.FormType;
 import com.laigeoffer.pmhub.workflow.domain.MaterialsApprovalSet;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
 import com.laigeoffer.pmhub.workflow.domain.WfModelDeploy;
-import com.laigeoffer.pmhub.workflow.domain.WfTaskProcess;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.workflow.domain.bo.WfModelBo;
 import com.laigeoffer.pmhub.workflow.domain.dto.WfMetaInfoDto;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;

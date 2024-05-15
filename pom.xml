@@ -327,6 +327,12 @@
                 <version>${laigeoffer.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.laigeoffer.pmhub-cloud</groupId>
+                <artifactId>pmhub-api-workflow</artifactId>
+                <version>${laigeoffer.version}</version>
+            </dependency>
+
 
 
 

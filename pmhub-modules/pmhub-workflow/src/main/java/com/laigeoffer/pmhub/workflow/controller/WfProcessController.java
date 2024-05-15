@@ -35,7 +35,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/workflow/process")
+@RequestMapping("/process")
 public class WfProcessController extends BaseController {
 
     private final IWfProcessService processService;
@@ -216,7 +216,7 @@ public class WfProcessController extends BaseController {
      */
     @RequiresPermissions("workflow:process:start")
     @PostMapping("/startTaskApprove/{taskId}/{processDefId}")
-    public R<Void> startTaskProcessDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
+    public R<Void> startTaskProcessByDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
         processService.startTaskProcessByDefId(taskId, processDefId, url, variables);
         return R.ok("流程启动成功");
 
@@ -241,5 +241,18 @@ public class WfProcessController extends BaseController {
     @GetMapping("/detail")
     public R<WfDetailVo> detail(String procInsId, String deployId, String taskId) {
         return R.ok(processService.queryProcessDetail(procInsId, deployId, taskId));
+    }
+
+    /**
+     * 启动项目发布流程实例
+     * @param projectId
+     * @param procDefId
+     * @param url
+     * @param variables
+     * @return
+     */
+    @PostMapping("/startProjectProcess")
+    public R<Integer> startProjectProcess(String projectId, String procDefId, String url, Map<String, Object> variables) {
+        return R.ok(processService.startProjectProcessByDefId(projectId, procDefId, url,variables));
     }
 }

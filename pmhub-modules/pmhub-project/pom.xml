@@ -65,7 +65,11 @@
             <artifactId>pmhub-base-datasource</artifactId>
         </dependency>
 
-
+        <!-- pmhub-api-workflow -->
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-api-workflow</artifactId>
+        </dependency>
 
     </dependencies>
 

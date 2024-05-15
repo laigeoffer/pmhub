@@ -8,7 +8,7 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
 import com.laigeoffer.pmhub.workflow.domain.WfTaskMessageDeal;
-import com.laigeoffer.pmhub.workflow.domain.WfTaskProcess;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.workflow.domain.vo.TaskCompletedStateVO;
 import com.laigeoffer.pmhub.workflow.enums.TaskCompletedStateEnum;
 import com.laigeoffer.pmhub.workflow.mapper.*;

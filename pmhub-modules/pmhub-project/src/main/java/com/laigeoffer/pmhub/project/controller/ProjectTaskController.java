@@ -1,9 +1,15 @@
 package com.laigeoffer.pmhub.project.controller;
 
+import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
+import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
 import com.laigeoffer.pmhub.base.core.annotation.Anonymous;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
+import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.Project;
@@ -12,7 +18,7 @@ import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.task.*;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,11 +40,10 @@ public class ProjectTaskController {
 
     @Autowired
     private ProjectTaskService projectTaskService;
-//    @Autowired
-//    private IWfProcessService processService;
-    // TODO: 2024.04.28 暂时注释掉workflow
-//    @Autowired
-//    private IWfDeployService wfDeployService;
+    @Autowired
+    private ProcessFeignService processService;
+    @Autowired
+    private DeployFeignService wfDeployService;
 
     /**
      * 首页-我的任务
@@ -84,20 +89,30 @@ public class ProjectTaskController {
             throw new ServiceException("[" + projectMsg.substring(0, projectMsg.toString().length() - 1) + "]" + "归属项目已暂停，无法删除任务");
         }
         Map<String, List<ProjectTask>> collect = projectTasks.stream().collect(Collectors.groupingBy(ProjectTask::getId));
-        // TODO: 2024.04.28 暂时注释掉审批相关流程
-//        List<WfTaskProcess> wfTaskProcesses = wfDeployService.selectList(taskIdsVO.getTaskIdList());
-//        if (CollectionUtils.isNotEmpty(wfTaskProcesses)) {
-//            StringBuilder msg = new StringBuilder();
-//            for (WfTaskProcess projectTaskProcess : wfTaskProcesses) {
-//                if (StringUtils.isNotBlank(projectTaskProcess.getInstanceId())) {
-//                    msg.append(collect.get(projectTaskProcess.getExtraId()).get(0).getTaskName()).append(",");
-//                }
-//            }
-//            if (StringUtils.isNotBlank(msg.toString())) {
-//                throw new ServiceException("[" + msg.substring(0, msg.toString().length() - 1) + "]" + "存在审批流程，不允许删除");
-//            }
-//
-//        }
+        // 审批相关流程远程调用
+        R<?> result = wfDeployService.selectList(taskIdsVO.getTaskIdList());
+        // 判断
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())) {
+            return AjaxResult.error("审批流程不存在");
+        }
+
+        if (R.FAIL == result.getCode()) {
+            return AjaxResult.error("查询流程服务异常");
+        }
+
+        List<WfTaskProcess> wfTaskProcesses = (List<WfTaskProcess>) result.getData();
+        if (CollectionUtils.isNotEmpty(wfTaskProcesses)) {
+            StringBuilder msg = new StringBuilder();
+            for (WfTaskProcess projectTaskProcess : wfTaskProcesses) {
+                if (StringUtils.isNotBlank(projectTaskProcess.getInstanceId())) {
+                    msg.append(collect.get(projectTaskProcess.getExtraId()).get(0).getTaskName()).append(",");
+                }
+            }
+            if (StringUtils.isNotBlank(msg.toString())) {
+                throw new ServiceException("[" + msg.substring(0, msg.toString().length() - 1) + "]" + "存在审批流程，不允许删除");
+            }
+
+        }
         projectTaskService.deleteTask(taskIdsVO);
         return AjaxResult.success();
     }
@@ -132,9 +147,13 @@ public class ProjectTaskController {
     @PostMapping("/task/add")
     public AjaxResult add(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
-        // TODO: 2024.04.28 暂时注释掉审批相关流程
-//        wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
-//                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        // 审批相关流程 远程调用
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
+                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
+        || R.fail().equals(result.getData())) {
+            return AjaxResult.error("远程调用审批服务失败");
+        }
         return AjaxResult.success();
     }
     /**
@@ -146,9 +165,13 @@ public class ProjectTaskController {
     @PostMapping("/task/addChildTask")
     public AjaxResult addChildTask(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
-        // TODO: 2024.04.28 暂时注释掉审批相关流程
-//        wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
-//                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        // 审批相关流程 远程调用
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
+                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
+                || R.fail().equals(result.getData())) {
+            return AjaxResult.error("远程调用审批服务失败");
+        }
         return AjaxResult.success();
     }
 
@@ -285,13 +308,17 @@ public class ProjectTaskController {
      * @param approvalSetDTO
      * @return
      */
-//    @PostMapping("/task/updateApprovalSet")
-//    @PreAuthorize("@ss.hasPermi('project:task:updateApprovalSet')")
-//    public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
-//        // TODO: 2024.04.28 暂时注释掉审批相关流程
-////        wfDeployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.TASK.getStatusName());
-//        return AjaxResult.success();
-//    }
+    @PostMapping("/task/updateApprovalSet")
+    @RequiresPermissions("project:task:updateApprovalSet")
+    public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
+        // 审批相关流程远程调用
+        R<?> result = wfDeployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.TASK.getStatusName());
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
+                || R.fail().equals(result.getData())) {
+            return AjaxResult.error("远程调用审批服务失败");
+        }
+        return AjaxResult.success();
+    }
 
 
     /**
@@ -303,8 +330,12 @@ public class ProjectTaskController {
     @RequiresPermissions("project:task:approve")
     @PostMapping("/startTaskApprove/{taskId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
-        // TODO: 2024.04.28 暂时注释掉流程相关
-//        processService.startTaskProcessByDefId(taskId, processDefId, url, variables);
+        // 掉流程相关远程调用
+        R<?> result = processService.startTaskProcessByDefId(taskId, processDefId, url, variables);
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
+                || R.fail().equals(result.getData())) {
+            return AjaxResult.error("远程调用审批服务失败");
+        }
         return AjaxResult.success("流程启动成功");
 
     }
@@ -316,8 +347,11 @@ public class ProjectTaskController {
     @PostMapping("/task/insertApprovalSet")
     @Anonymous
     public AjaxResult updateApprovalSet() {
-//        wfDeployService.insertApprovalSet();
-        // TODO: 2024.04.28 暂时注释掉审批相关流程
+        R<?> result = wfDeployService.insertApprovalSet();
+        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
+                || R.fail().equals(result.getData())) {
+            return AjaxResult.error("远程调用审批服务失败");
+        }
         return AjaxResult.success();
     }
 

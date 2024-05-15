@@ -4,9 +4,12 @@ import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.PageQuery;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
+import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
+import com.laigeoffer.pmhub.base.security.annotation.InnerAuth;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfDeployVo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;
 import com.laigeoffer.pmhub.workflow.service.IWfDeployFormService;
@@ -15,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -27,7 +31,7 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/workflow/deploy")
+@RequestMapping("/deploy")
 public class WfDeployController extends BaseController {
 
     private final IWfDeployService deployService;
@@ -109,6 +113,66 @@ public class WfDeployController extends BaseController {
     @GetMapping("/refApproval/{type}")
     public R<?> findApprovalByType(@PathVariable(value = "type") String type, @RequestParam(value = "taskId", required = false) String taskId) {
         return R.ok(deployService.queryApprovalSet(type, taskId));
+    }
+
+    /**
+     * 更新审批设置
+     * @param approvalSetDTO
+     * @param type
+     * @return
+     */
+    @InnerAuth
+    @PostMapping("/updateApprovalSet")
+    public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type) {
+        return R.ok(deployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
+    }
+
+    /**
+     * 更新审批设置2
+     * @param approvalSetDTO
+     * @param type
+     * @return
+     */
+    @InnerAuth
+    @PostMapping("/updateApprovalSet2")
+    public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
+        return R.ok(deployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
+    }
+
+    /**
+     * 查询流程部署关联表单信息
+     * @param taskId
+     * @return
+     */
+    @InnerAuth
+    @GetMapping("/selectList")
+    public R<?> selectList(List<String> taskId) {
+        return R.ok(deployService.selectList(taskId));
+    }
+
+    /**
+     * 添加&更新审批设置
+     * @param extraId
+     * @param type
+     * @param approved
+     * @param definitionId
+     * @param deploymentId
+     * @return
+     */
+    @InnerAuth
+    @PostMapping("/insertOrUpdateApprovalSet")
+    public R<?> insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
+        return R.ok(deployService.insertOrUpdateApprovalSet(extraId, type, approved, definitionId, deploymentId));
+    }
+
+    /**
+     * 添加审批设置
+     * @return
+     */
+    @InnerAuth
+    @PostMapping("/insertApprovalSet")
+    public R<?> insertApprovalSet() {
+        return R.ok(deployService.insertApprovalSet());
     }
 
 }

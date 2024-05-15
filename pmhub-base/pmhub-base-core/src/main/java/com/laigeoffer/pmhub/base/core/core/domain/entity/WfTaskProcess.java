@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.workflow.domain;
+package com.laigeoffer.pmhub.base.core.core.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;

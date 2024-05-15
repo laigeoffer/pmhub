@@ -16,4 +16,9 @@ public class ServiceNameConstants {
      */
     public static final String SYSTEM_SERVICE = "pmhub-system";
 
+    /**
+     * 流程模块的serviceid
+     */
+    public static final String WORKFLOW_SERVICE = "pmhub-workflow";
+
 }

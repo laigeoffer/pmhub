@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.workflow.domain.dto;
+package com.laigeoffer.pmhub.base.core.core.domain.dto;
 
 /**
  * @author canghe
