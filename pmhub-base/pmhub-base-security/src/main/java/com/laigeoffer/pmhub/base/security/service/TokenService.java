@@ -1,5 +1,6 @@
 package com.laigeoffer.pmhub.base.security.service;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
@@ -104,7 +105,8 @@ public class TokenService {
             if (StringUtils.isNotEmpty(token))
             {
                 String userkey = JwtUtils.getUserKey(token);
-                user = redisService.getCacheObject(getTokenKey(userkey));
+                JSONObject jsonObject = redisService.getCacheObject(getTokenKey(userkey));
+                user = jsonObject.toJavaObject(LoginUser.class);
                 return user;
             }
         }
