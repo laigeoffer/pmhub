@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.laigeoffer.pmhub.api.workflow.factory.DeployFeignFallbackFactory,\
+com.laigeoffer.pmhub.api.workflow.factory.ProcessFeignFallbackFactory
