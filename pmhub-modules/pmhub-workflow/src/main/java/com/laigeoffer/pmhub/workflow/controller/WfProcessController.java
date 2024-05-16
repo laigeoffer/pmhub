@@ -6,10 +6,12 @@ import com.laigeoffer.pmhub.base.core.annotation.Log;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.PageQuery;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ProjectProcessDTO;
 import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
 import com.laigeoffer.pmhub.base.core.utils.poi.ExcelUtil;
+import com.laigeoffer.pmhub.base.security.annotation.InnerAuth;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
@@ -222,6 +224,8 @@ public class WfProcessController extends BaseController {
 
     }
 
+
+
     /**
      * 读取xml文件
      * @param processDefId 流程定义ID
@@ -245,14 +249,24 @@ public class WfProcessController extends BaseController {
 
     /**
      * 启动项目发布流程实例
-     * @param projectId
-     * @param procDefId
-     * @param url
-     * @param variables
+     * @param request
      * @return
      */
+    @InnerAuth
     @PostMapping("/startProjectProcess")
-    public R<Integer> startProjectProcess(String projectId, String procDefId, String url, Map<String, Object> variables) {
-        return R.ok(processService.startProjectProcessByDefId(projectId, procDefId, url,variables));
+    public R<Integer> startProjectProcess(@RequestBody ProjectProcessDTO request) {
+        return R.ok(processService.startProjectProcessByDefId(request.getProjectId(), request.getProcDefId(), request.getUrl(),request.getVariables()));
+    }
+
+    /**
+     * 启动任务审批流程实例
+     * @param request
+     * @return
+     */
+    @InnerAuth
+    @PostMapping("/startTaskProcessByDefId")
+    public R<Void> startTaskProcessByDefId(@RequestBody ProjectProcessDTO request) {
+        processService.startTaskProcessByDefId(request.getProjectId(), request.getProcDefId(), request.getUrl(),request.getVariables());
+        return R.ok("任务审批流程启动成功");
     }
 }

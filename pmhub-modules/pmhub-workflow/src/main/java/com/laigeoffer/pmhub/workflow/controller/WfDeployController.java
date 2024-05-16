@@ -118,24 +118,22 @@ public class WfDeployController extends BaseController {
     /**
      * 更新审批设置
      * @param approvalSetDTO
-     * @param type
      * @return
      */
     @InnerAuth
     @PostMapping("/updateApprovalSet")
-    public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type) {
+    public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
     }
 
     /**
      * 更新审批设置2
      * @param approvalSetDTO
-     * @param type
      * @return
      */
     @InnerAuth
     @PostMapping("/updateApprovalSet2")
-    public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
+    public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
     }
 
@@ -152,17 +150,13 @@ public class WfDeployController extends BaseController {
 
     /**
      * 添加&更新审批设置
-     * @param extraId
-     * @param type
-     * @param approved
-     * @param definitionId
-     * @param deploymentId
+     * @param approvalSetDTO
      * @return
      */
     @InnerAuth
     @PostMapping("/insertOrUpdateApprovalSet")
-    public R<?> insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
-        return R.ok(deployService.insertOrUpdateApprovalSet(extraId, type, approved, definitionId, deploymentId));
+    public R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
+        return R.ok(deployService.insertOrUpdateApprovalSet(approvalSetDTO.getExtraId(), approvalSetDTO.getType(), approvalSetDTO.getApproved(), approvalSetDTO.getDefinitionId(), approvalSetDTO.getDeploymentId()));
     }
 
     /**

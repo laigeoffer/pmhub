@@ -6,6 +6,7 @@ import com.laigeoffer.pmhub.base.core.annotation.Anonymous;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ProjectProcessDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
@@ -148,8 +149,9 @@ public class ProjectTaskController {
     public AjaxResult add(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
         // 审批相关流程 远程调用
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
-                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
+                taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
         || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");
@@ -166,8 +168,9 @@ public class ProjectTaskController {
     public AjaxResult addChildTask(@RequestBody TaskReqVO taskReqVO) {
         String taskId = projectTaskService.add(taskReqVO);
         // 审批相关流程 远程调用
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(taskId, ProjectStatusEnum.TASK.getStatusName(), taskReqVO.getApproved()
-                , taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
+                taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
                 || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");
@@ -312,7 +315,7 @@ public class ProjectTaskController {
     @RequiresPermissions("project:task:updateApprovalSet")
     public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
         // 审批相关流程远程调用
-        R<?> result = wfDeployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.TASK.getStatusName());
+        R<?> result = wfDeployService.updateApprovalSet2(approvalSetDTO);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
                 || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");
@@ -330,8 +333,9 @@ public class ProjectTaskController {
     @RequiresPermissions("project:task:approve")
     @PostMapping("/startTaskApprove/{taskId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "taskId") String taskId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
+        ProjectProcessDTO request = new ProjectProcessDTO(taskId, processDefId, url, variables);
         // 掉流程相关远程调用
-        R<?> result = processService.startTaskProcessByDefId(taskId, processDefId, url, variables);
+        R<?> result = processService.startTaskProcessByDefId(request);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
                 || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");

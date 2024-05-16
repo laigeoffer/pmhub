@@ -4,7 +4,7 @@ import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
 import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
-import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ProjectProcessDTO;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectReqVO;
@@ -213,7 +213,7 @@ public class ProjectController {
     @PostMapping("/updateApprovalSet")
     @RequiresPermissions("project:manage:updateApprovalSet")
     public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
-        wfDeployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName());
+        wfDeployService.updateApprovalSet(approvalSetDTO);
         return AjaxResult.success();
     }
 
@@ -226,8 +226,9 @@ public class ProjectController {
     @RequiresPermissions("project:manage:approve")
     @PostMapping("/startProjectApprove/{projectId}/{processDefId}")
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "projectId") String projectId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
+        ProjectProcessDTO request = new ProjectProcessDTO(projectId,processDefId, url, variables);
         // 远程调用流程服务
-        processService.startProjectProcess(projectId, processDefId, url, variables);
+        processService.startProjectProcess(request);
         return AjaxResult.success("流程启动成功");
 
     }

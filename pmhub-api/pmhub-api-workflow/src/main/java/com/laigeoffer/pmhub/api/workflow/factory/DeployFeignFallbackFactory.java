@@ -24,12 +24,12 @@ public class DeployFeignFallbackFactory implements FallbackFactory<DeployFeignSe
         log.error("流程部署服务调用失败:{}", throwable.getMessage());
         return new DeployFeignService() {
             @Override
-            public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type) {
+            public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO) {
                 return R.fail("更新审批设置失败:" + throwable.getMessage());
             }
 
             @Override
-            public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
+            public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO) {
                 return R.fail("更新审批设置2失败:" + throwable.getMessage());
             }
 
@@ -39,7 +39,7 @@ public class DeployFeignFallbackFactory implements FallbackFactory<DeployFeignSe
             }
 
             @Override
-            public R<?> insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
+            public R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
                 return R.fail("添加&更新任务审批设置失败:" + throwable.getMessage());
             }
 

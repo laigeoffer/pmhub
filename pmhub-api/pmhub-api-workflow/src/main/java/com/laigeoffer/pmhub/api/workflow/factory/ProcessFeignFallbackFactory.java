@@ -2,12 +2,11 @@ package com.laigeoffer.pmhub.api.workflow.factory;
 
 import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ProjectProcessDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 /**
  * 用户服务降级处理
@@ -28,12 +27,12 @@ public class ProcessFeignFallbackFactory implements FallbackFactory<ProcessFeign
 
 
             @Override
-            public R<Integer> startProjectProcess(String projectId, String procDefId, String url, Map<String, Object> variables) {
+            public R<Integer> startProjectProcess(ProjectProcessDTO request) {
                 return R.fail("开启项目流程失败:" + throwable.getMessage());
             }
 
             @Override
-            public R<Void> startTaskProcessByDefId(String taskId, String processDefId, String url, Map<String, Object> variables) {
+            public R<Void> startTaskProcessByDefId(ProjectProcessDTO reques) {
                 return R.fail("根据流程定义id启动流程实例失败:" + throwable.getMessage());
             }
         };

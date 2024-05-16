@@ -12,6 +12,36 @@ public class ApprovalSetDTO {
     private String deploymentId;
     private String projectId;
 
+    private String extraId;
+
+    private String type;
+
+
+    // 构造函数
+    public ApprovalSetDTO(String extraId, String type, String approved, String definitionId, String deploymentId) {
+        this.extraId = extraId;
+        this.type = type;
+        this.approved = approved;
+        this.definitionId = definitionId;
+        this.deploymentId = deploymentId;
+    }
+
+    public String getExtraId() {
+        return extraId;
+    }
+
+    public void setExtraId(String extraId) {
+        this.extraId = extraId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getApproved() {
         return approved;
     }

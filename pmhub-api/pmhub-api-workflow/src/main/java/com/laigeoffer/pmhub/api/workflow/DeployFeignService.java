@@ -21,21 +21,19 @@ public interface DeployFeignService {
     /**
      * 更新审批设置
      * @param approvalSetDTO
-     * @param type
      * @return
      */
     @PostMapping("/deploy/updateApprovalSet")
-    R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO, String type);
+    R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO);
 
 
     /**
      * 更新审批设置2
      * @param approvalSetDTO
-     * @param type
      * @return
      */
     @PostMapping("/deploy/updateApprovalSet")
-    R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type);
+    R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO);
 
 
     /**
@@ -48,15 +46,11 @@ public interface DeployFeignService {
 
     /**
      * 添加&更新审批设置
-     * @param extraId
-     * @param type
-     * @param approved
-     * @param definitionId
-     * @param deploymentId
+     * @param approvalSetDTO
      * @return
      */
     @PostMapping("/insertOrUpdateApprovalSet")
-    R<?> insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId);
+    R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO);
 
 
     /**
