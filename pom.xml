@@ -17,6 +17,7 @@
         <module>pmhub-auth</module>
         <module>pmhub-modules</module>
         <module>pmhub-api</module>
+        <module>pmhub-monitor</module>
 
     </modules>
     <packaging>pom</packaging>

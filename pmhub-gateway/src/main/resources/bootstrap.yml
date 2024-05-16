@@ -38,3 +38,8 @@ spring:
             groupId: DEFAULT_GROUP
             data-type: json
             rule-type: gw-flow
+
+# 实时log配置，可在http://localhost:6888/ 监控中心查看实时日志
+logging:
+  file:
+    name: logs/${spring.application.name}/info.log

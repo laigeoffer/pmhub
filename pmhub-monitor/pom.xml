@@ -9,10 +9,10 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>pmhub-auth</artifactId>
+    <artifactId>pmhub-monitor</artifactId>
 
     <description>
-        pmhub-auth认证授权中心
+        pmhub-monitor 监控中心
     </description>
 
     <properties>
@@ -22,6 +22,13 @@
     </properties>
 
     <dependencies>
+
+        <!-- SpringBoot Admin -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
 
         <!-- SpringCloud Alibaba Nacos -->
         <dependency>
@@ -33,6 +40,12 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Config Client，用于配置的动态刷新 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
 
         <!-- SpringCloud Alibaba Sentinel -->
@@ -47,30 +60,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- SpringBoot Actuator -->
+        <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
-
-        <!-- PmHub Base Core-->
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-base-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-api-system</artifactId>
-        </dependency>
-
-
-
 
     </dependencies>
-
-
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -88,5 +84,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

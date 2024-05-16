@@ -1,12 +1,12 @@
 # Tomcat
-server: 
-  port: 6803
+server:
+  port: 6888
 
 # Spring
 spring: 
   application:
     # 应用名称
-    name: pmhub-job
+    name: pmhub-monitor
   profiles:
     # 环境配置
     active: dev
@@ -23,8 +23,3 @@ spring:
         # 共享配置
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-
-# 实时log配置，可在http://localhost:6888/ 监控中心查看实时日志
-logging:
-  file:
-    name: logs/${spring.application.name}/info.log
