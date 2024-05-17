@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询登录日志列表
 export function list(query) {
   return request({
-    url: '/monitor/logininfor/list',
+    url: '/system/monitor/logininfor/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function list(query) {
 // 删除登录日志
 export function delLogininfor(infoId) {
   return request({
-    url: '/monitor/logininfor/' + infoId,
+    url: '/system/monitor/logininfor/' + infoId,
     method: 'delete'
   })
 }
@@ -20,7 +20,7 @@ export function delLogininfor(infoId) {
 // 解锁用户登录状态
 export function unlockLogininfor(userName) {
   return request({
-    url: '/monitor/logininfor/unlock/' + userName,
+    url: '/system/monitor/logininfor/unlock/' + userName,
     method: 'get'
   })
 }
@@ -28,7 +28,7 @@ export function unlockLogininfor(userName) {
 // 清空登录日志
 export function cleanLogininfor() {
   return request({
-    url: '/monitor/logininfor/clean',
+    url: '/system/monitor/logininfor/clean',
     method: 'delete'
   })
 }

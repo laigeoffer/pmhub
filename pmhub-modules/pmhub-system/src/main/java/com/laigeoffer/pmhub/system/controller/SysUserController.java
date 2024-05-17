@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * @author canghe
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/system/user")
 public class SysUserController extends BaseController {
     @Autowired
     private ISysUserService userService;
@@ -127,6 +127,25 @@ public class SysUserController extends BaseController {
             ajax.put("postIds", postService.selectPostListByUserId(userId));
             ajax.put("roleIds", sysUser.getRoles().stream().map(SysRole::getRoleId).collect(Collectors.toList()));
         }
+        return ajax;
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @return 用户信息
+     */
+    @GetMapping("/getInfo")
+    public AjaxResult getInfo() {
+        SysUser user = SecurityUtils.getLoginUser().getUser();
+        // 角色集合
+        Set<String> roles = permissionService.getRolePermission(user);
+        // 权限集合
+        Set<String> permissions = permissionService.getMenuPermission(user);
+        AjaxResult ajax = success();
+        ajax.put("user", user);
+        ajax.put("roles", roles);
+        ajax.put("permissions", permissions);
         return ajax;
     }
 

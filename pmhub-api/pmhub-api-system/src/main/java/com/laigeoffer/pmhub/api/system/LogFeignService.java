@@ -26,7 +26,7 @@ public interface LogFeignService
      * @param source 请求来源
      * @return 结果
      */
-    @PostMapping("/monitor/operlog")
+    @PostMapping("/system/monitor/operlog")
     R<Boolean> saveLog(@RequestBody SysOperLog sysOperLog, @RequestHeader(SecurityConstants.FROM_SOURCE) String source) throws Exception;
 
     /**
@@ -36,6 +36,6 @@ public interface LogFeignService
      * @param source 请求来源
      * @return 结果
      */
-    @PostMapping("/monitor/logininfor")
+    @PostMapping("/system/monitor/logininfor")
     R<Boolean> saveLogininfor(@RequestBody SysLogininfor sysLogininfor, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 }

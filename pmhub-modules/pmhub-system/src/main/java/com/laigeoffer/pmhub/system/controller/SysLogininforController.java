@@ -24,7 +24,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/monitor/logininfor")
+@RequestMapping("/system/monitor/logininfor")
 public class SysLogininforController extends BaseController {
     @Autowired
     private ISysLogininforService logininforService;

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询调度日志列表
 export function listJobLog(query) {
   return request({
-    url: '/monitor/jobLog/list',
+    url: '/schedule/monitor/jobLog/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listJobLog(query) {
 // 删除调度日志
 export function delJobLog(jobLogId) {
   return request({
-    url: '/monitor/jobLog/' + jobLogId,
+    url: '/schedule/monitor/jobLog/' + jobLogId,
     method: 'delete'
   })
 }
@@ -20,7 +20,7 @@ export function delJobLog(jobLogId) {
 // 清空调度日志
 export function cleanJobLog() {
   return request({
-    url: '/monitor/jobLog/clean',
+    url: '/schedule/monitor/jobLog/clean',
     method: 'delete'
   })
 }

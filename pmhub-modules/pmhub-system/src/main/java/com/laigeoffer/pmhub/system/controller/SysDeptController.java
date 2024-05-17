@@ -23,7 +23,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/system/dept")
 public class SysDeptController extends BaseController {
     @Autowired
     private ISysDeptService deptService;

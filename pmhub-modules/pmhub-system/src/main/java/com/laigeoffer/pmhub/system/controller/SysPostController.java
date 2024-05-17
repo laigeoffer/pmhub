@@ -24,7 +24,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/system/post")
 public class SysPostController extends BaseController {
     @Autowired
     private ISysPostService postService;

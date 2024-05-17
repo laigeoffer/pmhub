@@ -22,7 +22,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/system/menu")
 public class SysMenuController extends BaseController {
     @Autowired
     private ISysMenuService menuService;
@@ -118,5 +118,18 @@ public class SysMenuController extends BaseController {
             return warn("菜单已分配,不允许删除");
         }
         return toAjax(menuService.deleteMenuById(menuId));
+    }
+
+    /**
+     * 获取路由信息
+     *
+     * @return 路由信息
+     */
+    @GetMapping("getRouters")
+    public AjaxResult getRouters()
+    {
+        Long userId = SecurityUtils.getUserId();
+        List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
+        return success(menuService.buildMenus(menus));
     }
 }

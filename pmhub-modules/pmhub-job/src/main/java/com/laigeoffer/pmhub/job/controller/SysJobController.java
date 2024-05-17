@@ -28,7 +28,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/monitor/job")
+@RequestMapping("/schedule/monitor/job")
 public class SysJobController extends BaseController {
     @Autowired
     private ISysJobService jobService;

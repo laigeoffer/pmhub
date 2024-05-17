@@ -9,7 +9,7 @@ const baseURL = process.env.VUE_APP_BASE_API
 
 export default {
   name(name, isDelete = true) {
-    var url = baseURL + "/common/download?fileName=" + encodeURIComponent(name) + "&delete=" + isDelete
+    var url = baseURL + "/system/download?fileName=" + encodeURIComponent(name) + "&delete=" + isDelete
     axios({
       method: 'get',
       url: url,
@@ -26,7 +26,7 @@ export default {
     })
   },
   resource(resource) {
-    var url = baseURL + "/common/download/resource?resource=" + encodeURIComponent(resource);
+    var url = baseURL + "/system/download/resource?resource=" + encodeURIComponent(resource);
     axios({
       method: 'get',
       url: url,

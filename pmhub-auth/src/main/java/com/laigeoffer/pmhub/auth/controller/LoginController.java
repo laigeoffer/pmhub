@@ -1,6 +1,8 @@
 package com.laigeoffer.pmhub.auth.controller;
 
 import com.laigeoffer.pmhub.auth.service.SysLoginService;
+import com.laigeoffer.pmhub.base.core.constant.Constants;
+import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginBody;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.laigeoffer.pmhub.base.core.core.domain.AjaxResult.success;
+
 /**
  * 登录验证
  *
@@ -34,11 +38,14 @@ public class LoginController {
     private SysLoginService sysLoginService;
 
     @PostMapping("login")
-    public R<?> login(@RequestBody LoginBody form) {
+    public AjaxResult login(@RequestBody LoginBody form) {
+        AjaxResult ajax = success();
         // 用户登录
         LoginUser userInfo = sysLoginService.login(form.getUsername(), form.getPassword());
         // 获取登录token
-        return R.ok(tokenService.createToken(userInfo));
+        String token = tokenService.createToken(userInfo);
+        ajax.put(Constants.TOKEN, token);
+        return ajax;
     }
 
     @DeleteMapping("logout")

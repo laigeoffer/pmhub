@@ -21,7 +21,7 @@ public interface UserFeignService {
     /**
      * 根据用户名获取当前用户信息
      */
-    @GetMapping("/user/info/{username}")
+    @GetMapping("/system/user/info/{username}")
     R<LoginUser> info(@PathVariable("username") String username, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
@@ -31,6 +31,6 @@ public interface UserFeignService {
      * @param source 请求来源
      * @return 结果
      */
-    @PostMapping("/user/register")
+    @PostMapping("/system/user/register")
     R<Boolean> registerUserInfo(@RequestBody SysUser sysUser, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 }

@@ -31,7 +31,7 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/deploy")
+@RequestMapping("/workflow/deploy")
 public class WfDeployController extends BaseController {
 
     private final IWfDeployService deployService;

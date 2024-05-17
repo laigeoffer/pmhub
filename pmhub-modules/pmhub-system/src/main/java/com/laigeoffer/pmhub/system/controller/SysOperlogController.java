@@ -21,7 +21,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/monitor/operlog")
+@RequestMapping("/system/monitor/operlog")
 public class SysOperlogController extends BaseController {
     @Autowired
     private ISysOperLogService operLogService;

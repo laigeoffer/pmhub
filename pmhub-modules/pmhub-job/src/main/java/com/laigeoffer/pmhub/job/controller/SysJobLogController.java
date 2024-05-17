@@ -21,7 +21,7 @@ import java.util.List;
  * @author canghe
  */
 @RestController
-@RequestMapping("/monitor/jobLog")
+@RequestMapping("/schedule/monitor/jobLog")
 public class SysJobLogController extends BaseController {
     @Autowired
     private ISysJobLogService jobLogService;

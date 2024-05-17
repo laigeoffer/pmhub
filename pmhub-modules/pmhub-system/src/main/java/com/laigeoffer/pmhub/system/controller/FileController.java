@@ -26,7 +26,7 @@ import java.util.List;
  * @description FileController
  * @create 2024-04-25-17:17
  */
-@RestController
+@RestController("/system")
 public class FileController {
 
     private static final Logger log = LoggerFactory.getLogger(FileController.class);

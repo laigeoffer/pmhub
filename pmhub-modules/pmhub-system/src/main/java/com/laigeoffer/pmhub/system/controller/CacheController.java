@@ -18,7 +18,7 @@ import java.util.*;
  * @author canghe
  */
 @RestController
-@RequestMapping("/monitor/cache")
+@RequestMapping("/system/monitor/cache")
 public class CacheController {
     private final static List<SysCache> caches = new ArrayList<SysCache>();
     @Autowired

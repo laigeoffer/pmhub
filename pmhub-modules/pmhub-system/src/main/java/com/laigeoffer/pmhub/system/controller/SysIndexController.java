@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author canghe
  */
-@RestController
+@RestController("/system/dashboard")
 public class SysIndexController {
     /**
      * 系统基础配置

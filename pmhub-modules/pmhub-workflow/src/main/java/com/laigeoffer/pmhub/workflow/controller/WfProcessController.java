@@ -37,7 +37,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/process")
+@RequestMapping("/workflow/process")
 public class WfProcessController extends BaseController {
 
     private final IWfProcessService processService;
