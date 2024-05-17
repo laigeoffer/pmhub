@@ -303,6 +303,8 @@ public class SysUserController extends BaseController {
         loginUser.setUser(sysUser);
         loginUser.setRoles(roles);
         loginUser.setPermissions(permissions);
+        loginUser.setUserId(sysUser.getUserId());
+        loginUser.setDeptId(sysUser.getDeptId());
 
 
         return R.ok(loginUser);

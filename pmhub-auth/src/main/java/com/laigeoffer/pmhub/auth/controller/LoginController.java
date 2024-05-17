@@ -1,6 +1,7 @@
 package com.laigeoffer.pmhub.auth.controller;
 
 import com.laigeoffer.pmhub.auth.service.SysLoginService;
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
@@ -36,6 +37,9 @@ public class LoginController {
 
     @Autowired
     private SysLoginService sysLoginService;
+
+    @Autowired
+    private RedisService redisService;
 
     @PostMapping("login")
     public AjaxResult login(@RequestBody LoginBody form) {
@@ -79,5 +83,15 @@ public class LoginController {
         return R.ok();
     }
 
+
+    /**
+     * 刷新 redis
+     * @return
+     */
+    @PostMapping("refreshRedis")
+    public R<?> refreshRedis() {
+        redisService.flushAll();
+        return R.ok();
+    }
 
 }

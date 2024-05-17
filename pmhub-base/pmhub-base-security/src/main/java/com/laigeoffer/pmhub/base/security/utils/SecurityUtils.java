@@ -62,12 +62,6 @@ public class SecurityUtils {
         }
     }
 
-    /**
-     * 获取Authentication
-     */
-//    public static Authentication getAuthentication() {
-//        return SecurityContextHolder.getContext().getAuthentication();
-//    }
 
     /**
      * 生成BCryptPasswordEncoder密码
