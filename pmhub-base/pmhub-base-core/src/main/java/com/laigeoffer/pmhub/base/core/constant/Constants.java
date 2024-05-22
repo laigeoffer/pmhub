@@ -155,6 +155,11 @@ public class Constants
      */
     public static final String LOGIN_FAIL_STATUS = "1";
 
+    /**
+     * 体验账号用户名
+     */
+    public static final String DEMO_ACCOUNT = "laige";
+
 
 
 }

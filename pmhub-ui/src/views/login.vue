@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { getCodeImg } from "@/api/login"
+// import { getCodeImg } from "@/api/login"
 import Cookies from "js-cookie"
 import { encrypt, decrypt } from "@/utils/jsencrypt"
 
@@ -110,13 +110,13 @@ export default {
   },
   methods: {
     getCode() {
-      getCodeImg().then((res) => {
-        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled
-        if (this.captchaEnabled) {
-          this.codeUrl = "data:image/gif;base64," + res.img
-          this.loginForm.uuid = res.uuid
-        }
-      })
+      // getCodeImg().then((res) => {
+      //   this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled
+      //   if (this.captchaEnabled) {
+      //     this.codeUrl = "data:image/gif;base64," + res.img
+      //     this.loginForm.uuid = res.uuid
+      //   }
+      // })
     },
     getCookie() {
       const username = Cookies.get("username")
