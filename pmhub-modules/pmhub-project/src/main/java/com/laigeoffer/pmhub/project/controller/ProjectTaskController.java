@@ -52,7 +52,7 @@ public class ProjectTaskController {
      * @return
      */
     @PostMapping("/queryMyTaskList")
-    @RequiresPermissions("project:task:queryMyTaskList")
+//    @RequiresPermissions("project:task:queryMyTaskList")
     public AjaxResult queryMyTaskList(@RequestBody TaskReqVO taskReqVO) {
         return AjaxResult.success(projectTaskService.queryMyTaskList(taskReqVO));
     }

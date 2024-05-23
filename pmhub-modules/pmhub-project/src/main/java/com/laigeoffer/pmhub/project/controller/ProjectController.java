@@ -75,7 +75,7 @@ public class ProjectController {
      * 首页统计
      * @return
      */
-    @RequiresPermissions("project:manage:statistics")
+//    @RequiresPermissions("project:manage:statistics")
     @GetMapping("/statistics")
     public AjaxResult statistics() {
         ProjectStatisticsResVO projectStatisticsResVO = new ProjectStatisticsResVO();
@@ -98,7 +98,7 @@ public class ProjectController {
      * 查询与我有关的项目
      * @return
      */
-    @RequiresPermissions("project:manage:select")
+//    @RequiresPermissions("project:manage:select")
     @GetMapping("/select")
     public AjaxResult queryMyProject() {
         return AjaxResult.success(projectService.queryMyProjectList());
@@ -118,7 +118,7 @@ public class ProjectController {
      * 进行中的项目
      * @return
      */
-    @RequiresPermissions("project:manage:doing")
+//    @RequiresPermissions("project:manage:doing")
     @GetMapping("/doing")
     public AjaxResult queryDoingProject() {
         return AjaxResult.success(projectService.queryDoingProject());

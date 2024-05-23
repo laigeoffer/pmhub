@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWra
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
@@ -12,8 +13,8 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectStageEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
-import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.uuid.Seq;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.project.domain.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogVO;
@@ -61,6 +62,14 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     public List<ProjectRankVO> queryProjectRankList() {
         List<ProjectRankVO> projectRankVOList = new ArrayList<>(10);
         LoginUser loginUser = SecurityUtils.getLoginUser();
+        // 对于免登场景
+        if (Objects.isNull(loginUser)) {
+            loginUser = new LoginUser();
+            loginUser.setUsername(Constants.DEMO_ACCOUNT);
+            SysUser sysUser = new SysUser();
+            sysUser.setNickName(Constants.DEMO_ACCOUNT);
+            loginUser.setUser(sysUser);
+        }
         LambdaQueryWrapper<Project> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Project::getDeleted, 0);
         List<Project> list = projectMapper.selectList(queryWrapper);
@@ -70,13 +79,14 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         // 对项目进度降序
         List<Project> collect = list.stream().sorted(Comparator.comparing(Project::getProjectProcess).reversed())
                 .collect(Collectors.toList());
+        LoginUser finalLoginUser = loginUser;
         collect.forEach(project -> {
             ProjectRankVO projectRankVO = new ProjectRankVO();
             projectRankVO.setProjectId(project.getId());
             projectRankVO.setProjectName(project.getProjectName());
             projectRankVO.setProcess(project.getProjectProcess());
-            projectRankVO.setUserName(loginUser.getUsername());
-            projectRankVO.setNickName(loginUser.getUser().getNickName());
+            projectRankVO.setUserName(finalLoginUser.getUsername());
+            projectRankVO.setNickName(finalLoginUser.getUser().getNickName());
             projectRankVOList.add(projectRankVO);
         });
         return projectRankVOList;
@@ -84,6 +94,10 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
 
     @Override
     public List<ProjectVO> queryMyProjectList() {
+        // 对于免登场景
+        if (Objects.isNull(SecurityUtils.getLoginUser())) {
+            return new ArrayList<>();
+        }
         List<ProjectVO> projects = projectMapper.queryMyProjectList(SecurityUtils.getUserId());
         projects.forEach( project -> {
             project.setStatusName(ProjectStatusEnum.getStatusNameByStatus(project.getStatus()));
