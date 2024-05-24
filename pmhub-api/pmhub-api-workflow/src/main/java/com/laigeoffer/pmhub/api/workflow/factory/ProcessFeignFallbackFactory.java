@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 用户服务降级处理
  *
- * @author ruoyi
+ * @author canghe
  */
 @Component
 public class ProcessFeignFallbackFactory implements FallbackFactory<ProcessFeignService>

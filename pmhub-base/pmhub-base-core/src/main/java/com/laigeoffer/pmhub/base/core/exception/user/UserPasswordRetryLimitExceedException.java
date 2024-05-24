@@ -3,7 +3,7 @@ package com.laigeoffer.pmhub.base.core.exception.user;
 /**
  * 用户错误最大次数异常类
  *
- * @author ruoyi
+ * @author canghe
  */
 public class UserPasswordRetryLimitExceedException extends UserException {
     private static final long serialVersionUID = 1L;

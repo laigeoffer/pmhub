@@ -1,0 +1,13 @@
+# 基础镜像
+FROM redis
+# author
+MAINTAINER canghe
+
+# 挂载目录
+VOLUME /home/pmhub/redis
+# 创建目录
+RUN mkdir -p /home/pmhub/redis
+# 指定路径
+WORKDIR /home/pmhub/redis
+# 复制conf文件到路径
+COPY ./conf/redis.conf /home/pmhub/redis/redis.conf

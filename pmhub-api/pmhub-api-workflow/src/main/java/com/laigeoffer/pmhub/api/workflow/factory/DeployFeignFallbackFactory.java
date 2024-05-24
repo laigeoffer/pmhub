@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 用户服务降级处理
  *
- * @author ruoyi
+ * @author canghe
  */
 @Component
 public class DeployFeignFallbackFactory implements FallbackFactory<DeployFeignService> {

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 /**
  * 记录日志方法
  *
- * @author ruoyi
+ * @author canghe
  */
 @Component
 public class SysRecordLogService {

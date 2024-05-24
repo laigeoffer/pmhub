@@ -8,7 +8,7 @@ import com.laigeoffer.pmhub.base.security.annotation.RequiresRoles;
 /**
  * Token 权限验证工具类
  * 
- * @author ruoyi
+ * @author canghe
  */
 public class AuthUtil
 {

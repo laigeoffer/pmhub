@@ -17,13 +17,13 @@ public class SysIndexController {
      * 系统基础配置
      */
     @Autowired
-    private PmhubConfig ruoyiConfig;
+    private PmhubConfig pmHubConfig;
 
     /**
      * 访问首页，提示语
      */
     @RequestMapping("/")
     public String index() {
-        return StringUtils.format("欢迎使用 PmHub，当前版本：v{}，请通过前端地址访问。", ruoyiConfig.getName(), ruoyiConfig.getVersion());
+        return StringUtils.format("欢迎使用 PmHub，当前版本：v{}，请通过前端地址访问。", pmHubConfig.getName(), pmHubConfig.getVersion());
     }
 }

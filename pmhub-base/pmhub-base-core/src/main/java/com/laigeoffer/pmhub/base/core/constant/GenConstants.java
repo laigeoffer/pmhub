@@ -3,7 +3,7 @@ package com.laigeoffer.pmhub.base.core.constant;
 /**
  * 代码生成通用常量
  *
- * @author ruoyi
+ * @author canghe
  */
 public class GenConstants {
     /**

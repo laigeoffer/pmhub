@@ -1,0 +1,15 @@
+# 基础镜像
+FROM  openjdk:8-jre
+# author
+MAINTAINER canghe
+
+# 挂载目录
+VOLUME /home/pmhub
+# 创建目录
+RUN mkdir -p /home/pmhub
+# 指定路径
+WORKDIR /home/pmhub
+# 复制jar文件到路径
+COPY ./jar/pmhub-gen.jar /home/pmhub/pmhub-gen.jar
+# 启动代码生成服务
+ENTRYPOINT ["java","-jar","pmhub-gen.jar"]

@@ -3,7 +3,7 @@ package com.laigeoffer.pmhub.base.core.exception;
 /**
  * 内部认证异常
  * 
- * @author ruoyi
+ * @author canghe
  */
 public class InnerAuthException extends RuntimeException
 {
