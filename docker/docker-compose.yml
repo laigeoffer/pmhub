@@ -22,7 +22,7 @@ services:
     build:
       context: ./mysql
     ports:
-      - "3306:3306"
+      - "33706:3306" # 有经验的开发不会直接暴露3306端口
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/logs:/logs
@@ -36,8 +36,8 @@ services:
           '--lower-case-table-names=1'
         ]
     environment:
-      MYSQL_DATABASE: 'ry-cloud'
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: 'laigeoffer-pmhub'
+      MYSQL_ROOT_PASSWORD: 123456 #上线修改为复杂密码，否则很容易被黑
   pmhub-redis:
     container_name: pmhub-redis
     image: redis
