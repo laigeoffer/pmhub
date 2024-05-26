@@ -10,6 +10,6 @@ RUN mkdir -p /home/pmhub
 # 指定路径
 WORKDIR /home/pmhub
 # 复制jar文件到路径
-COPY ../jar/pmhub-monitor.jar /home/pmhub/pmhub-monitor.jar
+COPY ./jar/pmhub-monitor.jar /home/pmhub/pmhub-monitor.jar
 # 启动系统服务
 ENTRYPOINT ["java","-jar","pmhub-monitor.jar"]
