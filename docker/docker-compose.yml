@@ -155,7 +155,7 @@ services:
   pmhub-monitor:
     container_name: pmhub-monitor
     build:
-      context: pmhub/monitor/monitor
+      context: pmhub/monitor
       dockerfile: pmhub/monitor/dockerfile
     ports:
       - "6888:6888"
