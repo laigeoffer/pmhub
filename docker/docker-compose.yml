@@ -49,22 +49,6 @@ services:
       - ./redis/conf/redis.conf:/home/pmhub/redis/redis.conf
       - ./redis/data:/data
     command: redis-server /home/pmhub/redis/redis.conf
-  pmhub-nginx:
-    container_name: pmhub-nginx
-    image: nginx
-    build:
-      context: ./nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/html/dist:/home/pmhub/projects/pmhub-ui
-      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/logs:/var/log/nginx
-      - ./nginx/conf.d:/etc/nginx/conf.d
-    depends_on:
-      - pmhub-gateway
-    links:
-      - pmhub-gateway
   pmhub-gateway:
     container_name: pmhub-gateway
     build:
