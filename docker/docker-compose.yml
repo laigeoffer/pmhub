@@ -76,7 +76,7 @@ services:
       - pmhub-redis
     links:
       - pmhub-redis
-  ruoyi-auth:
+  pmhub-auth:
     container_name: pmhub-auth
     build:
       context: pmhub/auth
