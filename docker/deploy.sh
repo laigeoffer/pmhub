@@ -78,10 +78,6 @@ base(){
 	docker-compose up -d pmhub-mysql pmhub-redis pmhub-nacos
 }
 
-# 启动 Nginx（必须）
-nginx(){
-  docker-compose up -d pmhub-nginx
-}
 
 # 启动重要服务（必须）
 important(){
@@ -116,9 +112,6 @@ case "$1" in
 ;;
 "base")
 	base
-;;
-"nginx")
-  nginx
 ;;
 "important")
   important

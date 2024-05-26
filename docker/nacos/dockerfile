@@ -3,5 +3,8 @@ FROM nacos/nacos-server
 # author
 MAINTAINER canghe
 
+# 创建目标路径并设置权限
+RUN mkdir -p /home/nacos/conf && chown -R nacos:nacos /home/nacos/conf
+
 # 复制conf文件到路径
 COPY ./conf/application.properties /home/nacos/conf/application.properties
