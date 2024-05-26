@@ -78,9 +78,25 @@ base(){
 	docker-compose up -d pmhub-mysql pmhub-redis pmhub-nacos
 }
 
+# 启动 Nginx（必须）
+nginx(){
+  docker-compose up -d pmhub-nginx
+}
+
+# 启动重要服务（必须）
+important(){
+  docker-compose up -d pmhub-gateway pmhub-auth
+}
+
+
 # 启动程序模块（必须）
 modules(){
-	docker-compose up -d pmhub-nginx pmhub-gateway pmhub-auth pmhub-system pmhub-project pmhub-workflow pmhub-gen pmhub-job pmhub-monitor
+	docker-compose up -d pmhub-system pmhub-project pmhub-workflow
+}
+
+# 启动不重要服务（非必须）
+unimportant(){
+  docker-compose up -d pmhub-gen pmhub-job pmhub-monitor
 }
 
 # 关闭所有环境/模块
@@ -101,8 +117,17 @@ case "$1" in
 "base")
 	base
 ;;
+"nginx")
+  nginx
+;;
+"important")
+  important
+;;
 "modules")
 	modules
+;;
+"unimportant")
+  unimportant
 ;;
 "stop")
 	stop
