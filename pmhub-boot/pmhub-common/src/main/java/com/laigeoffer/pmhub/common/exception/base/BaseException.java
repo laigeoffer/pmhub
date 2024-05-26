@@ -6,7 +6,7 @@ import com.laigeoffer.pmhub.common.utils.StringUtils;
 /**
  * 基础异常
  *
- * @author ruoyi
+ * @author canghe
  */
 public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
