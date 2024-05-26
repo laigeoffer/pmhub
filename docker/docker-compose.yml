@@ -71,7 +71,7 @@ services:
       context: pmhub/gateway
       dockerfile: dockerfile
     ports:
-      - "8080:8080"
+      - "6880:6880"
     depends_on:
       - pmhub-redis
     links:
@@ -82,69 +82,73 @@ services:
       context: pmhub/auth
       dockerfile: dockerfile
     ports:
-      - "9200:9200"
+      - "6800:6800"
     depends_on:
       - pmhub-redis
     links:
       - pmhub-redis
-  pmhub-modules-system:
+  pmhub-system:
     container_name: pmhub-system
     build:
       context: pmhub/modules/system
       dockerfile: dockerfile
     ports:
-      - "9201:9201"
+      - "6801:6801"
     depends_on:
       - pmhub-redis
       - pmhub-mysql
     links:
       - pmhub-redis
       - pmhub-mysql
-  pmhub-modules-gen:
+  pmhub-gen:
     container_name: pmhub-gen
     build:
       context: pmhub/modules/gen
       dockerfile: dockerfile
     ports:
-      - "9202:9202"
+      - "6802:6802"
     depends_on:
       - pmhub-mysql
     links:
       - pmhub-mysql
-  pmhub-modules-job:
+  pmhub-job:
     container_name: pmhub-job
     build:
       context: pmhub/modules/job
       dockerfile: dockerfile
     ports:
-      - "9203:9203"
+      - "6803:6803"
     depends_on:
       - pmhub-mysql
     links:
       - pmhub-mysql
 
-  pmhub-modules-project:
+  pmhub-project:
     container_name: pmhub-project
     build:
       context: pmhub/modules/project
       dockerfile: dockerfile
     ports:
-      - "9203:9203"
+      - "6806:6806"
     depends_on:
+      - pmhub-redis
       - pmhub-mysql
     links:
+      - pmhub-redis
       - pmhub-mysql
 
-  pmhub-modules-workflow:
+  pmhub-workflow:
     container_name: pmhub-workflow
     build:
       context: pmhub/modules/workflow
       dockerfile: dockerfile
     ports:
-      - "9203:9203"
+      - "6808:6808"
     depends_on:
+      - pmhub-redis
       - pmhub-mysql
     links:
+      - pmhub-redis
       - pmhub-mysql
 
 
@@ -154,4 +158,4 @@ services:
       context: pmhub/monitor/monitor
       dockerfile: pmhub/monitor/dockerfile
     ports:
-      - "9100:9100"
+      - "6888:6888"

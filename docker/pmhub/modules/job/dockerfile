@@ -10,6 +10,6 @@ RUN mkdir -p /home/pmhub
 # 指定路径
 WORKDIR /home/pmhub
 # 复制jar文件到路径
-COPY ./jar/pmhub-job.jar /home/ruoyi/pmhub-job.jar
+COPY ./jar/pmhub-job.jar /home/pmhub/pmhub-job.jar
 # 启动定时任务服务
 ENTRYPOINT ["java","-jar","pmhub-job.jar"]
