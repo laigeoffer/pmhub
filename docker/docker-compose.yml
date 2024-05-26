@@ -37,7 +37,7 @@ services:
         ]
     environment:
       MYSQL_DATABASE: 'laigeoffer-pmhub'
-      MYSQL_ROOT_PASSWORD: 123456 #上线修改为复杂密码，否则很容易被黑
+      MYSQL_ROOT_PASSWORD: laigeoffer-pmhub #上线修改为复杂密码，否则很容易被黑
   pmhub-redis:
     container_name: pmhub-redis
     image: redis
