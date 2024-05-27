@@ -56,8 +56,6 @@ services:
       dockerfile: dockerfile
     ports:
       - "6880:6880"
-    environment:
-      - SPRING_PROFILES_ACTIVE=dev
     depends_on:
       - pmhub-redis
     links:
