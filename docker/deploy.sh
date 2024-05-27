@@ -100,6 +100,11 @@ stop(){
 	docker-compose stop
 }
 
+# 重新构建镜像
+build(){
+  docker-compose up --build -d
+}
+
 # 删除所有环境/模块
 rm(){
 	docker-compose rm
@@ -124,6 +129,9 @@ case "$1" in
 ;;
 "stop")
 	stop
+;;
+"stop")
+	build
 ;;
 "rm")
 	rm

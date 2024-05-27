@@ -30,6 +30,8 @@ import reactor.core.publisher.Mono;
 public class AuthFilter implements GlobalFilter, Ordered {
     private static final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
+    private static final String BEGIN_VISIT_TIME = "begin_visit_time";//开始访问时间
+
     // 排除过滤的 uri 地址，nacos自行添加
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
@@ -73,6 +75,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
         addHeader(mutate, SecurityConstants.DETAILS_USERNAME, username);
         // 内部请求来源参数清除（防止网关携带内部请求标识，造成系统安全风险）
         removeHeader(mutate, SecurityConstants.FROM_SOURCE);
+
+        //先记录下访问接口的开始时间
+        exchange.getAttributes().put(BEGIN_VISIT_TIME, System.currentTimeMillis());
+
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
 
@@ -117,4 +123,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return -200;
     }
+
+
+
+
 }

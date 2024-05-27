@@ -3,11 +3,6 @@ FROM nacos/nacos-server
 # author
 MAINTAINER canghe
 
-# 使用root用户执行命令
-USER root
 
-# 创建目标路径
-RUN mkdir -p /home/nacos/conf
-
-# 复制conf文件到路径
+# 复制conf文件到docker路径
 COPY ./conf/application.properties /home/nacos/conf/application.properties
