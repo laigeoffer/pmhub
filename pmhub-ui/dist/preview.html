@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>form-generator-preview</title>
+    <link href="https://lib.baomitu.com/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/vue/2.6.11/vue.min.js"></script>
+    <script src="https://lib.baomitu.com/vue-router/3.1.3/vue-router.min.js"></script>
+    <script src="https://lib.baomitu.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://lib.baomitu.com/element-ui/2.13.2/index.js"></script>
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        height: calc(100vh - 33px);
+        padding: 12px;
+        box-sizing: border-box;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      }
+      input, textarea{
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>抱歉，javascript被禁用，请开启后重试。</strong>
+    </noscript>
+    <div id="previewApp"></div>
+    <script type="text/javascript">
+      Vue.prototype.$axios = axios
+      const childAttrs = {
+        file: '',
+        dialog: ' width="600px" class="dialog-width" v-if="visible" :visible.sync="visible" :modal-append-to-body="false" '
+      }
+
+      window.addEventListener('message', init, false)
+      function init(event) {
+        if (event.data.type === 'refreshFrame') {
+          const code = event.data.data
+          const attrs = childAttrs[code.generateConf.type]
+          let links = ''
+
+          if (Array.isArray(code.links) && code.links.length > 0) {
+            links = buildLinks(code.links)
+          }
+
+          document.getElementById('previewApp').innerHTML = `${links}<style>${code.css}</style><div id="app"></div>`
+
+          if (Array.isArray(code.scripts) && code.scripts.length > 0) {
+            this.loadScriptQueue(code.scripts, () => {
+              newVue(attrs, code.js, code.html)
+            })
+          } else {
+            newVue(attrs, code.js, code.html)
+          }
+        }
+      }
+      function buildLinks(links) {
+        let strs = ''
+        links.forEach(url => {
+          strs += `<link href="${url}" rel="stylesheet">`
+        })
+        return strs
+      }
+      function newVue(attrs, main, html) {
+        main = eval(`(${main})`)
+        main.template = `<div>${html}</div>`
+        new Vue({
+          components: {
+            child: main
+          },
+          data() {
+            return {
+              visible: true
+            }
+          },
+          template: `<div><child ${attrs}/></div>`
+        }).$mount('#app')
+      }
+    </script>
+  </body>
+</html>
