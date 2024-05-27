@@ -23,11 +23,6 @@ spring:
         # 共享配置
         shared-configs:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-      # 鉴权配置，服务无需再次鉴权
-      server-identity:
-        key: serverIdentity-laigeoffer-pmhub
-        value: security-laigeoffer-pmhub-666
-
     sentinel:
       # 取消控制台懒加载
       eager: true
