@@ -56,6 +56,8 @@ services:
       dockerfile: dockerfile
     ports:
       - "6880:6880"
+    volumes:
+      - ./pmhub/gateway/config/bootstrap.yml /home/pmhub/pmhub-gateway/config/bootstrap.yml
     depends_on:
       - pmhub-redis
       - pmhub-nacos
