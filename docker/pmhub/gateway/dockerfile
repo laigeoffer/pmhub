@@ -11,5 +11,7 @@ RUN mkdir -p /home/pmhub
 WORKDIR /home/pmhub
 # 复制jar文件到路径
 COPY ./jar/pmhub-gateway.jar /home/pmhub/pmhub-gateway.jar
+# 复制配置资源文件到路径
+COPY ./config /home/pmhub/pmhub-gateway/config/
 # 启动网关服务
-ENTRYPOINT ["java","-jar","pmhub-gateway.jar"]
+ENTRYPOINT ["java","-jar","pmhub-gateway.jar", "--spring.config.location=file:/home/pmhub/pmhub-gateway/config/"]
