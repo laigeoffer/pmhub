@@ -1,5 +1,5 @@
 <p align="center"><img src= "https://cdn.tobebetterjavaer.com/stutymore/pmhub_%E7%AE%80%E4%BB%8B%E7%89%88.png" alt="MaxKB" width="300" /></p>
-<h3 align="center">基于 SpringCloud Alibaba & LLM 的智能项目管理系统</h3>
+<h3 align="center">基于 SpringCloud & SpringCloud Alibaba & LLM 的智能项目管理系统</h3>
 <p align="center">
   <a href="https://opensource.org/license/MIT"><img src="https://img.shields.io/github/license/laigeoffer/pmhub?color=rgb(25%2C%20121%2C%20255)" alt="The MIT License"></a>
   <a href=""><img src="https://img.shields.io/github/forks/laigeoffer/pmhub?color=green" alt="Forks"></a>
@@ -9,23 +9,28 @@
 </p>
 
 <hr/>
-PmHub 是一套基于 SpringCloud Alibaba 分布式微服务 & LLM 的智能项目管理系统，这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
+PmHub 是一套基于 SpringCloud & SpringCloud Alibaba & LLM 的分布式微服务的智能项目管理系统，这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
 
 ## 一、项目简介
 
-PmHub 包括用户、流程、项目管理、认证等服务。包含了 Redis 缓存、RocketMQ 消息队列、Docker 容器化、Jenkins 自动化部署、Spring Security 安全框架、Nacos 服务注册和发现、Elasticsearch 搜索引擎、Kibana 可视化工具、Zipkin 链路追踪、OAuth2 统一认证、Vue3 前端框架等互联网开发中需要用到的主流技术栈，可以帮助同学们快速掌握微服务/分布式项目的核心知识点。
+PmHub 包括认证、流程、项目管理、系统、网关等服务。包含了 Redis 缓存、RocketMQ 消息队列、Docker 容器化、Jenkins 自动化部署、Spring Security 安全框架、Nacos 服务注册和发现、sentinel 分布式事务、Spring Boot Actuator 服务监控、SkyWalking 链路追踪、OAuth2 统一认证、OpenFeign 服务调用，Vue3 前端框架等互联网开发中需要用到的主流技术栈，可以帮助同学们快速掌握微服务/分布式项目的核心知识点。
+
+并且同时 PmHub 也是一套企业工作流的开发框架，您可以根据自身需求，快速定制出适合自己公司的企业工作流系统。
 
 
 
->如果对开源项目感兴趣，可以关注二哥的另外一个实战项目：技术派，一个前后端分离的社区项目。[GitHub](https://github.com/itwanger/paicoding) 上已经星标 1.5k+，不少同学就是靠这个项目在往年的校招中拿到了不错的 offer。
+>如果对开源项目感兴趣，可以关注来个 offer 的另外一个实战项目：技术派，一个前后端分离的社区项目。[GitHub](https://github.com/itwanger/paicoding) 上已经星标 1.5k+，不少同学就是靠这个项目在往年的校招中拿到了不错的 offer。
 
 
-为了方便大家循序渐进式的学习，我们将会推出两个版本：
+为了方便大家循序渐进式的学习，我们已经推出两个版本：
 
-- 单体架构版本：适合初学者，直接运行 pmhub-admin 中的 PmhubApplication 类即可。
-- 微服务架构版本：适合有一定基础，想进阶学习微服务/分布式的同学，可以分别启动用户、流程、项目管理、认证等多个服务。
+- 单体架构版本：适合初学者，直接运行 pmhub-boot 模块下的 pmhub-admin 中的 PmhubApplication 类即可。
+- 微服务架构版本：适合有一定基础，想进阶学习微服务/分布式的同学，可以分别启动网关、认证、流程、项目管理、代码生成等多个服务。
 
 可以根据自己的实际情况选择合适的版本进行学习，我们将会倾其所有，在第一时间帮助大家解决所有学习过程遇到的问题，让你的学习曲线变得非常丝滑😁。
+
+* 项目文档教程：https://laigeoffer.cn/
+* 在线体验地址：https://pmhub.laigeoffer.cn/
 
 ![pmhub 业务架构图](https://cdn.tobebetterjavaer.com/images/README/1711707917318.png)
 
@@ -34,9 +39,9 @@ PmHub 包括用户、流程、项目管理、认证等服务。包含了 Redis �
 来个 offer 组织由二哥发起，苍何主理，旨在帮助同学们在校招、社招中拿到满意的 offer。
 
 - 二哥，原创公众号“沉默王二”累计 18 万+ 读者，GitHub 星标 11000+ 开源知识库《二哥的 Java 进阶之路》作者，帮助很多很多同学成功拿到满意的 offer。
-- 苍何，原创公众号“苍何”作者，前大厂高级开发，曾就职于蚂蚁金服，科大讯飞，现国企技术总监，技术、管理、面试经验丰富。
+- 苍何，原创公众号“苍何”作者，CSDN 博客专家，阿里云专家博主，GitHub 开发者计划成员，前大厂技术专家，技术、管理、面试经验丰富。
 
-加入[二哥的编程星球](https://javabetter.cn/zhishixingqiu/)后，即可解锁来个 offer 组织下的所有项目的付费文档，以及 1 对 1 的技术面试辅导服务。
+[//]: # (「tips:可以在官网那里详细介绍」加入[二哥的编程星球]&#40;https://javabetter.cn/zhishixingqiu/&#41;后，即可解锁来个 offer 组织下的所有项目的付费文档，以及 1 对 1 的技术面试辅导服务。)
 
 项目|码云|GitHub|简介
 ---|---|---|---
