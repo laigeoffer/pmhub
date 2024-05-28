@@ -56,10 +56,22 @@ services:
       dockerfile: dockerfile
     ports:
       - "6880:6880"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-redis
+      - pmhub-nacos
     links:
       - pmhub-redis
+      - pmhub-nacos
   pmhub-auth:
     container_name: pmhub-auth
     build:
