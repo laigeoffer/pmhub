@@ -79,6 +79,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6800:6800"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-redis
     links:
@@ -90,6 +100,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6801:6801"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-redis
       - pmhub-mysql
@@ -103,6 +123,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6802:6802"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-mysql
     links:
@@ -114,6 +144,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6803:6803"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-mysql
     links:
@@ -126,6 +166,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6806:6806"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-redis
       - pmhub-mysql
@@ -140,6 +190,16 @@ services:
       dockerfile: dockerfile
     ports:
       - "6808:6808"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_DISCOVERY_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_DISCOVERY_PASSWORD=AbMt1425@asda@9123
+      - SPRING_CLOUD_NACOS_CONFIG_SERVER-ADDR=http://pmhub-nacos:8848
+      - SPRING_CLOUD_NACOS_CONFIG_USERNAME=nacos
+      - SPRING_CLOUD_NACOS_CONFIG_PASSWORD=AbMt1425@asda@9123
+      - SPRING_REDIS_HOST=pmhub-redis
+      - SPRING_REDIS_PORT=6379
     depends_on:
       - pmhub-redis
       - pmhub-mysql
