@@ -4,11 +4,11 @@ FROM  openjdk:8-jre
 MAINTAINER canghe
 
 # 挂载目录
-VOLUME /home/pmhub
+VOLUME /home/pmhub/pmhub-gateway
 # 创建目录
-RUN mkdir -p /home/pmhub
+RUN mkdir -p /home/pmhub/pmhub-gateway
 # 指定路径
-WORKDIR /home/pmhub
+WORKDIR /home/pmhub/pmhub-gateway
 # 复制jar文件到路径
 COPY ./jar/pmhub-gateway.jar /home/pmhub/pmhub-gateway/pmhub-gateway.jar
 # 复制配置资源文件到路径
