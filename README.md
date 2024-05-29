@@ -32,7 +32,10 @@ PmHub 包括认证、流程、项目管理、系统、网关等服务。包含�
 * 项目文档教程：https://laigeoffer.cn/
 * 在线体验地址：https://pmhub.laigeoffer.cn/
 
-![pmhub 业务架构图](https://cdn.tobebetterjavaer.com/images/README/1711707917318.png)
+![pmhub-业务架构图](https://cdn.tobebetterjavaer.com/stutymore/laigeoffer-pmhub-%E4%B8%9A%E5%8A%A1%E5%A4%A7%E5%9B%BE.png)
+
+此为 PmHub 微服务版本说明文档！单体版本说明文档请移步：[https://github.com/laigeoffer/pmhub/blob/master/pmhub-boot/README.md](https://github.com/laigeoffer/pmhub/blob/master/pmhub-boot/README.md)
+
 
 ## 二、关于来个 offer 组织
 
@@ -55,6 +58,14 @@ PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com
 
 ![pmhub-系统架构图](https://cdn.tobebetterjavaer.com/images/README/1711709454988.png)
 
+下面这张架构选型图可以帮助大家快速了解 PmHub 项目的技术选型，以及在[官方手册](https://laigeoffer.cn/project/laigeoffer/pmhub/about/)中会更详细的说明我们为什么选择该技术，毕竟授人以鱼不如授人以渔嘛。
+
+![pmhub-架构选型](https://cdn.tobebetterjavaer.com/stutymore/PmHub%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B.png)
+
+下面这张技术架构图可以帮助大家快速了解 PmHub 项目的技术架构，以及各个模块之间的交互关系。
+
+![pmhub-技术架构图](https://cdn.tobebetterjavaer.com/stutymore/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+
 优质的项目，离不开一张清晰的鸟瞰图（😄）。
 
 ### 3.2、项目演示
@@ -67,31 +78,50 @@ PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com
 ![任务编辑页](https://cdn.tobebetterjavaer.com/stutymore/20240407163256.png)
 
 ### 3.3、代码展示
-![pmhub代码展示](https://cdn.tobebetterjavaer.com/stutymore/20240407164544.png)
+![pmhub代码展示](https://cdn.tobebetterjavaer.com/stutymore/20240529152747.png)
 
 ### 3.4、代码结构
+
 ```
-pmhub
-├── pmhub-admin -- 核心配置，如：国际化、mybatis、日志、swagger及配置文件
-├── pmhub-common -- 通用组件都放在这个模块，各模块公共方法、注解、配置、常量、模型转换、异常、过滤器，全局预防 xss 脚本攻击
-├── pmhub-workflow -- 流程管理模块，包含流程分类、表单设计、流程设计、部署管理
-├── pmhub-framework -- 关于框架相关功能都在这个模块，如多数据源配置，限流处理、MybatisPlus、redis、连接池配置等
-├── pmhub-generator -- 代码生成相关控制器及配置
-├── pmhub-oa -- 企微绑定以及第三方 OA 系统绑定，统一登录认证中心
-├── pmhub-project -- 涉及项目管理，任务管理、项目设置，任务流转等
-├── pmhub-quartz -- 定时任务调度中心
-├── pmhub-system -- 对应系统管理模块，含用户管理、角色管理、日志管理等
-├── pmhub-ui -- 前端项目源码
+com.laigeoffer.pmhub     
+├── pmhub-ui              // 前端框架 [1024]
+├── pmhub-gateway         // 网关模块 [6880]
+├── pmhub-auth            // 认证中心 [6800]
+├── pmhub-api             // 接口模块
+│       └── pmhub-api-system                          // 系统接口
+├── pmhub-base          // 通用模块
+│       └── pmhub-base-core                           // 核心模块
+│       └── pmhub-base-datasource                     // 多数据源
+│       └── pmhub-base-seata                          // 分布式事务
+│       └── pmhub-base-security                       // 安全模块
+│       └── pmhub-base-swagger                        // 系统接口
+├── pmhub-modules         // 业务模块
+│       └── pmhub-system                              // 系统模块 [6801]
+│       └── pmhub-gen                                 // 代码生成 [6802]
+│       └── pmhub-job                                 // 定时任务 [6803]
+│       └── pmhub-project                             // 项目服务 [6806]
+│       └── pmhub-workflow                            // 流程服务 [6808]
+├── pmhub-monitor             						  // 监控中心 [6888]                 
+├──pom.xml                                            // 公共依赖
 ```
 
 ## 四、项目部署
-> 微服务版本请参考：[微服务版本部署手册](https://laigeoffer.cn/)
+> 单体版本请参考：[单体版本部署手册](https://laigeoffer.cn/)
 ### 4.1、环境准备
-* JDK 1.8
-* Maven 3.6
-* MySQL 5.7
-* Redis 6.0
-* RocketMQ 5.0.4
+|    | 技术                  | 名称        | 版本         | 官网                                                                                                 |
+|----|---------------------|-----------|------------|----------------------------------------------------------------------------------------------------|
+| 1  | Spring Boot         | 基础框架      | 2.7.18     | [https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)                   |
+| 2  | SpringCloud         | 微服务框架     | 2021.0.8   | [https://spring.io/projects/spring-cloud](https://spring.io/projects/spring-cloud)                 |
+| 3  | SpringCloud Alibaba | 阿里微服务框架   | 2021.0.5.0 | [https://github.com/alibaba/spring-cloud-alibaba](https://github.com/alibaba/spring-cloud-alibaba) |
+| 4  | SpringCloud Gateway | 服务网关      | 3.1.8      | [https://spring.io/projects/spring-cloud-gateway](https://spring.io/projects/spring-cloud-gateway) |
+| 5  | MyBatis-Plus        | 持久层框架     | 3.5.1      | [https://baomidou.com](https://baomidou.com)                                                       |
+| 6  | Redis               | 分布式缓存数据库  | Latest     | [https://redis.io](https://redis.io)                                                               |
+| 7  | RocketMQ            | 消息队列      | 2.2.3      | [https://rocketmq.apache.org](https://rocketmq.apache.org)                                         |
+| 8  | HuTool              | 小而全的工具集项目 | 5.8.11     | [https://hutool.cn](https://hutool.cn)                                                             |
+| 9  | Maven               | 项目构建管理    | 3.9.1      | [http://maven.apache.org](http://maven.apache.org)                                                 |
+| 10 | Sentinel            | 流控防护框架    | 1.8.6      | [https://github.com/alibaba/Sentinel](https://github.com/alibaba/Sentinel)                         |
+| 11 | Java                | 开发版本      | 1.8        | [https://www.oracle.com/java/technologies](https://www.oracle.com/java/technologies)               |
+
 
 
 ### 4.2、后端项目启动
@@ -144,7 +174,7 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 ![](https://cdn.tobebetterjavaer.com/images/20240324/83b5e36a95e04e3d951641215ff16dcf.png)
 
 
-②、导入数据库文件，路径在 pmhub/sql/pmhub_20240305.sql
+②、导入数据库文件，路径在 pmhub/sql/pmhub_20240305.sql 和 pmhub/sql/pmhub_nacos_20240423.sql
 
 ![](https://cdn.tobebetterjavaer.com/images/20240324/327783d299814ff8837ab5c3c64b3ff5.png)
 
@@ -158,17 +188,11 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 导入完成后，刷新一下就可以看到最新的数据库表了。
 
-#### 第四步，修改配置文件
+#### 第四步，基础环境准备
+* 1、启动 MySQL
 
-在 pmhub/pmhub-admin/src/main/resources/application-local.yml 中修改数据库连接信息。
-
-![](https://cdn.tobebetterjavaer.com/images/20240324/6a39a64bee524e5daf4edb388eebf14f.png)
-
-1. 如果数据库名也是 laigeoffer-pmhub，那么只需要修改用户名和密码即可。
-2. 如果用户名也是 root，那么只需要修改密码即可。
-3. 如果密码也一样，那么就不需要修改了（不可能，绝对不可能这么巧😂）。
-
-#### 第五步，启动 Redis
+可以选择本机直接安装 MySQL，也可以通过 Docker 的方式，但需要做好磁盘挂载，推荐本机安装！
+* 2、启动 Redis
 
 ①、如果你是 macOS 用户，可以直接在终端输入`redis-server`启动 Redis。
 
@@ -176,15 +200,98 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ②、如果你是 Windows 用户，可以直接双击 redis-server.exe 启动 Redis。
 
-#### 第六步，启动项目
+③、当然也可以直接通过 Docker 启动 Redis。
+```shell
+# 拉取 Redis 镜像:
+docker pull redis
+# 启动 Redis 容器:
+docker run --name my-redis -d redis
+```
 
-找到 PmhubApplication 类，右键 Run PmhubApplication.main()。
+* 3、启动 Nacos
 
-![主类就在 admin 中](https://cdn.tobebetterjavaer.com/images/20240324/7a2259e197014c33be4355025f87266a.png)
+[官网](https://nacos.io/download/nacos-server/)下载 Nacos，找到 /conf/application.properties 文件，修改数据库连接信息。可以直接复制 pmhub/docker/nacos/conf/application.properties 内容。
 
-如果出现以下的日志，表明项目已经启动成功了。
+修改下数据库配置信息为你自己的数据库，本地启动可以把鉴权关了。
 
-![](https://cdn.tobebetterjavaer.com/images/20240324/42274fdded6d44cbb942ca951f36bf68.png)
+```
+1. 如果数据库名也是 laigeoffer-pmhub，那么只需要修改用户名和密码即可。
+2. 如果用户名也是 root，那么只需要修改密码即可。
+3. 如果密码也一样，那么就不需要修改了（不可能，绝对不可能这么巧😂）。
+```
+
+![修改nacos配置文件](https://cdn.tobebetterjavaer.com/stutymore/20240529173446.png)
+
+①、如果你是 macOS 用户，可以直接在终端输入`sh startup.sh -m standalone`启动 Nacos。
+
+②、如果你是 Windows 用户，可以直接双击 startup.cmd 启动 Nacos。
+
+启动成功后访问 http://localhost:8848/nacos 即可看到 Nacos 控制台。默认用户名密码都是 nacos。
+
+![nacos启动成功界面](https://cdn.tobebetterjavaer.com/stutymore/20240529173621.png)
+
+
+
+
+#### 第五步，启动各个微服务
+
+> 注意：如果遇到服务启动失败，可自行查看 nacos 配置是否做了修改，如数据库连接信息等。
+
+①、启动 pmhub-gateway 网关服务
+
+找到 pmhub-gateway 项目，右键 Run PmHubGatewayApplication.main()。
+
+![pmhub-gateway启动成功](https://cdn.tobebetterjavaer.com/stutymore/20240529174025.png)
+
+②、启动 pmhub-auth 认证服务
+
+找到 pmhub-auth 项目，右键 Run PmHubAuthApplication.main()。
+
+③、启动 pmhub-system 系统服务
+
+找到 pmhub-system 项目（在pmhub-modules 下），右键 Run PmHubSystemApplication.main()。
+pmhub-system 启动前需要修改 nacos 中的 pmhub-system-dev.yml 配置文件，修改数据库连接信息为你自己的数据库。
+
+![修改pmhub-system配置](img.png)
+
+④、启动 pmhub-project 项目管理服务
+
+找到 pmhub-project 项目（在pmhub-modules 下），右键 Run PmHubProjectApplication.main()。
+
+启动前需要修改 nacos 中的 pmhub-project-dev.yml 配置文件，修改数据库连接信息为你自己的数据库。
+
+⑤、启动 pmhub-workflow 流程管理服务
+
+找到 pmhub-workflow 项目（在pmhub-modules 下），右键 Run PmHubWorkflowApplication.main()。
+
+启动前需要修改 nacos 中的 pmhub-workflow-dev.yml 配置文件，修改数据库连接信息为你自己的数据库。
+
+⑥、启动 pmhub-gen 代码生成服务
+
+找到 pmhub-gen 项目（在pmhub-modules 下），右键 Run PmHubGenApplication.main()。
+
+启动前需要修改 nacos 中的 pmhub-gen-dev.yml 配置文件，修改数据库连接信息为你自己的数据库。
+
+⑦、启动 pmhub-job 定时任务调度服务
+
+找到 pmhub-job 项目（在pmhub-modules 下），右键 Run PmHubJobApplication.main()。
+
+启动前需要修改 nacos 中的 pmhub-job-dev.yml 配置文件，修改数据库连接信息为你自己的数据库。
+
+⑧、启动 pmhub-monitor 监控服务
+
+找到 pmhub-monitor 项目，右键 Run PmHubMonitorApplication.main()。
+
+启动前需要修改 nacos 中的 pmhub-monitor-dev.yml 配置文件，修改监控后台的用户名和密码，以及首页展示标题。
+
+启动成功后可访问：http://localhost:6888/wallboard
+
+可以在线实时查案各个服务的状态以及日志：
+
+![主界面](https://cdn.tobebetterjavaer.com/stutymore/image.webp)
+
+
+
 
 ### 4.3、前端项目启动
 
@@ -197,120 +304,7 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 
 ### 4.5、服务器部署（Docker 方式）
 
-这里统一以 Debian 系统为例，Centos 系统自行替换操作命令即可！
-#### 安装 docker
-```shell
-1、更新软件包索引：
-sudo apt update
-2、安装一些必要的软件包，这些软件包允许apt通过HTTPS使用仓库：
-sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg lsb-release
-3、添加Docker的官方GPG密钥：
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-4、设置稳定版仓库：
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-5、再次更新软件包索引以包含Docker仓库：
-sudo apt update
-6、安装Docker Engine：
-sudo apt install docker-ce docker-ce-cli containerd.io
-
-7、验证Docker是否安装成功：
-sudo docker run hello-world
-这条命令会下载一个测试镜像并在容器中运行，如果安装正确，您将看到欢迎信息。
-```
-
-#### docker 安装并启动 MySQL 容器
-安装启动命令：
-```shell
-1、安装 mysql
-docker pull mysql:5.7
-2、运行容器（详细启动挂载如下）
-docker run -p 3306:3306 --name mysql \
--v /home/mysql/log:/var/log/mysql \
--v /home/mysql/data:/var/lib/mysql \
---memory 1.5g \
---restart=always \
--e MYSQL_ROOT_PASSWORD=设置mysql密码 -d mysql:5.7
-3、阿里云开启安全组
-4、防火墙
-ufw allow 33706/tcp
-```
-运行容器各部分解释：
-```shell
-# 将容器的 3306 端口映射到主机的 3306 端口，这样就可以通过主机的 IP 地址和端口号访问 MySQL 服务。
-# 指定容器的名称为 mysql，方便后续管理和操作
-docker run -p 3306:3306 --name mysql \
-# 将主机的 /home/mysql/log 目录挂载到容器的 /var/log/mysql 目录，用于存储 MySQL 的日志文件。
- -v /home/mysql/log:/var/log/mysql \
- # 将主机的 /home/mysql/data 目录挂载到容器的 /var/lib/mysql 目录，用于存储 MySQL 的数据文件。
- -v /home/mysql/data:/var/lib/mysql \
- # 设置 MySQL 的 root 用户密码为 root。这个参数使用了环境变量来传递密码信息。
- -e MYSOL_ROOT_PASSWORD=123456 \
- # 以后台模式运行 MySQL 容器，
- -d 
- # 内存限制
- --memory
- # 内存保留
- --memory-reservation
- 
-```
-
-<mark>特别注意：</mark>
-端口请设置为非3306，密码尽量设置复杂一些，否则数据库服务很可能被勒索攻击，另外如果可能的话，推荐将数据服务和应用服务分开不要放在一个容易或者一个服务器中。
-
-
-#### docker 安装并启动 redis
-```shell
-1、安装redis
-docker pull redis
-2、启动
-docker run --name redis -d -p 6379:6379 redis
-3、云服务器安全组
-4、开启6379防火墙端口
-ufw allow 6379/tcp
-```
-#### docker 安装并启动 pmhub
-先要将 pmhub 上传到你的服务器，或者使用 git clone 拉取最新代码
-```shell
-# 进入项目目录（进入 pmhub 的路径）
-cd /var/lib/xxx/xxx/pmhub
-
-
-1、打包构建项目
-mvn -T 1C clean package -Dmaven.test.skip=true -Dmaven.compile.fork=true
-
-2、构建镜像
-mkdir -p build
-cp pmhub-admin/target/*.jar build/app.jar
-cp Dockerfile.prod build/Dockerfile
-cd build
-docker build -t pmhub:latest .
-
-3、运行容器
-docker run -p 8010:8010 --name pmhub \
--v /home/pmhub:/data \
--d pmhub:latest
-
-
-4、开启8010端口安全组
-5、开启8010端口防火墙
-ufw allow 5010/tcp
-
-6、查看容器
-docker ps
-
-7、查看容器日志
-docker logs pmhub
-```
-#### 前端部署
-<mark>特别注意：</mark>
-因 build 需要过多资源且比较慢，如果服务器内存比较小（比如只有2G）推荐采用本地构建后上传到服务器。
-```js
-npm run build:prod
-```
-![前端部署](https://cdn.tobebetterjavaer.com/stutymore/20240407174623.png)
-把 dist 上传到服务器同级目录下,如果需要域名访问，配置Nginx就可以直接访问啦！
+请参考 [项目手册](https://laigeoffer.cn/)
 
 ## 五、技术选型
 
@@ -320,7 +314,7 @@ npm run build:prod
 |:-------------------:|----------------------|----------------------------------------------------------------------------------------------------------------------------|
 | Spring & SpringMVC  | Java全栈应用程序框架和WEB容器实现 | [https://spring.io/](https://spring.io/)                                                                                   |
 |     SpringBoot      | Spring应用简化集成开发框架     | [https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)                                           |
-|       mybatis       | 数据库orm框架             | [https://mybatis.org](https://mybatis.org)                                                                                 |
+|     SpringCloud     | 微服务框架                | [https://spring.io/projects/spring-cloud](https://spring.io/projects/spring-cloud)                                         |
 |    mybatis-plus     | 数据库orm框架             | [https://baomidou.com/](https://baomidou.com/)                                                                             |
 | mybatis PageHelper  | 数据库翻页插件              | [https://github.com/pagehelper/Mybatis-PageHelper](https://github.com/pagehelper/Mybatis-PageHelper)                       |
 |    elasticsearch    | 近实时文本搜索              | [https://www.elastic.co/cn/elasticsearch/service](https://www.elastic.co/cn/elasticsearch/service)                         |
@@ -357,7 +351,7 @@ PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
 - [（🌟 新人必看）PmHub 项目管理流程](https://laigeoffer.cn/)
 - [（🌟 新人必看）PmHub 分层架构](https://laigeoffer.cn/)
 - [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 企业微信自动登录](https://laigeoffer.cn/)
+- [（👍 强烈推荐）PmHub 实现接口流量耗时统计](https://laigeoffer.cn/)
 - [（👍 强烈推荐）PmHub Mysql/Redis缓存一致性](https://laigeoffer.cn/)
 - [（👍 强烈推荐）PmHub 消息队列 Rocketmq](https://laigeoffer.cn/)
 - [（👍 强烈推荐）PmHub 实现接入 flowable 流程管理](https://laigeoffer.cn/)
@@ -440,10 +434,9 @@ PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
 
 ## 九、友情链接
 
-- [laigeoffer](https://github.com/laigeoffer) ：🚀🚀🚀来个 offer 官方社区，这里汇集了很多的校招/社招优质项目，助力学生党和工作党拿个更好的 offer💪🏻
 - [paicoding](https://github.com/itwanger/paicoding?tab=readme-ov-file) ：⭐️一款好用又强大的开源社区，基于 Spring Boot、MyBatis-Plus、MySQL、Redis、ElasticSearch、MongoDB、Docker、RabbitMQ 等主流技术栈
-- [toBeBetterjavaer](https://github.com/itwanger/toBeBetterJavaer) ：一份通俗易懂、风趣幽默的Java学习指南，内容涵盖Java基础、Java并发编程、Java虚拟机、Java企业级开发、Java面试等核心知识点。学Java，就认准二哥的Java进阶之路😄
-
+- [toBeBetterjavaer](https://github.com/itwanger/toBeBetterJavaer) ：🚀一份通俗易懂、风趣幽默的Java学习指南，内容涵盖Java基础、Java并发编程、Java虚拟机、Java企业级开发、Java面试等核心知识点。学Java，就认准二哥的Java进阶之路😄
+- [CodeCanvas](https://github.com/freestylefly/CodeCanvas) ：📚本代码仓库是作者苍何多年从事一线互联网Java开发的学习历程技术汇总，旨在为大家提供一个清晰详细的学习教程，侧重点更倾向编写Java核心内容。💪🏻
 
 ## 十、鸣谢
 感谢所有参与开源贡献的小伙伴，PmHub 因你们而更强大！
