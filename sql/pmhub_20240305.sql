@@ -1,33 +1,20 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : canghe-aliyun-laigeoffer
+ Source Server         : local-canghe
  Source Server Type    : MySQL
- Source Server Version : 50744 (5.7.44)
- Source Host           : 8.137.9.219:33706
+ Source Server Version : 80032 (8.0.32)
+ Source Host           : localhost:3306
  Source Schema         : laigeoffer-pmhub
 
  Target Server Type    : MySQL
- Target Server Version : 50744 (5.7.44)
- File Encoding         : 65001/*
- Navicat Premium Data Transfer
-
- Source Server         : canghe-aliyun-laigeoffer
- Source Server Type    : MySQL
- Source Server Version : 50744 (5.7.44)
- Source Host           : 8.137.9.219:33706
- Source Schema         : laigeoffer-pmhub
-
- Target Server Type    : MySQL
- Target Server Version : 50744 (5.7.44)
+ Target Server Version : 80032 (8.0.32)
  File Encoding         : 65001
 
- Date: 31/05/2024 16:08:12
+ Date: 05/03/2024 14:39:47
 */
 
 CREATE DATABASE  `laigeoffer-pmhub` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -35,10 +22,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 USE `laigeoffer-pmhub`;
 
 -- ----------------------------
--- Table structure for act_evt_log
+-- Table structure for ACT_EVT_LOG
 -- ----------------------------
-DROP TABLE IF EXISTS `act_evt_log`;
-CREATE TABLE `act_evt_log` (
+DROP TABLE IF EXISTS `ACT_EVT_LOG`;
+CREATE TABLE `ACT_EVT_LOG` (
                                `LOG_NR_` bigint(20) NOT NULL AUTO_INCREMENT,
                                `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
                                `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -55,16 +42,16 @@ CREATE TABLE `act_evt_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_evt_log
+-- Records of ACT_EVT_LOG
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ge_bytearray
+-- Table structure for ACT_GE_BYTEARRAY
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ge_bytearray`;
-CREATE TABLE `act_ge_bytearray` (
+DROP TABLE IF EXISTS `ACT_GE_BYTEARRAY`;
+CREATE TABLE `ACT_GE_BYTEARRAY` (
                                     `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `REV_` int(11) DEFAULT NULL,
                                     `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -80,14 +67,14 @@ CREATE TABLE `act_ge_bytearray` (
 -- Records of act_ge_bytearray
 -- ----------------------------
 BEGIN;
-INSERT INTO `act_ge_bytearray` (`ID_`, `REV_`, `NAME_`, `DEPLOYMENT_ID_`, `BYTES_`, `GENERATED_`) VALUES ('f7cf0e4e-18af-11ef-bdc0-0242ac110002', 1, 'source', NULL, 0x3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554462D38223F3E0A3C646566696E6974696F6E7320786D6C6E733D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2220786D6C6E733A7873693D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D612D696E7374616E63652220786D6C6E733A7873643D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D612220786D6C6E733A666C6F7761626C653D22687474703A2F2F666C6F7761626C652E6F72672F62706D6E2220786D6C6E733A62706D6E64693D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F44492220786D6C6E733A6F6D6764633D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44432220786D6C6E733A6F6D6764693D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44492220786D6C6E733A62706D6E323D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2220786D6C6E733A64633D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44432220747970654C616E67756167653D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D61222065787072657373696F6E4C616E67756167653D22687474703A2F2F7777772E77332E6F72672F313939392F585061746822207461726765744E616D6573706163653D22313233343536222069643D226469616772616D5F50726F636573735F3137313634333239343734343022207873693A736368656D614C6F636174696F6E3D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2042504D4E32302E787364223E0A20203C70726F636573732069643D2250726F636573735F3137313634333239343734343022206E616D653D22E4B89AE58AA1E6B581E7A88B5F313731363433323934373434302220697345786563757461626C653D2274727565223E0A202020203C73746172744576656E742069643D2273746172745F6576656E74223E3C2F73746172744576656E743E0A20203C2F70726F636573733E0A20203C62706D6E64693A42504D4E4469616772616D2069643D2242504D4E4469616772616D5F50726F636573735F31373136343332393437343430223E0A202020203C62706D6E64693A42504D4E506C616E652062706D6E456C656D656E743D2250726F636573735F31373136343332393437343430222069643D2242504D4E506C616E655F50726F636573735F31373136343332393437343430223E0A2020202020203C62706D6E64693A42504D4E53686170652062706D6E456C656D656E743D2273746172745F6576656E74222069643D2242504D4E53686170655F73746172745F6576656E74223E0A20202020202020203C6F6D6764633A426F756E6473206865696768743D2233362E30222077696474683D2233362E302220783D223630322E302220793D223131322E30223E3C2F6F6D6764633A426F756E64733E0A2020202020203C2F62706D6E64693A42504D4E53686170653E0A202020203C2F62706D6E64693A42504D4E506C616E653E0A20203C2F62706D6E64693A42504D4E4469616772616D3E0A3C2F646566696E6974696F6E733E, NULL);
+INSERT INTO `ACT_GE_BYTEARRAY` (`ID_`, `REV_`, `NAME_`, `DEPLOYMENT_ID_`, `BYTES_`, `GENERATED_`) VALUES ('f7cf0e4e-18af-11ef-bdc0-0242ac110002', 1, 'source', NULL, 0x3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554462D38223F3E0A3C646566696E6974696F6E7320786D6C6E733D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2220786D6C6E733A7873693D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D612D696E7374616E63652220786D6C6E733A7873643D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D612220786D6C6E733A666C6F7761626C653D22687474703A2F2F666C6F7761626C652E6F72672F62706D6E2220786D6C6E733A62706D6E64693D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F44492220786D6C6E733A6F6D6764633D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44432220786D6C6E733A6F6D6764693D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44492220786D6C6E733A62706D6E323D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2220786D6C6E733A64633D22687474703A2F2F7777772E6F6D672E6F72672F737065632F44442F32303130303532342F44432220747970654C616E67756167653D22687474703A2F2F7777772E77332E6F72672F323030312F584D4C536368656D61222065787072657373696F6E4C616E67756167653D22687474703A2F2F7777772E77332E6F72672F313939392F585061746822207461726765744E616D6573706163653D22313233343536222069643D226469616772616D5F50726F636573735F3137313634333239343734343022207873693A736368656D614C6F636174696F6E3D22687474703A2F2F7777772E6F6D672E6F72672F737065632F42504D4E2F32303130303532342F4D4F44454C2042504D4E32302E787364223E0A20203C70726F636573732069643D2250726F636573735F3137313634333239343734343022206E616D653D22E4B89AE58AA1E6B581E7A88B5F313731363433323934373434302220697345786563757461626C653D2274727565223E0A202020203C73746172744576656E742069643D2273746172745F6576656E74223E3C2F73746172744576656E743E0A20203C2F70726F636573733E0A20203C62706D6E64693A42504D4E4469616772616D2069643D2242504D4E4469616772616D5F50726F636573735F31373136343332393437343430223E0A202020203C62706D6E64693A42504D4E506C616E652062706D6E456C656D656E743D2250726F636573735F31373136343332393437343430222069643D2242504D4E506C616E655F50726F636573735F31373136343332393437343430223E0A2020202020203C62706D6E64693A42504D4E53686170652062706D6E456C656D656E743D2273746172745F6576656E74222069643D2242504D4E53686170655F73746172745F6576656E74223E0A20202020202020203C6F6D6764633A426F756E6473206865696768743D2233362E30222077696474683D2233362E302220783D223630322E302220793D223131322E30223E3C2F6F6D6764633A426F756E64733E0A2020202020203C2F62706D6E64693A42504D4E53686170653E0A202020203C2F62706D6E64693A42504D4E506C616E653E0A20203C2F62706D6E64693A42504D4E4469616772616D3E0A3C2F646566696E6974696F6E733E, NULL);
 COMMIT;
 
 -- ----------------------------
 -- Table structure for act_ge_property
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ge_property`;
-CREATE TABLE `act_ge_property` (
+DROP TABLE IF EXISTS `ACT_GE_PROPERTY`;
+CREATE TABLE `ACT_GE_PROPERTY` (
                                    `NAME_` varchar(64) COLLATE utf8_bin NOT NULL,
                                    `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
                                    `REV_` int(11) DEFAULT NULL,
@@ -95,29 +82,29 @@ CREATE TABLE `act_ge_property` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ge_property
+-- Records of ACT_GE_PROPERTY
 -- ----------------------------
 BEGIN;
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('batch.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('cfg.execution-related-entities-count', 'true', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('cfg.task-related-entities-count', 'true', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('common.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('entitylink.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('eventsubscription.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('identitylink.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('job.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('next.dbid', '1', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.history', 'create(6.7.2.0)', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('task.schema.version', '6.7.2.0', 1);
-INSERT INTO `act_ge_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('variable.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('batch.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('cfg.execution-related-entities-count', 'true', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('cfg.task-related-entities-count', 'true', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('common.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('entitylink.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('eventsubscription.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('identitylink.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('job.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('next.dbid', '1', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.history', 'create(6.7.2.0)', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('task.schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_GE_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('variable.schema.version', '6.7.2.0', 1);
 COMMIT;
 
 -- ----------------------------
 -- Table structure for act_hi_actinst
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_actinst`;
-CREATE TABLE `act_hi_actinst` (
+DROP TABLE IF EXISTS `ACT_HI_ACTINST`;
+CREATE TABLE `ACT_HI_ACTINST` (
                                   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                   `REV_` int(11) DEFAULT '1',
                                   `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
@@ -143,16 +130,16 @@ CREATE TABLE `act_hi_actinst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_actinst
+-- Records of ACT_HI_ACTINST
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_attachment
+-- Table structure for ACT_HI_ATTACHMENT
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_attachment`;
-CREATE TABLE `act_hi_attachment` (
+DROP TABLE IF EXISTS `ACT_HI_ATTACHMENT`;
+CREATE TABLE `ACT_HI_ATTACHMENT` (
                                      `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                      `REV_` int(11) DEFAULT NULL,
                                      `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -168,16 +155,16 @@ CREATE TABLE `act_hi_attachment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_attachment
+-- Records of ACT_HI_ATTACHMENT
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_comment
+-- Table structure for ACT_HI_COMMENT
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_comment`;
-CREATE TABLE `act_hi_comment` (
+DROP TABLE IF EXISTS `ACT_HI_COMMENT`;
+CREATE TABLE `ACT_HI_COMMENT` (
                                   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                   `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
                                   `TIME_` datetime(3) NOT NULL,
@@ -191,7 +178,7 @@ CREATE TABLE `act_hi_comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_comment
+-- Records of ACT_HI_COMMENT
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -199,8 +186,8 @@ COMMIT;
 -- ----------------------------
 -- Table structure for act_hi_detail
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_detail`;
-CREATE TABLE `act_hi_detail` (
+DROP TABLE IF EXISTS `ACT_HI_DETAIL`;
+CREATE TABLE `ACT_HI_DETAIL` (
                                  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                  `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
                                  `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -225,16 +212,16 @@ CREATE TABLE `act_hi_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_detail
+-- Records of ACT_HI_DETAIL
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_entitylink
+-- Table structure for ACT_HI_ENTITYLINK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_entitylink`;
-CREATE TABLE `act_hi_entitylink` (
+DROP TABLE IF EXISTS `ACT_HI_ENTITYLINK`;
+CREATE TABLE `ACT_HI_ENTITYLINK` (
                                      `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                      `LINK_TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
                                      `CREATE_TIME_` datetime(3) DEFAULT NULL,
@@ -257,15 +244,15 @@ CREATE TABLE `act_hi_entitylink` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_entitylink
+-- Records of ACT_HI_ENTITYLINK
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_identitylink
+-- Table structure for ACT_HI_IDENTITYLINK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_identitylink`;
+DROP TABLE IF EXISTS `ACT_HI_IDENTITYLINK`;
 CREATE TABLE `act_hi_identitylink` (
                                        `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -288,7 +275,7 @@ CREATE TABLE `act_hi_identitylink` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_identitylink
+-- Records of ACT_HI_IDENTITYLINK
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -296,8 +283,8 @@ COMMIT;
 -- ----------------------------
 -- Table structure for act_hi_procinst
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_procinst`;
-CREATE TABLE `act_hi_procinst` (
+DROP TABLE IF EXISTS `ACT_HI_PROCINST`;
+CREATE TABLE `ACT_HI_PROCINST` (
                                    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                    `REV_` int(11) DEFAULT '1',
                                    `PROC_INST_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
@@ -326,16 +313,16 @@ CREATE TABLE `act_hi_procinst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_procinst
+-- Records of ACT_HI_PROCINST
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_taskinst
+-- Table structure for ACT_HI_TASKINST
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_taskinst`;
-CREATE TABLE `act_hi_taskinst` (
+DROP TABLE IF EXISTS `ACT_HI_TASKINST`;
+CREATE TABLE `ACT_HI_TASKINST` (
                                    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                    `REV_` int(11) DEFAULT '1',
                                    `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -372,16 +359,16 @@ CREATE TABLE `act_hi_taskinst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_taskinst
+-- Records of ACT_HI_TASKINST
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_tsk_log
+-- Table structure for ACT_HI_TSK_LOG
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_tsk_log`;
-CREATE TABLE `act_hi_tsk_log` (
+DROP TABLE IF EXISTS `ACT_HI_TSK_LOG`;
+CREATE TABLE `ACT_HI_TSK_LOG` (
                                   `ID_` bigint(20) NOT NULL AUTO_INCREMENT,
                                   `TYPE_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
                                   `TASK_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
@@ -400,16 +387,16 @@ CREATE TABLE `act_hi_tsk_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_tsk_log
+-- Records of ACT_HI_TSK_LOG
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_varinst
+-- Table structure for ACT_HI_VARINST
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_varinst`;
-CREATE TABLE `act_hi_varinst` (
+DROP TABLE IF EXISTS `ACT_HI_VARINST`;
+CREATE TABLE `ACT_HI_VARINST` (
                                   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                   `REV_` int(11) DEFAULT '1',
                                   `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -437,16 +424,16 @@ CREATE TABLE `act_hi_varinst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_varinst
+-- Records of ACT_HI_VARINST
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_id_bytearray
+-- Table structure for ACT_ID_BYTEARRAY
 -- ----------------------------
-DROP TABLE IF EXISTS `act_id_bytearray`;
-CREATE TABLE `act_id_bytearray` (
+DROP TABLE IF EXISTS `ACT_ID_BYTEARRAY`;
+CREATE TABLE `ACT_ID_BYTEARRAY` (
                                     `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `REV_` int(11) DEFAULT NULL,
                                     `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -455,16 +442,16 @@ CREATE TABLE `act_id_bytearray` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_id_bytearray
+-- Records of ACT_ID_BYTEARRAY
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_id_priv
+-- Table structure for ACT_ID_PRIV
 -- ----------------------------
-DROP TABLE IF EXISTS `act_id_priv`;
-CREATE TABLE `act_id_priv` (
+DROP TABLE IF EXISTS `ACT_ID_PRIV`;
+CREATE TABLE `ACT_ID_PRIV` (
                                `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                `NAME_` varchar(255) COLLATE utf8_bin NOT NULL,
                                PRIMARY KEY (`ID_`) USING BTREE,
@@ -472,16 +459,16 @@ CREATE TABLE `act_id_priv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_id_priv
+-- Records of ACT_ID_PRIV
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_id_priv_mapping
+-- Table structure for ACT_ID_PRIV_MAPPING
 -- ----------------------------
-DROP TABLE IF EXISTS `act_id_priv_mapping`;
-CREATE TABLE `act_id_priv_mapping` (
+DROP TABLE IF EXISTS `ACT_ID_PRIV_MAPPING`;
+CREATE TABLE `ACT_ID_PRIV_MAPPING` (
                                        `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `PRIV_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `USER_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -494,16 +481,16 @@ CREATE TABLE `act_id_priv_mapping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_id_priv_mapping
+-- Records of ACT_ID_PRIV_MAPPING
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_id_property
+-- Table structure for ACT_ID_PROPERTY
 -- ----------------------------
-DROP TABLE IF EXISTS `act_id_property`;
-CREATE TABLE `act_id_property` (
+DROP TABLE IF EXISTS `ACT_ID_PROPERTY`;
+CREATE TABLE `ACT_ID_PROPERTY` (
                                    `NAME_` varchar(64) COLLATE utf8_bin NOT NULL,
                                    `VALUE_` varchar(300) COLLATE utf8_bin DEFAULT NULL,
                                    `REV_` int(11) DEFAULT NULL,
@@ -511,17 +498,17 @@ CREATE TABLE `act_id_property` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_id_property
+-- Records of ACT_ID_PROPERTY
 -- ----------------------------
 BEGIN;
-INSERT INTO `act_id_property` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.version', '6.7.2.0', 1);
+INSERT INTO `ACT_ID_PROPERTY` (`NAME_`, `VALUE_`, `REV_`) VALUES ('schema.version', '6.7.2.0', 1);
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_id_token
+-- Table structure for ACT_ID_TOKEN
 -- ----------------------------
-DROP TABLE IF EXISTS `act_id_token`;
-CREATE TABLE `act_id_token` (
+DROP TABLE IF EXISTS `ACT_ID_TOKEN`;
+CREATE TABLE `ACT_ID_TOKEN` (
                                 `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                 `REV_` int(11) DEFAULT NULL,
                                 `TOKEN_VALUE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -534,16 +521,16 @@ CREATE TABLE `act_id_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_id_token
+-- Records of ACT_ID_TOKEN
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_procdef_info
+-- Table structure for ACT_PROCDEF_INFO
 -- ----------------------------
-DROP TABLE IF EXISTS `act_procdef_info`;
-CREATE TABLE `act_procdef_info` (
+DROP TABLE IF EXISTS `ACT_PROCDEF_INFO`;
+CREATE TABLE `ACT_PROCDEF_INFO` (
                                     `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `REV_` int(11) DEFAULT NULL,
@@ -557,16 +544,16 @@ CREATE TABLE `act_procdef_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_procdef_info
+-- Records of ACT_PROCDEF_INFO
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_re_deployment
+-- Table structure for ACT_RE_DEPLOYMENT
 -- ----------------------------
-DROP TABLE IF EXISTS `act_re_deployment`;
-CREATE TABLE `act_re_deployment` (
+DROP TABLE IF EXISTS `ACT_RE_DEPLOYMENT`;
+CREATE TABLE `ACT_RE_DEPLOYMENT` (
                                      `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                      `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
                                      `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -581,16 +568,16 @@ CREATE TABLE `act_re_deployment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_re_deployment
+-- Records of ACT_RE_DEPLOYMENT
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_re_model
+-- Table structure for ACT_RE_MODEL
 -- ----------------------------
-DROP TABLE IF EXISTS `act_re_model`;
-CREATE TABLE `act_re_model` (
+DROP TABLE IF EXISTS `ACT_RE_MODEL`;
+CREATE TABLE `ACT_RE_MODEL` (
                                 `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                 `REV_` int(11) DEFAULT NULL,
                                 `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -617,14 +604,14 @@ CREATE TABLE `act_re_model` (
 -- Records of act_re_model
 -- ----------------------------
 BEGIN;
-INSERT INTO `act_re_model` (`ID_`, `REV_`, `NAME_`, `KEY_`, `CATEGORY_`, `CREATE_TIME_`, `LAST_UPDATE_TIME_`, `VERSION_`, `META_INFO_`, `DEPLOYMENT_ID_`, `EDITOR_SOURCE_VALUE_ID_`, `EDITOR_SOURCE_EXTRA_VALUE_ID_`, `TENANT_ID_`) VALUES ('f7ba4dcd-18af-11ef-bdc0-0242ac110002', 2, '业务流程_1716432947440', 'Process_1716432947440', '123456', '2024-05-23 10:55:52.630', '2024-05-23 10:55:52.767', 1, '{\"createUser\":\"laige\",\"description\":null,\"formType\":null,\"formId\":null}', NULL, 'f7cf0e4e-18af-11ef-bdc0-0242ac110002', NULL, '');
+INSERT INTO `ACT_RE_MODEL` (`ID_`, `REV_`, `NAME_`, `KEY_`, `CATEGORY_`, `CREATE_TIME_`, `LAST_UPDATE_TIME_`, `VERSION_`, `META_INFO_`, `DEPLOYMENT_ID_`, `EDITOR_SOURCE_VALUE_ID_`, `EDITOR_SOURCE_EXTRA_VALUE_ID_`, `TENANT_ID_`) VALUES ('f7ba4dcd-18af-11ef-bdc0-0242ac110002', 2, '业务流程_1716432947440', 'Process_1716432947440', '123456', '2024-05-23 10:55:52.630', '2024-05-23 10:55:52.767', 1, '{\"createUser\":\"laige\",\"description\":null,\"formType\":null,\"formId\":null}', NULL, 'f7cf0e4e-18af-11ef-bdc0-0242ac110002', NULL, '');
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_re_procdef
+-- Table structure for ACT_RE_PROCDEF
 -- ----------------------------
-DROP TABLE IF EXISTS `act_re_procdef`;
-CREATE TABLE `act_re_procdef` (
+DROP TABLE IF EXISTS `ACT_RE_PROCDEF`;
+CREATE TABLE `ACT_RE_PROCDEF` (
                                   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                   `REV_` int(11) DEFAULT NULL,
                                   `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -648,16 +635,16 @@ CREATE TABLE `act_re_procdef` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_re_procdef
+-- Records of ACT_RE_PROCDEF
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_actinst
+-- Table structure for ACT_RU_ACTINST
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_actinst`;
-CREATE TABLE `act_ru_actinst` (
+DROP TABLE IF EXISTS `ACT_RU_ACTINST`;
+CREATE TABLE `ACT_RU_ACTINST` (
                                   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                   `REV_` int(11) DEFAULT '1',
                                   `PROC_DEF_ID_` varchar(64) COLLATE utf8_bin NOT NULL,
@@ -686,16 +673,16 @@ CREATE TABLE `act_ru_actinst` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_actinst
+-- Records of ACT_RU_ACTINST
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_deadletter_job
+-- Table structure for ACT_RU_DEADLETTER_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_deadletter_job`;
-CREATE TABLE `act_ru_deadletter_job` (
+DROP TABLE IF EXISTS `ACT_RU_DEADLETTER_JOB`;
+CREATE TABLE `ACT_RU_DEADLETTER_JOB` (
                                          `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                          `REV_` int(11) DEFAULT NULL,
                                          `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -738,16 +725,16 @@ CREATE TABLE `act_ru_deadletter_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_deadletter_job
+-- Records of ACT_RU_DEADLETTER_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_entitylink
+-- Table structure for ACT_RU_ENTITYLINK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_entitylink`;
-CREATE TABLE `act_ru_entitylink` (
+DROP TABLE IF EXISTS `ACT_RU_ENTITYLINK`;
+CREATE TABLE `ACT_RU_ENTITYLINK` (
                                      `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                      `REV_` int(11) DEFAULT NULL,
                                      `CREATE_TIME_` datetime(3) DEFAULT NULL,
@@ -771,16 +758,16 @@ CREATE TABLE `act_ru_entitylink` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_entitylink
+-- Records of ACT_RU_ENTITYLINK
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_event_subscr
+-- Table structure for ACT_RU_EVENT_SUBSCR
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_event_subscr`;
-CREATE TABLE `act_ru_event_subscr` (
+DROP TABLE IF EXISTS `ACT_RU_EVENT_SUBSCR`;
+CREATE TABLE `ACT_RU_EVENT_SUBSCR` (
                                        `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `REV_` int(11) DEFAULT NULL,
                                        `EVENT_TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -803,16 +790,16 @@ CREATE TABLE `act_ru_event_subscr` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_event_subscr
+-- Records of ACT_RU_EVENT_SUBSCR
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_execution
+-- Table structure for ACT_RU_EXECUTION
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_execution`;
-CREATE TABLE `act_ru_execution` (
+DROP TABLE IF EXISTS `ACT_RU_EXECUTION`;
+CREATE TABLE `ACT_RU_EXECUTION` (
                                     `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `REV_` int(11) DEFAULT NULL,
                                     `PROC_INST_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -867,16 +854,16 @@ CREATE TABLE `act_ru_execution` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_execution
+-- Records of ACT_RU_EXECUTION
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_external_job
+-- Table structure for ACT_RU_EXTERNAL_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_external_job`;
-CREATE TABLE `act_ru_external_job` (
+DROP TABLE IF EXISTS `ACT_RU_EXTERNAL_JOB`;
+CREATE TABLE `ACT_RU_EXTERNAL_JOB` (
                                        `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `REV_` int(11) DEFAULT NULL,
                                        `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -916,16 +903,16 @@ CREATE TABLE `act_ru_external_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_external_job
+-- Records of ACT_RU_EXTERNAL_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_history_job
+-- Table structure for ACT_RU_HISTORY_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_history_job`;
-CREATE TABLE `act_ru_history_job` (
+DROP TABLE IF EXISTS `ACT_RU_HISTORY_JOB`;
+CREATE TABLE `ACT_RU_HISTORY_JOB` (
                                       `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                       `REV_` int(11) DEFAULT NULL,
                                       `LOCK_EXP_TIME_` timestamp(3) NULL DEFAULT NULL,
@@ -944,16 +931,16 @@ CREATE TABLE `act_ru_history_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_history_job
+-- Records of ACT_RU_HISTORY_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_identitylink
+-- Table structure for ACT_RU_IDENTITYLINK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_identitylink`;
-CREATE TABLE `act_ru_identitylink` (
+DROP TABLE IF EXISTS `ACT_RU_IDENTITYLINK`;
+CREATE TABLE `ACT_RU_IDENTITYLINK` (
                                        `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                        `REV_` int(11) DEFAULT NULL,
                                        `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -981,16 +968,16 @@ CREATE TABLE `act_ru_identitylink` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_identitylink
+-- Records of ACT_RU_IDENTITYLINK
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_job
+-- Table structure for ACT_RU_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_job`;
-CREATE TABLE `act_ru_job` (
+DROP TABLE IF EXISTS `ACT_RU_JOB`;
+CREATE TABLE `ACT_RU_JOB` (
                               `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                               `REV_` int(11) DEFAULT NULL,
                               `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -1036,16 +1023,16 @@ CREATE TABLE `act_ru_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_job
+-- Records of ACT_RU_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_suspended_job
+-- Table structure for ACT_RU_SUSPENDED_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_suspended_job`;
-CREATE TABLE `act_ru_suspended_job` (
+DROP TABLE IF EXISTS `ACT_RU_SUSPENDED_JOB`;
+CREATE TABLE `ACT_RU_SUSPENDED_JOB` (
                                         `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                         `REV_` int(11) DEFAULT NULL,
                                         `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -1089,16 +1076,16 @@ CREATE TABLE `act_ru_suspended_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_suspended_job
+-- Records of ACT_RU_SUSPENDED_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_task
+-- Table structure for ACT_RU_TASK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_task`;
-CREATE TABLE `act_ru_task` (
+DROP TABLE IF EXISTS `ACT_RU_TASK`;
+CREATE TABLE `ACT_RU_TASK` (
                                `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                `REV_` int(11) DEFAULT NULL,
                                `EXECUTION_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -1143,16 +1130,16 @@ CREATE TABLE `act_ru_task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_task
+-- Records of ACT_RU_TASK
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_timer_job
+-- Table structure for ACT_RU_TIMER_JOB
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_timer_job`;
-CREATE TABLE `act_ru_timer_job` (
+DROP TABLE IF EXISTS `ACT_RU_TIMER_JOB`;
+CREATE TABLE `ACT_RU_TIMER_JOB` (
                                     `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                     `REV_` int(11) DEFAULT NULL,
                                     `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -1199,16 +1186,16 @@ CREATE TABLE `act_ru_timer_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_timer_job
+-- Records of ACT_RU_TIMER_JOB
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_ru_variable
+-- Table structure for ACT_RU_VARIABLE
 -- ----------------------------
-DROP TABLE IF EXISTS `act_ru_variable`;
-CREATE TABLE `act_ru_variable` (
+DROP TABLE IF EXISTS `ACT_RU_VARIABLE`;
+CREATE TABLE `ACT_RU_VARIABLE` (
                                    `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                    `REV_` int(11) DEFAULT NULL,
                                    `TYPE_` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -1237,16 +1224,16 @@ CREATE TABLE `act_ru_variable` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_ru_variable
+-- Records of ACT_RU_VARIABLE
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_channel_definition
+-- Table structure for FLW_CHANNEL_DEFINITION
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_channel_definition`;
-CREATE TABLE `flw_channel_definition` (
+DROP TABLE IF EXISTS `FLW_CHANNEL_DEFINITION`;
+CREATE TABLE `FLW_CHANNEL_DEFINITION` (
                                           `ID_` varchar(255) NOT NULL,
                                           `NAME_` varchar(255) DEFAULT NULL,
                                           `VERSION_` int(11) DEFAULT NULL,
@@ -1264,16 +1251,16 @@ CREATE TABLE `flw_channel_definition` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_channel_definition
+-- Records of FLW_CHANNEL_DEFINITION
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_ev_databasechangelog
+-- Table structure for FLW_EV_DATABASECHANGELOG
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_ev_databasechangelog`;
-CREATE TABLE `flw_ev_databasechangelog` (
+DROP TABLE IF EXISTS `FLW_EV_DATABASECHANGELOG`;
+CREATE TABLE `FLW_EV_DATABASECHANGELOG` (
                                             `ID` varchar(255) NOT NULL,
                                             `AUTHOR` varchar(255) NOT NULL,
                                             `FILENAME` varchar(255) NOT NULL,
@@ -1291,22 +1278,22 @@ CREATE TABLE `flw_ev_databasechangelog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_ev_databasechangelog
+-- Records of FLW_EV_DATABASECHANGELOG
 -- ----------------------------
 BEGIN;
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('1', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 1, 'EXECUTED', '8:1b0c48c9cf7945be799d868a2626d687', 'createTable tableName=FLW_EVENT_DEPLOYMENT; createTable tableName=FLW_EVENT_RESOURCE; createTable tableName=FLW_EVENT_DEFINITION; createIndex indexName=ACT_IDX_EVENT_DEF_UNIQ, tableName=FLW_EVENT_DEFINITION; createTable tableName=FLW_CHANNEL_DEFIN...', '', NULL, '4.3.5', NULL, NULL, '8259922348');
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('2', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 2, 'EXECUTED', '8:0ea825feb8e470558f0b5754352b9cda', 'addColumn tableName=FLW_CHANNEL_DEFINITION; addColumn tableName=FLW_CHANNEL_DEFINITION', '', NULL, '4.3.5', NULL, NULL, '8259922348');
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('3', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 3, 'EXECUTED', '8:3c2bb293350b5cbe6504331980c9dcee', 'customChange', '', NULL, '4.3.5', NULL, NULL, '8259922348');
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('1', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 1, 'EXECUTED', '8:1b0c48c9cf7945be799d868a2626d687', 'createTable tableName=FLW_EVENT_DEPLOYMENT; createTable tableName=FLW_EVENT_RESOURCE; createTable tableName=FLW_EVENT_DEFINITION; createIndex indexName=ACT_IDX_EVENT_DEF_UNIQ, tableName=FLW_EVENT_DEFINITION; createTable tableName=FLW_CHANNEL_DEFIN...', '', NULL, '4.3.5', NULL, NULL, '8259922348');
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('2', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 2, 'EXECUTED', '8:0ea825feb8e470558f0b5754352b9cda', 'addColumn tableName=FLW_CHANNEL_DEFINITION; addColumn tableName=FLW_CHANNEL_DEFINITION', '', NULL, '4.3.5', NULL, NULL, '8259922348');
-INSERT INTO `flw_ev_databasechangelog` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('3', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 3, 'EXECUTED', '8:3c2bb293350b5cbe6504331980c9dcee', 'customChange', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('1', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 1, 'EXECUTED', '8:1b0c48c9cf7945be799d868a2626d687', 'createTable tableName=FLW_EVENT_DEPLOYMENT; createTable tableName=FLW_EVENT_RESOURCE; createTable tableName=FLW_EVENT_DEFINITION; createIndex indexName=ACT_IDX_EVENT_DEF_UNIQ, tableName=FLW_EVENT_DEFINITION; createTable tableName=FLW_CHANNEL_DEFIN...', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('2', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 2, 'EXECUTED', '8:0ea825feb8e470558f0b5754352b9cda', 'addColumn tableName=FLW_CHANNEL_DEFINITION; addColumn tableName=FLW_CHANNEL_DEFINITION', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('3', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 3, 'EXECUTED', '8:3c2bb293350b5cbe6504331980c9dcee', 'customChange', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('1', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 1, 'EXECUTED', '8:1b0c48c9cf7945be799d868a2626d687', 'createTable tableName=FLW_EVENT_DEPLOYMENT; createTable tableName=FLW_EVENT_RESOURCE; createTable tableName=FLW_EVENT_DEFINITION; createIndex indexName=ACT_IDX_EVENT_DEF_UNIQ, tableName=FLW_EVENT_DEFINITION; createTable tableName=FLW_CHANNEL_DEFIN...', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('2', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 2, 'EXECUTED', '8:0ea825feb8e470558f0b5754352b9cda', 'addColumn tableName=FLW_CHANNEL_DEFINITION; addColumn tableName=FLW_CHANNEL_DEFINITION', '', NULL, '4.3.5', NULL, NULL, '8259922348');
+INSERT INTO `FLW_EV_DATABASECHANGELOG` (`ID`, `AUTHOR`, `FILENAME`, `DATEEXECUTED`, `ORDEREXECUTED`, `EXECTYPE`, `MD5SUM`, `DESCRIPTION`, `COMMENTS`, `TAG`, `LIQUIBASE`, `CONTEXTS`, `LABELS`, `DEPLOYMENT_ID`) VALUES ('3', 'flowable', 'org/flowable/eventregistry/db/liquibase/flowable-eventregistry-db-changelog.xml', '2023-03-08 15:18:42', 3, 'EXECUTED', '8:3c2bb293350b5cbe6504331980c9dcee', 'customChange', '', NULL, '4.3.5', NULL, NULL, '8259922348');
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_ev_databasechangeloglock
+-- Table structure for FLW_EV_DATABASECHANGELOGLOCK
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_ev_databasechangeloglock`;
-CREATE TABLE `flw_ev_databasechangeloglock` (
+DROP TABLE IF EXISTS `FLW_EV_DATABASECHANGELOGLOCK`;
+CREATE TABLE `FLW_EV_DATABASECHANGELOGLOCK` (
                                                 `ID` int(11) NOT NULL,
                                                 `LOCKED` bit(1) NOT NULL,
                                                 `LOCKGRANTED` datetime DEFAULT NULL,
@@ -1315,17 +1302,17 @@ CREATE TABLE `flw_ev_databasechangeloglock` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_ev_databasechangeloglock
+-- Records of FLW_EV_DATABASECHANGELOGLOCK
 -- ----------------------------
 BEGIN;
-INSERT INTO `flw_ev_databasechangeloglock` (`ID`, `LOCKED`, `LOCKGRANTED`, `LOCKEDBY`) VALUES (1, b'0', NULL, NULL);
+INSERT INTO `FLW_EV_DATABASECHANGELOGLOCK` (`ID`, `LOCKED`, `LOCKGRANTED`, `LOCKEDBY`) VALUES (1, b'0', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_event_definition
+-- Table structure for FLW_EVENT_DEFINITION
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_event_definition`;
-CREATE TABLE `flw_event_definition` (
+DROP TABLE IF EXISTS `FLW_EVENT_DEFINITION`;
+CREATE TABLE `FLW_EVENT_DEFINITION` (
                                         `ID_` varchar(255) NOT NULL,
                                         `NAME_` varchar(255) DEFAULT NULL,
                                         `VERSION_` int(11) DEFAULT NULL,
@@ -1340,16 +1327,16 @@ CREATE TABLE `flw_event_definition` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_event_definition
+-- Records of FLW_EVENT_DEFINITION
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_event_deployment
+-- Table structure for FLW_EVENT_DEPLOYMENT
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_event_deployment`;
-CREATE TABLE `flw_event_deployment` (
+DROP TABLE IF EXISTS `FLW_EVENT_DEPLOYMENT`;
+CREATE TABLE `FLW_EVENT_DEPLOYMENT` (
                                         `ID_` varchar(255) NOT NULL,
                                         `NAME_` varchar(255) DEFAULT NULL,
                                         `CATEGORY_` varchar(255) DEFAULT NULL,
@@ -1360,7 +1347,7 @@ CREATE TABLE `flw_event_deployment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_event_deployment
+-- Records of FLW_EVENT_DEPLOYMENT
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -1368,8 +1355,8 @@ COMMIT;
 -- ----------------------------
 -- Table structure for flw_event_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_event_resource`;
-CREATE TABLE `flw_event_resource` (
+DROP TABLE IF EXISTS `FLW_EVENT_RESOURCE`;
+CREATE TABLE `FLW_EVENT_RESOURCE` (
                                       `ID_` varchar(255) NOT NULL,
                                       `NAME_` varchar(255) DEFAULT NULL,
                                       `DEPLOYMENT_ID_` varchar(255) DEFAULT NULL,
@@ -1378,16 +1365,16 @@ CREATE TABLE `flw_event_resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of flw_event_resource
+-- Records of FLW_EVENT_RESOURCE
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_ru_batch
+-- Table structure for FLW_RU_BATCH
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_ru_batch`;
-CREATE TABLE `flw_ru_batch` (
+DROP TABLE IF EXISTS `FLW_RU_BATCH`;
+CREATE TABLE `FLW_RU_BATCH` (
                                 `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                 `REV_` int(11) DEFAULT NULL,
                                 `TYPE_` varchar(64) COLLATE utf8_bin NOT NULL,
@@ -1402,16 +1389,16 @@ CREATE TABLE `flw_ru_batch` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of flw_ru_batch
+-- Records of FLW_RU_BATCH
 -- ----------------------------
 BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for flw_ru_batch_part
+-- Table structure for FLW_RU_BATCH_PART
 -- ----------------------------
-DROP TABLE IF EXISTS `flw_ru_batch_part`;
-CREATE TABLE `flw_ru_batch_part` (
+DROP TABLE IF EXISTS `FLW_RU_BATCH_PART`;
+CREATE TABLE `FLW_RU_BATCH_PART` (
                                      `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
                                      `REV_` int(11) DEFAULT NULL,
                                      `BATCH_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,
@@ -1432,7 +1419,7 @@ CREATE TABLE `flw_ru_batch_part` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of flw_ru_batch_part
+-- Records of FLW_RU_BATCH_PART
 -- ----------------------------
 BEGIN;
 COMMIT;

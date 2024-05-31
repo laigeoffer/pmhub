@@ -335,6 +335,7 @@ export default {
       // 获取进行中的项目
       for (let i = 0; i < res.data.length; i++) {
         res.data[i].cover = process.env.VUE_APP_BASE_API + res.data[i].cover
+        console.log('Image URL:', res.data[i].cover); // 打印完整的图片路径
       }
       this.projectList = res.data
     })

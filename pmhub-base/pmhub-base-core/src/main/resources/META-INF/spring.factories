@@ -8,4 +8,5 @@ com.laigeoffer.pmhub.base.core.config.MybatisPlusConfig,\
 com.laigeoffer.pmhub.base.core.config.ServerConfig,\
 com.laigeoffer.pmhub.base.core.config.ThreadPoolConfig,\
 com.laigeoffer.pmhub.base.core.config.redis.RedisConfig,\
-com.laigeoffer.pmhub.base.core.config.redis.RedisService
+com.laigeoffer.pmhub.base.core.config.redis.RedisService,\
+com.laigeoffer.pmhub.base.core.config.ResourcesConfig
