@@ -170,8 +170,7 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 这一步应该就不需要我多讲了，相信大家都能搞定。
 
-![](https://cdn.tobebetterjavaer.com/images/20240324/62ee1affa2fd46ed89eaaa2d6931198b.png)
-
+![](https://cdn.tobebetterjavaer.com/stutymore/20240601234905.png)
 #### 第三步，导入数据库
 
 推荐大家使用 [Navicat](https://javabetter.cn/nice-article/itmind/navicatmacyjpx.html) 这款图形化数据库管理工具。
@@ -185,7 +184,7 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 ②、导入数据库文件，路径在 pmhub/sql/pmhub_20240305.sql 和 pmhub/sql/pmhub_nacos_20240423.sql
 
-![](https://cdn.tobebetterjavaer.com/images/20240324/327783d299814ff8837ab5c3c64b3ff5.png)
+![](https://cdn.tobebetterjavaer.com/stutymore/20240601235111.png)
 
 可以直接右键在 terminal 终端中打开，然后通过 pwd 和 ls 命令查看文件的绝对路径。
 
