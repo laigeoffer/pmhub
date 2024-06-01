@@ -1,7 +1,6 @@
 package com.laigeoffer.pmhub.system.controller;
 
 import com.laigeoffer.pmhub.base.core.annotation.Log;
-import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.constant.UserConstants;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
@@ -139,12 +138,6 @@ public class SysUserController extends BaseController {
     @GetMapping("/getInfo")
     public AjaxResult getInfo() {
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        if (StringUtils.isNull(loginUser)) {
-            // 根据用户名查出体验账号
-            SysUser DemoSysUser = userService.selectUserByUserName(Constants.DEMO_ACCOUNT);
-            loginUser = new LoginUser();
-            loginUser.setUser(DemoSysUser);
-        }
         SysUser user = loginUser.getUser();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(user);

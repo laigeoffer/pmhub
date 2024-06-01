@@ -1,12 +1,10 @@
 package com.laigeoffer.pmhub.system.controller;
 
 import com.laigeoffer.pmhub.base.core.annotation.Log;
-import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.constant.UserConstants;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysMenu;
-import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
@@ -135,14 +133,6 @@ public class SysMenuController extends BaseController {
     @GetMapping("getRouters")
     public AjaxResult getRouters() {
         LoginUser loginUser = SecurityUtils.getLoginUser();
-        // 默认免登录场景下
-        if (StringUtils.isNull(loginUser)) {
-            // 根据用户名查出体验账号
-            SysUser DemoSysUser = userService.selectUserByUserName(Constants.DEMO_ACCOUNT);
-            loginUser = new LoginUser();
-            loginUser.setUserId(DemoSysUser.getUserId());
-            loginUser.setUser(DemoSysUser);
-        }
         Long userId = loginUser.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return success(menuService.buildMenus(menus));

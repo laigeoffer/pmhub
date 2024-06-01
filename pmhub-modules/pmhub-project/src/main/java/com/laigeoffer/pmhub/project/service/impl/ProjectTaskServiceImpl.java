@@ -136,10 +136,6 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
 
     @Override
     public PageInfo<TaskResVO> queryMyTaskList(TaskReqVO taskReqVO) {
-        // 免登录场景
-        if (com.laigeoffer.pmhub.base.core.utils.StringUtils.isNull(SecurityUtils.getLoginUser())) {
-            return new PageInfo<>();
-        }
         PageInfo<TaskResVO> pageInfo;
         PageHelper.startPage(taskReqVO.getPageNum(), taskReqVO.getPageSize());
         switch (taskReqVO.getType()) {

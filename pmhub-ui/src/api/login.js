@@ -34,9 +34,6 @@ export function register(data) {
 export function getInfo() {
   return request({
     url: '/system/user/getInfo',
-    headers: {
-      isToken: false
-    },
     method: 'get'
   })
 }
