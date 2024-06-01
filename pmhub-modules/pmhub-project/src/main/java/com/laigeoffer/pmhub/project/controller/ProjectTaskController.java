@@ -3,6 +3,7 @@ package com.laigeoffer.pmhub.project.controller;
 import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
 import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
 import com.laigeoffer.pmhub.base.core.annotation.Anonymous;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
@@ -151,7 +152,7 @@ public class ProjectTaskController {
         // 审批相关流程 远程调用
         ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
                 taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO);
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
         || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");
@@ -170,7 +171,7 @@ public class ProjectTaskController {
         // 审批相关流程 远程调用
         ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
                 taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO);
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
         if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
                 || R.fail().equals(result.getData())) {
             return AjaxResult.error("远程调用审批服务失败");

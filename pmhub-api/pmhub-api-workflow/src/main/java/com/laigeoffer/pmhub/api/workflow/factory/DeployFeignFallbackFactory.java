@@ -39,7 +39,7 @@ public class DeployFeignFallbackFactory implements FallbackFactory<DeployFeignSe
             }
 
             @Override
-            public R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
+            public R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO, String source)  {
                 return R.fail("添加&更新任务审批设置失败:" + throwable.getMessage());
             }
 

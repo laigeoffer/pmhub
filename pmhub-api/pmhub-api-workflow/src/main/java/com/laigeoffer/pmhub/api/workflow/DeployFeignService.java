@@ -1,12 +1,14 @@
 package com.laigeoffer.pmhub.api.workflow;
 
 import com.laigeoffer.pmhub.api.workflow.factory.ProcessFeignFallbackFactory;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.constant.ServiceNameConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
@@ -49,8 +51,8 @@ public interface DeployFeignService {
      * @param approvalSetDTO
      * @return
      */
-    @PostMapping("/insertOrUpdateApprovalSet")
-    R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO);
+    @PostMapping("/workflow/deploy/insertOrUpdateApprovalSet")
+    R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 
     /**

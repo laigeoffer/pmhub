@@ -4,4 +4,5 @@ com.laigeoffer.pmhub.base.security.aspect.PreAuthorizeAspect,\
 com.laigeoffer.pmhub.base.security.service.TokenService,\
 com.laigeoffer.pmhub.base.security.handle.GlobalExceptionHandler,\
 com.laigeoffer.pmhub.base.security.config.WebMvcConfig,\
-com.laigeoffer.pmhub.base.security.aspect.LogAspect
+com.laigeoffer.pmhub.base.security.aspect.LogAspect,\
+com.laigeoffer.pmhub.base.core.config.ResourcesConfig
