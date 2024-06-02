@@ -144,6 +144,8 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(() => {
+              // 登录成功后刷新页面
+              window.location.reload();
               this.$router.push({ path: this.redirect || "/" }).catch(() => {})
             })
             .catch(() => {
