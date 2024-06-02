@@ -2,6 +2,7 @@ package com.laigeoffer.pmhub.project.controller;
 
 import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
 import com.laigeoffer.pmhub.api.workflow.ProcessFeignService;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ProjectProcessDTO;
@@ -213,7 +214,7 @@ public class ProjectController {
     @PostMapping("/updateApprovalSet")
     @RequiresPermissions("project:manage:updateApprovalSet")
     public AjaxResult updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
-        wfDeployService.updateApprovalSet(approvalSetDTO);
+        wfDeployService.updateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
         return AjaxResult.success();
     }
 
@@ -228,7 +229,7 @@ public class ProjectController {
     public AjaxResult startProjectApproveDefId(@PathVariable(value = "projectId") String projectId, @PathVariable(value = "processDefId") String processDefId, @RequestParam("url") String url, @RequestBody Map<String, Object> variables) {
         ProjectProcessDTO request = new ProjectProcessDTO(projectId,processDefId, url, variables);
         // 远程调用流程服务
-        processService.startProjectProcess(request);
+        processService.startProjectProcess(request,SecurityConstants.INNER);
         return AjaxResult.success("流程启动成功");
 
     }

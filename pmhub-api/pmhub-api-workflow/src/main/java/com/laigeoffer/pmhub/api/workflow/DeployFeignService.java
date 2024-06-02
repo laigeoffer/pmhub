@@ -25,8 +25,8 @@ public interface DeployFeignService {
      * @param approvalSetDTO
      * @return
      */
-    @PostMapping("/deploy/updateApprovalSet")
-    R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO);
+    @PostMapping("/workflow/deploy/updateApprovalSet")
+    R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 
     /**
@@ -34,8 +34,8 @@ public interface DeployFeignService {
      * @param approvalSetDTO
      * @return
      */
-    @PostMapping("/deploy/updateApprovalSet")
-    R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO);
+    @PostMapping("/workflow/deploy/updateApprovalSet")
+    R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 
     /**
@@ -43,8 +43,8 @@ public interface DeployFeignService {
      * @param taskId
      * @return
      */
-    @GetMapping("/selectList")
-    R<?> selectList(List<String> taskId);
+    @GetMapping("/workflow/deploy/selectList")
+    R<?> selectList(List<String> taskId, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
     /**
      * 添加&更新审批设置
@@ -59,6 +59,6 @@ public interface DeployFeignService {
      * 添加审批设置
      * @return
      */
-    @PostMapping("/insertApprovalSet")
-    public R<?> insertApprovalSet();
+    @PostMapping("/workflow/deploy/insertApprovalSet")
+    public R<?> insertApprovalSet(@RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 }

@@ -14,25 +14,22 @@ import org.springframework.stereotype.Component;
  * @author canghe
  */
 @Component
-public class ProcessFeignFallbackFactory implements FallbackFactory<ProcessFeignService>
-{
+public class ProcessFeignFallbackFactory implements FallbackFactory<ProcessFeignService> {
     private static final Logger log = LoggerFactory.getLogger(ProcessFeignFallbackFactory.class);
 
     @Override
-    public ProcessFeignService create(Throwable throwable)
-    {
+    public ProcessFeignService create(Throwable throwable) {
         log.error("流程设计服务调用失败:{}", throwable.getMessage());
-        return new ProcessFeignService()
-        {
+        return new ProcessFeignService() {
 
 
             @Override
-            public R<Integer> startProjectProcess(ProjectProcessDTO request) {
+            public R<Integer> startProjectProcess(ProjectProcessDTO request, String source) {
                 return R.fail("开启项目流程失败:" + throwable.getMessage());
             }
 
             @Override
-            public R<Void> startTaskProcessByDefId(ProjectProcessDTO reques) {
+            public R<Void> startTaskProcessByDefId(ProjectProcessDTO reques, String source) {
                 return R.fail("根据流程定义id启动流程实例失败:" + throwable.getMessage());
             }
         };
