@@ -12,7 +12,7 @@
     <artifactId>pmhub-monitor</artifactId>
 
     <description>
-        pmhub-monitor 监控中心
+        pmhub-monitor 监控中心，本地可访问：http://localhost:6888/wallboard，用户名：admin 密码：123456
     </description>
 
     <properties>
