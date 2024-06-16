@@ -2,6 +2,7 @@ package com.laigeoffer.pmhub.workflow;
 
 import com.laigeoffer.pmhub.base.security.annotation.EnableCustomConfig;
 import com.laigeoffer.pmhub.base.security.annotation.EnablePmFeignClients;
+import com.laigeoffer.pmhub.base.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableCustomConfig
 @EnablePmFeignClients
+@EnableCustomSwagger2
 @SpringBootApplication
 public class PmHubWorkflowApplication {
     public static void main(String[] args) {

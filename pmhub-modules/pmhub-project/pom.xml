@@ -71,6 +71,11 @@
             <artifactId>pmhub-api-workflow</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-base-swagger</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

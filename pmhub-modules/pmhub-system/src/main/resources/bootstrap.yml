@@ -32,3 +32,4 @@ spring:
 logging:
   file:
     name: logs/${spring.application.name}/info.log
+
