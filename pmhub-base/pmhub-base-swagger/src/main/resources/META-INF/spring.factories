@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.laigeoffer.pmhub.base.swagger.config.SwaggerAutoConfiguration,\
+com.laigeoffer.pmhub.base.swagger.config.SwaggerWebConfiguration,\
+com.laigeoffer.pmhub.base.swagger.config.SwaggerBeanPostProcessor
