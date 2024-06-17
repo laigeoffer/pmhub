@@ -29,6 +29,13 @@
             <artifactId>pmhub-base-core</artifactId>
         </dependency>
 
+        <!-- Redisson 分布式锁功能 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.16.2</version>
+        </dependency>
+
 
 
 

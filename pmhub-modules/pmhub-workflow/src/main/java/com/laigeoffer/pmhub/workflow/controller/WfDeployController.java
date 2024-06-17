@@ -3,13 +3,14 @@ package com.laigeoffer.pmhub.workflow.controller;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
 import com.laigeoffer.pmhub.base.core.core.domain.PageQuery;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.base.core.core.page.Table2DataInfo;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.utils.JsonUtils;
+import com.laigeoffer.pmhub.base.security.annotation.DistributedLock;
 import com.laigeoffer.pmhub.base.security.annotation.InnerAuth;
 import com.laigeoffer.pmhub.base.security.annotation.RequiresPermissions;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
-import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfDeployVo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;
 import com.laigeoffer.pmhub.workflow.service.IWfDeployFormService;
@@ -122,6 +123,7 @@ public class WfDeployController extends BaseController {
      */
     @InnerAuth
     @PostMapping("/updateApprovalSet")
+    @DistributedLock(key = "#approvalSetDTO.approved", lockTime = 10L, keyPrefix = "workflow-approve-")
     public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
     }
