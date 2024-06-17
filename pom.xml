@@ -47,6 +47,7 @@
         <aspectjrt.version>1.9.19</aspectjrt.version>
         <bcprov.version>1.75</bcprov.version>
         <tobato.version>1.27.2</tobato.version>
+        <knife4j.version>3.0.3</knife4j.version>
 
         <spring-boot.version>2.7.18</spring-boot.version>
         <spring-cloud.version>2021.0.8</spring-cloud.version>
@@ -332,6 +333,18 @@
                 <groupId>com.laigeoffer.pmhub-cloud</groupId>
                 <artifactId>pmhub-api-workflow</artifactId>
                 <version>${laigeoffer.version}</version>
+            </dependency>
+
+            <!-- knife4j -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
 

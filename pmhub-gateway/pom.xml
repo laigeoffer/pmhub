@@ -98,6 +98,16 @@
             <version>${swagger.fox.version}</version>
         </dependency>
 
+        <!-- knife4j -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.laigeoffer.pmhub-cloud</groupId>
             <artifactId>pmhub-base-core</artifactId>

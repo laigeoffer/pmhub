@@ -5,6 +5,7 @@ import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author canghe
  */
 @Component
+@Primary
 public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigurer
 {
     /**
