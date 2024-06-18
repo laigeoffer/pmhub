@@ -18,6 +18,7 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
@@ -30,6 +31,7 @@ import java.util.Objects;
  */
 @Aspect
 @Slf4j
+@Component
 public class DistributedLockAspect {
 
     @Resource
@@ -45,7 +47,7 @@ public class DistributedLockAspect {
      */
     private DefaultParameterNameDiscoverer nameDiscoverer = new DefaultParameterNameDiscoverer();
 
-    @Pointcut("@annotation(com.yt.bi.common.redis.distributedlok.annotation.DistributedLock)")
+    @Pointcut("@annotation(com.laigeoffer.pmhub.base.security.annotation.DistributedLock)")
     public void distributorLock() {
     }
 
