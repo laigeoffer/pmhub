@@ -1,6 +1,7 @@
 package com.laigeoffer.pmhub.auth.controller;
 
 import com.laigeoffer.pmhub.auth.service.SysLoginService;
+import com.laigeoffer.pmhub.base.core.annotation.RateLimiter;
 import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.Constants;
 import com.laigeoffer.pmhub.base.core.core.domain.AjaxResult;
@@ -14,10 +15,7 @@ import com.laigeoffer.pmhub.base.security.auth.AuthUtil;
 import com.laigeoffer.pmhub.base.security.service.TokenService;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,6 +39,14 @@ public class LoginController {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 登录接口，因为登录接口无token，所以不走网关鉴权和限流
+     * 需要自定义Redis限流逻辑
+     * 这里配置了 30 秒内仅允许访问 10 次
+     * @param form
+     * @return
+     */
+    @RateLimiter(key = "rate_limit:login", time = 30, count = 10)
     @PostMapping("login")
     public AjaxResult login(@RequestBody LoginBody form) {
         AjaxResult ajax = success();
@@ -92,6 +98,13 @@ public class LoginController {
     public R<?> refreshRedis() {
         redisService.flushAll();
         return R.ok();
+    }
+
+    @RateLimiter(key = "limitTest", time = 10, count = 2)
+    @PostMapping(value = "/limitTest")
+    public Long limitTest() {
+        System.out.println("limitTest");
+        return 1L;
     }
 
 }
