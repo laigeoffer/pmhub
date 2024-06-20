@@ -40,7 +40,7 @@ public class LoginController {
     private RedisService redisService;
 
     /**
-     * 登录接口，因为登录接口无token，所以不走网关鉴权和限流
+     * 登录接口，因为登录接口无token，所以不走网关鉴权，且安全级别极高
      * 需要自定义Redis限流逻辑
      * 这里配置了 30 秒内仅允许访问 10 次
      * @param form
