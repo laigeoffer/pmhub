@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 异步任务表 _async
+ * 异步任务表 pmhub_async
  *
  * @author canghe
  */
