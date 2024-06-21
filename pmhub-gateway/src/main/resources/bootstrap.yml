@@ -31,8 +31,10 @@ spring:
       # 取消控制台懒加载
       eager: true
       transport:
-        # 控制台地址
-        dashboard: 127.0.0.1:8718
+        # 配置控制台服务地址
+        dashboard: 127.0.0.1:8080
+        # 默认 8719 端口，假如被占用会自动从 8719 开始依次 +1 扫描,直至找到未被占用的端口
+        port: 8719
       # nacos配置持久化
       datasource:
         ds1:

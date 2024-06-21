@@ -291,6 +291,7 @@ public class SysUserController extends BaseController {
      */
     @InnerAuth
     @GetMapping("/info/{username}")
+//    @SentinelResource(value = "infoSentinelResource",blockHandler = "handlerBlockHandler", fallback = "doActionFallback") // 演示SentinelResource细粒度管控服务流控和降级
     public R<LoginUser> info(@PathVariable("username") String username) {
         SysUser sysUser = userService.selectUserByUserName(username);
         if (StringUtils.isNull(sysUser)) {
