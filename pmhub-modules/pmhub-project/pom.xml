@@ -77,7 +77,7 @@
             <artifactId>pmhub-base-swagger</artifactId>
         </dependency>
 
-        <!--分布式事务-->
+        <!--添加分布式事务-->
         <dependency>
             <groupId>com.laigeoffer.pmhub-cloud</groupId>
             <artifactId>pmhub-base-seata</artifactId>
