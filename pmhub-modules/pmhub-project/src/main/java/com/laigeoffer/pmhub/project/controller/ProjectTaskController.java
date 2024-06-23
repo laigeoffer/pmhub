@@ -148,16 +148,7 @@ public class ProjectTaskController {
     @RequiresPermissions("project:task:add")
     @PostMapping("/task/add")
     public AjaxResult add(@RequestBody TaskReqVO taskReqVO) {
-        String taskId = projectTaskService.add(taskReqVO);
-        // 审批相关流程 远程调用
-        ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
-                taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
-        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
-        || R.fail().equals(result.getData())) {
-            return AjaxResult.error("远程调用审批服务失败");
-        }
-        return AjaxResult.success();
+        return AjaxResult.success(projectTaskService.add(taskReqVO));
     }
     /**
      * 添加子任务
@@ -167,16 +158,7 @@ public class ProjectTaskController {
     @RequiresPermissions("project:task:addChildTask")
     @PostMapping("/task/addChildTask")
     public AjaxResult addChildTask(@RequestBody TaskReqVO taskReqVO) {
-        String taskId = projectTaskService.add(taskReqVO);
-        // 审批相关流程 远程调用
-        ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(taskId, ProjectStatusEnum.TASK.getStatusName(),
-                taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
-        if (StringUtils.isNull(result) || StringUtils.isNull(result.getData())
-                || R.fail().equals(result.getData())) {
-            return AjaxResult.error("远程调用审批服务失败");
-        }
-        return AjaxResult.success();
+        return AjaxResult.success(projectTaskService.add(taskReqVO));
     }
 
     /**

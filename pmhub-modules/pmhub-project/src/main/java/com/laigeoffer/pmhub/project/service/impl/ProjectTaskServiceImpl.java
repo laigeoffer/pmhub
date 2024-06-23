@@ -6,7 +6,11 @@ import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWra
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
@@ -14,8 +18,8 @@ import com.laigeoffer.pmhub.base.core.enums.ProjectTaskPriorityEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectTaskStatusEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.DateUtils;
-import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.file.FileUtils;
+import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.project.domain.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.*;
@@ -25,6 +29,9 @@ import com.laigeoffer.pmhub.project.mapper.*;
 import com.laigeoffer.pmhub.project.service.ProjectLogService;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
 import com.laigeoffer.pmhub.project.service.task.QueryTaskLogFactory;
+import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +40,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -47,6 +55,7 @@ import java.util.stream.Collectors;
  * @date 2022-12-14 15:00
  */
 @Service
+@Slf4j
 public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, ProjectTask> implements ProjectTaskService {
     @Autowired
     private ProjectTaskMapper projectTaskMapper;
@@ -62,6 +71,10 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     private QueryTaskLogFactory queryTaskLogFactory;
     @Autowired
     private ProjectFileMapper projectFileMapper;
+
+    // 远程调用流程服务
+    @Resource
+    private DeployFeignService wfDeployService;
 
     @Override
     public Long queryTodayTaskNum() {
@@ -246,11 +259,17 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @GlobalTransactional(name = "pmhub-project-addTask",rollbackFor = Exception.class) //seata分布式事务，AT模式
     public String add(TaskReqVO taskReqVO) {
+        // xid 全局事务id的检查（方便查看）
+        String xid = RootContext.getXID();
+        log.info("---------------开始新建任务: "+"\t"+"xid: "+xid);
+
         if (ProjectStatusEnum.PAUSE.getStatus().equals(projectTaskMapper.queryProjectStatus(taskReqVO.getProjectId()))) {
             throw new ServiceException("归属项目已暂停，无法新增任务");
         }
+
+        // 1、添加任务
         ProjectTask projectTask = new ProjectTask();
         if (StringUtils.isNotBlank(taskReqVO.getTaskId())) {
             projectTask.setTaskPid(taskReqVO.getTaskId());
@@ -261,8 +280,10 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         projectTask.setUpdatedBy(SecurityUtils.getUsername());
         projectTask.setUpdatedTime(new Date());
         projectTaskMapper.insert(projectTask);
+
+        // 2、添加任务成员
         insertMember(projectTask.getId(), 1, SecurityUtils.getUserId());
-        // 添加日志
+        // 3、添加日志
         saveLog("addTask", projectTask.getId(), taskReqVO.getProjectId(), taskReqVO.getTaskName(), "参与了任务", null);
         // 将执行人加入
         if (taskReqVO.getUserId() != null && !Objects.equals(taskReqVO.getUserId(), SecurityUtils.getUserId())) {
@@ -270,8 +291,19 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             // 添加日志
             saveLog("invitePartakeTask", projectTask.getId(), taskReqVO.getProjectId(), taskReqVO.getTaskName(), "邀请 " + projectMemberMapper.selectUserById(Collections.singletonList(taskReqVO.getUserId())).get(0).getNickName() + " 参与任务", taskReqVO.getUserId());
         }
-        // 任务指派消息提醒
+        // 4、任务指派消息提醒
         extracted(taskReqVO.getTaskName(), taskReqVO.getUserId(), SecurityUtils.getUsername(), projectTask.getId());
+
+        // 5、添加或更新审批设置（远程调用 pmhub-workflow 微服务）
+        ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(projectTask.getId(), ProjectStatusEnum.TASK.getStatusName(),
+                taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
+        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(result) || Objects.isNull(result.getData())
+                || R.fail().equals(result.getData())) {
+            throw  new ServiceException("远程调用审批服务失败");
+        }
+        log.info("---------------结束新建任务: "+"\t"+"xid: "+xid);
         return projectTask.getId();
     }
 
