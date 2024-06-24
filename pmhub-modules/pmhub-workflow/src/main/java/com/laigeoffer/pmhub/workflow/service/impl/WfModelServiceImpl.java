@@ -13,7 +13,7 @@ import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.common.constant.ProcessConstants;
 import com.laigeoffer.pmhub.workflow.common.enums.FormType;
-import com.laigeoffer.pmhub.workflow.domain.MaterialsApprovalSet;
+import com.laigeoffer.pmhub.workflow.domain.WfApprovalSet;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
 import com.laigeoffer.pmhub.workflow.domain.WfModelDeploy;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
@@ -23,7 +23,7 @@ import com.laigeoffer.pmhub.workflow.domain.vo.WfFormVo;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfModelResVO;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfModelVo;
 import com.laigeoffer.pmhub.workflow.factory.FlowServiceFactory;
-import com.laigeoffer.pmhub.workflow.mapper.MaterialsApprovalSetMapper;
+import com.laigeoffer.pmhub.workflow.mapper.WfApprovalSetMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfMaterialsScrappedProcessMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfModelDeployMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfTaskProcessMapper;
@@ -62,7 +62,7 @@ public class WfModelServiceImpl extends FlowServiceFactory implements IWfModelSe
     private final WfModelDeployMapper wfModelDeployMapper;
     private final WfTaskProcessMapper wfTaskProcessMapper;
     private final WfMaterialsScrappedProcessMapper wfMaterialsScrappedProcessMapper;
-    private final MaterialsApprovalSetMapper materialsApprovalSetMapper;
+    private final WfApprovalSetMapper wfApprovalSetMapper;
 
     @Override
     public Table2DataInfo<WfModelVo> list(WfModelBo modelBo, PageQuery pageQuery) {
@@ -423,10 +423,10 @@ public class WfModelServiceImpl extends FlowServiceFactory implements IWfModelSe
                 .set(WfTaskProcess::getDefinitionId, processDefinition.getId())
                 .set(WfTaskProcess::getDeploymentId, processDefinition.getDeploymentId());
         wfTaskProcess.update();
-        LambdaUpdateChainWrapper<MaterialsApprovalSet> materialsApprovalSet = new LambdaUpdateChainWrapper<>(materialsApprovalSetMapper);
-        materialsApprovalSet.likeRight(MaterialsApprovalSet::getDefinitionId, model.getKey())
-                .set(MaterialsApprovalSet::getDefinitionId, processDefinition.getId())
-                .set(MaterialsApprovalSet::getDeploymentId, processDefinition.getDeploymentId());
+        LambdaUpdateChainWrapper<WfApprovalSet> materialsApprovalSet = new LambdaUpdateChainWrapper<>(wfApprovalSetMapper);
+        materialsApprovalSet.likeRight(WfApprovalSet::getDefinitionId, model.getKey())
+                .set(WfApprovalSet::getDefinitionId, processDefinition.getId())
+                .set(WfApprovalSet::getDeploymentId, processDefinition.getDeploymentId());
         materialsApprovalSet.update();
         LambdaUpdateChainWrapper<WfMaterialsScrappedProcess> wfMaterialsScrappedProcess = new LambdaUpdateChainWrapper<>(wfMaterialsScrappedProcessMapper);
         wfMaterialsScrappedProcess.likeRight(WfMaterialsScrappedProcess::getDefinitionId, model.getKey()).eq(WfMaterialsScrappedProcess::getApproved, 0)

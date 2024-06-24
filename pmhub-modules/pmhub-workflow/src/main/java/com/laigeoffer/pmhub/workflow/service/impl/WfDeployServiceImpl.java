@@ -11,7 +11,7 @@ import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import com.laigeoffer.pmhub.workflow.core.domain.ProcessQuery;
-import com.laigeoffer.pmhub.workflow.domain.MaterialsApprovalSet;
+import com.laigeoffer.pmhub.workflow.domain.WfApprovalSet;
 import com.laigeoffer.pmhub.workflow.domain.WfDeployForm;
 import com.laigeoffer.pmhub.workflow.domain.WfMaterialsScrappedProcess;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.WfTaskProcess;
@@ -20,7 +20,7 @@ import com.laigeoffer.pmhub.workflow.domain.dto.MaterialsApprovalSetDTO;
 import com.laigeoffer.pmhub.workflow.domain.vo.MaterialsApprovalSetVO;
 import com.laigeoffer.pmhub.workflow.domain.vo.WfDeployVo;
 import com.laigeoffer.pmhub.workflow.factory.FlowServiceFactory;
-import com.laigeoffer.pmhub.workflow.mapper.MaterialsApprovalSetMapper;
+import com.laigeoffer.pmhub.workflow.mapper.WfApprovalSetMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfDeployFormMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfMaterialsScrappedProcessMapper;
 import com.laigeoffer.pmhub.workflow.mapper.WfTaskProcessMapper;
@@ -54,7 +54,7 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
 
     private final RepositoryService repositoryService;
     private final WfDeployFormMapper deployFormMapper;
-    private final MaterialsApprovalSetMapper materialsApprovalSetMapper;
+    private final WfApprovalSetMapper wfApprovalSetMapper;
     private final WfTaskProcessMapper wfTaskProcessMapper;
     private final WfMaterialsScrappedProcessMapper wfMaterialsScrappedProcessMapper;
 
@@ -175,7 +175,7 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void approvalSet(MaterialsApprovalSetDTO approvalSetDTO, String type) {
-        MaterialsApprovalSet mas = getMaterialsApprovalSet(type, null);
+        WfApprovalSet mas = getMaterialsApprovalSet(type, null);
         if (mas != null) {
             // 更新
             mas.setApproved(approvalSetDTO.getApproved());
@@ -183,33 +183,33 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
             mas.setDeploymentId(approvalSetDTO.getDeploymentId());
             mas.setUpdatedBy(SecurityUtils.getUsername());
             mas.setUpdatedTime(new Date());
-            materialsApprovalSetMapper.updateById(mas);
+            wfApprovalSetMapper.updateById(mas);
         } else {
             // 新增
-            MaterialsApprovalSet materialsApprovalSet = new MaterialsApprovalSet();
-            materialsApprovalSet.setApproved(approvalSetDTO.getApproved());
-            materialsApprovalSet.setType(type);
-            materialsApprovalSet.setDefinitionId(approvalSetDTO.getDefinitionId());
-            materialsApprovalSet.setDeploymentId(approvalSetDTO.getDeploymentId());
-            materialsApprovalSet.setCreatedBy(SecurityUtils.getUsername());
-            materialsApprovalSet.setCreatedTime(new Date());
-            materialsApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
-            materialsApprovalSet.setUpdatedTime(new Date());
-            materialsApprovalSetMapper.insert(materialsApprovalSet);
+            WfApprovalSet wfApprovalSet = new WfApprovalSet();
+            wfApprovalSet.setApproved(approvalSetDTO.getApproved());
+            wfApprovalSet.setType(type);
+            wfApprovalSet.setDefinitionId(approvalSetDTO.getDefinitionId());
+            wfApprovalSet.setDeploymentId(approvalSetDTO.getDeploymentId());
+            wfApprovalSet.setCreatedBy(SecurityUtils.getUsername());
+            wfApprovalSet.setCreatedTime(new Date());
+            wfApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
+            wfApprovalSet.setUpdatedTime(new Date());
+            wfApprovalSetMapper.insert(wfApprovalSet);
         }
     }
 
-    private MaterialsApprovalSet getMaterialsApprovalSet(String type, String taskId) {
-        LambdaQueryWrapper<MaterialsApprovalSet> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(MaterialsApprovalSet::getType, type);
+    private WfApprovalSet getMaterialsApprovalSet(String type, String taskId) {
+        LambdaQueryWrapper<WfApprovalSet> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(WfApprovalSet::getType, type);
         if (StringUtils.isNotBlank(taskId)) {
-            queryWrapper.eq(MaterialsApprovalSet::getExtraId, taskId);
+            queryWrapper.eq(WfApprovalSet::getExtraId, taskId);
         } else {
             if (ProjectStatusEnum.TASK.getStatusName().equals(type)) {
                 return null;
             }
         }
-        return materialsApprovalSetMapper.selectOne(queryWrapper);
+        return wfApprovalSetMapper.selectOne(queryWrapper);
     }
 
     /**
@@ -221,12 +221,12 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     @Override
     public MaterialsApprovalSetVO queryApprovalSet(String type, String taskId) {
         MaterialsApprovalSetVO materialsApprovalSetVO = new MaterialsApprovalSetVO();
-        MaterialsApprovalSet materialsApprovalSet = getMaterialsApprovalSet(type, taskId);
-        if (materialsApprovalSet != null) {
-            materialsApprovalSetVO.setApproved(materialsApprovalSet.getApproved());
+        WfApprovalSet wfApprovalSet = getMaterialsApprovalSet(type, taskId);
+        if (wfApprovalSet != null) {
+            materialsApprovalSetVO.setApproved(wfApprovalSet.getApproved());
             materialsApprovalSetVO.setType(type);
-            materialsApprovalSetVO.setDeploymentId(materialsApprovalSet.getDeploymentId());
-            materialsApprovalSetVO.setDefinitionId(materialsApprovalSet.getDefinitionId());
+            materialsApprovalSetVO.setDeploymentId(wfApprovalSet.getDeploymentId());
+            materialsApprovalSetVO.setDefinitionId(wfApprovalSet.getDefinitionId());
         }
         return materialsApprovalSetVO;
     }
@@ -274,11 +274,11 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateApprovalSet2(ApprovalSetDTO approvalSetDTO, String type) {
-        LambdaQueryWrapper<MaterialsApprovalSet> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(MaterialsApprovalSet::getExtraId, approvalSetDTO.getTaskId()).eq(MaterialsApprovalSet::getType, ProjectStatusEnum.TASK.getStatusName());
-        MaterialsApprovalSet materialsApprovalSet = materialsApprovalSetMapper.selectOne(queryWrapper);
+        LambdaQueryWrapper<WfApprovalSet> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(WfApprovalSet::getExtraId, approvalSetDTO.getTaskId()).eq(WfApprovalSet::getType, ProjectStatusEnum.TASK.getStatusName());
+        WfApprovalSet wfApprovalSet = wfApprovalSetMapper.selectOne(queryWrapper);
         // 无需审批
-        if ("1".equals(materialsApprovalSet.getApproved())) {
+        if ("1".equals(wfApprovalSet.getApproved())) {
             if (!Objects.equals(wfTaskProcessMapper.selectStatusByTaskId2(approvalSetDTO.getTaskId()), ProjectStatusEnum.NO_STARTED.getStatus())) {
                 throw new ServiceException("需将任务状态变为未开始才能修改审批设置");
             }
@@ -305,12 +305,12 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
                 }
             }
         }
-        materialsApprovalSet.setApproved(approvalSetDTO.getApproved());
-        materialsApprovalSet.setDeploymentId(approvalSetDTO.getDeploymentId());
-        materialsApprovalSet.setDefinitionId(approvalSetDTO.getDefinitionId());
-        materialsApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
-        materialsApprovalSet.setUpdatedTime(new Date());
-        materialsApprovalSetMapper.updateById(materialsApprovalSet);
+        wfApprovalSet.setApproved(approvalSetDTO.getApproved());
+        wfApprovalSet.setDeploymentId(approvalSetDTO.getDeploymentId());
+        wfApprovalSet.setDefinitionId(approvalSetDTO.getDefinitionId());
+        wfApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
+        wfApprovalSet.setUpdatedTime(new Date());
+        wfApprovalSetMapper.updateById(wfApprovalSet);
         return true;
     }
 
@@ -323,17 +323,17 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
         if (CollectionUtils.isNotEmpty(list)) {
             log.info("开始优化的任务审批设置的数量:{}", list.size());
             list.forEach(wfTaskProcess -> {
-                MaterialsApprovalSet materialsApprovalSet = new MaterialsApprovalSet();
-                materialsApprovalSet.setType(ProjectStatusEnum.TASK.getStatusName());
-                materialsApprovalSet.setApproved(wfTaskProcess.getApproved());
-                materialsApprovalSet.setDefinitionId(wfTaskProcess.getDefinitionId());
-                materialsApprovalSet.setDeploymentId(wfTaskProcess.getDeploymentId());
-                materialsApprovalSet.setCreatedBy(wfTaskProcess.getCreatedBy());
-                materialsApprovalSet.setCreatedTime(wfTaskProcess.getCreatedTime());
-                materialsApprovalSet.setUpdatedBy(wfTaskProcess.getUpdatedBy());
-                materialsApprovalSet.setUpdatedTime(wfTaskProcess.getUpdatedTime());
-                materialsApprovalSet.setExtraId(wfTaskProcess.getExtraId());
-                materialsApprovalSetMapper.insert(materialsApprovalSet);
+                WfApprovalSet wfApprovalSet = new WfApprovalSet();
+                wfApprovalSet.setType(ProjectStatusEnum.TASK.getStatusName());
+                wfApprovalSet.setApproved(wfTaskProcess.getApproved());
+                wfApprovalSet.setDefinitionId(wfTaskProcess.getDefinitionId());
+                wfApprovalSet.setDeploymentId(wfTaskProcess.getDeploymentId());
+                wfApprovalSet.setCreatedBy(wfTaskProcess.getCreatedBy());
+                wfApprovalSet.setCreatedTime(wfTaskProcess.getCreatedTime());
+                wfApprovalSet.setUpdatedBy(wfTaskProcess.getUpdatedBy());
+                wfApprovalSet.setUpdatedTime(wfTaskProcess.getUpdatedTime());
+                wfApprovalSet.setExtraId(wfTaskProcess.getExtraId());
+                wfApprovalSetMapper.insert(wfApprovalSet);
                 if ("1".equals(wfTaskProcess.getApproved())) {
                     wfTaskProcessMapper.deleteById(wfTaskProcess);
                     log.info("开始删除的任务id:{}", wfTaskProcess.getTaskId());
@@ -371,28 +371,28 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
 
     @Override
     public boolean insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
-        LambdaQueryWrapper<MaterialsApprovalSet> qw = new LambdaQueryWrapper<>();
-        qw.eq(MaterialsApprovalSet::getExtraId, extraId).eq(MaterialsApprovalSet::getType, type);
-        MaterialsApprovalSet mas = materialsApprovalSetMapper.selectOne(qw);
+        LambdaQueryWrapper<WfApprovalSet> qw = new LambdaQueryWrapper<>();
+        qw.eq(WfApprovalSet::getExtraId, extraId).eq(WfApprovalSet::getType, type);
+        WfApprovalSet mas = wfApprovalSetMapper.selectOne(qw);
         if (mas != null) {
             mas.setApproved(approved);
             mas.setDefinitionId(definitionId);
             mas.setDeploymentId(deploymentId);
             mas.setUpdatedBy(SecurityUtils.getUsername());
             mas.setUpdatedTime(new Date());
-            materialsApprovalSetMapper.updateById(mas);
+            wfApprovalSetMapper.updateById(mas);
         } else {
-            MaterialsApprovalSet materialsApprovalSet = new MaterialsApprovalSet();
-            materialsApprovalSet.setExtraId(extraId);
-            materialsApprovalSet.setType(type);
-            materialsApprovalSet.setApproved(approved);
-            materialsApprovalSet.setDefinitionId(definitionId);
-            materialsApprovalSet.setDeploymentId(deploymentId);
-            materialsApprovalSet.setCreatedBy(SecurityUtils.getUsername());
-            materialsApprovalSet.setCreatedTime(new Date());
-            materialsApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
-            materialsApprovalSet.setUpdatedTime(new Date());
-            materialsApprovalSetMapper.insert(materialsApprovalSet);
+            WfApprovalSet wfApprovalSet = new WfApprovalSet();
+            wfApprovalSet.setExtraId(extraId);
+            wfApprovalSet.setType(type);
+            wfApprovalSet.setApproved(approved);
+            wfApprovalSet.setDefinitionId(definitionId);
+            wfApprovalSet.setDeploymentId(deploymentId);
+            wfApprovalSet.setCreatedBy(SecurityUtils.getUsername());
+            wfApprovalSet.setCreatedTime(new Date());
+            wfApprovalSet.setUpdatedBy(SecurityUtils.getUsername());
+            wfApprovalSet.setUpdatedTime(new Date());
+            wfApprovalSetMapper.insert(wfApprovalSet);
         }
 
         return true;

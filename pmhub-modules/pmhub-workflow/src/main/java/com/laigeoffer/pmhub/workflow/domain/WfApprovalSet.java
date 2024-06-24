@@ -11,8 +11,8 @@ import java.util.Date;
  * @date 2023-04-20 13:53
  */
 @Data
-@TableName("pmhub_materials_approval_set")
-public class MaterialsApprovalSet {
+@TableName("pmhub_wf_approval_set")
+public class WfApprovalSet {
 
     @TableId(type = IdType.ASSIGN_UUID)
     private String id;

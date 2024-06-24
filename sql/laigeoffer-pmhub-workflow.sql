@@ -1566,4 +1566,29 @@ INSERT INTO `pmhub_wf_model_deploy` (`id`, `model_id`, `deployed`, `created_by`,
 COMMIT;
 
 
+-- ----------------------------
+-- Table structure for pmhub_wf_approval_set
+-- ----------------------------
+DROP TABLE IF EXISTS `pmhub_wf_approval_set`;
+CREATE TABLE `pmhub_wf_approval_set` (
+  `id` varchar(32) NOT NULL,
+  `type` varchar(32) DEFAULT NULL,
+  `approved` varchar(10) DEFAULT NULL,
+  `deployment_id` varchar(64) DEFAULT NULL,
+  `definition_id` varchar(64) DEFAULT NULL,
+  `created_by` varchar(64) DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `updated_by` varchar(64) DEFAULT NULL,
+  `updated_time` datetime DEFAULT NULL,
+  `extra_id` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='审批状态设置表';
+
+-- ----------------------------
+-- Records of pmhub_wf_approval_set
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+
 SET FOREIGN_KEY_CHECKS = 1;

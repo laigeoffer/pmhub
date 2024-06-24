@@ -338,18 +338,19 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         if (ProjectStatusEnum.PAUSE.getStatus().equals(projectTaskMapper.queryProjectStatus(taskReqVO.getProjectId()))) {
             throw new ServiceException("该任务不能切换到已暂停的项目");
         }
-        if (!Objects.equals(oldObj.getStatus(), taskReqVO.getStatus())) {
-            // 根据 taskId 去查询 是否需要审批
-            String queryApproved = projectTaskMapper.queryApproved(taskReqVO.getTaskId());
-            String approved = "0";
-            if (approved.equals(queryApproved)) {
-                throw new ServiceException("该任务需要审批，任务状态不允许手动修改");
-            } else {
-                if (!SecurityUtils.getUsername().equals(oldObj.getCreatedBy())) {
-                    throw new ServiceException("该任务不需要审批，只有创建人才能修改任务状态");
-                }
-            }
-        }
+         // TODO: 2024.06.24 暂时注释掉审批过滤，待远程调用
+//        if (!Objects.equals(oldObj.getStatus(), taskReqVO.getStatus())) {
+//            // 根据 taskId 去查询 是否需要审批
+//            String queryApproved = projectTaskMapper.queryApproved(taskReqVO.getTaskId());
+//            String approved = "0";
+//            if (approved.equals(queryApproved)) {
+//                throw new ServiceException("该任务需要审批，任务状态不允许手动修改");
+//            } else {
+//                if (!SecurityUtils.getUsername().equals(oldObj.getCreatedBy())) {
+//                    throw new ServiceException("该任务不需要审批，只有创建人才能修改任务状态");
+//                }
+//            }
+//        }
         ProjectTask projectTask = new ProjectTask();
         BeanUtils.copyProperties(taskReqVO, projectTask);
         projectTask.setId(taskReqVO.getTaskId());
