@@ -669,10 +669,35 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     @Override
     public List<TaskExportVO> exportAll() {
         List<TaskExportVO> list = projectTaskMapper.exportAll(SecurityUtils.getUserId());
+        if (CollectionUtils.isEmpty(list)) {
+            return Collections.emptyList();
+        }
+        // 拿到userids
+        List<Long> userIds = list.stream().map(TaskExportVO::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
         list.forEach(a -> {
             a.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getExecuteStatus()));
             a.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getStatus()));
             a.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(a.getTaskPriority()));
+
+            // 设置用户信息
+            SysUserVO sysUserVO = userMap.get(a.getUserId());
+            if (Objects.nonNull(sysUserVO)) {
+                a.setExecutor(sysUserVO.getNickName());
+                a.setCreatedBy(sysUserVO.getNickName());
+            }
         });
         return list;
     }
@@ -713,12 +738,6 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             }
         });
 
-
-        list.forEach(a -> {
-            a.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getExecuteStatus()));
-            a.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getStatus()));
-            a.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(a.getTaskPriority()));
-        });
         return list;
     }
 
