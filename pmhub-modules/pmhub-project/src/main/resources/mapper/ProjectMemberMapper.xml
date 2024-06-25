@@ -13,7 +13,7 @@
         where pm.pt_id = #{projectId}
     </select>
     <select id="queryTaskUserList" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
-        select su.user_id, su.user_name, su.nick_name from pmhub_project_member pm left join sys_user su on pm.user_id = su.user_id
+        select pm.user_id from pmhub_project_member pm
         where pm.pt_id = #{taskId}
     </select>
 </mapper>
