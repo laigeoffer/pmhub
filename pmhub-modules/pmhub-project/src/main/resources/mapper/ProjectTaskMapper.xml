@@ -106,11 +106,9 @@
         where pt.deleted = 0 and pm.type = 'task' and pm.user_id = #{userId}
     </select>
     <select id="export" resultType="com.laigeoffer.pmhub.project.domain.vo.project.task.TaskExportVO">
-        select pt.task_name, p.project_name, ps.stage_name, su.nick_name as executor, pt.status, pt.execute_status, pt.task_priority, su2.nick_name as createdBy, pt.created_time from pmhub_project_task pt
+        select pt.task_name, p.project_name, ps.stage_name,  pt.status, pt.execute_status, pt.task_priority,  pt.created_time, pt.user_id from pmhub_project_task pt
         left join pmhub_project p on p.id = pt.project_id
         left join pmhub_project_stage ps on pt.project_stage_id = ps.id
-        left join sys_user su on su.user_id = pt.user_id
-        left join sys_user su2 on su2.user_name = pt.created_by
         where pt.deleted = 0
         <if test="taskIdList != null and taskIdList.size() > 0">
             and pt.id in
