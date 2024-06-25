@@ -14,6 +14,7 @@ import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
@@ -226,12 +227,14 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         TaskResVO detail = projectTaskMapper.detail(taskReqVO.getTaskId());
         detail.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getStatus()));
         detail.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getExecuteStatus()));
+        String createdBy = "";
         if (detail.getUserId() != null) {
             // 查询用户信息
             List<SysUser> sysUsers = getSysUserList(Collections.singletonList(detail.getUserId()));
-            detail.setExecutor(sysUsers.get(0).getNickName());
+            createdBy = sysUsers.get(0).getNickName();
+            detail.setExecutor(createdBy);
         }
-        detail.setCreatedBy(projectMemberMapper.selectUserByUsername(Collections.singletonList(detail.getCreatedBy())).get(0).getNickName());
+        detail.setCreatedBy(createdBy);
         detail.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(detail.getTaskPriority()));
         return detail;
     }
@@ -472,10 +475,12 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         taskResVOList.forEach(detail -> {
             detail.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getStatus()));
             detail.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getExecuteStatus()));
+            String createdBy = "";
             if (detail.getUserId() != null) {
-                detail.setExecutor(getSysUserList(Collections.singletonList(detail.getUserId())).get(0).getNickName());
+                createdBy = getSysUserList(Collections.singletonList(detail.getUserId())).get(0).getNickName();
+                detail.setExecutor(createdBy);
             }
-            detail.setCreatedBy(projectMemberMapper.selectUserByUsername(Collections.singletonList(detail.getCreatedBy())).get(0).getNickName());
+            detail.setCreatedBy(createdBy);
             detail.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(detail.getTaskPriority()));
         });
         return taskResVOList;
@@ -608,11 +613,21 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         if (CollectionUtils.isEmpty(taskList)) {
             throw new ServiceException("导入任务数据不能为空");
         }
+        // todo 后期优化成批量查询，性能优化
         taskList.forEach(task -> {
-            List<SysUser> sysUsers = projectMemberMapper.selectUserByUsername(Collections.singletonList(task.getUsername()));
-            if (CollectionUtils.isEmpty(sysUsers)) {
+            // 查询用户信息
+            R<LoginUser> userResult = userFeignService.info(task.getUsername(), SecurityConstants.INNER);
+
+            if (Objects.isNull(userResult) || Objects.isNull(userResult.getData())) {
+                throw new ServiceException("登录用户：" + task.getUsername() + " 不存在");
+            }
+
+            LoginUser loginUser = userResult.getData();
+            if (Objects.isNull(loginUser)) {
                 return;
             }
+            SysUser sysUser =  loginUser.getUser();
+
             ProjectTask projectTask = new ProjectTask();
             projectTask.setTaskName(task.getTaskName());
             projectTask.setBeginTime(DateUtils.parseDate(task.getBeginTime()));
@@ -630,14 +645,14 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             queryWrapper.eq(ProjectMember::getPtId, projectId).eq(ProjectMember::getType, ProjectStatusEnum.PROJECT.getStatusName());
             List<ProjectMember> projectMembers = projectMemberMapper.selectList(queryWrapper);
             List<Long> userIds = projectMembers.stream().map(ProjectMember::getUserId).collect(Collectors.toList());
-            if (!userIds.contains(sysUsers.get(0).getUserId())) {
+            if (!userIds.contains(sysUser.getUserId())) {
                 return;
             }
             projectTask.setProjectId(projectId);
             LambdaQueryWrapper<ProjectStage> qw2 = new LambdaQueryWrapper<>();
             qw2.eq(ProjectStage::getProjectId, projectId).orderByAsc(ProjectStage::getStageCode);
             projectTask.setProjectStageId(projectStageMapper.selectList(qw2).get(0).getId());
-            projectTask.setUserId(sysUsers.get(0).getUserId());
+            projectTask.setUserId(sysUser.getUserId());
             projectTask.setCreatedBy(SecurityUtils.getUsername());
             projectTask.setCreatedTime(new Date());
             projectTask.setUpdatedBy(SecurityUtils.getUsername());

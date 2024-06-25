@@ -1,7 +1,6 @@
 package com.laigeoffer.pmhub.project.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.project.domain.ProjectMember;
 import com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO;
@@ -17,7 +16,6 @@ public interface ProjectMemberMapper extends BaseMapper<ProjectMember> {
 
     List<ProjectMemberResVO> searchMember(@Param("data") ProjectMemberReqVO projectMemberReqVO);
 
-    List<SysUser> selectUserByUsername(@Param("usernameList") List<String> usernameList);
     List<ProjectMemberResVO> queryExecutorList(@Param("projectId") String projectId);
     List<ProjectMemberResVO> queryTaskUserList(@Param("taskId") String taskId);
 }
