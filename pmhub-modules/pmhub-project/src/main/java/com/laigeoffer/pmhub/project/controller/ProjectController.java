@@ -31,7 +31,6 @@ public class ProjectController {
     private ProjectService projectService;
     @Autowired
     private ProjectTaskService projectTaskService;
-    // TODO: 2024.04.28 接口修改为远程调用
     @Autowired
     private ProcessFeignService processService;
     @Autowired

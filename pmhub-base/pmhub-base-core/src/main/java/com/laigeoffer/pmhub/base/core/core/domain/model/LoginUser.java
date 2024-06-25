@@ -19,6 +19,13 @@ public class LoginUser implements Serializable {
      */
     private Long userId;
 
+
+
+    /**
+     * 用户昵称
+     */
+    private String nickName;
+
     /**
      * 用户名
      */
@@ -81,6 +88,7 @@ public class LoginUser implements Serializable {
 
 
 
+
     public LoginUser() {
     }
 
@@ -122,6 +130,14 @@ public class LoginUser implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     @JSONField(serialize = false)

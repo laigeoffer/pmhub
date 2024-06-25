@@ -1,5 +1,6 @@
 package com.laigeoffer.pmhub.system.controller;
 
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
 import com.laigeoffer.pmhub.base.core.annotation.Log;
 import com.laigeoffer.pmhub.base.core.constant.UserConstants;
 import com.laigeoffer.pmhub.base.core.core.controller.BaseController;
@@ -9,6 +10,7 @@ import com.laigeoffer.pmhub.base.core.core.domain.entity.SysDept;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.core.page.TableDataInfo;
 import com.laigeoffer.pmhub.base.core.enums.BusinessType;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
@@ -72,6 +74,17 @@ public class SysUserController extends BaseController {
         startPage();
         List<SysUser> list = userService.selectUserList(user);
         return getDataTable(list);
+    }
+
+    /**
+     * 获取用户列表
+     * 内部服务调用
+     */
+    @InnerAuth
+    @PostMapping("/listOfInner")
+    public R<List<SysUserVO>> listOfInner(@Validated @RequestBody SysUserDTO sysUserDTO) {
+        List<SysUserVO> sysUserVOS = userService.selectUserListOfInner(sysUserDTO);
+        return R.ok(sysUserVOS);
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
@@ -307,6 +320,7 @@ public class SysUserController extends BaseController {
         loginUser.setPermissions(permissions);
         loginUser.setUserId(sysUser.getUserId());
         loginUser.setDeptId(sysUser.getDeptId());
+        loginUser.setNickName(sysUser.getNickName());
 
 
         return R.ok(loginUser);
@@ -326,6 +340,42 @@ public class SysUserController extends BaseController {
             return R.fail("保存用户'" + username + "'失败，注册账号已存在");
         }
         return R.ok(userService.registerUser(sysUser));
+    }
+
+    /**
+     * 根据用户编号获取详细信息（仅限内部服务调用）
+     */
+    @InnerAuth
+    @GetMapping("/getInfoByUserId/{userId}")
+    public R<LoginUser> getInfoByUserId(@PathVariable("userId") Long userId) {
+        if (StringUtils.isNull(userId)) {
+            return R.fail("请传入userId");
+        }
+        SysUser sysUser = userService.selectUserById(userId);
+        if (StringUtils.isNotBlank(sysUser.getLeaderId())) {
+            List<String> userIds = Arrays.asList(sysUser.getLeaderId().split(","));
+            List<String> names = new ArrayList<>();
+            userIds.forEach(id -> {
+                names.add(userService.selectUserById(Long.valueOf(id)).getNickName());
+
+            });
+            sysUser.setLeaderIds(userIds);
+            sysUser.setLeaderNames(names);
+        }
+
+        // 角色集合
+        Set<String> roles = permissionService.getRolePermission(sysUser);
+        // 权限集合
+        Set<String> permissions = permissionService.getMenuPermission(sysUser);
+        LoginUser loginUser = new LoginUser();
+        loginUser.setUser(sysUser);
+        loginUser.setRoles(roles);
+        loginUser.setPermissions(permissions);
+        loginUser.setUserId(sysUser.getUserId());
+        loginUser.setDeptId(sysUser.getDeptId());
+        loginUser.setNickName(sysUser.getNickName());
+
+        return R.ok(loginUser);
     }
 
 }

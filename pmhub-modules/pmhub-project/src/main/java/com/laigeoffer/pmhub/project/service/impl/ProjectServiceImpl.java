@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWra
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
@@ -28,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,6 +55,9 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
     private ProjectCollectionMapper projectCollectionMapper;
     @Autowired
     private QueryProjectFactory queryProjectFactory;
+
+    @Resource
+    private UserFeignService userFeignService;
 
     private final String NO_PUBLISHED_NAME = "未发布";
     private final String PUBLISHED_NAME = "已发布";
@@ -146,7 +153,15 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         ProjectCollection projectCollection = projectCollectionMapper.selectOne(queryWrapper);
         detail.setCollected(projectCollection != null);
         detail.setPublishedName(detail.getPublished() == 0 ? NO_PUBLISHED_NAME : PUBLISHED_NAME);
-        detail.setNickName(projectMemberMapper.selectUserById(Collections.singletonList(detail.getUserId())).get(0).getNickName());
+
+        // 根据userid远程查询用户信息
+        R<LoginUser> userResult = userFeignService.getInfoByUserId(detail.getUserId(), SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || Objects.isNull(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户：" + detail.getUserId() + " 不存在");
+        }
+        LoginUser userInfo = userResult.getData();
+        detail.setNickName(userInfo.getNickName());
         return detail;
     }
 

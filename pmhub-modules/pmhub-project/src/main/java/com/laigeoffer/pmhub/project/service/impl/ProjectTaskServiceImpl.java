@@ -30,7 +30,6 @@ import com.laigeoffer.pmhub.project.service.ProjectLogService;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
 import com.laigeoffer.pmhub.project.service.task.QueryTaskLogFactory;
 import io.seata.core.context.RootContext;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -259,7 +258,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     }
 
     @Override
-    @GlobalTransactional(name = "pmhub-project-addTask",rollbackFor = Exception.class) //seata分布式事务，AT模式
+//    @GlobalTransactional(name = "pmhub-project-addTask",rollbackFor = Exception.class) //seata分布式事务，AT模式
     public String add(TaskReqVO taskReqVO) {
         // xid 全局事务id的检查（方便查看）
         String xid = RootContext.getXID();

@@ -1,7 +1,9 @@
 package com.laigeoffer.pmhub.system.service;
 
 
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 
 import java.util.List;
 
@@ -18,6 +20,15 @@ public interface ISysUserService {
      * @return 用户信息集合信息
      */
     public List<SysUser> selectUserList(SysUser user);
+
+    /**
+     * 根据条件查询用户列表
+     * 内部服务调用
+     *
+     * @param sysUserDTO 用户信息
+     * @return 用户信息集合信息
+     */
+    List<SysUserVO> selectUserListOfInner(SysUserDTO sysUserDTO);
 
     /**
      * 根据条件分页查询已分配用户角色列表

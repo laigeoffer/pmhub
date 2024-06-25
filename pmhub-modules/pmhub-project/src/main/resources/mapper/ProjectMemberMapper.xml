@@ -4,14 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.laigeoffer.pmhub.project.mapper.ProjectMemberMapper">
     <select id="searchMember" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
-        select pm.user_id, su.nick_name, pm.joined_time, sd.dept_name, sr.role_name from pmhub_project_member pm
-            inner join sys_user su on pm.user_id = su.user_id
-            left join sys_dept sd on su.dept_id = sd.dept_id
-            left join sys_user_role sur on sur.user_id = su.user_id
-            left join sys_role sr on sr.role_id = sur.role_id where pm.pt_id = #{data.projectId}
-        <if test="data.keyword != null and data.keyword != ''">
-            and su.nick_name like CONCAT("%", #{data.keyword},"%") or su.email like CONCAT("%", #{data.keyword},"%")
-        </if>
+        select pm.user_id, pm.joined_time from pmhub_project_member pm
+        where pm.pt_id = #{data.projectId}
     </select>
     <select id="queryUserList" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO">
         select user_id, user_name, nick_name, email from sys_user where del_flag = 0

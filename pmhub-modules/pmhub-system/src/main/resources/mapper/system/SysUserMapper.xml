@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.laigeoffer.pmhub.system.mapper.SysUserMapper">
 
-    <resultMap type="SysUserVO" id="SysUserResult">
+    <resultMap type="com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO" id="SysUserResult">
         <id property="userId" column="user_id"/>
         <result property="deptId" column="dept_id"/>
         <result property="leaderId" column="leader_id"/>
@@ -26,11 +26,11 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
-        <association property="dept" column="dept_id" javaType="SysDept" resultMap="deptResult"/>
+        <association property="dept" column="dept_id" javaType="com.laigeoffer.pmhub.base.core.core.domain.entity.SysDept" resultMap="deptResult"/>
         <collection property="roles" javaType="java.util.List" resultMap="RoleResult"/>
     </resultMap>
 
-    <resultMap id="deptResult" type="SysDept">
+    <resultMap id="deptResult" type="com.laigeoffer.pmhub.base.core.core.domain.entity.SysDept">
         <id property="deptId" column="dept_id"/>
         <result property="parentId" column="parent_id"/>
         <result property="deptName" column="dept_name"/>
@@ -40,7 +40,7 @@
         <result property="status" column="dept_status"/>
     </resultMap>
 
-    <resultMap id="RoleResult" type="SysRole">
+    <resultMap id="RoleResult" type="com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole">
         <id property="roleId" column="role_id"/>
         <result property="roleName" column="role_name"/>
         <result property="roleKey" column="role_key"/>
@@ -88,7 +88,7 @@
                  left join sys_role r on r.role_id = ur.role_id
     </sql>
 
-    <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
+    <select id="selectUserList" parameterType="com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser" resultMap="SysUserResult">
         select u.user_id, u.dept_id, u.nick_name, u.user_name, u.user_wx_name,
                case when u.user_wx_name is null then '未绑定' else '已绑定' end as user_wx_name_state,
                u.email, u.avatar, u.phonenumber, u.sex, u.status,
@@ -126,6 +126,44 @@
         </if>
         <!-- 数据范围过滤 -->
         ${params.dataScope}
+    </select>
+    <select id="selectUserListOfInner" parameterType="java.lang.String" resultMap="SysUserResult">
+        <include refid="selectUserVo"/>
+        where u.del_flag = '0'
+        <if test="userId != null and userId != 0">
+            AND u.user_id = #{userId}
+        </if>
+        <if test="userIds != null and userIds.size() > 0">
+            AND u.user_id in
+            <foreach item="userId" index="index" collection="userIds" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+        </if>
+        <if test="nickName != null and nickName != ''">
+            AND u.nick_name like concat('%', #{nickName}, '%')
+        </if>
+        <if test="userName != null and userName != ''">
+            AND u.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="userWxName != null and userWxName != ''">
+            AND u.user_wx_name like concat('%', #{userWxName}, '%')
+        </if>
+        <if test="status != null and status != ''">
+            AND u.status = #{status}
+        </if>
+        <if test="phonenumber != null and phonenumber != ''">
+            AND u.phonenumber like concat('%', #{phonenumber}, '%')
+        </if>
+        <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+            AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        </if>
+        <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+            AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+        </if>
+        <if test="deptId != null and deptId != 0">
+            AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{deptId},
+            ancestors) ))
+        </if>
     </select>
 
     <select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">

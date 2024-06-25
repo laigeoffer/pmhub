@@ -4,7 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
+import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
+import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.project.domain.ProjectMember;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
@@ -17,10 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import javax.annotation.Resource;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +36,8 @@ import java.util.stream.Collectors;
 public class ProjectMemberServiceImpl extends ServiceImpl<ProjectMemberMapper, ProjectMember> implements ProjectMemberService {
     @Autowired
     private ProjectMemberMapper projectMemberMapper;
+    @Resource
+    private UserFeignService userFeignService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -64,7 +71,33 @@ public class ProjectMemberServiceImpl extends ServiceImpl<ProjectMemberMapper, P
     @Override
     public PageInfo<ProjectMemberResVO> searchMember(ProjectMemberReqVO projectMemberReqVO) {
         PageHelper.startPage(projectMemberReqVO.getPageNum(), projectMemberReqVO.getPageSize());
-        return new PageInfo<>(projectMemberMapper.searchMember(projectMemberReqVO));
+        // 根据项目id查询项目成员
+        List<ProjectMemberResVO> projectMemberResVOList = projectMemberMapper.searchMember(projectMemberReqVO);
+        // 查询用户信息
+        List<Long> userIds = projectMemberResVOList.stream().map(ProjectMemberResVO::getUserId).distinct().collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || Objects.isNull(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
+        projectMemberResVOList.forEach(projectMemberVO -> {
+            SysUserVO userVO = userMap.get(projectMemberVO.getUserId());
+            if (Objects.nonNull(userVO)) {
+                projectMemberVO.setNickName(userVO.getNickName());
+                projectMemberVO.setDeptName(userVO.getDept().getDeptName());
+                // 多个角色默认只展示一个角色
+                List<SysRole> roles = userVO.getRoles();
+                projectMemberVO.setRoleName(!roles.isEmpty() ? roles.get(0).getRoleName() : "超级管理员");
+            }
+        });
+
+        return new PageInfo<>(projectMemberResVOList);
     }
 
     @Override

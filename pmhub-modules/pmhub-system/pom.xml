@@ -70,6 +70,11 @@
             <artifactId>pmhub-base-swagger</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-api-system</artifactId>
+        </dependency>
+
 
     </dependencies>
 

@@ -3,7 +3,7 @@
     <el-dialog title="邀请新成员" :visible.sync="visible" width="50%" :before-close="handleClose" @open="handleOpen">
       <el-input
         v-model="keyword"
-        placeholder="请输入昵称或邮箱搜索成员（不输入即可搜索全部）"
+        placeholder="请输入昵称搜索成员（不输入即可搜索全部）"
         @keydown.enter.native="handleSearch"
       >
         <el-button slot="append" icon="el-icon-search" @click="handleSearch" />

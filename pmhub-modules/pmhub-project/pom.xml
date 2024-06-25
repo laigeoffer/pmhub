@@ -77,6 +77,12 @@
             <artifactId>pmhub-base-swagger</artifactId>
         </dependency>
 
+        <!--用户服务-->
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-api-system</artifactId>
+        </dependency>
+
         <!--添加分布式事务-->
         <dependency>
             <groupId>com.laigeoffer.pmhub-cloud</groupId>

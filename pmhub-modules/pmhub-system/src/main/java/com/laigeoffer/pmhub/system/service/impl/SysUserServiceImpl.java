@@ -1,9 +1,11 @@
 package com.laigeoffer.pmhub.system.service.impl;
 
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
 import com.laigeoffer.pmhub.base.core.annotation.DataScope;
 import com.laigeoffer.pmhub.base.core.constant.UserConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysRole;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
@@ -60,6 +62,18 @@ public class SysUserServiceImpl implements ISysUserService {
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectUserList(SysUser user) {
         return userMapper.selectUserList(user);
+    }
+
+    /**
+     * 根据条件查询用户列表
+     * 内部服务调用
+     *
+     * @param sysUserDTO 用户信息
+     * @return 用户信息集合信息
+     */
+    @Override
+    public List<SysUserVO> selectUserListOfInner(SysUserDTO sysUserDTO) {
+        return userMapper.selectUserListOfInner(sysUserDTO);
     }
 
     /**
