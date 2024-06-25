@@ -17,7 +17,6 @@ public interface ProjectMemberMapper extends BaseMapper<ProjectMember> {
 
     List<ProjectMemberResVO> searchMember(@Param("data") ProjectMemberReqVO projectMemberReqVO);
 
-    List<SysUser> selectUserById(@Param("userIdList") List<Long> userId);
     List<SysUser> selectUserByUsername(@Param("usernameList") List<String> usernameList);
     List<ProjectMemberResVO> queryExecutorList(@Param("projectId") String projectId);
     List<ProjectMemberResVO> queryTaskUserList(@Param("taskId") String taskId);

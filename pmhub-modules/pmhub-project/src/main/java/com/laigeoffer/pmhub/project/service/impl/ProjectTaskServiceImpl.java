@@ -6,12 +6,15 @@ import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWra
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
 import com.laigeoffer.pmhub.api.workflow.DeployFeignService;
 import com.laigeoffer.pmhub.base.core.config.PmhubConfig;
 import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.dto.ApprovalSetDTO;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectTaskPriorityEnum;
@@ -74,6 +77,10 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     // 远程调用流程服务
     @Resource
     private DeployFeignService wfDeployService;
+
+    // 远程调用用户服务
+    @Resource
+    private UserFeignService userFeignService;
 
     @Override
     public Long queryTodayTaskNum() {
@@ -220,12 +227,28 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         detail.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getStatus()));
         detail.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getExecuteStatus()));
         if (detail.getUserId() != null) {
-            List<SysUser> sysUsers = projectMemberMapper.selectUserById(Collections.singletonList(detail.getUserId()));
+            // 查询用户信息
+            List<SysUser> sysUsers = getSysUserList(Collections.singletonList(detail.getUserId()));
             detail.setExecutor(sysUsers.get(0).getNickName());
         }
         detail.setCreatedBy(projectMemberMapper.selectUserByUsername(Collections.singletonList(detail.getCreatedBy())).get(0).getNickName());
         detail.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(detail.getTaskPriority()));
         return detail;
+    }
+
+    private List<SysUser> getSysUserList(List<Long> userIds) {
+        // 查询用户信息
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+        return userVOList.stream()
+                .map(userVO -> (SysUser) userVO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -288,7 +311,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         if (taskReqVO.getUserId() != null && !Objects.equals(taskReqVO.getUserId(), SecurityUtils.getUserId())) {
             insertMember(projectTask.getId(), 0, taskReqVO.getUserId());
             // 添加日志
-            saveLog("invitePartakeTask", projectTask.getId(), taskReqVO.getProjectId(), taskReqVO.getTaskName(), "邀请 " + projectMemberMapper.selectUserById(Collections.singletonList(taskReqVO.getUserId())).get(0).getNickName() + " 参与任务", taskReqVO.getUserId());
+            saveLog("invitePartakeTask", projectTask.getId(), taskReqVO.getProjectId(), taskReqVO.getTaskName(), "邀请 " + getSysUserList(Collections.singletonList(taskReqVO.getUserId())).get(0).getNickName() + " 参与任务", taskReqVO.getUserId());
         }
         // 4、任务指派消息提醒
         extracted(taskReqVO.getTaskName(), taskReqVO.getUserId(), SecurityUtils.getUsername(), projectTask.getId());
@@ -416,8 +439,8 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             logContentVOList.forEach(logContentVO -> {
                 switch (logContentVO.getField()) {
                     case "userId":
-                        logContentVO.setOldValue(projectMemberMapper.selectUserById(Collections.singletonList(Long.valueOf(logContentVO.getOldValue()))).get(0).getNickName());
-                        logContentVO.setNewValue(projectMemberMapper.selectUserById(Collections.singletonList(Long.valueOf(logContentVO.getNewValue()))).get(0).getNickName());
+                        logContentVO.setOldValue(getSysUserList(Collections.singletonList(Long.valueOf(logContentVO.getOldValue()))).get(0).getNickName());
+                        logContentVO.setNewValue(getSysUserList(Collections.singletonList(Long.valueOf(logContentVO.getNewValue()))).get(0).getNickName());
                         break;
                     case "status":
                     case "executeStatus":
@@ -450,7 +473,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             detail.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getStatus()));
             detail.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(detail.getExecuteStatus()));
             if (detail.getUserId() != null) {
-                detail.setExecutor(projectMemberMapper.selectUserById(Collections.singletonList(detail.getUserId())).get(0).getNickName());
+                detail.setExecutor(getSysUserList(Collections.singletonList(detail.getUserId())).get(0).getNickName());
             }
             detail.setCreatedBy(projectMemberMapper.selectUserByUsername(Collections.singletonList(detail.getCreatedBy())).get(0).getNickName());
             detail.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(detail.getTaskPriority()));
@@ -629,7 +652,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
                 insertMember(projectTask.getId(), 0, projectTask.getUserId());
                 // 添加日志
                 saveLog("invitePartakeTask", projectTask.getId(), projectTask.getProjectId(), projectTask.getTaskName()
-                        ,"邀请 " + projectMemberMapper.selectUserById(Collections.singletonList(projectTask.getUserId())).get(0).getNickName() + " 参与任务"
+                        ,"邀请 " + getSysUserList(Collections.singletonList(projectTask.getUserId())).get(0).getNickName() + " 参与任务"
                         , projectTask.getUserId());
             }
         });

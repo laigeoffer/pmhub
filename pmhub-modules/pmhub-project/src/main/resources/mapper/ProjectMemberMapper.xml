@@ -7,15 +7,7 @@
         select pm.user_id, pm.joined_time from pmhub_project_member pm
         where pm.pt_id = #{data.projectId}
     </select>
-    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser">
-        select * from sys_user su where
-        <if test="userIdList != null and userIdList.size() > 0">
-            su.user_id in
-            <foreach item="userId" index="index" collection="userIdList" open="(" separator="," close=")">
-                #{userId}
-            </foreach>
-        </if>
-    </select>
+
     <select id="selectUserByUsername" parameterType="java.lang.String" resultType="com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser">
         select * from sys_user su where
         <if test="usernameList != null and usernameList.size() > 0">
