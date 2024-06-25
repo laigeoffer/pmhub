@@ -185,7 +185,7 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 ![](https://cdn.tobebetterjavaer.com/images/20240324/83b5e36a95e04e3d951641215ff16dcf.png)
 
 
-②、导入数据库文件，路径在 pmhub/sql/pmhub_20240305.sql 和 pmhub/sql/pmhub_nacos_20240423.sql
+②、导入数据库文件，路径在 pmhub/sql/,导入所有数据库文件（每一个微服务对应一个数据库）
 
 ![](https://cdn.tobebetterjavaer.com/stutymore/20240601235111.png)
 
