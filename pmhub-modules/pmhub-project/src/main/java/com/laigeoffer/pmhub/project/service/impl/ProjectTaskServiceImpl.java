@@ -256,7 +256,35 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
 
     @Override
     public List<ProjectMemberResVO> queryExecutorList(TaskReqVO taskReqVO) {
-        return projectMemberMapper.queryExecutorList(taskReqVO.getProjectId());
+        List<ProjectMemberResVO> list = projectMemberMapper.queryExecutorList(taskReqVO.getProjectId());
+        if (CollectionUtils.isEmpty(list)) {
+            return Collections.emptyList();
+        }
+        // 拿到userids
+        List<Long> userIds = list.stream().map(ProjectMemberResVO::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
+        list.forEach(projectMemberResVO -> {
+            SysUserVO sysUserVO = userMap.get(projectMemberResVO.getUserId());
+            if (Objects.nonNull(sysUserVO)) {
+                projectMemberResVO.setUserName(sysUserVO.getUserName());
+                projectMemberResVO.setNickName(sysUserVO.getNickName());
+                projectMemberResVO.setEmail(sysUserVO.getEmail());
+                projectMemberResVO.setAvatar(sysUserVO.getAvatar());
+            }
+        });
+        return list;
     }
 
     @Override
