@@ -290,7 +290,19 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         PageHelper.startPage(projectReqVO.getPageNum(), projectReqVO.getPageSize());
         List<ProjectResVO> list = queryProjectFactory.execute(projectReqVO);
         if (CollectionUtils.isNotEmpty(list)) {
-            List<SysUser> sysUsers = projectMemberMapper.selectUserById(list.stream().map(ProjectResVO::getUserId).distinct().collect(Collectors.toList()));
+            // 查询用户信息
+            List<Long> userIds =  list.stream().map(ProjectResVO::getUserId).distinct().collect(Collectors.toList());
+            SysUserDTO sysUserDTO = new SysUserDTO();
+            sysUserDTO.setUserIds(userIds);
+            R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+            if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+                throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+            }
+            List<SysUserVO> userVOList = userResult.getData();
+            List<SysUser> sysUsers = userVOList.stream()
+                    .map(userVO -> (SysUser) userVO)
+                    .collect(Collectors.toList());
             Map<Long, List<SysUser>> map = sysUsers.stream().collect(Collectors.groupingBy(SysUser::getUserId));
 
             list.forEach(a -> {
