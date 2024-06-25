@@ -132,12 +132,8 @@
     <select id="queryVxUserName" resultType="java.lang.String">
         select user_wx_name from sys_user where user_id = #{userId}
     </select>
-    <select id="queryUserName" resultType="java.lang.String">
-        select user_name from sys_user where user_id = #{userId}
-    </select>
-    <select id="queryNickName" resultType="java.lang.String">
-        select nick_name from sys_user where user_name = #{username}
-    </select>
+
+
     <select id="queryApproved" resultType="java.lang.String">
        select approved from pmhub_materials_approval_set where type = 'task' and extra_id = #{taskId}
     </select>

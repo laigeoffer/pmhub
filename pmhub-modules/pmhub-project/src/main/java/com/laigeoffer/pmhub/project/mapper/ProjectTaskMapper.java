@@ -29,8 +29,7 @@ public interface ProjectTaskMapper extends BaseMapper<ProjectTask> {
     List<TaskNotifyDTO> queryTaskNotifyJob();
     List<TaskNotifyDTO> queryTaskNotifyJob2();
     String queryVxUserName(@Param("userId") Long userId);
-    String queryUserName(@Param("userId") Long userId);
-    String queryNickName(@Param("username") String username);
+
     String queryApproved(@Param("taskId") String taskId);
     Integer queryProjectStatus(@Param("projectId") String projectId);
     List<Project> queryProjectsStatus(@Param("projectIds") List<String> projectIds);

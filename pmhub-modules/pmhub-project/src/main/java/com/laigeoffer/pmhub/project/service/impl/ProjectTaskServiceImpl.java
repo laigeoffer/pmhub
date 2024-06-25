@@ -391,7 +391,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     private void extracted(String taskName, Long userId, String username, String taskId) {
         String name = projectTaskMapper.queryVxUserName(userId);
         if (StringUtils.isNotBlank(name)) {
-            // TODO: 2024.04.25 语雀任务提醒暂时关闭 
+            // TODO: 2024.04.25 逾期任务提醒暂时关闭
 //            TaskAssignRemindDTO taskAssignRemindDTO = new TaskAssignRemindDTO();
 //            taskAssignRemindDTO.setTaskName(taskName);
 //            taskAssignRemindDTO.setUserIds(Collections.singletonList(name));

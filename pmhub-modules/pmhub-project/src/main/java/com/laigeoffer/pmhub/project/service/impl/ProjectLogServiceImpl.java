@@ -27,7 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author canghe
@@ -124,6 +126,35 @@ public class ProjectLogServiceImpl extends ServiceImpl<ProjectLogMapper, Project
     @Override
     public PageInfo<ProjectLogVO> list(ProjectVO projectVO) {
         PageHelper.startPage(projectVO.getPageNum(), projectVO.getPageSize());
-        return new PageInfo<>(projectLogMapper.queryLogList(projectVO.getProjectId()));
+        List<ProjectLogVO> projectLogVOS = projectLogMapper.queryLogList(projectVO.getProjectId());
+        if (CollectionUtils.isEmpty(projectLogVOS)) {
+            return new PageInfo<>();
+        }
+        // 拿到userids
+        List<Long> userIds = projectLogVOS.stream().map(ProjectLogVO::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
+        projectLogVOS.forEach(a -> {
+
+            // 设置用户信息
+            SysUserVO sysUserVO = userMap.get(a.getUserId());
+            if (Objects.nonNull(sysUserVO)) {
+                a.setUserName(sysUserVO.getUserName());
+                a.setNickName(sysUserVO.getNickName());
+                a.setAvatar(sysUserVO.getAvatar());
+            }
+        });
+        return new PageInfo<>(projectLogVOS);
     }
 }
