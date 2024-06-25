@@ -291,23 +291,51 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     public PageInfo<TaskResVO> list(TaskReqVO taskReqVO) {
         PageHelper.startPage(taskReqVO.getPageNum(), taskReqVO.getPageSize());
         List<TaskResVO> list = projectTaskMapper.list(taskReqVO, SecurityUtils.getUserId());
-        if (CollectionUtils.isNotEmpty(list)) {
-            list.forEach(a -> {
-                WorkFlowable workFlowable = new WorkFlowable();
-                workFlowable.setTaskId(a.getTaskProcessId());
-                workFlowable.setApproved(a.getApproved());
-                workFlowable.setDeploymentId(a.getDeployId());
-                workFlowable.setProcInsId(a.getProcInsId());
-                workFlowable.setDefinitionId(a.getDefinitionId());
-                a.setWorkFlowable(workFlowable);
-                a.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(a.getTaskPriority()));
-                a.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getStatus()));
-                a.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getExecuteStatus()));
-                if (a.getEndTime() != null && a.getBeginTime() != null) {
-                    a.setPeriod(DateUtils.differentDaysByMillisecond(a.getEndTime(), a.getBeginTime()));
-                }
-            });
+        if (CollectionUtils.isEmpty(list)) {
+            return new PageInfo<>(list);
         }
+        // 拿到userids
+        List<Long> userIds = list.stream().map(TaskResVO::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        if (StringUtils.isNotEmpty(taskReqVO.getExecutor())) {
+            sysUserDTO.setNickName(taskReqVO.getExecutor());
+        }
+        if (StringUtils.isNotEmpty(taskReqVO.getCreatedBy())) {
+            sysUserDTO.setNickName(taskReqVO.getCreatedBy());
+        }
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
+        list.forEach(a -> {
+            WorkFlowable workFlowable = new WorkFlowable();
+            workFlowable.setTaskId(a.getTaskProcessId());
+            workFlowable.setApproved(a.getApproved());
+            workFlowable.setDeploymentId(a.getDeployId());
+            workFlowable.setProcInsId(a.getProcInsId());
+            workFlowable.setDefinitionId(a.getDefinitionId());
+            a.setWorkFlowable(workFlowable);
+            a.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(a.getTaskPriority()));
+            a.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getStatus()));
+            a.setExecuteStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getExecuteStatus()));
+            if (a.getEndTime() != null && a.getBeginTime() != null) {
+                a.setPeriod(DateUtils.differentDaysByMillisecond(a.getEndTime(), a.getBeginTime()));
+            }
+            // 设置用户信息
+            SysUserVO sysUserVO = userMap.get(a.getUserId());
+            if (Objects.nonNull(sysUserVO)) {
+                a.setExecutor(sysUserVO.getNickName());
+                a.setCreatedBy(sysUserVO.getNickName());
+            }
+        });
         return new PageInfo<>(list);
     }
 
