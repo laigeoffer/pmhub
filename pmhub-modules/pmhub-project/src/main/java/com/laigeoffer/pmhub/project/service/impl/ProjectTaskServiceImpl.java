@@ -802,6 +802,30 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     public PageInfo<TaskResVO> taskList(TaskReqVO taskReqVO) {
         PageHelper.startPage(taskReqVO.getPageNum(), taskReqVO.getPageSize());
         List<TaskResVO> list = projectTaskMapper.taskList(taskReqVO);
+        if (CollectionUtils.isEmpty(list)) {
+            return new PageInfo<>(list);
+        }
+        // 拿到userids
+        List<Long> userIds = list.stream().map(TaskResVO::getUserId)
+                .distinct()
+                .collect(Collectors.toList());
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setUserIds(userIds);
+        if (StringUtils.isNotEmpty(taskReqVO.getExecutor())) {
+            sysUserDTO.setNickName(taskReqVO.getExecutor());
+        }
+        if (StringUtils.isNotEmpty(taskReqVO.getCreatedBy())) {
+            sysUserDTO.setNickName(taskReqVO.getCreatedBy());
+        }
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+
+        // 匹配设置值
+        Map<Long, SysUserVO> userMap = userVOList.stream().collect(Collectors.toMap(SysUserVO::getUserId, a -> a));
         list.forEach(a -> {
             a.setTaskPriorityName(ProjectTaskPriorityEnum.getStatusNameByStatus(a.getTaskPriority()));
             a.setStatusName(ProjectTaskStatusEnum.getStatusNameByStatus(a.getStatus()));
@@ -816,6 +840,12 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
             workFlowable.setProcInsId(a.getProcInsId());
             workFlowable.setDefinitionId(a.getDefinitionId());
             a.setWorkFlowable(workFlowable);
+            // 设置用户信息
+            SysUserVO sysUserVO = userMap.get(a.getUserId());
+            if (Objects.nonNull(sysUserVO)) {
+                a.setExecutor(sysUserVO.getNickName());
+                a.setCreatedBy(sysUserVO.getNickName());
+            }
         });
         return new PageInfo<>(list);
     }
