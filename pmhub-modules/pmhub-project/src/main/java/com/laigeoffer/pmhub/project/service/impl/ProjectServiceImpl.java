@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
 import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
 import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
 import com.laigeoffer.pmhub.base.core.core.domain.model.LoginUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.enums.LogTypeEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStageEnum;
 import com.laigeoffer.pmhub.base.core.enums.ProjectStatusEnum;
@@ -174,7 +176,19 @@ public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> impl
         List<Project> projects = projectMapper.selectList(queryWrapper);
 
         if (CollectionUtils.isNotEmpty(projects)) {
-            List<SysUser> sysUsers = projectMemberMapper.selectUserById(projects.stream().map(Project::getUserId).distinct().collect(Collectors.toList()));
+            // 根据 userIds 查询用户列表
+            List<Long> userIds = projects.stream().map(Project::getUserId).distinct().collect(Collectors.toList());
+            SysUserDTO sysUserDTO = new SysUserDTO();
+            sysUserDTO.setUserIds(userIds);
+            R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+            if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+                throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+            }
+            List<SysUserVO> userVOList = userResult.getData();
+            List<SysUser> sysUsers = userVOList.stream()
+                    .map(userVO -> (SysUser) userVO)
+                    .collect(Collectors.toList());
             Map<Long, List<SysUser>> map = sysUsers.stream().collect(Collectors.groupingBy(SysUser::getUserId));
             projects.forEach(a -> {
                 DoingProjectVO doingProjectVO = new DoingProjectVO();
