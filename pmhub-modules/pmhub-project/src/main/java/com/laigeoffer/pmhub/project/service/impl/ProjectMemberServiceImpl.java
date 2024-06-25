@@ -79,7 +79,7 @@ public class ProjectMemberServiceImpl extends ServiceImpl<ProjectMemberMapper, P
         sysUserDTO.setUserIds(userIds);
         R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
 
-        if (Objects.isNull(userResult) || Objects.isNull(userResult.getData())) {
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
             throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
         }
         List<SysUserVO> userVOList = userResult.getData();
@@ -102,11 +102,30 @@ public class ProjectMemberServiceImpl extends ServiceImpl<ProjectMemberMapper, P
 
     @Override
     public List<ProjectMemberResVO> queryUserList(String projectId, String keyword) {
-        List<ProjectMemberResVO> memberResVOList = projectMemberMapper.queryUserList(keyword);
+        // 根据昵称模糊查询用户列表
+        SysUserDTO sysUserDTO = new SysUserDTO();
+        sysUserDTO.setNickName(keyword);
+        R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+        if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+            throw new ServiceException("远程调用查询用户列表：" + keyword + " 失败");
+        }
+        List<SysUserVO> userVOList = userResult.getData();
+        // 复制 userVOList 对象到 List<ProjectMemberResVO>
+        List<ProjectMemberResVO> memberResVOList = userVOList.stream().map(userVO -> {
+            ProjectMemberResVO memberResVO = new ProjectMemberResVO();
+
+            // 手动将 SysUserVO 的字段复制到 ProjectMemberResVO（个别字段）
+            memberResVO.setUserId(userVO.getUserId());
+            memberResVO.setUserName(userVO.getUserName());
+            memberResVO.setNickName(userVO.getNickName());
+            memberResVO.setEmail(userVO.getEmail());
+            return memberResVO;
+        }).collect(Collectors.toList());
+
         if (CollectionUtils.isEmpty(memberResVOList)) {
             return Collections.emptyList();
         }
-        List<Long> userIds = memberResVOList.stream().map(ProjectMemberResVO::getUserId).distinct().collect(Collectors.toList());
         LambdaQueryWrapper<ProjectMember> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ProjectMember::getPtId, projectId);
         List<ProjectMember> projectMembers = projectMemberMapper.selectList(queryWrapper);

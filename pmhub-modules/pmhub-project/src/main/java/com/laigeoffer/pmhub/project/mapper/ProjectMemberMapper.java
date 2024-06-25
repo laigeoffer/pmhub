@@ -16,12 +16,6 @@ import java.util.List;
 public interface ProjectMemberMapper extends BaseMapper<ProjectMember> {
 
     List<ProjectMemberResVO> searchMember(@Param("data") ProjectMemberReqVO projectMemberReqVO);
-    /**
-     * 根据昵称或邮箱模糊查询用户
-     * @param keyword
-     * @return
-     */
-    List<ProjectMemberResVO> queryUserList(@Param("keyword") String keyword);
 
     List<SysUser> selectUserById(@Param("userIdList") List<Long> userId);
     List<SysUser> selectUserByUsername(@Param("usernameList") List<String> usernameList);
