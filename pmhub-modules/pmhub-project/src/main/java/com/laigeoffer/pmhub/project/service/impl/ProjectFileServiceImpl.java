@@ -3,7 +3,12 @@ package com.laigeoffer.pmhub.project.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
 import com.laigeoffer.pmhub.base.core.enums.FileTypeEnum;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.security.utils.SecurityUtils;
@@ -23,11 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -45,6 +48,8 @@ public class ProjectFileServiceImpl extends ServiceImpl<ProjectFileMapper, Proje
     private ProjectMemberMapper projectMemberMapper;
     @Autowired
     private ProjectTaskMapper projectTaskMapper;
+    @Resource
+    private UserFeignService userFeignService;
 
 
     @Override
@@ -71,7 +76,18 @@ public class ProjectFileServiceImpl extends ServiceImpl<ProjectFileMapper, Proje
 
         if (CollectionUtils.isNotEmpty(files)) {
             List<Long> userIds = files.stream().map(ProjectFileResVO::getUserId).distinct().collect(Collectors.toList());
-            List<SysUser> sysUsers = projectMemberMapper.selectUserById(userIds);
+            // 根据 userIds 查询用户列表
+            SysUserDTO sysUserDTO = new SysUserDTO();
+            sysUserDTO.setUserIds(userIds);
+            R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+            if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+                throw new ServiceException("远程调用查询用户列表：" + userIds + " 失败");
+            }
+            List<SysUserVO> userVOList = userResult.getData();
+            List<SysUser> sysUsers = userVOList.stream()
+                    .map(userVO -> (SysUser) userVO)
+                    .collect(Collectors.toList());
             Map<Long, List<SysUser>> map = sysUsers.stream().collect(Collectors.groupingBy(SysUser::getUserId));
             files.forEach(a -> {
                 if (FileTypeEnum.P.getStatus().equals(a.getType())) {
