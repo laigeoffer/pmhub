@@ -3,7 +3,13 @@ package com.laigeoffer.pmhub.project.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.api.system.UserFeignService;
+import com.laigeoffer.pmhub.api.system.domain.dto.SysUserDTO;
+import com.laigeoffer.pmhub.base.core.constant.SecurityConstants;
+import com.laigeoffer.pmhub.base.core.core.domain.R;
 import com.laigeoffer.pmhub.base.core.core.domain.entity.SysUser;
+import com.laigeoffer.pmhub.base.core.core.domain.vo.SysUserVO;
+import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.ProjectLog;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
@@ -13,11 +19,15 @@ import com.laigeoffer.pmhub.project.mapper.ProjectLogMapper;
 import com.laigeoffer.pmhub.project.mapper.ProjectMapper;
 import com.laigeoffer.pmhub.project.mapper.ProjectMemberMapper;
 import com.laigeoffer.pmhub.project.service.ProjectLogService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author canghe
@@ -32,6 +42,8 @@ public class ProjectLogServiceImpl extends ServiceImpl<ProjectLogMapper, Project
     private ProjectMemberMapper projectMemberMapper;
     @Autowired
     private ProjectLogMapper projectLogMapper;
+    @Resource
+    private UserFeignService userFeignService;
 
     @Transactional(rollbackFor = Exception.class)
     public void run(LogVO logVO) {
@@ -54,7 +66,18 @@ public class ProjectLogServiceImpl extends ServiceImpl<ProjectLogMapper, Project
         Project project = projectMapper.selectById(projectLog.getPtId());
         SysUser sysUser = new SysUser();
         if (projectLog.getToUserId() != null) {
-            sysUser = projectMemberMapper.selectUserById(Collections.singletonList(projectLog.getToUserId())).get(0);
+            // 根据 userIds 查询用户列表
+            SysUserDTO sysUserDTO = new SysUserDTO();
+            sysUserDTO.setUserIds(Collections.singletonList(projectLog.getToUserId()));
+            R<List<SysUserVO>> userResult = userFeignService.listOfInner(sysUserDTO, SecurityConstants.INNER);
+
+            if (Objects.isNull(userResult) || CollectionUtils.isEmpty(userResult.getData())) {
+                throw new ServiceException("远程调用查询用户列表：" + projectLog.getToUserId() + " 失败");
+            }
+            List<SysUserVO> userVOList = userResult.getData();
+            if (CollectionUtils.isNotEmpty(userVOList)) {
+                sysUser = userVOList.get(0);
+            }
         }
 
         String type = projectLog.getOperateType();
