@@ -372,6 +372,12 @@ public class WfDeployServiceImpl extends FlowServiceFactory implements IWfDeploy
     @Override
     public boolean insertOrUpdateApprovalSet(String extraId, String type, String approved, String definitionId, String deploymentId) {
         LambdaQueryWrapper<WfApprovalSet> qw = new LambdaQueryWrapper<>();
+        // 分布式任务异常场景模拟，睡10秒
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         qw.eq(WfApprovalSet::getExtraId, extraId).eq(WfApprovalSet::getType, type);
         WfApprovalSet mas = wfApprovalSetMapper.selectOne(qw);
         if (mas != null) {

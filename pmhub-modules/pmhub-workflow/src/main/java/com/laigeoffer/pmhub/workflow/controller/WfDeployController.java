@@ -157,7 +157,7 @@ public class WfDeployController extends BaseController {
      */
     @InnerAuth
     @PostMapping("/insertOrUpdateApprovalSet")
-    public R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
+    public R<Boolean> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.insertOrUpdateApprovalSet(approvalSetDTO.getExtraId(), approvalSetDTO.getType(), approvalSetDTO.getApproved(), approvalSetDTO.getDefinitionId(), approvalSetDTO.getDeploymentId()));
     }
 

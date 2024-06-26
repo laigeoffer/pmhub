@@ -34,6 +34,7 @@ import com.laigeoffer.pmhub.project.service.ProjectLogService;
 import com.laigeoffer.pmhub.project.service.ProjectTaskService;
 import com.laigeoffer.pmhub.project.service.task.QueryTaskLogFactory;
 import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -340,7 +341,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     }
 
     @Override
-//    @GlobalTransactional(name = "pmhub-project-addTask",rollbackFor = Exception.class) //seata分布式事务，AT模式
+    @GlobalTransactional(name = "pmhub-project-addTask",rollbackFor = Exception.class) //seata分布式事务，AT模式
     public String add(TaskReqVO taskReqVO) {
         // xid 全局事务id的检查（方便查看）
         String xid = RootContext.getXID();
@@ -378,7 +379,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
         // 5、添加或更新审批设置（远程调用 pmhub-workflow 微服务）
         ApprovalSetDTO approvalSetDTO = new ApprovalSetDTO(projectTask.getId(), ProjectStatusEnum.TASK.getStatusName(),
                 taskReqVO.getApproved(), taskReqVO.getDefinitionId(), taskReqVO.getDeploymentId());
-        R<?> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
+        R<Boolean> result = wfDeployService.insertOrUpdateApprovalSet(approvalSetDTO, SecurityConstants.INNER);
 
         if (Objects.isNull(result) || Objects.isNull(result.getData())
                 || R.fail().equals(result.getData())) {
@@ -389,8 +390,8 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
     }
 
     private void extracted(String taskName, Long userId, String username, String taskId) {
-        String name = projectTaskMapper.queryVxUserName(userId);
-        if (StringUtils.isNotBlank(name)) {
+//        String name = projectTaskMapper.queryVxUserName(userId);
+//        if (StringUtils.isNotBlank(name)) {
             // TODO: 2024.04.25 逾期任务提醒暂时关闭
 //            TaskAssignRemindDTO taskAssignRemindDTO = new TaskAssignRemindDTO();
 //            taskAssignRemindDTO.setTaskName(taskName);
@@ -405,7 +406,7 @@ public class ProjectTaskServiceImpl extends ServiceImpl<ProjectTaskMapper, Proje
 //            taskAssignRemindDTO.setLinkUrl(OAUtils.ssoCreate(host + "/pmhub-project/my-task/info?taskId=" + taskId));
             // TODO: 2024.03.03 @canghe 推送消息暂时关闭
 //            RocketMqUtils.push2Wx(taskAssignRemindDTO);
-        }
+//        }
 
     }
 

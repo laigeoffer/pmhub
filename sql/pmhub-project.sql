@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50742 (5.7.42)
  Source Host           : localhost:3306
- Source Schema         : laigeoffer-pmhub-project
+ Source Schema         : pmhub-project
 
  Target Server Type    : MySQL
  Target Server Version : 50742 (5.7.42)
@@ -13,13 +13,14 @@
 
  Date: 21/06/2024 16:18:44
 */
-CREATE DATABASE  `laigeoffer-pmhub-project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE  `pmhub-project` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-USE `laigeoffer-pmhub-project`;
+USE `pmhub-project`;
+
 
 
 -- ----------------------------
@@ -347,6 +348,28 @@ CREATE TABLE `pmhub_project_task_work_time` (
 
 -- ----------------------------
 -- Records of pmhub_project_task_work_time
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- for AT mode you must to init this sql for you business database. the seata server not need it.
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `branch_id`     BIGINT       NOT NULL COMMENT 'branch transaction id',
+    `xid`           VARCHAR(128) NOT NULL COMMENT 'global transaction id',
+    `context`       VARCHAR(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+    `rollback_info` LONGBLOB     NOT NULL COMMENT 'rollback info',
+    `log_status`    INT(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   DATETIME(6)  NOT NULL COMMENT 'create datetime',
+    `log_modified`  DATETIME(6)  NOT NULL COMMENT 'modify datetime',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT ='AT transaction mode undo table';
+ALTER TABLE `undo_log` ADD INDEX `ix_log_created` (`log_created`);
+
+-- ----------------------------
+-- Records of undo_log
 -- ----------------------------
 BEGIN;
 COMMIT;

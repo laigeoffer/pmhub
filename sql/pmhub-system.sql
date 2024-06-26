@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50742 (5.7.42)
  Source Host           : localhost:3306
- Source Schema         : laigeoffer-pmhub-system
+ Source Schema         : pmhub-system
 
  Target Server Type    : MySQL
  Target Server Version : 50742 (5.7.42)
@@ -14,13 +14,13 @@
  Date: 21/06/2024 16:43:12
 */
 
-CREATE DATABASE  `laigeoffer-pmhub-system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE  `pmhub-system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-USE `laigeoffer-pmhub-system`;
+USE `pmhub-system`;
 
 -- ----------------------------
 -- Table structure for pmhub_async

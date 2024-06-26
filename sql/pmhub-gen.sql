@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50742 (5.7.42)
  Source Host           : localhost:3306
- Source Schema         : laigeoffer-pmhub-gen
+ Source Schema         : pmhub-gen
 
  Target Server Type    : MySQL
  Target Server Version : 50742 (5.7.42)
@@ -13,13 +13,13 @@
 
  Date: 21/06/2024 16:36:49
 */
-CREATE DATABASE  `laigeoffer-pmhub-gen` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE  `pmhub-gen` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-USE `laigeoffer-pmhub-gen`;
+USE `pmhub-gen`;
 
 -- ----------------------------
 -- Table structure for gen_table

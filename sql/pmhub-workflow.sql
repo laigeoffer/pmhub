@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50742 (5.7.42)
  Source Host           : localhost:3306
- Source Schema         : laigeoffer-pmhub-workflow
+ Source Schema         : pmhub-workflow
 
  Target Server Type    : MySQL
  Target Server Version : 50742 (5.7.42)
@@ -13,13 +13,13 @@
 
  Date: 21/06/2024 15:39:22
 */
-CREATE DATABASE  `laigeoffer-pmhub-workflow` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE  `pmhub-workflow` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
-USE `laigeoffer-pmhub-workflow`;
+USE `pmhub-workflow`;
 
 -- ----------------------------
 -- Table structure for ACT_EVT_LOG
@@ -1394,10 +1394,10 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for act_hi_identitylink
+-- Table structure for ACT_HI_IDENTITYLINK
 -- ----------------------------
-DROP TABLE IF EXISTS `act_hi_identitylink`;
-CREATE TABLE `act_hi_identitylink` (
+DROP TABLE IF EXISTS `ACT_HI_IDENTITYLINK`;
+CREATE TABLE `ACT_HI_IDENTITYLINK` (
   `ID_` varchar(64) COLLATE utf8_bin NOT NULL,
   `GROUP_ID_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `TYPE_` varchar(255) COLLATE utf8_bin DEFAULT NULL,
@@ -1419,7 +1419,7 @@ CREATE TABLE `act_hi_identitylink` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of act_hi_identitylink
+-- Records of ACT_HI_IDENTITYLINK
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -1570,22 +1570,45 @@ COMMIT;
 -- Table structure for pmhub_wf_approval_set
 -- ----------------------------
 DROP TABLE IF EXISTS `pmhub_wf_approval_set`;
-CREATE TABLE `pmhub_wf_approval_set` (
-  `id` varchar(32) NOT NULL,
-  `type` varchar(32) DEFAULT NULL,
-  `approved` varchar(10) DEFAULT NULL,
-  `deployment_id` varchar(64) DEFAULT NULL,
-  `definition_id` varchar(64) DEFAULT NULL,
-  `created_by` varchar(64) DEFAULT NULL,
-  `created_time` datetime DEFAULT NULL,
-  `updated_by` varchar(64) DEFAULT NULL,
-  `updated_time` datetime DEFAULT NULL,
-  `extra_id` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='审批状态设置表';
+CREATE TABLE `pmhub_wf_approval_set`
+(
+    `id`            varchar(32) NOT NULL,
+    `type`          varchar(32) DEFAULT NULL,
+    `approved`      varchar(10) DEFAULT NULL,
+    `deployment_id` varchar(64) DEFAULT NULL,
+    `definition_id` varchar(64) DEFAULT NULL,
+    `created_by`    varchar(64) DEFAULT NULL,
+    `created_time`  datetime    DEFAULT NULL,
+    `updated_by`    varchar(64) DEFAULT NULL,
+    `updated_time`  datetime    DEFAULT NULL,
+    `extra_id`      varchar(32) DEFAULT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of pmhub_wf_approval_set
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- for AT mode you must to init this sql for you business database. the seata server not need it.
+CREATE TABLE IF NOT EXISTS `undo_log`
+(
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `branch_id`     BIGINT       NOT NULL COMMENT 'branch transaction id',
+    `xid`           VARCHAR(128) NOT NULL COMMENT 'global transaction id',
+    `context`       VARCHAR(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+    `rollback_info` LONGBLOB     NOT NULL COMMENT 'rollback info',
+    `log_status`    INT(11)      NOT NULL COMMENT '0:normal status,1:defense status',
+    `log_created`   DATETIME(6)  NOT NULL COMMENT 'create datetime',
+    `log_modified`  DATETIME(6)  NOT NULL COMMENT 'modify datetime',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`, `branch_id`)
+    ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4 COMMENT ='AT transaction mode undo table';
+ALTER TABLE `undo_log` ADD INDEX `ix_log_created` (`log_created`);
+
+-- ----------------------------
+-- Records of undo_log
 -- ----------------------------
 BEGIN;
 COMMIT;

@@ -52,7 +52,7 @@ public interface DeployFeignService {
      * @return
      */
     @PostMapping("/workflow/deploy/insertOrUpdateApprovalSet")
-    R<?> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
+    R<Boolean> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 
     /**
