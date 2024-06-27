@@ -101,51 +101,33 @@ public class OAMessageConsumer implements CommandLineRunner {
                                     messageDataDTO.setMsgTime(System.currentTimeMillis());
                                     messageDataDTO.setWxUserName(processRemindDTO.getWxUserName());
                                     RedisUtils.set(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee(), messageDataDTO);
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(processRemindDTO.getUserName(), processRemindDTO.getOaTitle()
-                                            , processRemindDTO.getOaContext(), processRemindDTO.getLinkUrl(), processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee())), OAUtils.SEND_MESSAGE_API);
                                     LogFactory.get().info("新增消息instanceId：{}, taskId：{}"+processRemindDTO.getInstId(), processRemindDTO.getTaskId());
                                     LogFactory.get().info(JSONUtil.toJsonStr(wxResult));
                                     break;
-                                case "审批流结束回执":
+                                 case "审批流结束回执":
                                     // 消息回执
                                     ProcessReturnDTO processReturnDTO = JSONUtil.toBean(json, ProcessReturnDTO.class);
                                     LogFactory.get().info(JSONUtil.toJsonStr(MessageUtils.sendMessage(processReturnDTO.toWxMessage())));
-                                    // 发送消息至泛微
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(processReturnDTO.getUserName(), processReturnDTO.getOaTitle()
-                                            , processReturnDTO.getOaContext(), processReturnDTO.getLinkUrl(), null)), OAUtils.SEND_MESSAGE_API);
                                     break;
                                 case "待办提醒":
                                     // 待办提醒
                                     TodoRemindDTO todoRemindDTO = JSONUtil.toBean(json, TodoRemindDTO.class);
                                     LogFactory.get().info(JSONUtil.toJsonStr(MessageUtils.sendMessage(todoRemindDTO.toWxMessage())));
-                                    // 发送消息至泛微
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(todoRemindDTO.getUserName(), todoRemindDTO.getOaTitle()
-                                            , todoRemindDTO.getOaContext(), todoRemindDTO.getLinkUrl(), null)), OAUtils.SEND_MESSAGE_API);
-
                                     break;
                                 case "任务逾期提醒":
                                     // 任务逾期提醒
                                     TaskOverdueRemindDTO taskOverdueRemindDTO = JSONUtil.toBean(json, TaskOverdueRemindDTO.class);
                                     LogFactory.get().info(JSONUtil.toJsonStr(MessageUtils.sendMessage(taskOverdueRemindDTO.toWxMessage())));
-                                    // 发送消息至泛微
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(taskOverdueRemindDTO.getUserName(), taskOverdueRemindDTO.getOaTitle()
-                                            , taskOverdueRemindDTO.getOaContext(), taskOverdueRemindDTO.getLinkUrl(), null)), OAUtils.SEND_MESSAGE_API);
                                     break;
                                 case "任务已逾期提醒":
                                     // 任务逾期提醒
                                     TaskOvertimeRemindDTO taskOvertimeRemindDTO = JSONUtil.toBean(json, TaskOvertimeRemindDTO.class);
                                     LogFactory.get().info(JSONUtil.toJsonStr(MessageUtils.sendMessage(taskOvertimeRemindDTO.toWxMessage())));
-                                    // 发送消息至泛微
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(taskOvertimeRemindDTO.getUserName(), taskOvertimeRemindDTO.getOaTitle()
-                                            , taskOvertimeRemindDTO.getOaContext(), taskOvertimeRemindDTO.getLinkUrl(), null)), OAUtils.SEND_MESSAGE_API);
                                     break;
                                 case "任务指派提醒":
                                     // 任务指派提醒
                                     TaskAssignRemindDTO taskAssignRemindDTO = JSONUtil.toBean(json, TaskAssignRemindDTO.class);
                                     LogFactory.get().info(JSONUtil.toJsonStr(MessageUtils.sendMessage(taskAssignRemindDTO.toWxMessage())));
-                                    // 发送消息至泛微
-                                    OAUtils.restfulCall2(OAUtils.SEND_MESSAGE_API, OAUtils.mapToStr(OAUtils.sendCustomMessageSingle(taskAssignRemindDTO.getUserName(), taskAssignRemindDTO.getOaTitle()
-                                            , taskAssignRemindDTO.getOaContext(), taskAssignRemindDTO.getLinkUrl(), null)), OAUtils.SEND_MESSAGE_API);
                                     break;
                                 default:
                                     break;
