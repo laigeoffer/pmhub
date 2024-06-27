@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.laigeoffer.pmhub.base.datasource.properties.DruidProperties,\
+com.laigeoffer.pmhub.base.datasource.config.DruidConfig

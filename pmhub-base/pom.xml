@@ -24,6 +24,7 @@
         <module>pmhub-base-sensitive</module>
         <module>pmhub-base-swagger</module>
         <module>pmhub-base-datasource</module>
+        <module>pmhub-base-notice</module>
     </modules>
 
     <properties>
