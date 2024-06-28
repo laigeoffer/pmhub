@@ -317,6 +317,13 @@
                 <version>${laigeoffer.version}</version>
             </dependency>
 
+            <!--Rocketmq-企微消息提醒-->
+            <dependency>
+                <groupId>com.laigeoffer.pmhub-cloud</groupId>
+                <artifactId>pmhub-base-notice</artifactId>
+                <version>${laigeoffer.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.laigeoffer.pmhub-cloud</groupId>
                 <artifactId>pmhub-base-framework</artifactId>

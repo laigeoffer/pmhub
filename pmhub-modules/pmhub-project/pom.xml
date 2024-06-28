@@ -89,6 +89,12 @@
             <artifactId>pmhub-base-seata</artifactId>
         </dependency>
 
+        <!--Rocketmq-企微消息提醒-->
+        <dependency>
+            <groupId>com.laigeoffer.pmhub-cloud</groupId>
+            <artifactId>pmhub-base-notice</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
