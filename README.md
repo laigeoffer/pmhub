@@ -178,16 +178,10 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 
 推荐大家使用 [Navicat](https://javabetter.cn/nice-article/itmind/navicatmacyjpx.html) 这款图形化数据库管理工具。
 
-①、创建数据库 laigeoffer-pmhub
 
->也可以是其他名字，只要在配置文件里修改对应的数据库名即可。
+数据库文件路径在 pmhub/sql/,在Navicat中导入所有数据库文件（每一个微服务对应一个数据库）
 
-![](https://cdn.tobebetterjavaer.com/images/20240324/83b5e36a95e04e3d951641215ff16dcf.png)
-
-
-②、导入数据库文件，路径在 pmhub/sql/,导入所有数据库文件（每一个微服务对应一个数据库）
-
-![](https://cdn.tobebetterjavaer.com/stutymore/20240601235111.png)
+![](https://cdn.tobebetterjavaer.com/stutymore/20240629223138.png)
 
 可以直接右键在 terminal 终端中打开，然后通过 pwd 和 ls 命令查看文件的绝对路径。
 
@@ -198,12 +192,15 @@ git clone https://gitee.com/laigeoffer/pmhub.git
 ![](https://cdn.tobebetterjavaer.com/images/20240324/aa4cb8f705aa4f46a7d4835c9d26a596.png)
 
 导入完成后，刷新一下就可以看到最新的数据库表了。
+（当然你也可以直接复制sql，然后在Navicat执行）
 
 #### 第四步，基础环境准备
-* 1、启动 MySQL
+* 1、启动 MySQL（必须）
 
 可以选择本机直接安装 MySQL，也可以通过 Docker 的方式，但需要做好磁盘挂载，推荐本机安装！
-* 2、启动 Redis
+
+
+* 2、启动 Redis（必须）
 
 ①、如果你是 macOS 用户，可以直接在终端输入`redis-server`启动 Redis。
 
@@ -219,7 +216,7 @@ docker pull redis
 docker run --name my-redis -d redis
 ```
 
-* 3、启动 Nacos
+* 3、启动 Nacos（必须）
 
 [官网](https://nacos.io/download/nacos-server/)下载 Nacos，找到 /conf/application.properties 文件，修改数据库连接信息。可以直接复制 pmhub/docker/nacos/conf/application.properties 内容。
 
@@ -241,6 +238,22 @@ docker run --name my-redis -d redis
 
 ![nacos启动成功界面](https://cdn.tobebetterjavaer.com/stutymore/20240529173621.png)
 
+* 4、启动 SkyWalking 分布式链路追踪（非必须）
+
+参考手册：[SkyWalking 启动手册](https://laigeoffer.cn/pages/c3f20a/)
+
+* 5、启动 Sentinel 分布式熔断和降级（非必须）
+
+参考手册：[Sentinel 启动手册](https://laigeoffer.cn/pages/932120/)
+
+
+* 6、启动 Seata 分布式事务（非必须）
+
+参考手册：[Seata 启动手册](https://laigeoffer.cn/pages/8a2cb8/)
+
+* 7、启动 Rocketmq 消息队列（非必须）
+
+参考手册：[Rocketmq 启动手册](https://laigeoffer.cn/pages/1fe541/)
 
 
 
@@ -316,7 +329,7 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 
 ### 4.5、服务器部署（Docker 方式）
 
-请参考 [项目手册](https://laigeoffer.cn/)
+请参考 [项目手册](https://laigeoffer.cn/pages/0f1eb7/#%E6%9C%AC%E5%9C%B0%E5%87%86%E5%A4%87)
 
 ## 五、技术选型
 
@@ -355,20 +368,20 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 
 ## 六、PmHub 教程
 PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
-- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/)
-- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/)
-- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/)
+- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/pages/8023f6/)
+- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/pages/99dc82/)
+- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/pages/03f86f/)
 - [（🌟 新人必看）PmHub 架构方案设计](https://laigeoffer.cn/)
-- [（🌟 新人必看）PmHub 技术方案设计](https://laigeoffer.cn/)
-- [（🌟 新人必看）PmHub 项目管理流程](https://laigeoffer.cn/)
-- [（🌟 新人必看）PmHub 分层架构](https://laigeoffer.cn/)
-- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 实现接口流量耗时统计](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub Mysql/Redis缓存一致性](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 消息队列 Rocketmq](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 实现接入 flowable 流程管理](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 分布式事务实现](https://laigeoffer.cn/)
-- [（👍 强烈推荐）PmHub 定时任务实现](https://laigeoffer.cn/)
+- [（🌟 新人必看）PmHub 技术方案设计](https://laigeoffer.cn/pages/5b273f/)
+- [（🌟 新人必看）PmHub 项目管理流程](https://laigeoffer.cn/pages/a32b8f/)
+- [（🌟 新人必看）PmHub 分层架构](https://laigeoffer.cn/pmhub/about/)
+- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/pages/8abf04/)
+- [（👍 强烈推荐）PmHub 实现接口流量耗时统计](https://laigeoffer.cn/pages/59af76/)
+- [（👍 强烈推荐）PmHub Mysql/Redis缓存一致性](https://laigeoffer.cn/pages/228927/)
+- [（👍 强烈推荐）PmHub 消息队列 Rocketmq](https://laigeoffer.cn/pages/228927/)
+- [（👍 强烈推荐）PmHub 实现接入 flowable 流程管理](https://laigeoffer.cn/pages/228927/)
+- [（👍 强烈推荐）PmHub 分布式事务实现](https://laigeoffer.cn/pages/8a2cb8/)
+- [（👍 强烈推荐）PmHub 定时任务实现](https://laigeoffer.cn/pages/8a2cb8/)
 - [（👍 扬帆起航）送给坚持到最后的自己，一起杨帆起航](https://laigeoffer.cn/)
 
 
@@ -416,12 +429,13 @@ PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
 
 #### 本地部署教程
 
-> [本地开发环境手把手教程](docs/本地开发环境配置教程.md)
+> [本地开发环境手把手教程](https://laigeoffer.cn/pages/94fcd5/#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2)
 
 ### 云服务器部署教程
 
 > [环境搭建 & 基于源码的部署教程](docs/安装环境.md)
-> [服务器docker启动教程](docs/服务器启动教程.md)
+
+> [服务器docker启动教程](https://laigeoffer.cn/pages/0f1eb7/)
 
 ## 八、内置功能
 > 内置功能我们使用了若依的框架，为什么要用若依，一来我们觉得基础的后台功能没有必要再重复造轮子，我们需要节省时间花力气在项目核心业务上，二来我们希望站在巨人的肩膀上，若依是后台系统中很优秀的框架，我们基于其做的二次开发，相信也能再创辉煌！
