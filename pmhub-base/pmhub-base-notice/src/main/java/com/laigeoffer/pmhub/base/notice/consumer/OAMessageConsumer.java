@@ -4,9 +4,11 @@ import cn.hutool.json.JSONUtil;
 import cn.hutool.log.LogFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.notice.domain.dto.*;
 import com.laigeoffer.pmhub.base.notice.domain.entity.WxResult;
-import com.laigeoffer.pmhub.base.notice.utils.*;
+import com.laigeoffer.pmhub.base.notice.utils.MessageUtils;
+import com.laigeoffer.pmhub.base.notice.utils.RocketMqUtils;
 import org.apache.rocketmq.client.apis.ClientConfiguration;
 import org.apache.rocketmq.client.apis.ClientException;
 import org.apache.rocketmq.client.apis.ClientServiceProvider;
@@ -14,8 +16,11 @@ import org.apache.rocketmq.client.apis.consumer.ConsumeResult;
 import org.apache.rocketmq.client.apis.consumer.FilterExpression;
 import org.apache.rocketmq.client.apis.consumer.FilterExpressionType;
 import org.apache.rocketmq.client.apis.consumer.PushConsumer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -26,21 +31,21 @@ import java.util.Collections;
  * @author canghe
  * @date 2023/07/21
  */
-//@Component
+@Component
 public class OAMessageConsumer implements CommandLineRunner {
 
 
     /**
      * 微信topic
      * */
-//    @Value("${pmhub.rocketMQ.topic.wxMessage}")
+    @Value("${pmhub.rocketMQ.topic.wxMessage}")
     private String WX_TOPIC;
 
 
     /**
      * 服务器地址
      * */
-//    @Value("${pmhub.rocketMQ.addr}")
+    @Value("${pmhub.rocketMQ.addr}")
     private String addr;
 
 
@@ -48,8 +53,11 @@ public class OAMessageConsumer implements CommandLineRunner {
     /**
      * 消费组
      * */
-//    @Value("${pmhub.rocketMQ.topic.consumerGroup}")
+    @Value("${pmhub.rocketMQ.topic.consumerGroup}")
     private String WX_CONSUMER_GROUP;
+
+    @Resource
+    private RedisService redisService;
 
 
     /**
@@ -93,7 +101,7 @@ public class OAMessageConsumer implements CommandLineRunner {
                                 case "任务审批提醒":
                                     ProcessRemindDTO processRemindDTO = JSONUtil.toBean(json, ProcessRemindDTO.class);
                                     // 消息幂等性校验（查询redis中同一个 taskId 和 Assignee 是否重复消费）
-                                    if (RedisUtils.exists(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee())) {
+                                    if (redisService.hasKey(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee())) {
                                         LogFactory.get().info("消息重复消费，instanceId：{}, taskId：{}"+processRemindDTO.getInstId(), processRemindDTO.getTaskId());
                                         return ConsumeResult.FAILURE;
                                     }
@@ -107,7 +115,7 @@ public class OAMessageConsumer implements CommandLineRunner {
                                     messageDataDTO.setMsgCode(wxResult.getResponse_code());
                                     messageDataDTO.setMsgTime(System.currentTimeMillis());
                                     messageDataDTO.setWxUserName(processRemindDTO.getWxUserName());
-                                    RedisUtils.set(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee(), messageDataDTO);
+                                    redisService.setCacheObject(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee(), messageDataDTO);
                                     LogFactory.get().info("新增消息instanceId：{}, taskId：{}"+processRemindDTO.getInstId(), processRemindDTO.getTaskId());
                                     LogFactory.get().info(JSONUtil.toJsonStr(wxResult));
                                     break;

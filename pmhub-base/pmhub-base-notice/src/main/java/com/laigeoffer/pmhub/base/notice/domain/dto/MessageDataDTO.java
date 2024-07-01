@@ -1,4 +1,4 @@
-package com.laigeoffer.pmhub.base.notice.utils;
+package com.laigeoffer.pmhub.base.notice.domain.dto;
 
 import lombok.Data;
 

@@ -4,6 +4,8 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.LogFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
+import com.laigeoffer.pmhub.base.notice.domain.dto.MessageDataDTO;
 import com.laigeoffer.pmhub.base.notice.domain.dto.ProcessWxMessageStateUpdateDTO;
 import com.laigeoffer.pmhub.base.notice.domain.entity.WxResult;
 import com.laigeoffer.pmhub.base.notice.enums.ButtonStateEnum;
@@ -14,14 +16,17 @@ import org.apache.rocketmq.client.apis.ClientServiceProvider;
 import org.apache.rocketmq.client.apis.message.Message;
 import org.apache.rocketmq.client.apis.producer.Producer;
 import org.apache.rocketmq.client.apis.producer.SendReceipt;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
  * RocketMQ连接工具
  * @author canghe
  */
-//@Component
+@Component
 public class RocketMqUtils {
 
 
@@ -36,11 +41,11 @@ public class RocketMqUtils {
      * */
     private static String WX_TOPIC;
 
-//    @Value("${pmhub.rocketMQ.addr}")
+    @Value("${pmhub.rocketMQ.addr}")
     private void setAddr(String addr) {
         RocketMqUtils.addr = addr;
     }
-//    @Value("${pmhub.rocketMQ.topic.wxMessage}")
+    @Value("${pmhub.rocketMQ.topic.wxMessage}")
     public void setWxTopic(String wxMessage) {
         WX_TOPIC = wxMessage;
     }
@@ -50,11 +55,8 @@ public class RocketMqUtils {
      * */
     public final static String mqTag = "WX_MASSAGE";
 
-
-
-
-
-
+    @Resource
+    private RedisService redisService;
 
 
 
@@ -102,11 +104,11 @@ public class RocketMqUtils {
     }
 
 
-    public static void cleanMessage(String instId){
+    public void cleanMessage(String instId){
         LogFactory.get().info("清理消息：" + instId);
         try {
             // 清理消息
-            MessageDataDTO messageDataDTO = (MessageDataDTO) RedisUtils.get(instId);
+            MessageDataDTO messageDataDTO = (MessageDataDTO) redisService.getCacheObject(instId);
             if (messageDataDTO != null) {
                 ProcessWxMessageStateUpdateDTO processWxMessageStateUpdateDTO = new ProcessWxMessageStateUpdateDTO();
                 processWxMessageStateUpdateDTO.setAtall(1);
@@ -114,7 +116,7 @@ public class RocketMqUtils {
                 processWxMessageStateUpdateDTO.getButton().setReplace_name(ButtonStateEnum.FINISH);
                 WxResult wxResult =  MessageUtils.updateMessage(processWxMessageStateUpdateDTO);
                 LogFactory.get().info(JSONUtil.toJsonStr(wxResult));
-                RedisUtils.remove(instId);
+                redisService.deleteObject(instId);
                 LogFactory.get().info("消息存在");
             }
         } catch (Exception ex){

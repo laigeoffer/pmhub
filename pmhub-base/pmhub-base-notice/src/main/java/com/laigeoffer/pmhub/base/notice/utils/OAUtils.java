@@ -10,8 +10,6 @@ import cn.hutool.json.JSONUtil;
 import com.laigeoffer.pmhub.base.core.exception.ServiceException;
 import com.laigeoffer.pmhub.base.core.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -20,11 +18,12 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 泛微微信工具类
+ * 泛微 OA 工具类
+ * 对接 OA 模块可直接使用
+ * 有需要帮助请联系公众号：苍何
  *
  * @author canghe
  */
-@Component
 @Slf4j
 public class OAUtils {
 
@@ -123,30 +122,30 @@ public class OAUtils {
      */
     public static String SERVER_PATH = "";
 
-    @Value("${pmhub.oa.appId}")
+//    @Value("${pmhub.oa.appId}")
     private void setAppId(String appId) {
         OAUtils.APPID = appId;
     }
-    @Value("${pmhub.oa.code}")
+//    @Value("${pmhub.oa.code}")
     private void setCode(String code) {
         OAUtils.CODE = code;
     }
 
 
-    @Value("${pmhub.oa.clientId}")
+//    @Value("${pmhub.oa.clientId}")
     private void setClientId(String clientId) {
         OAUtils.CLIENT_ID = clientId;
     }
 
-    @Value("${pmhub.oa.clientSecret}")
+//    @Value("${pmhub.oa.clientSecret}")
     private void setClientSecret(String clientSecret) {
         OAUtils.CLIENT_SECRET = clientSecret;
     }
 
     /**
-     * 泛微地址
+     * 泛微OA地址
      */
-    @Value("${pmhub.oa.path}")
+//    @Value("${pmhub.oa.path}")
     private void setServerPath(String path) {
         SERVER_PATH = path;
     }
@@ -159,7 +158,7 @@ public class OAUtils {
      * pmhub平台 host
      * */
     public static String host;
-    @Value("${pmhub.oa.host}")
+//    @Value("${pmhub.oa.host}")
     private void setHost(String host) {
         OAUtils.host = host;
     }
@@ -168,7 +167,7 @@ public class OAUtils {
      * pmhub平台 path2
      * */
     public static String path2;
-    @Value("${pmhub.oa.path2}")
+//    @Value("${pmhub.oa.path2}")
     private void setPath2(String path2) {
         OAUtils.path2 = path2;
     }

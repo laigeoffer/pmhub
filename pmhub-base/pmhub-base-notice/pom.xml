@@ -46,6 +46,7 @@
             </exclusions>
         </dependency>
 
+
         <!-- mybatis-plus 增强CRUD -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -94,6 +95,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
 
 
     </dependencies>

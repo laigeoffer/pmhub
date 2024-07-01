@@ -1,3 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.laigeoffer.pmhub.base.datasource.properties.DruidProperties,\
-com.laigeoffer.pmhub.base.datasource.config.DruidConfig
+com.laigeoffer.pmhub.base.notice.consumer.OAMessageConsumer,\
+com.laigeoffer.pmhub.base.notice.service.impl.WorkWxUtilsServiceImpl,\
+com.laigeoffer.pmhub.base.notice.utils.PublicUtil,\
+com.laigeoffer.pmhub.base.notice.utils.RocketMqUtils,\
+com.laigeoffer.pmhub.base.notice.utils.MessageUtils
