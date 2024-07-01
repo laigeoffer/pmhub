@@ -92,6 +92,13 @@ public class OAMessageConsumer implements CommandLineRunner {
                             switch (type){
                                 case "任务审批提醒":
                                     ProcessRemindDTO processRemindDTO = JSONUtil.toBean(json, ProcessRemindDTO.class);
+                                    // 消息幂等性校验（查询redis中同一个 taskId 和 Assignee 是否重复消费）
+                                    if (RedisUtils.exists(processRemindDTO.getTaskId() + "_" + processRemindDTO.getAssignee())) {
+                                        LogFactory.get().info("消息重复消费，instanceId：{}, taskId：{}"+processRemindDTO.getInstId(), processRemindDTO.getTaskId());
+                                        return ConsumeResult.FAILURE;
+                                    }
+
+                                    // 发送消息
                                     WxResult wxResult =  MessageUtils.sendMessage(processRemindDTO.toWxMessage());
 
                                     // 信息发送成功,保存message
