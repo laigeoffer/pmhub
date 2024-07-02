@@ -113,8 +113,8 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
---- # workflow 配置
-workflow:
+# flowable 配置
+flowable:
   # 关闭定时任务 job
   async-executor-activate: false
   # 库与数据库表结构不一致时，会自动将数据库表结构升级至新版本。

@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 /**
- * OA message消费者
+ * message消费者
  *
  * @author canghe
  * @date 2023/07/21
@@ -53,7 +53,7 @@ public class OAMessageConsumer implements CommandLineRunner {
     /**
      * 消费组
      * */
-    @Value("${pmhub.rocketMQ.topic.consumerGroup}")
+    @Value("${pmhub.rocketMQ.group.wxMessage}")
     private String WX_CONSUMER_GROUP;
 
     @Resource
