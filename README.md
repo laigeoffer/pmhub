@@ -55,7 +55,7 @@ PmHub 包括认证、流程、项目管理、系统、网关等服务。包含�
 - 二哥，原创公众号“沉默王二”累计 18 万+ 读者，GitHub 星标 11000+ 开源知识库《二哥的 Java 进阶之路》作者，帮助很多很多同学成功拿到满意的 offer。
 - 苍何，原创公众号“苍何”作者，CSDN 博客专家，阿里云专家博主，GitHub 开发者计划成员，前大厂技术专家，技术、管理、面试经验丰富。
 
-加入[PmHub官方编程星球](https://laigeoffer.cn/pages/8429d9/)后，即可解锁来个 offer 组织下的所有项目的付费文档及产品原型，以及 1 对 1 的技术面试辅导服务。
+加入[PmHub官方编程星球](https://laigeoffer.cn/zsxq/)后，即可解锁来个 offer 组织下的所有项目的付费文档及产品原型，以及 1 对 1 的技术面试辅导服务。
 
 
 项目|码云|GitHub|简介
@@ -68,9 +68,9 @@ PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com
 
 下面这张系统架构图可以帮助大家快速了解 PmHub 项目的组织架构，从前端到网关、从服务应用到基础服务、从存储技术到运维部署，可以说是一目了然。
 
-![pmhub-系统架构图](https://cdn.tobebetterjavaer.com/images/README/1711709454988.png)
+![技术架构图](https://cdn.tobebetterjavaer.com/stutymore/技术架构图.png)
 
-下面这张架构选型图可以帮助大家快速了解 PmHub 项目的技术选型，以及在[官方手册](https://laigeoffer.cn/project/laigeoffer/pmhub/about/)中会更详细的说明我们为什么选择该技术，毕竟授人以鱼不如授人以渔嘛。
+下面这张架构选型图可以帮助大家快速了解 PmHub 项目的技术选型，以及在[官方手册](https://laigeoffer.cn/pmhub/tech-architecture/)中会更详细的说明我们为什么选择该技术，毕竟授人以鱼不如授人以渔嘛。
 
 ![pmhub-架构选型](https://cdn.tobebetterjavaer.com/stutymore/PmHub%E6%9E%B6%E6%9E%84%E9%80%89%E5%9E%8B.png)
 
@@ -242,20 +242,20 @@ docker run --name my-redis -d redis
 
 * 4、启动 SkyWalking 分布式链路追踪（非必须）
 
-参考手册：[SkyWalking 启动手册](https://laigeoffer.cn/pages/c3f20a/)
+参考手册：[SkyWalking 启动手册](https://laigeoffer.cn/pmhub/interview/skywalking/)
 
 * 5、启动 Sentinel 分布式熔断和降级（非必须）
 
-参考手册：[Sentinel 启动手册](https://laigeoffer.cn/pages/932120/)
+参考手册：[Sentinel 启动手册](https://laigeoffer.cn/pmhub/interview/feign-sentinel/)
 
 
 * 6、启动 Seata 分布式事务（非必须）
 
-参考手册：[Seata 启动手册](https://laigeoffer.cn/pages/8a2cb8/)
+参考手册：[Seata 启动手册](https://laigeoffer.cn/pmhub/interview/seata/)
 
 * 7、启动 Rocketmq 消息队列（非必须）
 
-参考手册：[Rocketmq 启动手册](https://laigeoffer.cn/pages/1fe541/)
+参考手册：[Rocketmq 启动手册](https://laigeoffer.cn/pmhub/interview/rocketmq/)
 
 
 
@@ -331,7 +331,7 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 
 ### 4.5、服务器部署（Docker 方式）
 
-请参考 [项目手册](https://laigeoffer.cn/pages/0f1eb7/#%E6%9C%AC%E5%9C%B0%E5%87%86%E5%A4%87)
+请参考 [云容器部署系统](https://laigeoffer.cn/pmhub/quickstart/docker/)
 
 ## 五、技术选型
 
@@ -369,22 +369,18 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 |        讯飞星火         | 讯飞星火大模型              | [https://www.xfyun.cn/doc/spark/Web.html](https://www.xfyun.cn/doc/spark/Web.html#_1-%E6%8E%A5%E5%8F%A3%E8%AF%B4%E6%98%8E) |
 
 ## 六、PmHub 教程
-PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
-- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/pages/8023f6/)
-- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/pages/99dc82/)
-- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/pages/03f86f/)
-- [（🌟 新人必看）PmHub 架构方案设计](https://laigeoffer.cn/)
-- [（🌟 新人必看）PmHub 技术方案设计](https://laigeoffer.cn/pages/5b273f/)
-- [（🌟 新人必看）PmHub 项目管理流程](https://laigeoffer.cn/pages/a32b8f/)
-- [（🌟 新人必看）PmHub 分层架构](https://laigeoffer.cn/pmhub/about/)
-- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/pages/8abf04/)
-- [（👍 强烈推荐）PmHub 实现接口流量耗时统计](https://laigeoffer.cn/pages/59af76/)
-- [（👍 强烈推荐）PmHub Mysql/Redis缓存一致性](https://laigeoffer.cn/pages/228927/)
-- [（👍 强烈推荐）PmHub 消息队列 Rocketmq](https://laigeoffer.cn/pages/228927/)
-- [（👍 强烈推荐）PmHub 实现接入 flowable 流程管理](https://laigeoffer.cn/pages/228927/)
-- [（👍 强烈推荐）PmHub 分布式事务实现](https://laigeoffer.cn/pages/8a2cb8/)
-- [（👍 强烈推荐）PmHub 定时任务实现](https://laigeoffer.cn/pages/8a2cb8/)
-- [（👍 扬帆起航）送给坚持到最后的自己，一起杨帆起航](https://laigeoffer.cn/)
+PmHub 高质量教程共 70+ 篇，从中整理出 10 篇，供大家免费学习。
+- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/pmhub/tech-architecture/)
+- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/pmhub/learn/)
+- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/pmhub/why/)
+- [（🌟 新人必看）PmHub 产品原型](https://laigeoffer.cn/pmhub/product/prototype/)
+- [（🌟 新人必看）项目真实面经](https://laigeoffer.cn/pmhub/real-interview/)
+- [（🌟 新人必看）本地快速启动](https://laigeoffer.cn/pmhub/quickstart/backend/)
+- [（🌟 新人必看）PmHub 微服务网关设计](https://laigeoffer.cn/pmhub/microservice/gateway/)
+- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/pmhub/quickstart/environment/)
+- [（👍 强烈推荐）如何做好产品设计](https://laigeoffer.cn/pmhub/how-to-do-product-design/)
+- [（👍 强烈推荐）项目真实面经](https://laigeoffer.cn/pmhub/real-interview/)
+
 
 
 ## 七、环境搭建
@@ -431,13 +427,13 @@ PmHub 教程共 100+ 篇，从中整理出 15 篇，供大家免费学习。
 
 #### 本地部署教程
 
-> [本地开发环境手把手教程](https://laigeoffer.cn/pages/94fcd5/#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2)
+> [本地开发环境手把手教程](https://laigeoffer.cn/pmhub/quickstart/environment/)
 
 ### 云服务器部署教程
 
 > [环境搭建 & 基于源码的部署教程](docs/安装环境.md)
 
-> [服务器docker启动教程](https://laigeoffer.cn/pages/0f1eb7/)
+> [服务器docker启动教程](https://laigeoffer.cn/pmhub/quickstart/docker/)
 
 ## 八、内置功能
 > 内置功能我们使用了若依的框架，为什么要用若依，一来我们觉得基础的后台功能没有必要再重复造轮子，我们需要节省时间花力气在项目核心业务上，二来我们希望站在巨人的肩膀上，若依是后台系统中很优秀的框架，我们基于其做的二次开发，相信也能再创辉煌！
