@@ -68,7 +68,7 @@ PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com
 
 下面这张系统架构图可以帮助大家快速了解 PmHub 项目的系统架构，从前端到网关、从服务应用到基础服务组件、从存储技术到运维部署，可以说是一目了然。
 
-![pmhub系统架构图](https://cdn.tobebetterjavaer.com/stutymore/pmhub系统架构图.png)
+![pmhub-系统架构图](https://cdn.tobebetterjavaer.com/stutymore/01.什么是PmHub-20240708113736.png)
 
 下面这张架构选型图可以帮助大家快速了解 PmHub 项目的技术选型，以及在[官方手册](https://laigeoffer.cn/pmhub/tech-architecture/)中会更详细的说明我们为什么选择该技术，毕竟授人以鱼不如授人以渔嘛。
 
@@ -76,7 +76,7 @@ PmHub| [Gitee](https://gitee.com/laigeoffer/pmhub) | [GitHub](https://github.com
 
 下面这张技术架构图可以帮助大家快速了解 PmHub 项目的技术架构，以及各个模块之间的交互关系。
 
-![pmhub-技术架构图](https://cdn.tobebetterjavaer.com/stutymore/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![pmhub-技术架构图](https://cdn.tobebetterjavaer.com/stutymore/01.什么是PmHub-20240702103552.png)
 
 优质的项目，离不开一张清晰的鸟瞰图（😄）。
 
