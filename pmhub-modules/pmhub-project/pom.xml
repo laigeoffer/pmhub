@@ -90,10 +90,10 @@
         </dependency>
 
         <!--Rocketmq-消息提醒，注意：如果不需要此模块，请自行注释，否则项目无法启动-->
-        <dependency>
-            <groupId>com.laigeoffer.pmhub-cloud</groupId>
-            <artifactId>pmhub-base-notice</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.laigeoffer.pmhub-cloud</groupId>-->
+<!--            <artifactId>pmhub-base-notice</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 
