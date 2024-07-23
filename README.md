@@ -1,5 +1,5 @@
 <p align="center"><img src= "https://cdn.tobebetterjavaer.com/stutymore/pmhub_%E7%AE%80%E4%BB%8B%E7%89%88.png" alt="MaxKB" width="300" /></p>
-<h3 align="center">基于 SpringCloud & SpringCloud Alibaba & LLM 的智能项目管理系统</h3>
+<h3 align="center">PmHub，一个基于 SpringCloud & LLM 的智能项目管理系统</h3>
 <p align="center">
   <a href="https://opensource.org/license/MIT"><img src="https://img.shields.io/github/license/laigeoffer/pmhub?color=rgb(25%2C%20121%2C%20255)" alt="The MIT License"></a>
   <a href=""><img src="https://img.shields.io/github/forks/laigeoffer/pmhub?color=green" alt="Forks"></a>
@@ -9,7 +9,7 @@
 </p>
 
 <hr/>
-PmHub 是一套基于 SpringCloud & SpringCloud Alibaba & LLM 的分布式微服务的智能项目管理系统，这个项目旨在让同学们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
+PmHub 是一套基于 SpringCloud & LLM 的微服务智能项目管理系统，这个项目旨在帮助小伙伴们快速掌握微服务/分布式项目的架构设计和开发流程，如果想在校招或者社招中拿到一个满意的 offer，PmHub 将是一个非常 nice 的选择。
 
 ## 项目亮点
 
