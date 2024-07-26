@@ -1591,6 +1591,30 @@ CREATE TABLE `pmhub_wf_approval_set`
 BEGIN;
 COMMIT;
 
+CREATE TABLE `pmhub_materials_scrapped_process`
+(
+    `id`            varchar(64) NOT NULL,
+    `material_id`   varchar(64) DEFAULT NULL COMMENT '报废物料id',
+    `approved`      varchar(10) DEFAULT NULL COMMENT '是否需要审批',
+    `instance_id`   varchar(64) DEFAULT NULL COMMENT '流程实例id',
+    `deployment_id` varchar(64) DEFAULT NULL COMMENT '部署id',
+    `definition_id` varchar(64) DEFAULT NULL COMMENT '流程定义id',
+    `created_by`    varchar(64) DEFAULT NULL,
+    `created_time`  datetime    DEFAULT NULL,
+    `updated_by`    varchar(64) DEFAULT NULL,
+    `updated_time`  datetime    DEFAULT NULL,
+    `type`          varchar(64) DEFAULT NULL COMMENT '类型task/project等',
+    `task_id`       varchar(64) DEFAULT NULL COMMENT '流程任务id',
+    `url`           text COMMENT '详情地址',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT ='冗余表，带物料模块上线';
+
+-- ----------------------------
+-- Records of pmhub_materials_scrapped_process
+-- ----------------------------
+BEGIN;
+COMMIT;
+
 -- for AT mode you must to init this sql for you business database. the seata server not need it.
 CREATE TABLE IF NOT EXISTS `undo_log`
 (
