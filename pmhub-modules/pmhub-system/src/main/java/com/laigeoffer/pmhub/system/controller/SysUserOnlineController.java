@@ -1,5 +1,6 @@
 package com.laigeoffer.pmhub.system.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.laigeoffer.pmhub.base.core.annotation.Log;
 import com.laigeoffer.pmhub.base.core.config.redis.RedisService;
 import com.laigeoffer.pmhub.base.core.constant.CacheConstants;
@@ -40,7 +41,8 @@ public class SysUserOnlineController extends BaseController {
         Collection<String> keys = redisService.keys(CacheConstants.LOGIN_TOKEN_KEY + "*");
         List<SysUserOnline> userOnlineList = new ArrayList<SysUserOnline>();
         for (String key : keys) {
-            LoginUser user = redisService.getCacheObject(key);
+            JSONObject jsonObject = redisService.getCacheObject(key);
+            LoginUser user = jsonObject.toJavaObject(LoginUser.class);
             if (StringUtils.isNotEmpty(ipaddr) && StringUtils.isNotEmpty(userName)) {
                 if (StringUtils.equals(ipaddr, user.getIpaddr()) && StringUtils.equals(userName, user.getUsername())) {
                     userOnlineList.add(userOnlineService.selectOnlineByInfo(ipaddr, userName, user));
