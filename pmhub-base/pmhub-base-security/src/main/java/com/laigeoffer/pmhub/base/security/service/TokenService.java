@@ -229,7 +229,7 @@ public class TokenService {
     public void updateToken(LoginUser loginUser) {
         Map<String,Object> tokensMap = redisService.getCacheKv("login_tokens:*");
         tokensMap.forEach((key, value) -> {
-            if (Objects.equals(((LoginUser) value).getUserId(), loginUser.getUserId())){
+            if (Objects.equals(((JSONObject) value).getLong("userId"), loginUser.getUserId())){
                 String token = key.replace(CacheConstants.LOGIN_TOKEN_KEY,"");
                 loginUser.setToken(token);
                 refreshToken(loginUser);
