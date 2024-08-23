@@ -132,7 +132,7 @@
 <script>
 import { listForm, getForm, delForm, addForm, updateForm } from "@/api/workflow/form";
 import Editor from '@/components/Editor';
-import Parser from '@/utils/gen/parser'
+import Parser from '@/utils/generator/parser'
 export default {
   name: "Form",
   components: {

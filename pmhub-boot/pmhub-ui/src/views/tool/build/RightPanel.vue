@@ -647,7 +647,7 @@ import { isNumberStr } from '@/utils/index'
 import IconsDialog from './IconsDialog'
 import {
   inputComponents, selectComponents, layoutComponents
-} from '@/utils/gen/config'
+} from '@/utils/generator/config'
 import { saveFormConf } from '@/utils/db'
 
 const dateTimeFormat = {

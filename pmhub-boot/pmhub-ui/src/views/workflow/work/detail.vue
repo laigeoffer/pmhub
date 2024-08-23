@@ -315,7 +315,7 @@
 
 <script>
 import { detailProcess } from "@/api/workflow/process"
-import Parser from "@/utils/gen/parser"
+import Parser from "@/utils/generator/parser"
 import { getURLParams } from "@/utils/index"
 import { complete, delegate, transfer, rejectTask, returnList, returnTask } from "@/api/workflow/task"
 import { selectUser, deptTreeSelect } from "@/api/system/user"

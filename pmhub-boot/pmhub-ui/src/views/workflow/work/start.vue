@@ -15,7 +15,7 @@
 
 <script>
 import { getProcessForm, startProcess } from '@/api/workflow/process'
-import Parser from '@/utils/gen/parser'
+import Parser from '@/utils/generator/parser'
 
 export default {
   name: 'WorkStart',

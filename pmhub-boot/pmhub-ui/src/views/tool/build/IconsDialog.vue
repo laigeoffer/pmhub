@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import iconList from '@/utils/gen/icon.json'
+import iconList from '@/utils/generator/icon.json'
 
 const originList = iconList.map(name => `el-icon-${name}`)
 

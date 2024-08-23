@@ -25,7 +25,7 @@ import { getProcessForm, getBpmnXml } from "@/api/workflow/process"
 import { startProcessApi } from "@/api/pmhub-project/my-task"
 import { getUserProfile } from "@/api/system/user"
 import { getFileListApi } from "@/api/pmhub-project/my-project.js"
-import Parser from "@/utils/gen/parser"
+import Parser from "@/utils/generator/parser"
 import ProcessViewer from "@/components/ProcessViewer"
 
 let INFO_PATH = ""

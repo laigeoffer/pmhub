@@ -81,9 +81,9 @@ import ClipboardJS from 'clipboard'
 import { saveAs } from 'file-saver'
 import {
   makeUpHtml, vueTemplate, vueScript, cssStyle
-} from '@/utils/gen/html'
-import { makeUpJs } from '@/utils/gen/js'
-import { makeUpCss } from '@/utils/gen/css'
+} from '@/utils/generator/html'
+import { makeUpJs } from '@/utils/generator/js'
+import { makeUpCss } from '@/utils/generator/css'
 import { exportDefault, beautifierConf, titleCase } from '@/utils/index'
 import ResourceDialog from './ResourceDialog'
 import loadMonaco from '@/utils/loadMonaco'

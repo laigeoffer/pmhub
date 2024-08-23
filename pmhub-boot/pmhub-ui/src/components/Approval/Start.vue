@@ -22,7 +22,7 @@
 <script>
 import { getProcessForm, getBpmnXml } from "@/api/workflow/process"
 import { getUserProfile } from "@/api/system/user"
-import Parser from "@/utils/gen/parser"
+import Parser from "@/utils/generator/parser"
 import ProcessViewer from "@/components/ProcessViewer"
 import { fieldsConfig } from "./config"
 

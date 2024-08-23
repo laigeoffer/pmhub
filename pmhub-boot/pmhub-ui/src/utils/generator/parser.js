@@ -1,6 +1,6 @@
 import { deepClone } from '@/utils/index';
 import { getToken } from '@/utils/auth';
-import render from '@/utils/gen/render';
+import render from '@/utils/generator/render';
 import axios from 'axios'
 import Vue from 'vue';
 
