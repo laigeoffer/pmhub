@@ -22,30 +22,6 @@ npm install --registry=https://registry.npmmirror.com
 
 第三步，安装完依赖后，执行 `npm run dev` 启动项目：
 
-如果 Nodejs 版本过新，可能会出现`Error: error:0308010C:digital envelope routines::unsupported`这个问题。
-
-![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324123352.png)
-
-①、如果你是 Windows 用户，可以在 cmd 命令行中输入以下命令：
-
-```bash
-set NODE_OPTIONS=--openssl-legacy-provider
-```
-
-也可以在 PowerShell 中输入以下命令：
-
-```bash
-$env:NODE_OPTIONS="--openssl-legacy-provider"
-```
-
-②、如果你是 macOS 用户，可以在终端中输入以下命令：
-
-```bash
-export NODE_OPTIONS=--openssl-legacy-provider
-```
-
-之后再次执行 `npm run dev` 即可正常启动项目。
-
 ![](https://cdn.tobebetterjavaer.com/stutymore/README-20240324123905.png)
 
 浏览器会自动打开 `http://localhost:1024`，即可看到 pmhub-ui 项目登录页面。
