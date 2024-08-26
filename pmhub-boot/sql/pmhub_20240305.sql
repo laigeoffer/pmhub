@@ -13,9 +13,12 @@
 
  Date: 05/03/2024 14:39:47
 */
+CREATE DATABASE  `laigeoffer-pmhub` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+USE `laigeoffer-pmhub`;
 
 -- ----------------------------
 -- Table structure for ACT_EVT_LOG
