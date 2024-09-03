@@ -4,6 +4,7 @@
   "description": "laigeoffer-pmhub",
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "serve": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
     "build:stage": "vue-cli-service build --mode staging",
     "preview": "node build/index.js --preview",
