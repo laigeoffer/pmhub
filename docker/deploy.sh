@@ -130,7 +130,7 @@ case "$1" in
 "stop")
 	stop
 ;;
-"stop")
+"build")
 	build
 ;;
 "rm")
