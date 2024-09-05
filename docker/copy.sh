@@ -9,12 +9,12 @@ usage() {
 
 # copy sql
 echo "begin copy sql "
-cp ../sql/pmhub_20240305.sql ./mysql/db
-cp ../sql/pmhub_nacos_20240423.sql ./mysql/db
+#cp ../sql/pmhub_20240305.sql ./mysql/db
+#cp ../sql/pmhub_nacos_20240423.sql ./mysql/db
 
 # copy html
 echo "begin copy html "
-cp -r ../pmhub-ui/dist/** ./nginx/html/dist
+#cp -r ../pmhub-ui/dist/** ./nginx/html/dist
 
 
 # copy jar
