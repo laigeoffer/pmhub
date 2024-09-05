@@ -3,5 +3,5 @@ FROM mysql:5.7
 # author
 MAINTAINER canghe
 
-# 执行sql脚本
-ADD ./db/*.sql /docker-entrypoint-initdb.d/
+# 执行sql初始化脚本（这里默认关闭，微服务有多个数据库，为防止启动过慢，需要单独新建数据库）
+# ADD ./db/*.sql /docker-entrypoint-initdb.d/
