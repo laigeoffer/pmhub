@@ -29,7 +29,7 @@ services:
       - ./mysql/data:/var/lib/mysql
     command: [
           'mysqld',
-          '--innodb-buffer-pool-size=80M',
+          '--innodb-buffer-pool-size=2G',
           '--character-set-server=utf8mb4',
           '--collation-server=utf8mb4_unicode_ci',
           '--default-time-zone=+8:00',
