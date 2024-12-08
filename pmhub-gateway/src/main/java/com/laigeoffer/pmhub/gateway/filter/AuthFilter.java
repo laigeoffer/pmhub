@@ -21,6 +21,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 网关鉴权
  *
@@ -79,7 +83,29 @@ public class AuthFilter implements GlobalFilter, Ordered {
         //先记录下访问接口的开始时间
         exchange.getAttributes().put(BEGIN_VISIT_TIME, System.currentTimeMillis());
 
-        return chain.filter(exchange.mutate().request(mutate.build()).build());
+//        return chain.filter(exchange.mutate().request(mutate.build()).build());
+
+        // Mono.fromRunnable 是非阻塞的，适合在 then 中处理后续的日志逻辑。
+        return chain.filter(exchange).then(Mono.fromRunnable(() -> {
+            try {
+                // 记录接口访问日志
+                Long beginVisitTime = exchange.getAttribute(BEGIN_VISIT_TIME);
+                if (beginVisitTime != null) {
+                    URI uri = exchange.getRequest().getURI();
+                    Map<String, Object> logData = new HashMap<>();
+                    logData.put("host", uri.getHost());
+                    logData.put("port", uri.getPort());
+                    logData.put("path", uri.getPath());
+                    logData.put("query", uri.getRawQuery());
+                    logData.put("duration", (System.currentTimeMillis() - beginVisitTime) + "ms");
+
+                    log.info("访问接口信息: {}", logData);
+                    log.info("我是美丽分割线: ###################################################");
+                }
+            } catch (Exception e) {
+                log.error("记录日志时发生异常: ", e);
+            }
+        }));
     }
 
     private void addHeader(ServerHttpRequest.Builder mutate, String name, Object value) {

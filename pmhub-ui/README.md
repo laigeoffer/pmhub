@@ -54,7 +54,6 @@ $env:NODE_OPTIONS="--openssl-legacy-provider"
 
 还有球友（马嘉杰）的解决办法是（有点怪）：
 
-::: info 友情提示
 nodejs 版本是 17.0.0。
 
 直接 `npm run dev` 还是会报错 `NODE_OPTIONS 不是内部命令或外部命令`。
@@ -64,7 +63,7 @@ nodejs 版本是 17.0.0。
 然后在 PowerShell 中输入以下命令：
 
 `$env:NODE_OPTIONS="--openssl-legacy-provider"`
-:::
+
 
 ②、如果你是 macOS 用户，通常不会出现这个问题，因为我在 package.json 文件中加过处理了：
 
