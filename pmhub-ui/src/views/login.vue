@@ -176,8 +176,9 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-background.jpg");
+  background-image: url("../assets/images/pmhub-bg2.png");
   background-size: cover;
+  background-position: center center;
   .title {
     margin: 0px auto 30px auto;
     text-align: center;
