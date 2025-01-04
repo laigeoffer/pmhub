@@ -5,7 +5,7 @@ com.laigeoffer.pmhub.base.security.service.TokenService,\
 com.laigeoffer.pmhub.base.security.handle.GlobalExceptionHandler,\
 com.laigeoffer.pmhub.base.security.config.WebMvcConfig,\
 com.laigeoffer.pmhub.base.security.aspect.LogAspect,\
-com.laigeoffer.pmhub.base.core.config.ResourcesConfig,\
+com.laigeoffer.pmhub.base.security.config.ResourcesConfig,\
 com.laigeoffer.pmhub.base.security.service.redisson.RedissonDistributedLock,\
 com.laigeoffer.pmhub.base.security.aspect.DistributedLockAspect,\
 com.laigeoffer.pmhub.base.security.config.RedissonConfig
