@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-tabs tab-position="top" :value="finished === 'true' ? 'approval' : 'form'" @tab-click="tabClick">
       <el-tab-pane label="任务办理" name="approval" v-if="finished === 'true'">
-        <el-card class="box-card" shadow="hover" v-if="taskFormOpen">
+        <el-card class="box-card" shadow="hover" v-if="false && taskFormOpen">
           <div slot="header" class="clearfix">
             <span>填写表单</span>
           </div>
