@@ -124,7 +124,7 @@ public class WfDeployController extends BaseController {
     @InnerAuth
     @PostMapping("/updateApprovalSet")
     @DistributedLock(key = "#approvalSetDTO.approved", lockTime = 10L, keyPrefix = "workflow-approve-")
-    public R<?> updateApprovalSet(ApprovalSetDTO approvalSetDTO) {
+    public R<?> updateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.updateApprovalSet(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
     }
 
@@ -135,7 +135,7 @@ public class WfDeployController extends BaseController {
      */
     @InnerAuth
     @PostMapping("/updateApprovalSet2")
-    public R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO) {
+    public R<?> updateApprovalSet2(@RequestBody ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.updateApprovalSet2(approvalSetDTO, ProjectStatusEnum.PROJECT.getStatusName()));
     }
 
@@ -157,7 +157,7 @@ public class WfDeployController extends BaseController {
      */
     @InnerAuth
     @PostMapping("/insertOrUpdateApprovalSet")
-    public R<Boolean> insertOrUpdateApprovalSet(ApprovalSetDTO approvalSetDTO) {
+    public R<Boolean> insertOrUpdateApprovalSet(@RequestBody ApprovalSetDTO approvalSetDTO) {
         return R.ok(deployService.insertOrUpdateApprovalSet(approvalSetDTO.getExtraId(), approvalSetDTO.getType(), approvalSetDTO.getApproved(), approvalSetDTO.getDefinitionId(), approvalSetDTO.getDeploymentId()));
     }
 

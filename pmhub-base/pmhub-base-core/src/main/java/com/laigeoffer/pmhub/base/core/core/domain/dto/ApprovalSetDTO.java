@@ -25,6 +25,8 @@ public class ApprovalSetDTO {
         this.definitionId = definitionId;
         this.deploymentId = deploymentId;
     }
+    // jackson反序列化构造函数
+    public ApprovalSetDTO() {}
 
     public String getExtraId() {
         return extraId;
