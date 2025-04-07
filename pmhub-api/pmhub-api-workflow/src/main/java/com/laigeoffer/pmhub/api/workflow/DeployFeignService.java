@@ -34,7 +34,7 @@ public interface DeployFeignService {
      * @param approvalSetDTO
      * @return
      */
-    @PostMapping("/workflow/deploy/updateApprovalSet")
+    @PostMapping("/workflow/deploy/updateApprovalSet2")
     R<?> updateApprovalSet2(ApprovalSetDTO approvalSetDTO, @RequestHeader(SecurityConstants.FROM_SOURCE) String source);
 
 
