@@ -2,13 +2,13 @@ package com.laigeoffer.pmhub.project.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.laigeoffer.pmhub.project.domain.ProjectTaskProcess;
 import com.laigeoffer.pmhub.project.domain.vo.project.ProjectVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.LogReqVO;
 import com.laigeoffer.pmhub.project.domain.vo.project.log.ProjectLogVO;
 import com.laigeoffer.pmhub.project.domain.Project;
 import com.laigeoffer.pmhub.project.domain.ProjectTask;
 import com.laigeoffer.pmhub.project.domain.vo.project.member.ProjectMemberResVO;
-import com.laigeoffer.pmhub.project.domain.vo.project.task.*;
 import com.laigeoffer.pmhub.project.domain.vo.project.task.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -78,5 +78,7 @@ public interface ProjectTaskService extends IService<ProjectTask> {
     Long countTaskNum();
 
     List<Project> queryProjectsStatus(List<String> projectIds);
+
+    List<ProjectTaskProcess> taskProcessList(List<String> taskIds);
 
 }
