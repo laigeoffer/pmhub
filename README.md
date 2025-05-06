@@ -373,16 +373,16 @@ http://localhost:1024/dev-api/swagger-ui/index.html
 
 ## 六、PmHub 教程
 PmHub 高质量教程共 70+ 篇，从中整理出 10 篇，供大家免费学习。
-- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/pmhub/tech-architecture/)
-- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/pmhub/learn/)
-- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/pmhub/why/)
-- [（🌟 新人必看）PmHub 产品原型](https://laigeoffer.cn/pmhub/product/prototype/)
-- [（🌟 新人必看）项目真实面经](https://laigeoffer.cn/pmhub/real-interview/)
-- [（🌟 新人必看）本地快速启动](https://laigeoffer.cn/pmhub/quickstart/backend/)
-- [（🌟 新人必看）PmHub 微服务网关设计](https://laigeoffer.cn/pmhub/microservice/gateway/)
-- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/pmhub/quickstart/environment/)
-- [（👍 强烈推荐）如何做好产品设计](https://laigeoffer.cn/pmhub/how-to-do-product-design/)
-- [（👍 强烈推荐）项目真实面经](https://laigeoffer.cn/pmhub/real-interview/)
+- [（🌟 新人必看）PmHub 系统架构&功能模块一览](https://laigeoffer.cn/pmhub/introduction/architecture-function.html)
+- [（🌟 新人必看）小白如何学习 PmHub](https://laigeoffer.cn/pmhub/introduction/beginner-learn.html)
+- [（🌟 新人必看）如何将 PmHub 写入简历](https://laigeoffer.cn/pmhub/write-to-resume.html)
+- [（🌟 新人必看）PmHub 产品原型](https://laigeoffer.cn/pmhub/productdesign/product-prototype.html)
+- [（🌟 新人必看）项目真实面经](https://laigeoffer.cn/pmhub/interview/global-filter-statistics-gateway.html)
+- [（🌟 新人必看）本地快速启动](https://laigeoffer.cn/pmhub/quickstart/backend.html)
+- [（🌟 新人必看）PmHub 微服务网关设计](https://laigeoffer.cn/pmhub/architecture/pmhub-gateway.html)
+- [（🌟 新人必看）PmHub 项目工程搭建手册](https://laigeoffer.cn/pmhub/quickstart/docker.html#%E6%9C%AC%E5%9C%B0%E5%87%86%E5%A4%87)
+- [（👍 强烈推荐）如何做好产品设计](https://laigeoffer.cn/pmhub/productdesign/everyone-is-producter.html)
+- [（👍 强烈推荐）项目真实面经](https://laigeoffer.cn/pmhub/interview/global-filter-statistics-gateway.html)
 
 
 
